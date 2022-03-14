@@ -1,4 +1,4 @@
-#include <cTmodel.h>
+﻿#include <cTmodel.h>
 #include <QLatin1String>
 #include <QSqlQuery>
 #include <QSqlRecord>
@@ -109,7 +109,7 @@ QString TModel::callWebData()
     QSqlRecord record = this->record();
 
     for(int col = 1; col < this->columnCount(); col++){
-        s += getChn(record.fieldName(col)) + " ";
+        s += record.fieldName(col) + " ";
     }
     if(this->columnCount() < 3)
         s += "null ";

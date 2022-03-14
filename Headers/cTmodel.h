@@ -1,4 +1,4 @@
-#ifndef CDBMODEL_H
+﻿#ifndef CDBMODEL_H
 #define CDBMODEL_H
 #include <QSqlTableModel>
 #include <QList>

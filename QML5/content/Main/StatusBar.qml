@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick 2.0
 Rectangle {
@@ -68,7 +68,7 @@ Rectangle {
     Timer {
            id:timer
            interval: 500; running: true; repeat: true
-           onTriggered: time.text = getData() +" " + Qt.formatDateTime(new Date(), "yyyy-MM-dd hh:mm")
+           onTriggered: time.text =  Qt.formatDateTime(new Date(), "dddd yyyy-MM-dd hh:mm")
        }
     Timer {
            id:dbConnect
