@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>JavaScript/chartjs-plugin-dragdata.min.js</file>
+        <file>JavaScript/jschart.html</file>
+        <file>JavaScript/qwebchannel.js</file>
+        <file>JavaScript/chart.js</file>
+    </qresource>
+</RCC>

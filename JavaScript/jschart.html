@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Chart.js Drag Data Points Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <script type="text/javascript" src="chart.js"></script>
+  <script type="text/javascript" src="chartjs-plugin-dragdata.min.js"></script>
+  <script type="text/javascript" src="qwebchannel.js"></script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+
+    }
+    canvas {
+      background-color: #e4e4e4;
+      position:absolute;
+    }
+  </style>
+</head>
+
+<body id = "bd">
+<div class="chartView" style="position: relative; " id ="that">
+    <canvas class="canvas"  id="chartJSContainer" >
+    </canvas>
+</div>
+<script>
+//initial data
+
+var webobj
+var TwoLineColor1 = "#ff5e38";
+var TwoLineColor2 = "#16c1ab";
+var OneLineColor = "#ff5e38";
+
+var TwoLineColor1dim = "#d03010";
+var TwoLineColor2dim = "#00a080";
+var OneLineColordim  = "#d03010";
+var isLock = true;
+window.onload =  function(){
+new QWebChannel(
+
+qt.webChannelTransport,
+
+function(channel){
+
+    webobj = channel.objects.webobj;
+
+    var ctx = document.getElementById('chartJSContainer').getContext('2d');
+    var chartSetting = createEmptyChart();
+    var chart = new Chart(ctx,chartSetting);
+
+    var istwoline = new Boolean();
+
+
+    //load model datas
+    webobj.chartFresh.connect(function(someText) {
+        if(someText == ""){
+            var emptySetting = createEmptyChart();
+            var context = document.getElementById('chartJSContainer').getContext('2d');
+            chart.destroy();
+            chart = new Chart(ctx,emptySetting);
+            if(isLock == true)
+                chart.options.plugins.dragData.dragY = false;
+            else
+                chart.options.plugins.dragData.dragY = true;
+            chart.update();
+        }
+        else{
+            //webobj.angleDatas = someText;
+            var configure = encodingData(someText);
+            istwoline = configure.isTwo;
+            var datasetsEle = new Array();//datasets element
+            datasetsEle = loadingData(25, configure, isLock);
+            chart.options.animation = false;
+
+            updataCharts(chart, datasetsEle, configure);
+            chart.options.animation = true;
+        }
+
+    });
+
+    // update web chart data from angletable
+    webobj.updatePoint.connect(function(row,col,v) {
+        updatSinglePoint(chart,row,col,v);
+    });
+
+    // update web chart data from angletable
+    webobj.calllockChanged.connect(function() {
+        unLockChanged(chart, istwoline);
+    });
+
+});//end webchannel
+}
+
+
+//encoding data
+function encodingData(dataToString){
+    var conf = {};
+    var angleDataList = new Array();
+    angleDataList = dataToString.split(" ");
+    var labelNames = new Array();
+    var avg=0;
+    var sum=0;
+    var maxN,minN,dragPrecision;
+    var isTwo=new Boolean();
+    if(angleDataList[angleDataList.length-1] ==""){//传来的字符串最后有空格的情况
+        angleDataList = angleDataList.slice(0,angleDataList.length-1);
+    }
+
+    if(angleDataList[0] == "2"){
+        isTwo = false;
+        labelNames[0] = angleDataList[1];
+    }
+    else{
+        isTwo = true;
+        labelNames[0] = angleDataList[1];
+        labelNames[1] = angleDataList[2];
+    }
+    //alert(isTwo);
+    //alert(angleDataList.length);
+
+
+    for(i=3;i<angleDataList.length;i++){
+        sum+=parseFloat(angleDataList[i]);
+    }
+    avg = sum/(angleDataList.length-3);
+    //alert(avg);
+
+    if(avg>100){//数字较小时提高拖拽精度，最高为三位
+        dragPrecision = 0;
+    }
+    else if(avg<100 && avg>=1){
+        dragPrecision = 1;
+    }
+        else{
+            dragPrecision = 3;
+        }
+    maxN = Math.max.apply(null,angleDataList.slice(3,angleDataList.length));
+    minN = Math.min.apply(null,angleDataList.slice(3,angleDataList.length));
+    conf.angleDataList = angleDataList;
+    conf.labelNames = labelNames;
+    conf.avg = avg;
+    conf.Ymax = maxN+0.5*avg;
+    conf.Ymin = minN-0.5*avg;
+    conf.dragPrecision = dragPrecision;
+    conf.isTwo = isTwo;
+    return conf;
+}
+
+function loadingData(singleNum, configure, isLock){
+    var datasetsEle = new Array();
+    if(configure.isTwo == false){
+        //假如数据量为一列
+        var data = new Array();
+        for(i=3;i<3+singleNum;i++){
+            data[i-3] = {"x": 10*(i-5) ,"y": configure.angleDataList[i]};
+        }
+        datasetsEle[0] = {
+            "label": configure.labelNames[0],
+            "data": data,
+            "backgroundColor": OneLineColordim,//默认为锁
+            borderWidth: 2.5,
+            borderColor: OneLineColordim,
+            fill: false,
+            pointRadius: 5,
+            pointHitRadius: 25,
+            showLine: true
+        }
+        if(isLock == false){
+            datasetsEle[0].backgroundColor = OneLineColor;
+            datasetsEle[0].borderColor = OneLineColor;
+        }
+    }
+
+    // 假设数据为两列
+    else if(configure.isTwo == true){
+        var data = new Array();
+        var data2 = new Array();
+        for(i=3;i<3+singleNum;i++){
+            data[i-3] = {"x": 10*(i-5) , "y": configure.angleDataList[i]};
+        }
+
+        for(j=3+singleNum;j<3+singleNum*2;j++){
+            data2[j-(3+singleNum)] = {"x": 10*(j-(3+singleNum)-2), "y": configure.angleDataList[j]};
+        }
+
+        datasetsEle[0] = {
+            "label": configure.labelNames[0],
+            "data": data,
+            "backgroundColor": TwoLineColor2dim,
+            borderWidth: 2.5,
+            borderColor: TwoLineColor2dim,
+            fill: false,
+            pointRadius: 5,
+            pointHitRadius: 25,
+            showLine: true
+        };
+        datasetsEle[1] = {
+            "label": configure.labelNames[1],
+            "data": data2,
+            "backgroundColor": TwoLineColor1dim,
+            borderWidth: 2.5,
+            borderColor: TwoLineColor1dim,
+            fill: false,
+            pointRadius: 5,
+            pointHitRadius: 25,
+            showLine: true
+        }
+        if(isLock == false){
+            datasetsEle[0].backgroundColor = TwoLineColor2;
+            datasetsEle[0].borderColor = TwoLineColor2;
+            datasetsEle[1].backgroundColor = TwoLineColor1;
+            datasetsEle[1].borderColor = TwoLineColor1;
+        }
+    }
+    return datasetsEle;
+}
+
+function createEmptyChart(){
+    var chartSetting = {
+        type: 'scatter',
+//        data: {
+//        "datasets": datasetsEle
+//        },
+        options: {
+            layout: {
+                padding: {
+                left: 20,
+                right: 20,
+                top: 50,
+                bottom: 20
+                }
+            },
+            aspectRatio:15.3/9.1,//canvas长宽比，宽固定
+            scales: {
+//               y: {
+//                       suggestedMin: 0,
+//                       suggestedMax: 1
+//                    },
+               xAxis: {
+                           ticks: {
+                               stepSize: 20
+                           }
+                       }
+            },
+            plugins: {
+                dragData:{
+                    round: 1,
+                    showTooltip: true,
+                    onDragEnd: function(e, datasetIndex, index, value) {
+                       webobj.callBack(index, datasetIndex + 1, value.y);
+                    },
+                    dragX: false,
+                    dragY: false
+
+                }
+            }
+        }
+    }
+    return chartSetting;
+}
+
+
+function updataCharts(chart, datasetsEle, configure){
+    chart.data.datasets = datasetsEle;
+    chart.options.scales.y.suggestedMin = configure.Ymin;
+    chart.options.scales.y.suggestedMax = configure.Ymax;
+//    chart.options.scales.x.min = -30;
+//    chart.options.scales.x.max = 230;
+
+    chart.options.plugins.dragData.round = configure.dragPrecision;
+    //chart.options.elements.line.borderColor = "000";
+    chart.update();
+}
+
+function updatSinglePoint(chart, row, col, v){
+    chart.data.datasets[col-1].data[row].y = v;
+    chart.update();
+}
+
+function unLockChanged(chart, istwoline){
+
+    if(chart.options.plugins.dragData.dragY == false){//unlock
+       chart.options.plugins.dragData.dragY = true;
+       isLock = false;
+            if(istwoline == false){
+                chart.data.datasets[0].backgroundColor = OneLineColor;
+                chart.data.datasets[0].borderColor = OneLineColor;
+            }
+            else{
+              chart.data.datasets[0].backgroundColor = TwoLineColor2;
+              chart.data.datasets[1].backgroundColor = TwoLineColor1;
+              chart.data.datasets[0].borderColor = TwoLineColor2;
+              chart.data.datasets[1].borderColor = TwoLineColor1;
+            }
+
+       chart.update();
+    }
+    else{
+        chart.options.plugins.dragData.dragY = false;
+        isLock = true;
+        if(istwoline == false){
+            chart.data.datasets[0].backgroundColor = OneLineColordim;
+            chart.data.datasets[0].borderColor = OneLineColordim;
+        }
+        else{
+          chart.data.datasets[0].backgroundColor = TwoLineColor2dim;
+          chart.data.datasets[1].backgroundColor = TwoLineColor1dim;
+          chart.data.datasets[0].borderColor = TwoLineColor2dim;
+          chart.data.datasets[1].borderColor = TwoLineColor1dim;
+        }
+        chart.update();
+    }
+
+}
+
+  </script>
+</body>
+
+</html>
