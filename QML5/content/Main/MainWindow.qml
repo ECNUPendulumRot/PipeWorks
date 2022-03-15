@@ -280,7 +280,11 @@ Rectangle {
                 fileDialog.open();
         }
 
-        disconnectBtn.onClicked: disconnect()
+        disconnectBtn.onClicked:{
+            popupDb.close();
+            disconnect();
+        }
+
     }
 
     ReconnectDialog {

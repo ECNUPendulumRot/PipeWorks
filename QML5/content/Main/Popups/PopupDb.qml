@@ -25,8 +25,8 @@ Popup{
     implicitHeight: 150
 
 
-    dim: false
-    modal: true
+    closePolicy: Popup.CloseOnPressOutside
+    //modal: true
 
     background: bg
 
