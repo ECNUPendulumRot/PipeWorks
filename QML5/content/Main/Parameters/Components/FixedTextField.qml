@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.12
 import QtQuick.Studio.Effects 1.0
-
+import "../../../../../QML5/imports/QML5"
 TextField {
     id: textField
     width: 100

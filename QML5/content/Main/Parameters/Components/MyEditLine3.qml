@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Components 1.0
 import QtQuick.Studio.Effects 1.0
-
+import "../../../../../QML5/imports/QML5"
 Rectangle {
     id: control
     width: 295
@@ -28,7 +28,7 @@ Rectangle {
     Label {
         id: label5
         x: 5
-        color: "#808080"
+        color: Constants.tableFontColor
         text: qsTr("前后枪间距")
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 12
@@ -59,7 +59,7 @@ Rectangle {
         id: label6
         width: 70
         height: 18
-        color: "#808080"
+        color: Constants.tableFontColor
         text: qsTr("毫米")
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: textField.left

@@ -1,6 +1,8 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Effects 1.0
+import "../../../../../QML5/imports/QML5"
+
 
 Rectangle {
     id: control
@@ -22,7 +24,7 @@ Rectangle {
     Label {
         id: label
         x: 8
-        color: "#808080"
+        color: Constants.tableFontColor
         text: qsTr("M4值")
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 12

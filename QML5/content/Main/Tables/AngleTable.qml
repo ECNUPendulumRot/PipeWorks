@@ -15,20 +15,20 @@ Rectangle {
     z: 1
     property var engToChn : {//cmd <------> table column name
         "angle"         :"角度(度)",
-        "stayTime_Lead" :"前枪\n边停时间(秒)",
-        "oscWidth_Lead" :"前枪\n摆宽(毫米)",
-        "oscFreq_Lead"  :"前枪\n摆动周期(毫秒)",   //？
-        "feedRate_Lead" :"前枪\n送丝速度(毫米/秒)",
-        "Arc_Rate_Lead" :"前枪\n电弧修正(伏特)",
-        "Arc_Rate_Trail":"后枪\n电弧修正(伏特)",
-        "stayTime_Trail":"后枪\n边停时间(秒)",
-        "oscWidth_Trail":"后枪\n摆宽(毫米)",
-        "oscFreq_Trail" :"后枪\n摆动周期(毫秒)",
-        "feedRate_Trail":"后枪\n送丝速度(毫米/秒)",
-        "carACC"        :"小车加速度(毫米/秒²)",
-        "carSPEED"      :"小车速度(毫米/秒)",
-        "leadTargetCur" :"前枪\n垂向目标值(毫米)",
-        "trailTargetCur":"后枪\n垂向目标值(毫米)"
+        "stayTime_Lead" :"前枪边停时间\n(秒)",
+        "oscWidth_Lead" :"前枪摆宽\n(毫米)",
+        "oscFreq_Lead"  :"前枪摆动周期\n(毫秒)",   //？
+        "feedRate_Lead" :"前枪送丝速度(毫米/秒)",
+        "Arc_Rate_Lead" :"前枪电弧修正\n(伏特)",
+        "Arc_Rate_Trail":"后枪电弧修正\n(伏特)",
+        "stayTime_Trail":"后枪边停时间\n(秒)",
+        "oscWidth_Trail":"后枪摆宽\n(毫米)",
+        "oscFreq_Trail" :"后枪摆动周期\n(毫秒)",
+        "feedRate_Trail":"后枪送丝速度\n(毫米/秒)",
+        "carACC"        :"小车加速度\n(毫米/秒²)",
+        "carSPEED"      :"小车速度\n(毫米/秒)",
+        "leadTargetCur" :"前枪垂向目标值\n(毫米)",
+        "trailTargetCur":"后枪垂向目标值\n(毫米)"
     }
 
 
