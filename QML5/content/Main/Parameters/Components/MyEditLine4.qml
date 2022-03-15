@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Studio.Components 1.0
 import QtQuick.Layouts 1.0
 import QtQuick.Studio.Effects 1.0
-
+import "../../../../../QML5/imports/QML5"
 Rectangle {
     id: control
     width: 295
@@ -29,7 +29,7 @@ Rectangle {
     Label {
         id: label11
         x: 5
-        color: "#808080"
+        color: Constants.tableFontColor
         text: qsTr("手动送丝百分比")
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 12
@@ -59,7 +59,7 @@ Rectangle {
         id: label12
         width: 70
         height: 18
-        color: "#808080"
+        color: Constants.tableFontColor
         text: qsTr("%")
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: textField.left

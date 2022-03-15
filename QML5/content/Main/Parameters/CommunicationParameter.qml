@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Studio.Components 1.0
 import "Components"
 import QtQuick.Layouts 1.0
-
+import "../../../../QML5/imports/QML5"
 Item {
     id: rectangle
     width: myGroupTitle2.width
@@ -34,7 +34,7 @@ Item {
             x: 43
             y: 51
             height: 30
-            color: "#808080"
+            color: Constants.tableFontColor
             text: qsTr("倾角仪")
             anchors.left: text1.left
             anchors.top: text1.bottom
@@ -47,7 +47,7 @@ Item {
             x: 43
             y: 81
             height: 30
-            color: "#808080"
+            color: Constants.tableFontColor
             text: qsTr("采集卡")
             anchors.left: text2.left
             anchors.top: text2.bottom
@@ -60,7 +60,7 @@ Item {
             x: 43
             y: 111
             height: 30
-            color: "#808080"
+            color: Constants.tableFontColor
             text: qsTr("手持盒")
             anchors.left: text1.left
             anchors.top: text3.bottom
@@ -73,7 +73,7 @@ Item {
             x: 43
             y: 141
             height: 30
-            color: "#808080"
+            color: Constants.tableFontColor
             text: qsTr("电机")
             anchors.left: text1.left
             anchors.top: text4.bottom
@@ -219,7 +219,7 @@ Item {
         Text {
             id: text1
             height: 30
-            color: "#808080"
+            color: Constants.tableFontColor
             text: qsTr("Qrcode")
             anchors.left: parent.left
             anchors.top: parent.top
@@ -347,3 +347,11 @@ Item {
 
 
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:1.33}D{i:1}D{i:3}D{i:4}D{i:5}D{i:6}D{i:7}D{i:8}D{i:9}D{i:10}
+D{i:11}D{i:12}D{i:13}D{i:14}D{i:15}D{i:16}D{i:17}D{i:18}D{i:19}D{i:20}D{i:21}D{i:22}
+D{i:2}
+}
+##^##*/

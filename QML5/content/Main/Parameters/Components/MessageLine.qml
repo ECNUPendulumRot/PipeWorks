@@ -1,7 +1,8 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Effects 1.0
+import "../../../../../QML5/imports/QML5"
 
 Rectangle {
     id: rectangle6
@@ -19,7 +20,7 @@ Rectangle {
     Text {
         id: text7
         x: 0
-        color: "#808080"
+        color: Constants.tableFontColor
         text: qsTr("地址")
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 12
