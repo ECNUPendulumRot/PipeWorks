@@ -1,4 +1,4 @@
-pragma Singleton
+﻿    pragma Singleton
 import QtQuick 2.15
 
 QtObject {
@@ -7,7 +7,6 @@ QtObject {
 
     property alias fontDirectory: directoryFontLoader.fontDirectory
     property alias relativeFontDirectory: directoryFontLoader.relativeFontDirectory
-
     /* Edit this comment to add your custom font */
     readonly property font font: Qt.font({
                                              family: Qt.application.font.family,
@@ -19,6 +18,8 @@ QtObject {
                                               })
 
     readonly property color backgroundColor: "#c2c2c2"
+
+    readonly property color tableFontColor: "#404040"
 
     property DirectoryFontLoader directoryFontLoader: DirectoryFontLoader {
         id: directoryFontLoader

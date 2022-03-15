@@ -1,9 +1,9 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 //import MotionControl
 import QtQuick.Studio.Components 1.0
 import QtQuick.Studio.Effects 1.0
-
+import "../../../../../QML5/imports/QML5"
 Rectangle {
     id: control
     enabled: true
@@ -34,7 +34,7 @@ Rectangle {
     Label {
         id: label
         x: 5
-        color: "#808080"
+        color: Constants.tableFontColor
         text: qsTr("运动减速度")
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 12
@@ -63,7 +63,7 @@ Rectangle {
         id: label1
         width: 65
         height: 48
-        color: "#808080"
+        color: Constants.tableFontColor
         text: qsTr("毫米/秒<sup>2<sup>")
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: textField.left
@@ -77,3 +77,9 @@ Rectangle {
 
 
 
+
+/*##^##
+Designer {
+    D{i:0;height:30;width:260}D{i:1}D{i:2}D{i:3}
+}
+##^##*/
