@@ -18,8 +18,8 @@ Popup {
     bottomMargin: 0
     topMargin: 0
 
-    dim:false
-    modal: true
+    closePolicy: Popup.CloseOnPressOutside
+    //modal: true
     clip:true
 
 
