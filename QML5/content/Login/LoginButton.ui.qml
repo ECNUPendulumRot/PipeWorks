@@ -50,13 +50,28 @@ Button {
     }
     states: [
         State {
-            name: "State1"
-            when: control.pressed
+            name: "hover"
+            when: control.hovered && !control.pressed
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#757575"
+                color: "#8b8b8b"
                 border.color: "#5b5b5b"
+            }
+        },
+        State {
+            name: "pressed"
+            when: control.pressed
+
+            PropertyChanges {
+                target: textItem
+                color: "#b0b0b0"
+            }
+
+            PropertyChanges {
+                target: buttonBackground
+                color: "#707070"
+                border.color: "#b0b0b0"
             }
         }
     ]
@@ -64,7 +79,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;height:50;width:140}D{i:1}D{i:2}
+    D{i:0;height:50;width:140}
 }
 ##^##*/
 
