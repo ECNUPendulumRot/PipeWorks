@@ -17,16 +17,16 @@ Rectangle {
         "angle"         :"角度\n(度)",
         "stayTime_Lead" :"前枪边停时间\n(秒)",
         "oscWidth_Lead" :"前枪摆宽\n(毫米)",
-        "oscFreq_Lead"  :"前枪摆动频率\n(次)",   //？
-        "feedRate_Lead" :"前枪送丝速度\n(毫米/秒)",
+        "oscFreq_Lead"  :"前枪摆动频率\n(赫兹)",   //？
+        "feedRate_Lead" :"前枪送丝速度\n(毫米/分钟²)",
         "Arc_Rate_Lead" :"前枪电弧修正\n(伏特)",
         "Arc_Rate_Trail":"后枪电弧修正\n(伏特)",
         "stayTime_Trail":"后枪边停时间\n(秒)",
         "oscWidth_Trail":"后枪摆宽\n(毫米)",
-        "oscFreq_Trail" :"后枪摆动频率\n(次)",
-        "feedRate_Trail":"后枪送丝速度\n(毫米/秒)",
-        "carACC"        :"小车加速度\n(毫米/秒²)",
-        "carSPEED"      :"小车速度\n(毫米/秒)",
+        "oscFreq_Trail" :"后枪摆动频率\n(赫兹)",
+        "feedRate_Trail":"后枪送丝速度\n(毫米/分钟²)",
+        "carACC"        :"小车加速度\n(毫米/分钟²)",
+        "carSPEED"      :"小车速度\n(毫米/分钟²)",
         "leadTargetCur" :"前枪干伸高度值\n(毫米)",
         "trailTargetCur":"后枪干伸高度值\n(毫米)"
     }
