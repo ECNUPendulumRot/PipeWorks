@@ -6,7 +6,7 @@ import "Components"
 
 Item {
     id: rectangle
-    property int i: 1
+    property int i: 0
 
     property var mapping:{
         "carWeldBeforeACC"          :0,
@@ -69,6 +69,13 @@ Item {
         "facingEndDistance"         :57
     }
 
+    property var mapping2:{
+        "gunInverted"               :0,
+        "verInverted"               :1,
+        "horInverted"               :2,
+        "travInverted"              :3
+    }
+
     property var parameterList: [
         "carWeldBeforeACC",
         "carWeldBeforeSPEED",
@@ -128,6 +135,13 @@ Item {
         "parameterInterval",
         "facingStartDistance",
         "facingEndDistance"
+    ]
+
+    property var parameterList2: [
+        "gunInverted",
+        "verInverted",
+        "horInverted",
+        "travInverted"
     ]
     width: content.width
     height: content.height
@@ -242,7 +256,7 @@ Item {
                 Rectangle {
                     id: motionelse
                     width: 560
-                    height: 475
+                    height: 500
                     color: "#ebebeb"
                     border.color: "#ffffff"
                     border.width: 0
@@ -252,12 +266,13 @@ Item {
                         x: 0
                         y: 0
                         width: 560
-                        height: 231
+                        height: 180
                         MyGroupTitle2 {
                             id: rectangle8
                             x: 0
                             y: 0
                             width: 560
+                            height: 180
                             label4FontpixelSize: 12
                             label4Color: "#202020"
 
@@ -266,7 +281,7 @@ Item {
                         MyGroupTitle {
                             id: rectangle1
                             x: 40
-                            y: 51
+                            y: 25
                             width: 220
                             height: 130
                             radius: 4
@@ -319,7 +334,7 @@ Item {
                         MyGroupTitle {
                             id: rectangle2
                             x: 300
-                            y: 51
+                            y: rectangle1.y
                             width: rectangle1.width
                             height: rectangle1.height
                             radius: 4
@@ -369,11 +384,13 @@ Item {
                     }
 
                     GroupItem {
+                        id: groupItem
                         x: 0
-                        y: 278
+                        y: 210
                         GroupItem {
+                            id: group3
                             x: 40
-                            y: 39
+                            y: 20
                             MyEditLine4 {
                                 id: parameterInterval
                                 x: 0
@@ -436,7 +453,8 @@ Item {
 
                         GroupItem {
                             x: 300
-                            y: 39
+                            anchors.top: group3.top
+                            anchors.topMargin: 0
                             MyEditLine4 {
                                 id: arcStart
                                 x: 0
@@ -498,10 +516,90 @@ Item {
                             x: 0
                             y: 0
                             width: 560
-                            height: 197
+                            height: 160
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "其他参数"
+                        }
+                    }
+
+                    GroupItem {
+                        id: groupItem1
+                        x: 0
+                        y: 400
+                        GroupItem {
+                            id: group4
+                            x: 40
+                            y: 20
+                            height: 60
+                            MyEditLine4 {
+                                id: gunInverted
+                                x: 0
+                                y: 0
+                                width: 220
+                                textFieldAnchorsleftMargin: 90
+                                label11Text: "焊枪反置"
+                                label12AnchorsleftMargin: 70
+                                textFieldWidth: 60
+                                label12Text: ""
+                                type: "editable2"
+                            }
+
+                            MyEditLine4 {
+                                id: travInverted
+                                x: 0
+                                y: 30
+                                width: 220
+                                textFieldAnchorsleftMargin: 90
+                                label11Text: "小车行走反置"
+                                label12AnchorsleftMargin: 70
+                                textFieldWidth: 60
+                                label12Text: ""
+                                type: "editable2"
+                            }
+                        }
+
+                        GroupItem {
+                            x: 300
+                            height: 60
+                            anchors.top: group4.top
+                            MyEditLine4 {
+                                id: verInverted
+                                x: 0
+                                y: 0
+                                width: 220
+                                textFieldAnchorsleftMargin: 90
+                                label11Text: "垂向运动反置"
+                                label12AnchorsleftMargin: 70
+                                textFieldWidth: 60
+                                label12Text: ""
+                                type: "editable2"
+                            }
+
+                            MyEditLine4 {
+                                id: horInverted
+                                x: 0
+                                y: 30
+                                width: 220
+                                textFieldAnchorsleftMargin: 90
+                                label11Text: "横向运动反置"
+                                label12AnchorsleftMargin: 70
+                                textFieldWidth: 60
+                                label12Text: ""
+                                type: "editable2"
+                            }
+                            anchors.topMargin: 0
+                        }
+
+                        MyGroupTitle2 {
+                            id: myGroupTitle8
+                            x: 0
+                            y: 0
+                            width: 560
+                            height: 100
+                            label4FontpixelSize: 12
+                            label4Color: "#202020"
+                            label4Text: "机头切换"
                         }
                     }
                 }
@@ -1946,8 +2044,13 @@ Item {
 
 
     function writeInData(item){
-        if(item.type === "editable" && item.editEnabled){
-            motionFTableModel.callSetData(mapping[item.mapString], 3, item.textFieldText)
+        if(item.editEnabled){
+            if(item.type === "editable"){
+                motionFTableModel.callSetData(mapping[item.mapString], 3, item.textFieldText)
+            }
+            else if(item.type === "editable2"){
+                systemFTableModel.callSetData(mapping2[item.mapString], 3, item.textFieldText)
+            }
             return;
         }
         for(var i = 0; i < item.children.length; i++)
@@ -1956,10 +2059,17 @@ Item {
     }
 
 
+
     function refreshData(item){
-        if(item.editEnabled === true && item.type === "editable"){
-            item.textFieldText = motionFTableModel.fixedTablePopData(mapping[item.mapString],"parmeterValue");
-            item.textFieldColor = motionFTableModel.callIsDirty(mapping[item.mapString],3) ? "#cc5555":"#0d0d0d";
+        if(item.editEnabled === true){
+            if(item.type === "editable"){
+                item.textFieldText = motionFTableModel.fixedTablePopData(mapping[item.mapString],"parmeterValue");
+                item.textFieldColor = motionFTableModel.callIsDirty(mapping[item.mapString],3) ? "#cc5555":"#0d0d0d";
+            }
+            else if(item.type === "editable2"){
+                item.textFieldText = systemFTableModel.fixedTablePopData(mapping2[item.mapString],"value");
+                item.textFieldColor = systemFTableModel.callIsDirty(mapping2[item.mapString],3) ? "#cc5555":"#0d0d0d";
+            }
             return;
         }
         for(var i = 0; i < item.children.length; i++)
@@ -1972,6 +2082,11 @@ Item {
             item.textFieldText = "";
             return;
         }
+        else if(item.type === "editable2"){
+            item.textFieldText = "";
+            return;
+        }
+
         for(var i = 0; i < item.children.length; i++)
             clearData(item.children[i])
         return
@@ -1993,6 +2108,11 @@ Item {
         arcEnd.mapString                = parameterList[54]
         facingStart.mapString           = parameterList[56]
         facingEnd.mapString             = parameterList[57]
+
+        gunInverted.mapString           = parameterList2[0]
+        travInverted.mapString          = parameterList2[3]
+        verInverted.mapString           = parameterList2[1]
+        horInverted.mapString           = parameterList2[2]
 
         lhwidthIncrement.mapString      = parameterList[6]
         lhwidthDecrement.mapString      = parameterList[7]

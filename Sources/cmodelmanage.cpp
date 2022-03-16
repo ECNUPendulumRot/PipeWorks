@@ -2,7 +2,7 @@
 
 ModelManage::ModelManage()
 {
-    for(int i=0;i < 6;i++){
+    for(int i=0;i < MTableCount;i++){
         MTable[i] = nullptr;
     }
 }
@@ -11,7 +11,7 @@ ModelManage::ModelManage(ParamDatabase* pdb)
     : QObject()
 {
     mdb = pdb->getdb();
-    for(int i=0;i < 6;i++){
+    for(int i=0;i < MTableCount;i++){
         MTable[i] = new TModel(mdb);
     }
 }
@@ -21,7 +21,7 @@ ModelManage::ModelManage(QString role)
     : QObject()
 {
     this->role = role;
-    for(int i=0;i<6;i++){
+    for(int i=0;i < MTableCount;i++){
         MTable[i] = nullptr;
     }
 }
@@ -29,12 +29,12 @@ ModelManage::ModelManage(QString role)
 
 bool ModelManage::Submit(){
     if(role == "W"){
-        for(int i=0;i<3;i++)
+        for(int i=0;i<4;i++)
             MTable[i]->callSubmit();
         return true;
     }
     else if(role =="SW"){
-        for(int i=0;i<6;i++)
+        for(int i=0;i<MTableCount;i++)
             MTable[i]->callSubmit();
         return true;
     }
@@ -44,12 +44,12 @@ bool ModelManage::Submit(){
 
 bool ModelManage::Rvert(){
     if(role == "W"){
-        for(int i=0; i< 3;i++)
+        for(int i=0; i< 4;i++)
             MTable[i]->callRevert();
         return true;
     }
     else if(role =="SW"){
-        for(int i=0; i<6; i++)
+        for(int i=0; i<MTableCount; i++)
             MTable[i]->callRevert();
         return true;
     }
@@ -60,10 +60,10 @@ bool ModelManage::Rvert(){
 
 QString ModelManage::MTruncate(unsigned int index, QList<unsigned int> cl){
     QString s;
-    if(role == "W" && index<3){
+    if(role == "W" && index<4){
         s = MTable[index]->truncate(cl);
     }
-    else if(role == "SW" && index<6){
+    else if(role == "SW" && index<MTableCount){
         s = MTable[index]->truncate(cl);
      }
     return s;
@@ -72,7 +72,7 @@ QString ModelManage::MTruncate(unsigned int index, QList<unsigned int> cl){
 
 void ModelManage::setModel(ParamDatabase* pdb)
 {
-    for(int i = 0; i < 6; i++){
+    for(int i = 0; i < MTableCount; i++){
         if(MTable[i] != nullptr)
             delete MTable[i];
         MTable[i] = new TModel(pdb->getdb());
@@ -88,7 +88,7 @@ bool ModelManage::setModelTable(unsigned int index, QString tableName){
 
 
 TModel* ModelManage::getMTable(unsigned int index){
-    if(index<6 && index >=0)
+    if(index<MTableCount && index >=0)
         return MTable[index];
     else
         return nullptr;
@@ -105,20 +105,23 @@ void ModelManage::callFixedTablesInitialize()
     this->setModelTable(0, "Pass");
     emit registerRequest(MTable[0], modelNames[0]);
 
-    this->setModelTable(3, "MotionJog");
+    this->setModelTable(3, "SystemParameter");
     emit registerRequest(MTable[3], modelNames[3]);
 
-    this->setModelTable(4, "ControlParameter");
+    this->setModelTable(4, "MotionJog");
     emit registerRequest(MTable[4], modelNames[4]);
 
-    this->setModelTable(5, "CommunicationParameter");
+    this->setModelTable(5, "ControlParameter");
     emit registerRequest(MTable[5], modelNames[5]);
+
+    this->setModelTable(6, "CommunicationParameter");
+    emit registerRequest(MTable[6], modelNames[6]);
 }
 
 
 void ModelManage::deleteModels()
 {
-    for(int i = 0; i < 6; i++){
+    for(int i = 0; i < MTableCount; i++){
         if(this->MTable[i] != nullptr){
             delete MTable[i];
             MTable[i] = nullptr;
