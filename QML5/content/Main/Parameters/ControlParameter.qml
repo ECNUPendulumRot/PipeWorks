@@ -601,8 +601,10 @@ Item {
     }
 
     function writeInData(item){
-        if(item.type === "editable" && item.editEnabled){
-            controlFTableModel.callSetData(mapping[item.mapString], 3, item.textFieldText)
+        if(item.editEnabled){
+            if(item.type === "editable"){
+                controlFTableModel.callSetData(mapping[item.mapString], 3, item.textFieldText)
+            }
             return;
         }
         for(var i = 0; i < item.children.length; i++)
@@ -618,6 +620,16 @@ Item {
         for(var i = 0; i < item.children.length; i++)
             clearData(item.children[i])
         return
+    }
+
+    function disableInput(item){
+        if(item.permission === "accessable"){
+            item.enabled = false;
+            return;
+        }
+        for(var i = 0; i < item.children.length; i++)
+            disableInput(item.children[i]);
+        return;
     }
 }
 /*##^##

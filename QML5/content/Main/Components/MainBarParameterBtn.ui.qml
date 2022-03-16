@@ -10,7 +10,7 @@ Button {
 
     text: "My text"
 
-    property string type: "accessable"
+    //property string type: "accessable"
     property alias imageSource: image.source
     property alias textItemText: text1.text
     width: 96

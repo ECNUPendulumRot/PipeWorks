@@ -29,7 +29,7 @@ ModelManage::ModelManage(QString role)
 
 bool ModelManage::Submit(){
     if(role == "W"){
-        for(int i=0;i<4;i++)
+        for(int i=0;i<5;i++)
             MTable[i]->callSubmit();
         return true;
     }
@@ -44,7 +44,7 @@ bool ModelManage::Submit(){
 
 bool ModelManage::Rvert(){
     if(role == "W"){
-        for(int i=0; i< 4;i++)
+        for(int i=0; i< 5;i++)
             MTable[i]->callRevert();
         return true;
     }
@@ -60,7 +60,7 @@ bool ModelManage::Rvert(){
 
 QString ModelManage::MTruncate(unsigned int index, QList<unsigned int> cl){
     QString s;
-    if(role == "W" && index<4){
+    if(role == "W" && index<5){
         s = MTable[index]->truncate(cl);
     }
     else if(role == "SW" && index<MTableCount){

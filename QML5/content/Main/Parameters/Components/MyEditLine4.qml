@@ -22,7 +22,9 @@ Rectangle {
     property alias editEnabled: control.enabled
 
     property string type : "editable"
+    property string permission : "accessable"
     property string mapString
+    property bool exist : true
 
     signal dataChanged(string s, var text)
 

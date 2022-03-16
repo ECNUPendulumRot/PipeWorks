@@ -98,7 +98,7 @@ Rectangle {
         var unsync =  "#f4f42f"
         var unconnect =  "#eee"
         if(scheduler.isPdbLoaded()){//db is load)
-            if(passFTableModel.callIsDirty() ||  angleRelatedTableModel.callIsDirty() || motionFTableModel.callIsDirty() || controlFTableModel.callIsDirty() || comFTableModel.callIsDirty()){
+            if(passFTableModel.callIsDirty() ||  angleRelatedTableModel.callIsDirty() || systemFTableModel.callIsDirty() || motionFTableModel.callIsDirty() || controlFTableModel.callIsDirty() || comFTableModel.callIsDirty()){
                 alertLight.color = unsync
                 syncText.text = "未提交"
             }

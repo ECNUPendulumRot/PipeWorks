@@ -103,4 +103,8 @@ Popup {
         ctrlParameter.clearData(ctrlParameter)
     }
 
+    function disable(){
+        ctrlParameter.disableInput(ctrlParameter)
+    }
+
 }

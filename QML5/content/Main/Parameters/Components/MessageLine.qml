@@ -16,6 +16,8 @@ Rectangle {
     property alias row : input.row
     property alias col : input.col
     property alias value : input.value
+
+    property string permission : "accessable"
     signal dataAccepted(string value);
     Text {
         id: text7

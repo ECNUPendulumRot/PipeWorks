@@ -162,8 +162,8 @@ Item {
                 width: 100
                 text: "小车与其他"
                 onClicked: i = 0
+                checked: true
                 checkable: true
-                checked: false
                 textItemFontpixelSize: 12
                 autoExclusive: true
             }
@@ -173,7 +173,6 @@ Item {
                 width: 100
                 onClicked: i = 1
                 checkable: true
-                checked: true
                 textItemFontpixelSize: 12
                 autoExclusive: true
             }
@@ -835,6 +834,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/分钟"
@@ -853,6 +853,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动加速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/秒<sup>2<sup>"
@@ -893,6 +894,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/分钟"
@@ -909,6 +911,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动加速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/秒<sup>2<sup>"
@@ -1539,6 +1542,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/分钟"
@@ -1554,6 +1558,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动加速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/秒<sup>2<sup>"
@@ -1593,6 +1598,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/分钟"
@@ -1606,6 +1612,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动加速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/秒<sup>2<sup>"
@@ -2061,16 +2068,17 @@ Item {
 
 
     function refreshData(item){
-        if(item.editEnabled === true){
+        if(item.exist){
             if(item.type === "editable"){
                 item.textFieldText = motionFTableModel.fixedTablePopData(mapping[item.mapString],"parmeterValue");
                 item.textFieldColor = motionFTableModel.callIsDirty(mapping[item.mapString],3) ? "#cc5555":"#0d0d0d";
+                return;
             }
             else if(item.type === "editable2"){
                 item.textFieldText = systemFTableModel.fixedTablePopData(mapping2[item.mapString],"value");
                 item.textFieldColor = systemFTableModel.callIsDirty(mapping2[item.mapString],3) ? "#cc5555":"#0d0d0d";
+                return;
             }
-            return;
         }
         for(var i = 0; i < item.children.length; i++)
             refreshData(item.children[i])
@@ -2090,6 +2098,16 @@ Item {
         for(var i = 0; i < item.children.length; i++)
             clearData(item.children[i])
         return
+    }
+
+    function disableInput(item){
+        if(item.permission === "accessable"){
+            item.enabled = false;
+            return;
+        }
+        for(var i = 0; i < item.children.length; i++)
+            disableInput(item.children[i]);
+        return;
     }
 
     function initMapString() {

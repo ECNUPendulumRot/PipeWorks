@@ -337,6 +337,15 @@ Item {
         motion2.inputColor = comFTableModel.callIsDirty(3,4)?"#cc5555":"#0d0d0d";
     }
 
+    function disableInput(item){
+        if(item.permission === "accessable"){
+            item.enabled = false;
+            return;
+        }
+        for(var i = 0; i < item.children.length; i++)
+            disableInput(item.children[i]);
+        return;
+    }
 }
 
 

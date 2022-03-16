@@ -197,17 +197,9 @@ Item {
     }
 
     function check(){
-        checkAuthority(objectMainWindow)
-    }
-
-    function checkAuthority(item){
-        if(item.type === "accessable" && scheduler.getAuthority() === 1){
-            item.enabled = false
-            return;
+        if(scheduler.getAuthority() === 1){
+            objectMainWindow.disable();
         }
-        for(var i = 0; i < item.children.length; i++)
-            checkAuthority(item.children[i])
-        return
     }
 }
 
