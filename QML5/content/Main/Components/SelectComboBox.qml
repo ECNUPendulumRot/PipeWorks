@@ -14,7 +14,7 @@ ComboBox {
     font.pixelSize: 12
     currentIndex: -1
     displayText: if(!(currentIndex + 1)) "选择数据类型"
-    model: ["边停时间", "摆宽", "摆动周期", "送丝速度", "电弧修正", "小车加速度", "小车速度", "垂向目标值"]
+    model: ["边停时间", "摆宽", "摆动频率", "送丝速度", "电弧修正", "小车加速度", "小车速度", "干伸高度值"]
 
     onCurrentIndexChanged: cmbBxCallSelect(currentIndex)
 
@@ -179,3 +179,9 @@ ComboBox {
 
 
 
+
+/*##^##
+Designer {
+    D{i:0;height:30;width:170}
+}
+##^##*/
