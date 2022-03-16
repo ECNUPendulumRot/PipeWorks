@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Components 1.0
 import QtQuick.Studio.Effects 1.0
@@ -68,6 +68,9 @@ Rectangle {
         wrapMode: Text.WordWrap
         anchors.leftMargin: 110
         textFormat: Text.RichText
+    }
+    function clear(){
+        textField.text=""
     }
 }
 

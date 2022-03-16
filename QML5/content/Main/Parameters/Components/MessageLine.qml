@@ -10,12 +10,12 @@ Rectangle {
     height: 30
     visible: true
     color: "#00ebebeb"
-    property alias inputColor: input.color
-    property alias inputText: input.text
+    property alias inputColor: textField.color
+    property alias inputText: textField.text
     property alias text7Text: text7.text
-    property alias row : input.row
-    property alias col : input.col
-    property alias value : input.value
+    property alias row : textField.row
+    property alias col : textField.col
+    property alias value : textField.value
     signal dataAccepted(string value);
     Text {
         id: text7
@@ -28,7 +28,7 @@ Rectangle {
     }
 
     FixedTextField {
-        id: input
+        id: textField
         x: 40
         width: 60
         height: 16
@@ -38,7 +38,10 @@ Rectangle {
         property int row
         property int col
         property string value
-        onEditingFinished: rectangle6.dataAccepted(input.text);
+        onEditingFinished: rectangle6.dataAccepted(textField.text);
+    }
+    function clear(){
+        textField.text=""
     }
 }
 
