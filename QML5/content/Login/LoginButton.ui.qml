@@ -51,7 +51,7 @@ Button {
     states: [
         State {
             name: "hover"
-            when: control.hovered && !control.pressed
+            when: (control.hovered && !control.pressed) || control.activeFocus
 
             PropertyChanges {
                 target: buttonBackground
