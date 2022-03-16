@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Effects 1.0
 import "../../../../../QML5/imports/QML5"
@@ -52,6 +52,9 @@ Rectangle {
             textField.focus = false
             control.dataChanged(control.mapString, textField.text)
         }
+    }
+    function clear(){
+        textField.text=""
     }
 }
 

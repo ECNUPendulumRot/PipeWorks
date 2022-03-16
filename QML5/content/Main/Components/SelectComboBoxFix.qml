@@ -11,7 +11,18 @@ Rectangle{
     color: "#00202020"
     border.color: "#ffffff"
     border.width: 0
+    property alias labelText: label.text
+    property alias textFieldText: control.currentIndex
+    property alias textFieldColor:content.color
+    //property alias cbxCurrentIndex: control.currentIndex
+    //property alias cbxText: control.displayText
+    property alias cbxModel: control.model
+    property string mapString
+    property string type : "editable"
 
+    property string defaultString
+    signal dataChanged(string s, var text)
+    //property alias textFieldColor:
     Label {
         id: label
         x: 0
@@ -22,16 +33,17 @@ Rectangle{
         id: control
         width: 80
         height: 20
+        editable: true
         anchors.verticalCenter: label.verticalCenter
         anchors.left: label.right
         padding: 0
         font.pixelSize: 12
         anchors.leftMargin: 10
         currentIndex: -1
-        displayText: if(!(currentIndex + 1)) "跟踪状态"
+        displayText: if(!(currentIndex + 1)) defaultString
         model: ["0:N", "1:H", "2:V", "3:B"]
 
-        onCurrentIndexChanged: cmbBxCallSelect(currentIndex)
+        onCurrentIndexChanged: cmbBxCallSelect(rectangle.mapString, currentIndex)
 
         delegate: ItemDelegate {
             id: element
@@ -102,6 +114,7 @@ Rectangle{
         }
 
         contentItem: Text {
+            id:content
             leftPadding: 4
             rightPadding: control.indicator.width + control.spacing
 
@@ -120,10 +133,7 @@ Rectangle{
             border.color: "#D3D3D3"
             border.width: control.visualFocus ? 2 : 1
             radius: 4
-
             layer.enabled: true
-
-
         }
 
         popup: Popup {
@@ -173,10 +183,13 @@ Rectangle{
                 cmbBxCallSelect(currentIndex)
         }
 
-        function cmbBxCallSelect(index){// write data into database
-            //if(scheduler.isPdbLoaded())
+        function cmbBxCallSelect(s, index){// write data into database
+            dataChanged(s,index)
         }
 
+    }
+    function clear(){
+        control.currentIndex= -1
     }
 }
 
@@ -184,6 +197,6 @@ Rectangle{
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.5;height:20;width:80}D{i:1}D{i:2}
+    D{i:0;formeditorZoom:6;height:20;width:80}D{i:1}D{i:2}
 }
 ##^##*/

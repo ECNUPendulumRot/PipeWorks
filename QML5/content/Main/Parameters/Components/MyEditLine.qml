@@ -73,6 +73,9 @@ Rectangle {
         anchors.leftMargin: 90
         textFormat: Text.RichText
     }
+    function clear(){
+        textField.text=""
+    }
 }
 
 

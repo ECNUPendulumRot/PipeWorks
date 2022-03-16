@@ -254,9 +254,13 @@ Item {
 
             SelectComboBoxFix {
                 id: selectComboBoxFix
+                mapString: "trimLeadMode"
+                defaultString:"跟踪状态"
                 x: 200
                 y: -8
                 width: 150
+                onDataChanged: (s, text) => writeToBackend(s, text)
+
             }
         }
 
@@ -468,6 +472,10 @@ Item {
                 y: -8
                 width: 150
                 height: 30
+                mapString: "trimTrailMode"
+                defaultString:"跟踪状态"
+                onDataChanged: (s, text) => writeToBackend(s, text)
+
             }
 
 //            MyEditLine {
@@ -510,6 +518,18 @@ Item {
                 width: 157
                 height: 120
                 spacing: 0
+                SelectComboBoxFix {
+                    id: selectComboBoxFix2
+                    x: 200
+                    y: -8
+                    width: 150
+                    labelText: "电位器功能"
+                    defaultString:"电位器功能"
+                    //cbxText: "电位器功能"
+                    cbxModel: ["不开启","主枪送丝","副枪送丝","小车行走"]
+                    mapString: "potFunc"
+                    onDataChanged: (s, text) => writeToBackend(s, text)
+                }
 
                 MyEditLine3 {
                     id: startAngle
@@ -541,21 +561,7 @@ Item {
                     onDataChanged: (s, text) => writeToBackend(s, text)
                 }
 
-                MyEditLine3 {
-                    id: potFunc
-                    width: 145
 
-                    mapString : "potFunc"
-
-                    textFieldAnchorsleftMargin: 76
-                    label6AnchorsleftMargin: 50
-                    textFieldWidth: 40
-                    label6Text: ""
-                    label5Text: "电位器功能"
-
-                    onDataChanged: (s, text) => writeToBackend(s, text)
-
-                }
 
                 MyEditLine3 {
                     id: potPercent
@@ -571,6 +577,8 @@ Item {
 
                     onDataChanged: (s, text) => writeToBackend(s, text)
                 }
+
+
             }
         }
     }
@@ -597,13 +605,14 @@ Item {
 
     function writeToBackend(s, text){
         if(scheduler.isPdbLoaded()){
+            console.log(s,text)
             passFTableModel.callSetData(control.passLine, colMapping[s], text)
             fixedTableRefreshData(control.passLine)
         }
     }
 
     function refreshData(item){
-        if(item.type === "editable" && item.editEnabled){
+        if(item.type === "editable" ){ //&& item.editEnabled
             item.textFieldText = passFTableModel.fixedTablePopData(control.passLine, item.mapString);
             item.textFieldColor = passFTableModel.callIsDirty(control.passLine, colMapping[item.mapString]) ? "#cc5555":"#0d0d0d";
             return;
@@ -620,7 +629,7 @@ Item {
 
     function clearData(item){
         if(item.type === "editable"){
-            item.textFieldText = "";
+            item.clear();
             return;
         }
         for(var i = 0; i < item.children.length; i++)
@@ -650,7 +659,7 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.66;height:160;width:1206}D{i:4}D{i:5}D{i:7}D{i:8}D{i:9}D{i:10}
+    D{i:0;formeditorZoom:1.1;height:160;width:1206}D{i:4}D{i:5}D{i:7}D{i:8}D{i:9}D{i:10}
 D{i:6}D{i:3}D{i:12}D{i:13}D{i:15}D{i:16}D{i:17}D{i:18}D{i:14}D{i:11}D{i:19}D{i:20}
 D{i:2}D{i:23}D{i:24}D{i:26}D{i:27}D{i:28}D{i:29}D{i:25}D{i:22}D{i:31}D{i:32}D{i:34}
 D{i:35}D{i:36}D{i:37}D{i:33}D{i:30}D{i:38}D{i:39}D{i:21}D{i:41}D{i:43}D{i:44}D{i:45}
