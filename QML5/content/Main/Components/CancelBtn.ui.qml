@@ -35,7 +35,7 @@ Button {
         leftPadding: 30
         opacity: enabled ? 1.0 : 0.3
         color: "#000000"
-        text: "恢复数据"
+        text: "撤销修改"
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 12
         horizontalAlignment: Text.AlignHCenter
@@ -72,7 +72,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:2;height:30;width:45}D{i:1}D{i:3}D{i:4}
+    D{i:0;formeditorZoom:2;height:30;width:120}D{i:1}D{i:3}D{i:4}
 }
 ##^##*/
 
