@@ -53,7 +53,7 @@ Rectangle {
             when: !rectangle6.enabled
 
             PropertyChanges {
-                target: input
+                target: textField
                 opacity: 0.5
             }
         }
