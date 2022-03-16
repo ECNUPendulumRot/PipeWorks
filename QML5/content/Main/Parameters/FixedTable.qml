@@ -1,9 +1,10 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "Components"
 import QtQuick.Studio.Components 1.0
 import QtQuick.Layouts 1.0
 import "../../../../QML5/imports/QML5"
+import "../Components"
 Item {
     width: 1220
     height: 160
@@ -251,20 +252,11 @@ Item {
                 label4Text: "前焊枪"
             }
 
-            MyEditLine {
-                id: trimLeadMode
-
-                mapString: "trimLeadMode"
-
-                x: 196
+            SelectComboBoxFix {
+                id: selectComboBoxFix
+                x: 200
                 y: -8
-                labelText: "跟踪状态"
-                textFieldAnchorsleftMargin: 64
-                label1AnchorsleftMargin: 50
-                textFieldWidth: 40
-                label1Text: ""
-
-                onDataChanged: (s, text) => writeToBackend(s, text)
+                width: 150
             }
         }
 
@@ -470,21 +462,29 @@ Item {
                 rectangle9X: 30
             }
 
-            MyEditLine {
-                id: trimTrailMode
-                x: trimLeadMode.x
-                y: trimLeadMode.y
-
-                mapString : "trimTrailMode"
-
-                textFieldAnchorsleftMargin: 64
-                label1AnchorsleftMargin: 50
-                labelText: "跟踪状态"
-                textFieldWidth: 40
-                label1Text: ""
-
-                onDataChanged: (s, text) => writeToBackend(s, text)
+            SelectComboBoxFix {
+                id: selectComboBoxFix1
+                x: 200
+                y: -8
+                width: 150
+                height: 30
             }
+
+//            MyEditLine {
+//                id: trimTrailMode
+//                x: trimLeadMode.x
+//                y: trimLeadMode.y
+
+//                mapString : "trimTrailMode"
+
+//                textFieldAnchorsleftMargin: 64
+//                label1AnchorsleftMargin: 50
+//                labelText: "跟踪状态"
+//                textFieldWidth: 40
+//                label1Text: ""
+
+//                onDataChanged: (s, text) => writeToBackend(s, text)
+//            }
         }
 
         GroupItem {
@@ -650,7 +650,7 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.9;height:160;width:1206}D{i:4}D{i:5}D{i:7}D{i:8}D{i:9}D{i:10}
+    D{i:0;formeditorZoom:1.66;height:160;width:1206}D{i:4}D{i:5}D{i:7}D{i:8}D{i:9}D{i:10}
 D{i:6}D{i:3}D{i:12}D{i:13}D{i:15}D{i:16}D{i:17}D{i:18}D{i:14}D{i:11}D{i:19}D{i:20}
 D{i:2}D{i:23}D{i:24}D{i:26}D{i:27}D{i:28}D{i:29}D{i:25}D{i:22}D{i:31}D{i:32}D{i:34}
 D{i:35}D{i:36}D{i:37}D{i:33}D{i:30}D{i:38}D{i:39}D{i:21}D{i:41}D{i:43}D{i:44}D{i:45}
