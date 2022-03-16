@@ -71,6 +71,17 @@ Rectangle {
         anchors.leftMargin: 110
         textFormat: Text.RichText
     }
+    states: [
+        State {
+            name: "disabled"
+            when: !control.enabled
+
+            PropertyChanges {
+                target: textField
+                opacity: 0.5
+            }
+        }
+    ]
 }
 
 

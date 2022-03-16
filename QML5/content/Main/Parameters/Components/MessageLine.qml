@@ -42,6 +42,17 @@ Rectangle {
         property string value
         onEditingFinished: rectangle6.dataAccepted(input.text);
     }
+    states: [
+        State {
+            name: "disabled"
+            when: !rectangle6.enabled
+
+            PropertyChanges {
+                target: input
+                opacity: 0.5
+            }
+        }
+    ]
 }
 
 

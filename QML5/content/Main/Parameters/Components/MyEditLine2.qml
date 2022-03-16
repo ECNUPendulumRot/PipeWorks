@@ -55,11 +55,22 @@ Rectangle {
             control.dataChanged(control.mapString, textField.text)
         }
     }
+    states: [
+        State {
+            name: "disabled"
+            when: !control.enabled
+
+            PropertyChanges {
+                target: textField
+                opacity: 0.5
+            }
+        }
+    ]
 }
 
 /*##^##
 Designer {
-    D{i:0;height:30;width:165}D{i:1}D{i:2}
+    D{i:0;height:30;width:165}
 }
 ##^##*/
 

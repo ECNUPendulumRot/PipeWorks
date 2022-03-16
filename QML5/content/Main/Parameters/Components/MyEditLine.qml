@@ -73,6 +73,17 @@ Rectangle {
         anchors.leftMargin: 90
         textFormat: Text.RichText
     }
+    states: [
+        State {
+            name: "disabled"
+            when: !control.enabled
+
+            PropertyChanges {
+                target: textField
+                opacity: 0.5
+            }
+        }
+    ]
 }
 
 
@@ -80,6 +91,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;height:30;width:260}D{i:1}D{i:2}D{i:3}
+    D{i:0;height:30;width:260}
 }
 ##^##*/

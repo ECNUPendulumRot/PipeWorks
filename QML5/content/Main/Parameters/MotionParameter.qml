@@ -2047,6 +2047,7 @@ Item {
 
     Component.onCompleted: {
         initMapString();
+        initPermission();
     }
 
 
@@ -2101,13 +2102,88 @@ Item {
     }
 
     function disableInput(item){
-        if(item.permission === "true"){
+        if(item.permission === "false"){
             item.enabled = false;
             return;
         }
         for(var i = 0; i < item.children.length; i++)
             disableInput(item.children[i]);
         return;
+    }
+
+    function initPermission() {
+        carSpeedBefore.permission        = "false"
+        carAccBefore.permission          = "false"
+        carStopAccBefore.permission      = "false"
+        carSpeed.permission              = "false"
+        carAcc.permission                = "false"
+        carStopAcc.permission            = "false"
+
+        parameterInterval.permission     = "true"
+        testOscFreq.permission           = "true"
+        pipeDiameter.permission          = "true"
+        feedPercent.permission           = "true"
+        arcStart.permission              = "true"
+        arcEnd.permission                = "true"
+        facingStart.permission           = "true"
+        facingEnd.permission             = "true"
+
+        gunInverted.permission           = "true"
+        travInverted.permission          = "true"
+        verInverted.permission           = "true"
+        horInverted.permission           = "true"
+
+        lhwidthIncrement.permission      = "false"
+        lhwidthDecrement.permission      = "false"
+        lhspeedOutBefore.permission      = "false"
+        lhaccOutBefore.permission        = "false"
+        lhstopAccOutBefore.permission    = "false"
+        lhspeedInBefore.permission       = "false"
+        lhaccInBefore.permission         = "false"
+        lhstopAccInBefore.permission     = "false"
+        lhchangenessOut.permission       = "false"
+        lhchangenessIn.permission        = "false"
+
+        lvwidthIncrement.permission      = "false"
+        lvwidthDecrement.permission      = "false"
+        lvspeedUpBefore.permission       = "false"
+        lvaccUpBefore.permission         = "false"
+        lvstopAccUpBefore.permission     = "false"
+        lvspeedDownBefore.permission     = "false"
+        lvaccDownBefore.permission       = "false"
+        lvstopAccDownBefore.permission   = "false"
+        lvspeedUp.permission             = "false"
+        lvaccUp.permission               = "false"
+        lvchangenessUp.permission        = "false"
+        lvspeedDown.permission           = "false"
+        lvaccDown.permission             = "false"
+        lvchangenessDown.permission      = "false"
+
+        thwidthIncrement.permission      = "false"
+        thwidthDecrement.permission      = "false"
+        thspeedOutBefore.permission      = "false"
+        thaccOutBefore.permission        = "false"
+        thstopAccOutBefore.permission    = "false"
+        thspeedInBefore.permission       = "false"
+        thaccInBefore.permission         = "false"
+        thstopAccInBefore.permission     = "false"
+        thchangenessOut.permission       = "false"
+        thchangenessIn.permission        = "false"
+
+        tvwidthIncrement.permission      = "false"
+        tvwidthDecrement.permission      = "false"
+        tvspeedUpBefore.permission       = "false"
+        tvaccUpBefore.permission         = "false"
+        tvstopAccUpBefore.permission     = "false"
+        tvspeedDownBefore.permission     = "false"
+        tvaccDownBefore.permission       = "false"
+        tvstopAccDownBefore.permission   = "false"
+        tvspeedUp.permission             = "false"
+        tvaccUp.permission               = "false"
+        tvchangenessUp.permission        = "false"
+        tvspeedDown.permission           = "false"
+        tvaccDown.permission             = "false"
+        tvchangenessDown.permission      = "false"
     }
 
     function initMapString() {

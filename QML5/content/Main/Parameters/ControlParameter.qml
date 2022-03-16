@@ -588,6 +588,9 @@ Item {
         }
     }
 
+    Component.onCompleted: {
+        initPermission();
+    }
 
     function refreshData(item){
         if(item.type === "editable"){
@@ -623,13 +626,59 @@ Item {
     }
 
     function disableInput(item){
-        if(item.permission === "true"){
+        if(item.permission === "false"){
             item.enabled = false;
             return;
         }
         for(var i = 0; i < item.children.length; i++)
             disableInput(item.children[i]);
         return;
+    }
+
+    function initPermission(){
+        lf.permission   =   "false"
+
+        lm.permission   =   "false"
+        lm1.permission  =   "false"
+        lm2.permission  =   "false"
+        lm3.permission  =   "false"
+        lm4.permission  =   "false"
+
+        lk.permission   =   "false"
+        lk1.permission  =   "false"
+        lk2.permission  =   "false"
+        lk3.permission  =   "false"
+        lk4.permission  =   "false"
+
+        lhp.permission  =   "false"
+        lhi.permission  =   "false"
+        lhd.permission  =   "false"
+
+        lvp.permission  =   "false"
+        lvi.permission  =   "false"
+        lvd.permission  =   "false"
+
+        tf.permission   =   "false"
+
+        tm.permission   =   "false"
+        tm1.permission  =   "false"
+        tm2.permission  =   "false"
+        tm3.permission  =   "false"
+        tm4.permission  =   "false"
+
+        tk.permission   =   "false"
+        tk1.permission  =   "false"
+        tk2.permission  =   "false"
+        tk3.permission  =   "false"
+        tk4.permission  =   "false"
+
+        thp.permission  =   "false"
+        thi.permission  =   "false"
+        thd.permission  =   "false"
+
+        tvp.permission  =   "false"
+        tvi.permission  =   "false"
+        tvd.permission  =   "false"
     }
 }
 /*##^##
