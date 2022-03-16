@@ -51,6 +51,22 @@ Item {
                 anchors.horizontalCenterOffset: 0
                 anchors.horizontalCenter: parent.horizontalCenter
             }
+
+            Text {
+                id: textItem
+                y: 540
+                opacity: enabled ? 1.0 : 0.3
+                color: "#ffffff"
+                text: "2022 v1.0"
+                font.pixelSize: 16
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                wrapMode: Text.WordWrap
+                anchors.horizontalCenterOffset: -1
+                anchors.horizontalCenter: label.horizontalCenter
+                z: 1
+                font.weight: Font.Medium
+            }
         }
 
         Rectangle {
@@ -90,6 +106,9 @@ Item {
                 textAreaPlaceholderText: "请输入用户名"
                 title: "账户"
                 inputText.onAccepted: userLogin()
+
+                inputText.focus: true
+                KeyNavigation.tab: inputPw.inputText
             }
 
             VerticalInput {
@@ -100,6 +119,8 @@ Item {
                 title: "密码"
                 inputText.echoMode: TextInput.Password
                 inputText.onAccepted: userLogin()
+
+                KeyNavigation.tab: loginButton
             }
 
             LoginButton {
@@ -110,6 +131,12 @@ Item {
                 anchors.rightMargin: 45
                 textItemText: "登 录"
                 onClicked: userLogin()
+
+                KeyNavigation.tab: loginButton1
+                Keys.onPressed: {
+                    if(event.key === Qt.Key_Enter || event.key === Qt.Key_Return)
+                        userLogin();
+                }
             }
 
             LoginButton {
@@ -120,6 +147,12 @@ Item {
                 anchors.leftMargin: 45
                 textItemText: "取 消"
                 onClicked: Qt.quit()
+
+                KeyNavigation.tab: inputID.inputText
+                Keys.onPressed: {
+                    if(event.key === Qt.Key_Enter || event.key === Qt.Key_Return)
+                        Qt.quit();
+                }
             }
         }
 
@@ -177,3 +210,9 @@ Item {
         return
     }
 }
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.75}D{i:5}
+}
+##^##*/
