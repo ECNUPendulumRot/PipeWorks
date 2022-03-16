@@ -47,3 +47,6 @@ QTQUICK_COMPILER_SKIPPED_RESOURCES += bundle_only.qrc
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    QML5/content/Main/Components/SelectComboBoxFix.qml

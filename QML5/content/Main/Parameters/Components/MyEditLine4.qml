@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 //import MotionControl
 import QtQuick.Studio.Components 1.0
@@ -71,6 +71,7 @@ Rectangle {
         anchors.leftMargin: 110
         textFormat: Text.RichText
     }
+
     states: [
         State {
             name: "disabled"
@@ -82,6 +83,11 @@ Rectangle {
             }
         }
     ]
+
+    function clear(){
+        textField.text=""
+    }
+
 }
 
 

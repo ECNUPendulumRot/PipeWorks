@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
 import QtQuick.Studio.Effects 1.0
@@ -14,9 +14,20 @@ ComboBox {
     font.pixelSize: 12
     currentIndex: -1
     displayText: if(!(currentIndex + 1)) "选择数据类型"
-    model: ["边停时间", "摆宽", "摆动频率", "送丝速度", "电弧修正", "小车加速度", "小车速度", "干伸高度值"]
+    model: ["边停时间", "摆宽", "摆动频率", "送丝速度", "电弧修正",  "小车速度", "干伸高度值"]
 
-    onCurrentIndexChanged: cmbBxCallSelect(currentIndex)
+    onCurrentIndexChanged: cmbBxCallSelect(indexMap[currentIndex])
+
+    property var indexMap: {
+        0:0,
+        1:1,
+        2:2,
+        3:3,
+        4:4,
+        5:6,
+        6:7
+
+                }
 
     delegate: ItemDelegate {
         id: element

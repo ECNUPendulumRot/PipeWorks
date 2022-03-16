@@ -84,6 +84,10 @@ Rectangle {
             }
         }
     ]
+    function clear(){
+        textField.text=""
+    }
+
 }
 
 
