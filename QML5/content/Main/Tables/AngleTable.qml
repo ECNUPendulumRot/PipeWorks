@@ -14,7 +14,7 @@ Rectangle {
     border.width: 0
     z: 1
     property var engToChn : {//cmd <------> table column name
-        "angle"         :"角度(度)",
+        "angle"         :"角度\n(度)",
         "stayTime_Lead" :"前枪边停时间\n(秒)",
         "oscWidth_Lead" :"前枪摆宽\n(毫米)",
         "oscFreq_Lead"  :"前枪摆动周期\n(毫秒)",   //？
