@@ -13,9 +13,13 @@ Rectangle {
     property alias inputColor: textField.color
     property alias inputText: textField.text
     property alias text7Text: text7.text
+
+    property string permission : "true"
+
     property alias row : textField.row
     property alias col : textField.col
     property alias value : textField.value
+
     signal dataAccepted(string value);
     Text {
         id: text7
@@ -43,6 +47,17 @@ Rectangle {
     function clear(){
         textField.text=""
     }
+    states: [
+        State {
+            name: "disabled"
+            when: !rectangle6.enabled
+
+            PropertyChanges {
+                target: textField
+                opacity: 0.5
+            }
+        }
+    ]
 }
 
 

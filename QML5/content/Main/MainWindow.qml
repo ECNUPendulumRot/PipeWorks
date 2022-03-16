@@ -428,6 +428,12 @@ Rectangle {
     function refreshModelData(row, col, value){
         angleRelatedTableModel.callSetData(row, col, value)
     }
+
+    function disable(){
+        ctrlPop.disable();
+        commPop.disable();
+        motionPop.disable();
+    }
 }
 
 /*##^##

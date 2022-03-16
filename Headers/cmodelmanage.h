@@ -53,10 +53,11 @@ private:
 
     QSqlDatabase mdb;
 
-    TModel* MTable[6];
+    const static int MTableCount = 7;
+    TModel* MTable[MTableCount];
 
-    static inline QList<QString> modelNames = {"passFTableModel", "passTableModel", "angleRelatedTableModel",// workers' access
-                                               "motionFTableModel", "controlFTableModel", "comFTableModel"}; // senior workers' access
+    static inline QList<QString> modelNames = {"passFTableModel", "passTableModel", "angleRelatedTableModel", "systemFTableModel", "motionFTableModel", // workers' access
+                                               "controlFTableModel", "comFTableModel"}; // senior workers' access
 
 signals:
     void registerRequest(TModel*, QString);

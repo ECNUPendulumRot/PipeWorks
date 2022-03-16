@@ -24,10 +24,10 @@ Rectangle {
     property alias labelText: label.text
     property alias editEnabled: control.enabled
 
-    property string mapString
-
-
     property string type : "editable"
+    property string permission : "true"
+    property string mapString
+    property bool exist : true
 
     signal dataChanged(string s, var text)
 
@@ -73,9 +73,21 @@ Rectangle {
         anchors.leftMargin: 90
         textFormat: Text.RichText
     }
+    states: [
+        State {
+            name: "disabled"
+            when: !control.enabled
+
+            PropertyChanges {
+                target: textField
+                opacity: 0.5
+            }
+        }
+    ]
     function clear(){
         textField.text=""
     }
+
 }
 
 
@@ -83,6 +95,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;height:30;width:260}D{i:1}D{i:2}D{i:3}
+    D{i:0;height:30;width:260}
 }
 ##^##*/

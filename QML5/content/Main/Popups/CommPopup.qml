@@ -107,4 +107,8 @@ Popup {
         commParameter.clearData()
     }
 
+    function disable(){
+        commParameter.disableInput(commParameter)
+    }
+
 }

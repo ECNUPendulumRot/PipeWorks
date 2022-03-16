@@ -220,7 +220,7 @@ Item {
             id: text1
             height: 30
             color: Constants.tableFontColor
-            text: qsTr("Qrcode")
+            text: qsTr("QRcode")
             anchors.left: parent.left
             anchors.top: parent.top
             font.pixelSize: 12
@@ -239,10 +239,23 @@ Item {
         }
     }
 
+    Component.onCompleted: {
+        initPermission();
+    }
 
     function refreshData(){
         getData()
         getColor()
+    }
+
+    function disableInput(item){
+        if(item.permission === "false"){
+            item.enabled = false;
+            return;
+        }
+        for(var i = 0; i < item.children.length; i++)
+            disableInput(item.children[i]);
+        return;
     }
 
     function getData(){
@@ -337,6 +350,28 @@ Item {
         motion2.inputColor = comFTableModel.callIsDirty(3,4)?"#cc5555":"#0d0d0d";
     }
 
+    function initPermission(){
+        angles.permission        =  "false";
+        angles1.permission       =  "false";
+        angles2.permission       =  "false";
+
+        box.permission           =  "false";
+        box1.permission          =  "false";
+        box2.permission          =  "false";
+
+        captureCard.permission   =  "false";
+        captureCard1.permission  =  "false";
+        captureCard2.permission  =  "false";
+
+        motion.permission        =  "false";
+        motion1.permission       =  "false";
+        motion2.permission       =  "false";
+
+
+        qcode.permission         =  "false";
+        qcode1.permission        =  "false";
+        qcode2.permission        =  "false";
+    }
 }
 
 
@@ -350,8 +385,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.33}D{i:1}D{i:3}D{i:4}D{i:5}D{i:6}D{i:7}D{i:8}D{i:9}D{i:10}
-D{i:11}D{i:12}D{i:13}D{i:14}D{i:15}D{i:16}D{i:17}D{i:18}D{i:19}D{i:20}D{i:21}D{i:22}
-D{i:2}
+    D{i:0;formeditorZoom:1.33}
 }
 ##^##*/

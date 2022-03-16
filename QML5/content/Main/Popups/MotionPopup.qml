@@ -108,4 +108,8 @@ Popup {
         motionParameter.clearData(motionParameter)
     }
 
+    function disable(){
+        motionParameter.disableInput(motionParameter)
+    }
+
 }

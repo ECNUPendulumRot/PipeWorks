@@ -6,7 +6,7 @@ import "Components"
 
 Item {
     id: rectangle
-    property int i: 1
+    property int i: 0
 
     property var mapping:{
         "carWeldBeforeACC"          :0,
@@ -69,6 +69,13 @@ Item {
         "facingEndDistance"         :57
     }
 
+    property var mapping2:{
+        "gunInverted"               :0,
+        "verInverted"               :1,
+        "horInverted"               :2,
+        "travInverted"              :3
+    }
+
     property var parameterList: [
         "carWeldBeforeACC",
         "carWeldBeforeSPEED",
@@ -129,6 +136,13 @@ Item {
         "facingStartDistance",
         "facingEndDistance"
     ]
+
+    property var parameterList2: [
+        "gunInverted",
+        "verInverted",
+        "horInverted",
+        "travInverted"
+    ]
     width: content.width
     height: content.height
 
@@ -148,8 +162,8 @@ Item {
                 width: 100
                 text: "小车与其他"
                 onClicked: i = 0
+                checked: true
                 checkable: true
-                checked: false
                 textItemFontpixelSize: 12
                 autoExclusive: true
             }
@@ -159,7 +173,6 @@ Item {
                 width: 100
                 onClicked: i = 1
                 checkable: true
-                checked: true
                 textItemFontpixelSize: 12
                 autoExclusive: true
             }
@@ -242,7 +255,7 @@ Item {
                 Rectangle {
                     id: motionelse
                     width: 560
-                    height: 475
+                    height: 500
                     color: "#ebebeb"
                     border.color: "#ffffff"
                     border.width: 0
@@ -252,12 +265,13 @@ Item {
                         x: 0
                         y: 0
                         width: 560
-                        height: 231
+                        height: 180
                         MyGroupTitle2 {
                             id: rectangle8
                             x: 0
                             y: 0
                             width: 560
+                            height: 180
                             label4FontpixelSize: 12
                             label4Color: "#202020"
 
@@ -266,7 +280,7 @@ Item {
                         MyGroupTitle {
                             id: rectangle1
                             x: 40
-                            y: 51
+                            y: 25
                             width: 220
                             height: 130
                             radius: 4
@@ -319,7 +333,7 @@ Item {
                         MyGroupTitle {
                             id: rectangle2
                             x: 300
-                            y: 51
+                            y: rectangle1.y
                             width: rectangle1.width
                             height: rectangle1.height
                             radius: 4
@@ -369,11 +383,13 @@ Item {
                     }
 
                     GroupItem {
+                        id: groupItem
                         x: 0
-                        y: 278
+                        y: 210
                         GroupItem {
+                            id: group3
                             x: 40
-                            y: 39
+                            y: 20
                             MyEditLine4 {
                                 id: parameterInterval
                                 x: 0
@@ -436,7 +452,8 @@ Item {
 
                         GroupItem {
                             x: 300
-                            y: 39
+                            anchors.top: group3.top
+                            anchors.topMargin: 0
                             MyEditLine4 {
                                 id: arcStart
                                 x: 0
@@ -498,10 +515,90 @@ Item {
                             x: 0
                             y: 0
                             width: 560
-                            height: 197
+                            height: 160
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "其他参数"
+                        }
+                    }
+
+                    GroupItem {
+                        id: groupItem1
+                        x: 0
+                        y: 400
+                        GroupItem {
+                            id: group4
+                            x: 40
+                            y: 20
+                            height: 60
+                            MyEditLine4 {
+                                id: gunInverted
+                                x: 0
+                                y: 0
+                                width: 220
+                                textFieldAnchorsleftMargin: 90
+                                label11Text: "焊枪反置"
+                                label12AnchorsleftMargin: 70
+                                textFieldWidth: 60
+                                label12Text: ""
+                                type: "editable2"
+                            }
+
+                            MyEditLine4 {
+                                id: travInverted
+                                x: 0
+                                y: 30
+                                width: 220
+                                textFieldAnchorsleftMargin: 90
+                                label11Text: "小车行走反置"
+                                label12AnchorsleftMargin: 70
+                                textFieldWidth: 60
+                                label12Text: ""
+                                type: "editable2"
+                            }
+                        }
+
+                        GroupItem {
+                            x: 300
+                            height: 60
+                            anchors.top: group4.top
+                            MyEditLine4 {
+                                id: verInverted
+                                x: 0
+                                y: 0
+                                width: 220
+                                textFieldAnchorsleftMargin: 90
+                                label11Text: "垂向运动反置"
+                                label12AnchorsleftMargin: 70
+                                textFieldWidth: 60
+                                label12Text: ""
+                                type: "editable2"
+                            }
+
+                            MyEditLine4 {
+                                id: horInverted
+                                x: 0
+                                y: 30
+                                width: 220
+                                textFieldAnchorsleftMargin: 90
+                                label11Text: "横向运动反置"
+                                label12AnchorsleftMargin: 70
+                                textFieldWidth: 60
+                                label12Text: ""
+                                type: "editable2"
+                            }
+                            anchors.topMargin: 0
+                        }
+
+                        MyGroupTitle2 {
+                            id: myGroupTitle8
+                            x: 0
+                            y: 0
+                            width: 560
+                            height: 100
+                            label4FontpixelSize: 12
+                            label4Color: "#202020"
+                            label4Text: "机头切换"
                         }
                     }
                 }
@@ -737,6 +834,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/分钟"
@@ -755,6 +853,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动加速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/秒<sup>2<sup>"
@@ -795,6 +894,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/分钟"
@@ -811,6 +911,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动加速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/秒<sup>2<sup>"
@@ -1441,6 +1542,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/分钟"
@@ -1456,6 +1558,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动加速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/秒<sup>2<sup>"
@@ -1495,6 +1598,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/分钟"
@@ -1508,6 +1612,7 @@ Item {
 
                                     label1AnchorsleftMargin: 70
                                     editEnabled: false
+                                    exist: false
                                     labelText: "运动加速度"
                                     textFieldAnchorsleftMargin: 70
                                     label1Text: "毫米/秒<sup>2<sup>"
@@ -1942,12 +2047,18 @@ Item {
 
     Component.onCompleted: {
         initMapString();
+        initPermission();
     }
 
 
     function writeInData(item){
-        if(item.type === "editable" && item.editEnabled){
-            motionFTableModel.callSetData(mapping[item.mapString], 3, item.textFieldText)
+        if(item.editEnabled){
+            if(item.type === "editable"){
+                motionFTableModel.callSetData(mapping[item.mapString], 3, item.textFieldText)
+            }
+            else if(item.type === "editable2"){
+                systemFTableModel.callSetData(mapping2[item.mapString], 3, item.textFieldText)
+            }
             return;
         }
         for(var i = 0; i < item.children.length; i++)
@@ -1956,11 +2067,19 @@ Item {
     }
 
 
+
     function refreshData(item){
-        if(item.editEnabled === true && item.type === "editable"){
-            item.textFieldText = motionFTableModel.fixedTablePopData(mapping[item.mapString],"parmeterValue");
-            item.textFieldColor = motionFTableModel.callIsDirty(mapping[item.mapString],3) ? "#cc5555":"#0d0d0d";
-            return;
+        if(item.exist){
+            if(item.type === "editable"){
+                item.textFieldText = motionFTableModel.fixedTablePopData(mapping[item.mapString],"parmeterValue");
+                item.textFieldColor = motionFTableModel.callIsDirty(mapping[item.mapString],3) ? "#cc5555":"#0d0d0d";
+                return;
+            }
+            else if(item.type === "editable2"){
+                item.textFieldText = systemFTableModel.fixedTablePopData(mapping2[item.mapString],"value");
+                item.textFieldColor = systemFTableModel.callIsDirty(mapping2[item.mapString],3) ? "#cc5555":"#0d0d0d";
+                return;
+            }
         }
         for(var i = 0; i < item.children.length; i++)
             refreshData(item.children[i])
@@ -1972,9 +2091,99 @@ Item {
             item.textFieldText = "";
             return;
         }
+        else if(item.type === "editable2"){
+            item.textFieldText = "";
+            return;
+        }
+
         for(var i = 0; i < item.children.length; i++)
             clearData(item.children[i])
         return
+    }
+
+    function disableInput(item){
+        if(item.permission === "false"){
+            item.enabled = false;
+            return;
+        }
+        for(var i = 0; i < item.children.length; i++)
+            disableInput(item.children[i]);
+        return;
+    }
+
+    function initPermission() {
+        carSpeedBefore.permission        = "false"
+        carAccBefore.permission          = "false"
+        carStopAccBefore.permission      = "false"
+        carSpeed.permission              = "false"
+        carAcc.permission                = "false"
+        carStopAcc.permission            = "false"
+
+        parameterInterval.permission     = "true"
+        testOscFreq.permission           = "true"
+        pipeDiameter.permission          = "true"
+        feedPercent.permission           = "true"
+        arcStart.permission              = "true"
+        arcEnd.permission                = "true"
+        facingStart.permission           = "true"
+        facingEnd.permission             = "true"
+
+        gunInverted.permission           = "true"
+        travInverted.permission          = "true"
+        verInverted.permission           = "true"
+        horInverted.permission           = "true"
+
+        lhwidthIncrement.permission      = "false"
+        lhwidthDecrement.permission      = "false"
+        lhspeedOutBefore.permission      = "false"
+        lhaccOutBefore.permission        = "false"
+        lhstopAccOutBefore.permission    = "false"
+        lhspeedInBefore.permission       = "false"
+        lhaccInBefore.permission         = "false"
+        lhstopAccInBefore.permission     = "false"
+        lhchangenessOut.permission       = "false"
+        lhchangenessIn.permission        = "false"
+
+        lvwidthIncrement.permission      = "false"
+        lvwidthDecrement.permission      = "false"
+        lvspeedUpBefore.permission       = "false"
+        lvaccUpBefore.permission         = "false"
+        lvstopAccUpBefore.permission     = "false"
+        lvspeedDownBefore.permission     = "false"
+        lvaccDownBefore.permission       = "false"
+        lvstopAccDownBefore.permission   = "false"
+        lvspeedUp.permission             = "false"
+        lvaccUp.permission               = "false"
+        lvchangenessUp.permission        = "false"
+        lvspeedDown.permission           = "false"
+        lvaccDown.permission             = "false"
+        lvchangenessDown.permission      = "false"
+
+        thwidthIncrement.permission      = "false"
+        thwidthDecrement.permission      = "false"
+        thspeedOutBefore.permission      = "false"
+        thaccOutBefore.permission        = "false"
+        thstopAccOutBefore.permission    = "false"
+        thspeedInBefore.permission       = "false"
+        thaccInBefore.permission         = "false"
+        thstopAccInBefore.permission     = "false"
+        thchangenessOut.permission       = "false"
+        thchangenessIn.permission        = "false"
+
+        tvwidthIncrement.permission      = "false"
+        tvwidthDecrement.permission      = "false"
+        tvspeedUpBefore.permission       = "false"
+        tvaccUpBefore.permission         = "false"
+        tvstopAccUpBefore.permission     = "false"
+        tvspeedDownBefore.permission     = "false"
+        tvaccDownBefore.permission       = "false"
+        tvstopAccDownBefore.permission   = "false"
+        tvspeedUp.permission             = "false"
+        tvaccUp.permission               = "false"
+        tvchangenessUp.permission        = "false"
+        tvspeedDown.permission           = "false"
+        tvaccDown.permission             = "false"
+        tvchangenessDown.permission      = "false"
     }
 
     function initMapString() {
@@ -1993,6 +2202,11 @@ Item {
         arcEnd.mapString                = parameterList[54]
         facingStart.mapString           = parameterList[56]
         facingEnd.mapString             = parameterList[57]
+
+        gunInverted.mapString           = parameterList2[0]
+        travInverted.mapString          = parameterList2[3]
+        verInverted.mapString           = parameterList2[1]
+        horInverted.mapString           = parameterList2[2]
 
         lhwidthIncrement.mapString      = parameterList[6]
         lhwidthDecrement.mapString      = parameterList[7]
