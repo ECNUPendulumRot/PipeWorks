@@ -2101,7 +2101,7 @@ Item {
     }
 
     function disableInput(item){
-        if(item.permission === "accessable"){
+        if(item.permission === "true"){
             item.enabled = false;
             return;
         }

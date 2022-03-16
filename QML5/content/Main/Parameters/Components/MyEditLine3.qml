@@ -21,7 +21,7 @@ Rectangle {
     property alias editEnabled: control.enabled
 
     property string type : "editable"
-    property string permission : "accessable"
+    property string permission : "true"
     property string mapString
     property bool exist : true
 
