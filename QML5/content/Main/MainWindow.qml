@@ -184,8 +184,8 @@ Rectangle {
 
     SelectComboBox {
         id: selectCombobx
-        x: 176
-        y: 67
+        x: 190
+        y: 72
         width: 170
         z: 3
     }
