@@ -98,6 +98,7 @@ Rectangle {
         spacing: 3
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 4
+        interactive: false
         model: pass1Model
 
         delegate: passDelegate
@@ -110,6 +111,7 @@ Rectangle {
         spacing: 3
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 0
+        interactive: false
         model: pass2Model
 
         delegate: passDelegate
@@ -129,6 +131,7 @@ Rectangle {
         spacing: 3
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 0
+        interactive: false
         model: pass3Model
 
         delegate: passDelegate
