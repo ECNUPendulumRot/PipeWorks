@@ -49,4 +49,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    ../../Users/TZZ/OneDrive/桌面/DPlogo.jpg \
     QML5/content/Main/Components/SelectComboBoxFix.qml
