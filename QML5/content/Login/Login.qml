@@ -28,10 +28,10 @@ Item {
 
             Image {
                 id: logoDpLogin
-                y: 207
+                y: 160
                 width: 125
                 height: 80
-                source: "../images/logoDpLogin.png"
+                source: "../images/DPLogin.png"
                 mipmap: true
                 asynchronous: false
                 antialiasing: true
@@ -42,13 +42,13 @@ Item {
 
             Label {
                 id: label
-                y: 323
+                y: 277
                 color: "#ffffff"
                 text: qsTr("德平科技")
                 font.pixelSize: 46
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
-                anchors.horizontalCenterOffset: 0
+                anchors.horizontalCenterOffset: -1
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
@@ -66,6 +66,17 @@ Item {
                 anchors.horizontalCenter: label.horizontalCenter
                 z: 1
                 font.weight: Font.Medium
+            }
+
+            Image {
+                id: image
+                x: 108
+                y: 393
+                width: 100
+                height: 100
+                //"../images/QRcode.jpg"
+                source: "qrc:/qtquickplugin/images/template_image.png"
+                fillMode: Image.PreserveAspectFit
             }
         }
 
@@ -203,8 +214,4 @@ Item {
     }
 }
 
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:0.75}D{i:5}
-}
-##^##*/
+
