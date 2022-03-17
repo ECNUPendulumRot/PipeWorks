@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Effects 1.0
 import QtQuick.Timeline 1.0
@@ -165,12 +165,25 @@ Item {
                         Qt.quit();
                 }
             }
+
+            LoginButton {
+                id: loginButton2
+                x: 295
+                y: 306
+                width: 80
+                height: 28
+                anchors.top: inputPw.bottom
+                anchors.topMargin: 5
+                textItemText: "修改密码"
+                onClicked: createInformationManagement()
+            }
         }
 
     }
 
     property var componentMainWindow : null
     property var objectMainWindow : null
+    property var objectIM : null
 
     function userLogin(){
         if(inputID.inputText.text === "")
@@ -204,6 +217,26 @@ Item {
         check();
         window.w = 1366
         window.h = 768
+        window.visible = true
+    }
+
+    function createInformationManagement(){
+        objectIM = Qt.createQmlObject(
+                   'import QtQuick 2.15
+                    import QtQuick.Controls 2.15
+                    import QtQuick.Studio.Effects 1.0
+                    import QtQuick.Timeline 1.0
+
+
+                     InformationManagemet {
+                        id : im
+                        anchors.fill: parent
+                     }
+                     ',
+                    window)
+        //check();
+        window.w = 800
+        window.h = 600
         window.visible = true
     }
 

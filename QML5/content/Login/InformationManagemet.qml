@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Effects 1.0
 import QtQuick.Timeline 1.0
@@ -75,7 +75,7 @@ Item {
                 width: 100
                 height: 100
                 //"../images/QRcode.jpg"
-                source: "qrc:/qtquickplugin/images/template_image.png"
+                source: "../images/DPLogin.png"
                 fillMode: Image.PreserveAspectFit
             }
         }
@@ -116,10 +116,10 @@ Item {
                 y: 94
                 textAreaPlaceholderText: "请输入要修改的用户名"
                 title: "请输入要修改的用户名"
-                inputText.onAccepted: userLogin()
+                inputText.onAccepted: userVerify()
 
                 inputText.focus: true
-                KeyNavigation.tab: inputPw.inputText
+                KeyNavigation.tab: inputOldPw.inputText
             }
 
             VerticalInput {
@@ -129,9 +129,9 @@ Item {
                 textAreaPlaceholderText: "请输入原有的密码"
                 title: "请输入原来的密码"
                 inputText.echoMode: TextInput.Password
-                inputText.onAccepted: userLogin()
+                inputText.onAccepted: userVerify()
 
-                KeyNavigation.tab: loginButton
+                KeyNavigation.tab: inputNewPw.inputText
             }
             VerticalInput {
                 id: inputNewPw
@@ -159,12 +159,21 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 39
                 textItemText: "确 定"
-                onClicked: userLogin()
+                onClicked: {userVerify()
+                            if(pwVerify()){
+                                if(pwUpdate(inputID.inputText.text,inputOldPw.inputText.text,inputNewPw.inputText.text))
+                                    createLogin()
+                                else
+                                    console.log("update failed")
+                            }
+                            else
+                                console.log("the two pw is not equal")
+                            }
 
                 KeyNavigation.tab: loginButton1
                 Keys.onPressed: {
                     if(event.key === Qt.Key_Enter || event.key === Qt.Key_Return)
-                        userLogin();
+                        userVerify();
                 }
             }
 
@@ -175,7 +184,7 @@ Item {
                 anchors.left: parent.left
                 anchors.leftMargin: 44
                 textItemText: "返 回"
-                onClicked: Qt.quit()
+                onClicked: createLogin()
 
                 KeyNavigation.tab: inputID.inputText
                 Keys.onPressed: {
@@ -191,22 +200,57 @@ Item {
 
     property var componentMainWindow : null
     property var objectMainWindow : null
+    property var objectLogin:null
 
-    function userLogin(){
+    function userVerify(){
         if(inputID.inputText.text === "")
             console.log("no id:", inputID.inputText.text);
-        else if(inputPw.inputText.text === "")
-            console.log("no pw:", inputPw.inputText.text);
+        else if(inputOldPw.inputText.text === "")
+            console.log("no pw:", inputOldPw.inputText.text);
         else{
-            if(!scheduler.userCreate(inputID.inputText.text, inputPw.inputText.text)){
+            if(!scheduler.userVerify(inputID.inputText.text, inputOldPw.inputText.text)){
                 console.log("id or pw wrong");
             }
             else{
-                scheduler.managerInit();
-                window.visible = false;
-                createMain();
+//                scheduler.managerInit();
+//                window.visible = false;
+//                createMain();
+                console.log("userVerify successful!")
             }
         }
+    }
+
+    function pwVerify(){
+        if(inputNewPw.inputText.text === ""){
+            console.log("no new pw:", inputNewPw.inputText.text);
+            return false
+        }
+
+        else if(inputNewPwTwice.inputText.text === ""){
+            console.log("no new pw 2:", inputNewPwTwice.inputText.text);
+            return false
+        }
+
+        else{
+            if(!(inputNewPwTwice.inputText.text == inputNewPw.inputText.text)){
+                console.log("the two pw is not equal");
+
+            }
+            else{
+//                scheduler.managerInit();
+//                window.visible = false;
+//                createMain();
+                console.log("newPwVerify successful!")
+                return true
+            }
+        }
+    }
+
+    function pwUpdate(id, opw, npw){
+        if(scheduler.userUpdate(id, opw, npw))
+            return true
+        else
+            return false
     }
 
     function createMain(){
@@ -227,11 +271,33 @@ Item {
         window.visible = true
     }
 
+    function createLogin(){
+        objectLogin = Qt.createQmlObject(
+                   'import QtQuick 2.15
+                    import QtQuick.Controls 2.15
+                    import QtQuick.Studio.Effects 1.0
+                    import QtQuick.Timeline 1.0
+
+
+
+                     Login {
+                        anchors.fill: parent
+                     }
+                     ',
+                    window)
+        //check();
+        window.w = 800
+        window.h = 600
+        window.visible = true
+    }
+
     function check(){
         if(scheduler.getAuthority() === 1){
             objectMainWindow.disable();
         }
     }
+
+
 }
 
 
