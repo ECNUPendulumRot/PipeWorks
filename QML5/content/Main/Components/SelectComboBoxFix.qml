@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
 import QtQuick.Studio.Effects 1.0
 import QtQuick.Studio.Components 1.0
+import "../../../../QML5/imports/QML5"
 
 Rectangle{
     id: rectangle
@@ -11,34 +12,38 @@ Rectangle{
     color: "#00202020"
     border.color: "#ffffff"
     border.width: 0
+    property alias controlWidth: control.width
+    property alias controlAnchorsleftMargin: control.anchors.leftMargin
     property alias labelText: label.text
     property alias textFieldText: control.currentIndex
     property alias textFieldColor:content.color
-    //property alias cbxCurrentIndex: control.currentIndex
-    //property alias cbxText: control.displayText
     property alias cbxModel: control.model
     property string mapString
     property string type : "editable"
 
     property string defaultString
     signal dataChanged(string s, var text)
-    //property alias textFieldColor:
+
     Label {
         id: label
-        x: 0
+        x: 5
         text: qsTr("跟踪状态")
+        color: Constants.tableFontColor
+        font.pixelSize: 12
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
         anchors.verticalCenter: parent.verticalCenter
     }
     ComboBox {
         id: control
-        width: 80
+        width: 60
         height: 20
         editable: true
         anchors.verticalCenter: label.verticalCenter
-        anchors.left: label.right
+        anchors.left: label.left
         padding: 0
-        font.pixelSize: 12
-        anchors.leftMargin: 10
+        font.pixelSize: 10
+        anchors.leftMargin: 64
         currentIndex: -1
         displayText: if(!(currentIndex + 1)) defaultString
         model: ["0:N", "1:H", "2:V", "3:B"]
@@ -122,13 +127,14 @@ Rectangle{
             font: control.font
             color: "#202020"
             verticalAlignment: Text.AlignVCenter
+            anchors.leftMargin: 0
             anchors.left: parent.left
             elide: Text.ElideRight
         }
 
         background: Rectangle {
-            implicitWidth: 240
-            implicitHeight: 30
+            implicitWidth: control.width
+            implicitHeight: control.height
             color: control.pressed ? "#D3D3D3" : "#E7E7E7"
             border.color: "#D3D3D3"
             border.width: control.visualFocus ? 2 : 1
@@ -197,6 +203,6 @@ Rectangle{
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:6;height:20;width:80}D{i:1}D{i:2}
+    D{i:0;formeditorZoom:1.5;height:30;width:150}
 }
 ##^##*/
