@@ -177,6 +177,18 @@ Item {
                 textItemText: "修改密码"
                 onClicked: createInformationManagement()
             }
+            Text {
+                id: errorMsg
+                x: 34
+                y: 124
+                color: "#9a0000"
+                anchors.bottom: inputID.top
+                property string errMsg
+                font.pixelSize: 14
+                horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignVCenter
+                anchors.bottomMargin: 5
+            }
         }
 
     }
@@ -187,20 +199,21 @@ Item {
 
     function userLogin(){
         if(inputID.inputText.text === "")
-            console.log("no id:", inputID.inputText.text);
+            errorMsg.text = "您还没有输入ID信息"
         else if(inputPw.inputText.text === "")
-            console.log("no pw:", inputPw.inputText.text);
-        else{
-            if(!scheduler.userCreate(inputID.inputText.text, inputPw.inputText.text)){
-                console.log("id or pw wrong");
-            }
-            else{
-                scheduler.managerInit();
-                window.visible = false;
-                createMain();
-            }
-        }
+                errorMsg.text = "您还没有输入密码"
+            else if(!scheduler.userCreate(inputID.inputText.text, inputPw.inputText.text))
+                    errorMsg.text = "账户或者密码错误"
+                else{
+                    errorMsg.text = ""
+                    scheduler.managerInit();
+                    window.visible = false;
+                    createMain();
+                }
+
+
     }
+
 
     function createMain(){
         objectMainWindow = Qt.createQmlObject(
@@ -248,3 +261,10 @@ Item {
 }
 
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:1.33}D{i:3}D{i:4}D{i:5}D{i:6}D{i:2}D{i:9}D{i:10}D{i:11}D{i:12}
+D{i:13}D{i:14}D{i:15}D{i:7}D{i:1}
+}
+##^##*/

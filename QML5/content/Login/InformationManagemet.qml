@@ -114,8 +114,8 @@ Item {
                 id: inputID
                 x: 25
                 y: 94
-                textAreaPlaceholderText: "请输入要修改的用户名"
-                title: "请输入要修改的用户名"
+                textAreaPlaceholderText: "请输入要修改的账户"
+                title: "请输入要修改的账户"
                 inputText.onAccepted: userVerify()
 
                 inputText.focus: true
@@ -159,15 +159,19 @@ Item {
                 anchors.right: parent.right
                 anchors.rightMargin: 39
                 textItemText: "确 定"
-                onClicked: {userVerify()
-                            if(pwVerify()){
-                                if(pwUpdate(inputID.inputText.text,inputOldPw.inputText.text,inputNewPw.inputText.text))
-                                    createLogin()
-                                else
-                                    console.log("update failed")
+                onClicked: {
+                            if(userVerify()){
+                                if(pwVerify()){
+                                    if(pwUpdate(inputID.inputText.text,inputOldPw.inputText.text,inputNewPw.inputText.text)){
+                                        errorMsg.text = "密码修改成功！"
+                                        //createLogin()
+                                    }
+
+                                    else
+                                        errorMsg.text = "密码修改失败，请检查是否符合规范"
+                                }
+
                             }
-                            else
-                                console.log("the two pw is not equal")
                             }
 
                 KeyNavigation.tab: loginButton1
@@ -193,6 +197,19 @@ Item {
                 }
             }
 
+            Text {
+                id: errorMsg
+                x: 34
+                y: 76
+                color: "#9a0000"
+                anchors.bottom: inputID.top
+                property string errMsg
+                font.pixelSize: 14
+                horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignVCenter
+                anchors.bottomMargin: 5
+            }
+
 
         }
 
@@ -203,43 +220,50 @@ Item {
     property var objectLogin:null
 
     function userVerify(){
-        if(inputID.inputText.text === "")
-            console.log("no id:", inputID.inputText.text);
-        else if(inputOldPw.inputText.text === "")
-            console.log("no pw:", inputOldPw.inputText.text);
-        else{
-            if(!scheduler.userVerify(inputID.inputText.text, inputOldPw.inputText.text)){
-                console.log("id or pw wrong");
-            }
-            else{
-//                scheduler.managerInit();
-//                window.visible = false;
-//                createMain();
-                console.log("userVerify successful!")
-            }
+        if(inputID.inputText.text === ""){
+            errorMsg.text = "您还没有输入ID信息"
+            return false
         }
+
+        else if(inputOldPw.inputText.text === ""){
+            errorMsg.text = "您还没有输入密码"
+            return false
+        }
+
+            else{
+                if(!scheduler.userVerify(inputID.inputText.text, inputOldPw.inputText.text)){
+                    errorMsg.text = "账户与密码错误"
+                    return false
+
+                }
+                else{
+                    errorMsg.text = ""
+                    return true
+                }
+            }
     }
 
     function pwVerify(){
         if(inputNewPw.inputText.text === ""){
-            console.log("no new pw:", inputNewPw.inputText.text);
+            errorMsg.text = "您还没有输入新的密码"
             return false
         }
 
         else if(inputNewPwTwice.inputText.text === ""){
-            console.log("no new pw 2:", inputNewPwTwice.inputText.text);
+            errorMsg.text = "您还没有第二次输入新的密码"
             return false
         }
 
         else{
             if(!(inputNewPwTwice.inputText.text == inputNewPw.inputText.text)){
-                console.log("the two pw is not equal");
-
+                errorMsg.text = "两次密码输入不一致"
+                return false
             }
             else{
 //                scheduler.managerInit();
 //                window.visible = false;
 //                createMain();
+                errorMsg.text = ""
                 console.log("newPwVerify successful!")
                 return true
             }
@@ -303,3 +327,10 @@ Item {
 
 
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:2}D{i:3}D{i:4}D{i:5}D{i:6}D{i:2}D{i:9}D{i:10}D{i:11}D{i:12}D{i:13}
+D{i:14}D{i:15}D{i:16}D{i:7}D{i:1}
+}
+##^##*/
