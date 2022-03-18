@@ -75,7 +75,7 @@ Item {
                 width: 100
                 height: 100
                 //"../images/QRcode.jpg"
-                source: "qrc:/qtquickplugin/images/template_image.png"
+                source: "../images/DPLogin.png"
                 fillMode: Image.PreserveAspectFit
             }
         }
@@ -105,7 +105,7 @@ Item {
                 id: logoTitle
                 x: 34
                 y: 35
-                text: "用户登录"
+                text: "信息修改"
                 font.pixelSize: 29
                 font.weight: Font.Normal
             }
@@ -113,51 +113,82 @@ Item {
             VerticalInput {
                 id: inputID
                 x: 25
-                y: 144
-                textAreaPlaceholderText: "请输入用户名"
-                title: "账户"
-                inputText.onAccepted: userLogin()
+                y: 94
+                textAreaPlaceholderText: "请输入要修改的账户"
+                title: "请输入要修改的账户"
+                inputText.onAccepted: userVerify()
 
                 inputText.focus: true
-                KeyNavigation.tab: inputPw.inputText
+                KeyNavigation.tab: inputOldPw.inputText
             }
 
             VerticalInput {
-                id: inputPw
+                id: inputOldPw
                 x: 25
-                y: 225
-                textAreaPlaceholderText: "请输入密码"
-                title: "密码"
+                anchors.top: inputID.bottom
+                textAreaPlaceholderText: "请输入原有的密码"
+                title: "请输入原来的密码"
                 inputText.echoMode: TextInput.Password
-                inputText.onAccepted: userLogin()
+                inputText.onAccepted: userVerify()
 
-                KeyNavigation.tab: loginButton
+                KeyNavigation.tab: inputNewPw.inputText
+            }
+            VerticalInput {
+                id: inputNewPw
+                x: 25
+                anchors.top: inputOldPw.bottom
+                inputText.echoMode: TextInput.Password
+                textAreaPlaceholderText: "请输入新密码"
+                title: "请输入新密码"
+            }
+            VerticalInput {
+                id: inputNewPwTwice
+                x: 25
+                anchors.top: inputNewPw.bottom
+                inputText.echoMode: TextInput.Password
+                textAreaPlaceholderText: "请重复输入新密码"
+                title: "请重复输入新密码"
             }
 
             LoginButton {
                 id: loginButton
+                x: 221
+                y: 401
                 width: 140
                 anchors.verticalCenter: loginButton1.verticalCenter
                 anchors.right: parent.right
-                anchors.rightMargin: 45
-                textItemText: "登 录"
-                onClicked: userLogin()
+                anchors.rightMargin: 39
+                textItemText: "确 定"
+                onClicked: {
+                            if(userVerify()){
+                                if(pwVerify()){
+                                    if(pwUpdate(inputID.inputText.text,inputOldPw.inputText.text,inputNewPw.inputText.text)){
+                                        errorMsg.text = "密码修改成功！"
+                                        //createLogin()
+                                    }
+
+                                    else
+                                        errorMsg.text = "密码修改失败，请检查是否符合规范"
+                                }
+
+                            }
+                            }
 
                 KeyNavigation.tab: loginButton1
                 Keys.onPressed: {
                     if(event.key === Qt.Key_Enter || event.key === Qt.Key_Return)
-                        userLogin();
+                        userVerify();
                 }
             }
 
             LoginButton {
                 id: loginButton1
-                y: 359
+                y: 420
                 width: 140
                 anchors.left: parent.left
-                anchors.leftMargin: 45
-                textItemText: "取 消"
-                onClicked: Qt.quit()
+                anchors.leftMargin: 44
+                textItemText: "返 回"
+                onClicked: createLogin()
 
                 KeyNavigation.tab: inputID.inputText
                 Keys.onPressed: {
@@ -166,21 +197,10 @@ Item {
                 }
             }
 
-            LoginButton {
-                id: loginButton2
-                x: 295
-                y: 306
-                width: 80
-                height: 28
-                anchors.top: inputPw.bottom
-                anchors.topMargin: 5
-                textItemText: "修改密码"
-                onClicked: createInformationManagement()
-            }
             Text {
                 id: errorMsg
                 x: 34
-                y: 124
+                y: 76
                 color: "#9a0000"
                 anchors.bottom: inputID.top
                 property string errMsg
@@ -189,31 +209,73 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 anchors.bottomMargin: 5
             }
+
+
         }
 
     }
 
     property var componentMainWindow : null
     property var objectMainWindow : null
-    property var objectIM : null
+    property var objectLogin:null
 
-    function userLogin(){
-        if(inputID.inputText.text === "")
+    function userVerify(){
+        if(inputID.inputText.text === ""){
             errorMsg.text = "您还没有输入ID信息"
-        else if(inputPw.inputText.text === "")
-                errorMsg.text = "您还没有输入密码"
-            else if(!scheduler.userCreate(inputID.inputText.text, inputPw.inputText.text))
-                    errorMsg.text = "账户或者密码错误"
+            return false
+        }
+
+        else if(inputOldPw.inputText.text === ""){
+            errorMsg.text = "您还没有输入密码"
+            return false
+        }
+
+            else{
+                if(!scheduler.userVerify(inputID.inputText.text, inputOldPw.inputText.text)){
+                    errorMsg.text = "账户与密码错误"
+                    return false
+
+                }
                 else{
                     errorMsg.text = ""
-                    scheduler.managerInit();
-                    window.visible = false;
-                    createMain();
+                    return true
                 }
-
-
+            }
     }
 
+    function pwVerify(){
+        if(inputNewPw.inputText.text === ""){
+            errorMsg.text = "您还没有输入新的密码"
+            return false
+        }
+
+        else if(inputNewPwTwice.inputText.text === ""){
+            errorMsg.text = "您还没有第二次输入新的密码"
+            return false
+        }
+
+        else{
+            if(!(inputNewPwTwice.inputText.text == inputNewPw.inputText.text)){
+                errorMsg.text = "两次密码输入不一致"
+                return false
+            }
+            else{
+//                scheduler.managerInit();
+//                window.visible = false;
+//                createMain();
+                errorMsg.text = ""
+                console.log("newPwVerify successful!")
+                return true
+            }
+        }
+    }
+
+    function pwUpdate(id, opw, npw){
+        if(scheduler.userUpdate(id, opw, npw))
+            return true
+        else
+            return false
+    }
 
     function createMain(){
         objectMainWindow = Qt.createQmlObject(
@@ -233,16 +295,16 @@ Item {
         window.visible = true
     }
 
-    function createInformationManagement(){
-        objectIM = Qt.createQmlObject(
+    function createLogin(){
+        objectLogin = Qt.createQmlObject(
                    'import QtQuick 2.15
                     import QtQuick.Controls 2.15
                     import QtQuick.Studio.Effects 1.0
                     import QtQuick.Timeline 1.0
 
 
-                     InformationManagemet {
-                        id : im
+
+                     Login {
                         anchors.fill: parent
                      }
                      ',
@@ -258,13 +320,17 @@ Item {
             objectMainWindow.disable();
         }
     }
+
+
 }
+
+
 
 
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.33}D{i:3}D{i:4}D{i:5}D{i:6}D{i:2}D{i:9}D{i:10}D{i:11}D{i:12}
-D{i:13}D{i:14}D{i:15}D{i:7}D{i:1}
+    D{i:0;formeditorZoom:2}D{i:3}D{i:4}D{i:5}D{i:6}D{i:2}D{i:9}D{i:10}D{i:11}D{i:12}D{i:13}
+D{i:14}D{i:15}D{i:16}D{i:7}D{i:1}
 }
 ##^##*/

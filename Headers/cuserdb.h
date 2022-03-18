@@ -1,4 +1,4 @@
-#ifndef USERDB_H
+﻿#ifndef USERDB_H
 #define USERDB_H
 
 #include <QSqlQuery>
@@ -14,6 +14,7 @@ public:
     UserDb();
     UserDb(QString);
     Role verify(QString id, QString pw);
+    bool informationUpdate(QString id, QString opw, QString npw);//old pw, new pw
 
 private:
     QString t = "users";

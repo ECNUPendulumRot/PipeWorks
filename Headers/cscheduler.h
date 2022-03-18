@@ -1,4 +1,4 @@
-#ifndef SCHEDULER_H
+﻿#ifndef SCHEDULER_H
 #define SCHEDULER_H
 
 #include <QObject>
@@ -44,6 +44,10 @@ public:
 public slots:
 
     bool userCreate(QString id, QString pw);
+
+    bool userVerify(QString id, QString pw);
+
+    bool userUpdate(QString id, QString opw,QString npw);
 
     int getAuthority();
     ///

@@ -1,6 +1,5 @@
-#include "cscheduler.h"
+﻿#include "cscheduler.h"
 #include <QCoreApplication>
-
 Scheduler::Scheduler(QObject *parent): QObject{parent}
 {
     udb     = nullptr;
@@ -32,6 +31,25 @@ bool Scheduler::userCreate(QString id, QString pw)
     callUserDbClose();
 
     return login;
+}
+
+bool Scheduler::userVerify(QString id, QString pw)
+{
+    bool login = false;
+    login = userCreate(id, pw);
+    user->clear();
+
+    return login;
+}
+
+bool Scheduler::userUpdate(QString id, QString opw, QString npw)
+{
+
+    callUserDb();
+    bool result;
+    result = udb->informationUpdate(id, opw, npw);
+    callUserDbClose();
+    return result;
 }
 
 int Scheduler::getAuthority()

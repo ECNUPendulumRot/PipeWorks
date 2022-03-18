@@ -1,4 +1,4 @@
-#ifndef CDATABASE_H
+﻿#ifndef CDATABASE_H
 #define CDATABASE_H
 
 #include <QObject>
@@ -23,9 +23,10 @@ public:
 
     bool closeDatabase();
 
-protected:
 
+protected:
     QSqlDatabase db;
+
     bool status;
 };
 
