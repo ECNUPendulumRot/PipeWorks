@@ -67,21 +67,7 @@ Rectangle {
         ListElement {
             i: 2
         }
-        ListElement {
-            i: 3
-        }
-        ListElement {
-            i: 4
-        }
-        ListElement {
-            i: 5
-        }
-        ListElement {
-            i: 6
-        }
-        ListElement {
-            i: 7
-        }
+
     }
     ListModel {
         id: pass3Model
@@ -124,7 +110,18 @@ Rectangle {
                 refreshPassName();
                 refreshPassFlag();
             }
+            var p = addBtn.pos
             refreshEditBtn();
+
+            if(pass2View.itemAtIndex(pass2Model.count - 1).haveRead){
+                if(addBtn.pos > p){
+                    pass2View.itemAtIndex(pass2Model.count - 1).flag = true
+                    passFTableModel.callSetData(addBtn.pos, 24, true)
+                }
+                else if(addBtn.pos < p){
+                    passFTableModel.callSetData(p, 24, false)
+                }
+            }
         }
     }
     ListView {
@@ -152,7 +149,7 @@ Rectangle {
         pos: pass2Model.count + pass1Model.count - 1
         onClicked: {
             if(pass2Model.count + pass1Model.count < pass3Model.get(0).i){
-                pass2Model.append({"i":pass2Model.count + pass1Model.count});
+                pass2Model.append({"i": pass2Model.count + pass1Model.count});
             }
         }
     }
@@ -237,17 +234,17 @@ Rectangle {
         removeBtn.pos = pass2Model.count + pass1Model.count - 1;
         if(exclusiveGroup.checkedButton != null){
             if(addBtn.pos === exclusiveGroup.checkedButton.col){
-                addBtn.flag = true;
-                removeBtn.flag = true;
+                addBtn.isCheck = true;
+                removeBtn.isCheck = true;
             }
             else{
-                addBtn.flag = false;
-                removeBtn.flag = false;
+                addBtn.isCheck = false;
+                removeBtn.isCheck = false;
             }
         }
         else{
-            addBtn.flag = false;
-            removeBtn.flag = false;
+            addBtn.isCheck = false;
+            removeBtn.isCheck = false;
         }
     }
 }
