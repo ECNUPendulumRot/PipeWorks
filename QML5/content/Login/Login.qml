@@ -75,7 +75,6 @@ Item {
                 width: 100
                 height: 100
                 //"../images/QRcode.jpg"
-                source: "qrc:/qtquickplugin/images/template_image.png"
                 fillMode: Image.PreserveAspectFit
             }
         }
