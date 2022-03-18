@@ -94,8 +94,6 @@ TextField {
             from: "selected,normal"
         }
     ]
-
-
 }
 
 /*##^##
