@@ -38,7 +38,6 @@ Rectangle {
         PassListBtn {
             id: passListBtn
             col: i
-            flag: f
             text: "焊道" + col
             ButtonGroup.group: exclusiveGroup
             anchors.horizontalCenterOffset: 0
@@ -58,18 +57,15 @@ Rectangle {
         id: pass1Model
         ListElement {
             i: 0
-            f: true
         }
         ListElement {
             i: 1
-            f: true
         }
     }
     ListModel {
         id: pass2Model
         ListElement {
             i: 2
-            f: true
         }
 
     }
@@ -77,11 +73,9 @@ Rectangle {
         id: pass3Model
         ListElement {
             i: 8
-            f: true
         }
         ListElement {
             i: 9
-            f: true
         }
     }
 
@@ -116,14 +110,18 @@ Rectangle {
                 refreshPassName();
                 refreshPassFlag();
             }
-            console.log(addBtn.pos)
-            console.log(pass2View.itemAtIndex(pass2Model.count - 1).flag)
-            if(pass2View.itemAtIndex(pass2Model.count - 1).haveRead){
-                pass2View.itemAtIndex(pass2Model.count - 1).flag = true
-                passFTableModel.callSetData(pass2View.itemAtIndex(pass2Model.count - 1).col, 24, pass2View.itemAtIndex(pass2Model.count - 1).flag)
-            }
+            var p = addBtn.pos
             refreshEditBtn();
 
+            if(pass2View.itemAtIndex(pass2Model.count - 1).haveRead){
+                if(addBtn.pos > p){
+                    pass2View.itemAtIndex(pass2Model.count - 1).flag = true
+                    passFTableModel.callSetData(addBtn.pos, 24, true)
+                }
+                else if(addBtn.pos < p){
+                    passFTableModel.callSetData(p, 24, false)
+                }
+            }
         }
     }
     ListView {
