@@ -14,11 +14,17 @@ Popup {
         color: "#c0515151"
     }
 
-    background: Rectangle {
-        id: motionBgd
+    background: backgroundRec
+    Rectangle {
+        id: backgroundRec
         color: "#ebebeb"
         border.width: 0
         anchors.fill: parent
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: forceActiveFocus()
+        }
     }
 
     ControlParameter {

@@ -24,6 +24,11 @@ Popup {
         border.width: 0
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: forceActiveFocus()
+        }
     }
 
     MotionParameter {
