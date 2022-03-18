@@ -50,5 +50,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     ../../Users/TZZ/OneDrive/桌面/DPlogo.jpg \
+    QML5/content/Login/InformationMInput.ui.qml \
     QML5/content/Login/InformationMangemet.qml \
-    QML5/content/Main/Components/SelectComboBoxFix.qml
+    QML5/content/Login/PwUpdateButton.qml \
+    QML5/content/Main/Components/SelectComboBoxFix.qml \
+    QML5/content/images/DpLogoMain.png

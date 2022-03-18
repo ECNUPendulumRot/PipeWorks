@@ -74,8 +74,7 @@ Item {
                 y: 393
                 width: 100
                 height: 100
-                //"../images/QRcode.jpg"
-                source: "qrc:/qtquickplugin/images/template_image.png"
+                source: "../images/QRcode.png"
                 fillMode: Image.PreserveAspectFit
             }
         }
@@ -104,7 +103,7 @@ Item {
             Text {
                 id: logoTitle
                 x: 34
-                y: 35
+                y: 25
                 text: "用户登录"
                 font.pixelSize: 29
                 font.weight: Font.Normal
@@ -113,7 +112,7 @@ Item {
             VerticalInput {
                 id: inputID
                 x: 25
-                y: 144
+                y: 130
                 textAreaPlaceholderText: "请输入用户名"
                 title: "账户"
                 inputText.onAccepted: userLogin()
@@ -125,7 +124,7 @@ Item {
             VerticalInput {
                 id: inputPw
                 x: 25
-                y: 225
+                y: 212
                 textAreaPlaceholderText: "请输入密码"
                 title: "密码"
                 inputText.echoMode: TextInput.Password
@@ -165,29 +164,29 @@ Item {
                         Qt.quit();
                 }
             }
-
-            LoginButton {
-                id: loginButton2
-                x: 295
-                y: 306
-                width: 80
-                height: 28
-                anchors.top: inputPw.bottom
-                anchors.topMargin: 5
-                textItemText: "修改密码"
-                onClicked: createInformationManagement()
-            }
             Text {
                 id: errorMsg
-                x: 34
-                y: 124
+                x: 25
+                y: 306
                 color: "#9a0000"
                 anchors.bottom: inputID.top
                 property string errMsg
                 font.pixelSize: 14
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
-                anchors.bottomMargin: 5
+                anchors.bottomMargin: -176
+            }
+
+            PwUpdateButton {
+                id: pwUpdateButton
+                x: 275
+                width: 100
+                height: 30
+                anchors.right: inputPw.right
+                anchors.top: inputPw.bottom
+                anchors.rightMargin: 0
+                anchors.topMargin: 6
+                onClicked: createInformationManagement()
             }
         }
 
@@ -262,9 +261,4 @@ Item {
 
 
 
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:1.33}D{i:3}D{i:4}D{i:5}D{i:6}D{i:2}D{i:9}D{i:10}D{i:11}D{i:12}
-D{i:13}D{i:14}D{i:15}D{i:7}D{i:1}
-}
-##^##*/
+

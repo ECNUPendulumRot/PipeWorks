@@ -16,7 +16,7 @@
 
     }
     canvas {
-      background-color: #e4e4e4;
+      background-color: #151926;
       position:absolute;
     }
   </style>
@@ -35,9 +35,9 @@ var TwoLineColor1 = "#ff5e38";
 var TwoLineColor2 = "#16c1ab";
 var OneLineColor = "#ff5e38";
 
-var TwoLineColor1dim = "#d03010";
-var TwoLineColor2dim = "#00a080";
-var OneLineColordim  = "#d03010";
+var TwoLineColor1dim = "#c02000";
+var TwoLineColor2dim = "#009070";
+var OneLineColordim  = "#c02000";
 var isLock = true;
 var eng2chn =       { "angle":               "角度",
                     "stayTime_Lead":       "前枪边停时间",
@@ -68,8 +68,6 @@ function(channel){
     var chart = new Chart(ctx,chartSetting);
 
     var istwoline = new Boolean();
-
-
 
     //load model datas
     webobj.chartFresh.connect(function(someText) {
@@ -258,10 +256,27 @@ function createEmptyChart(){
 //                    },
                xAxis: {
                            ticks: {
-                               stepSize: 20
-                           }
-                       }
+                               //stepSize: 20,
+                               color:"#ffffff"
+                           },
+                           grid:{
+                              color:"#777777"
+                          }
+
+                       },
+                   yAxis: {
+                           ticks: {
+                               color:"#ffffff"
+                               },
+                               grid:{
+                                  color:"#777777"
+                              }
+
+                           },
+
+
             },
+            color:"#ffffff",
             plugins: {
                 dragData:{
                     round: 1,
@@ -282,8 +297,10 @@ function createEmptyChart(){
 
 function updataCharts(chart, datasetsEle, configure){
     chart.data.datasets = datasetsEle;
-    chart.options.scales.y.suggestedMin = configure.Ymin;
-    chart.options.scales.y.suggestedMax = configure.Ymax;
+    chart.options.scales.yAxis.suggestedMin = configure.Ymin;
+    chart.options.scales.yAxis.suggestedMax = configure.Ymax;
+    chart.options.scales.xAxis.ticks.stepSize = 20;
+
 //    chart.options.scales.x.min = -30;
 //    chart.options.scales.x.max = 230;
 
