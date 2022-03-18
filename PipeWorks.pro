@@ -26,8 +26,8 @@ HEADERS += \
     Headers/cmodelmanage.h \
     Headers/cdatabase.h \
     Headers/cuserdb.h \
-    Headers/cscheduler.h
-
+    Headers/cscheduler.h \
+    Headers/utility.h
 
 QML_IMPORT_PATH = QML5/imports
 

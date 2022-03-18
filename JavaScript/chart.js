@@ -903,7 +903,7 @@ function _mergerIf(key, target, source) {
 }
 function _deprecated(scope, value, previous, current) {
   if (value !== undefined) {
-    console.warn(scope + ': "' + previous +
+    qDebug.warn(scope + ': "' + previous +
 			'" is deprecated. Please use "' + current + '" instead');
   }
 }
@@ -1968,7 +1968,7 @@ function toFont(options, fallback) {
   }
   let style = valueOrDefault(options.style, fallback.style);
   if (style && !('' + style).match(FONT_STYLE)) {
-    console.warn('Invalid font style specified: "' + style + '"');
+    qDebug.warn('Invalid font style specified: "' + style + '"');
     style = '';
   }
   const font = {
@@ -6305,10 +6305,10 @@ function mergeScaleConfig(config, options) {
   Object.keys(configScales).forEach(id => {
     const scaleConf = configScales[id];
     if (!isObject(scaleConf)) {
-      return console.error(`Invalid scale configuration for scale: ${id}`);
+      return qDebug.error(`Invalid scale configuration for scale: ${id}`);
     }
     if (scaleConf._proxy) {
-      return console.warn(`Ignoring resolver passed as options for scale: ${id}`);
+      return qDebug.warn(`Ignoring resolver passed as options for scale: ${id}`);
     }
     const axis = determineAxis(id, scaleConf);
     const defaultId = getDefaultScaleIDFromAxis(axis, chartIndexAxis);
@@ -6657,7 +6657,7 @@ class Chart {
     this._dataChanges = [];
     instances[this.id] = this;
     if (!context || !canvas) {
-      console.error("Failed to create chart: can't acquire context from the given item");
+      qDebug.error("Failed to create chart: can't acquire context from the given item");
       return;
     }
     animator.listen(this, 'complete', onAnimationsComplete);
@@ -12108,7 +12108,7 @@ class LinearScaleBase extends Scale {
     if (stepSize) {
       maxTicks = Math.ceil(this.max / stepSize) - Math.floor(this.min / stepSize) + 1;
       if (maxTicks > 1000) {
-        console.warn(`scales.${this.id}.ticks.stepSize: ${stepSize} would result generating up to ${maxTicks} ticks. Limiting to 1000.`);
+        qDebug.warn(`scales.${this.id}.ticks.stepSize: ${stepSize} would result generating up to ${maxTicks} ticks. Limiting to 1000.`);
         maxTicks = 1000;
       }
     } else {

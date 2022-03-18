@@ -54,6 +54,7 @@ Rectangle {
 
     function connectToModel(){
         angleRelatedTableModel.modelDataChanged.connect(refreshWebTable)
+        angleRelatedTableModel.modelSingleDataChanged.connect(callUpdatePoint)
     }
 
     function refreshWebTable(s){

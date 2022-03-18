@@ -266,7 +266,7 @@ Item {
 //                window.visible = false;
 //                createMain();
                 errorMsg.text = ""
-                console.log("newPwVerify successful!")
+                qDebug.log("newPwVerify successful!")
                 return true
             }
         }
