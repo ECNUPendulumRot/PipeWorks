@@ -18,7 +18,7 @@ Button {
     text: "My Button"
     property alias textItemText: textItem.text
     property int pos
-    property bool flag: false
+    property bool isCheck: false
 
     background: buttonBackground
     Rectangle {
@@ -47,7 +47,7 @@ Button {
     states: [
         State {
             name: "hover"
-            when: !flag && !control.down
+            when: !isCheck && !control.down
 
             PropertyChanges {
                 target: buttonBackground
@@ -62,7 +62,7 @@ Button {
         },
         State {
             name: "press"
-            when: !flag && control.down
+            when: !isCheck && control.down
             PropertyChanges {
                 target: textItem
                 color: "#dcdcdc"
@@ -76,7 +76,7 @@ Button {
         },
         State {
             name: "check"
-            when: flag && !control.down
+            when: isCheck && !control.down
             PropertyChanges {
                 target: buttonBackground
                 border.color: "#ffffff"
@@ -89,7 +89,7 @@ Button {
         },
         State {
             name: "checkPress"
-            when: flag && control.down
+            when: isCheck && control.down
 
             PropertyChanges {
                 target: buttonBackground

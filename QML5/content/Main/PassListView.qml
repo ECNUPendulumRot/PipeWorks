@@ -38,6 +38,7 @@ Rectangle {
         PassListBtn {
             id: passListBtn
             col: i
+            flag: f
             text: "焊道" + col
             ButtonGroup.group: exclusiveGroup
             anchors.horizontalCenterOffset: 0
@@ -57,39 +58,30 @@ Rectangle {
         id: pass1Model
         ListElement {
             i: 0
+            f: true
         }
         ListElement {
             i: 1
+            f: true
         }
     }
     ListModel {
         id: pass2Model
         ListElement {
             i: 2
+            f: true
         }
-        ListElement {
-            i: 3
-        }
-        ListElement {
-            i: 4
-        }
-        ListElement {
-            i: 5
-        }
-        ListElement {
-            i: 6
-        }
-        ListElement {
-            i: 7
-        }
+
     }
     ListModel {
         id: pass3Model
         ListElement {
             i: 8
+            f: true
         }
         ListElement {
             i: 9
+            f: true
         }
     }
 
@@ -124,7 +116,14 @@ Rectangle {
                 refreshPassName();
                 refreshPassFlag();
             }
+            console.log(addBtn.pos)
+            console.log(pass2View.itemAtIndex(pass2Model.count - 1).flag)
+            if(pass2View.itemAtIndex(pass2Model.count - 1).haveRead){
+                pass2View.itemAtIndex(pass2Model.count - 1).flag = true
+                passFTableModel.callSetData(pass2View.itemAtIndex(pass2Model.count - 1).col, 24, pass2View.itemAtIndex(pass2Model.count - 1).flag)
+            }
             refreshEditBtn();
+
         }
     }
     ListView {
@@ -152,7 +151,7 @@ Rectangle {
         pos: pass2Model.count + pass1Model.count - 1
         onClicked: {
             if(pass2Model.count + pass1Model.count < pass3Model.get(0).i){
-                pass2Model.append({"i":pass2Model.count + pass1Model.count});
+                pass2Model.append({"i": pass2Model.count + pass1Model.count});
             }
         }
     }
@@ -237,17 +236,17 @@ Rectangle {
         removeBtn.pos = pass2Model.count + pass1Model.count - 1;
         if(exclusiveGroup.checkedButton != null){
             if(addBtn.pos === exclusiveGroup.checkedButton.col){
-                addBtn.flag = true;
-                removeBtn.flag = true;
+                addBtn.isCheck = true;
+                removeBtn.isCheck = true;
             }
             else{
-                addBtn.flag = false;
-                removeBtn.flag = false;
+                addBtn.isCheck = false;
+                removeBtn.isCheck = false;
             }
         }
         else{
-            addBtn.flag = false;
-            removeBtn.flag = false;
+            addBtn.isCheck = false;
+            removeBtn.isCheck = false;
         }
     }
 }
