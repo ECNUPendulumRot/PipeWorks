@@ -29,7 +29,7 @@ Button {
         width: 33
         height: 22
         anchors.verticalCenter: parent.verticalCenter
-        source: "../../images/mainIcon.png"
+        source: "../../images/DpLogoMain.png"
         antialiasing: true
         mipmap: true
         anchors.horizontalCenter: parent.horizontalCenter
@@ -39,7 +39,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}D{i:1}D{i:2}
+    D{i:0;formeditorZoom:2;height:30;width:35}D{i:1}D{i:2}
 }
 ##^##*/
 

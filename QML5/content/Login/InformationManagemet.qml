@@ -74,8 +74,7 @@ Item {
                 y: 393
                 width: 100
                 height: 100
-                //"../images/QRcode.jpg"
-                source: "../images/DPLogin.png"
+                source: "../images/QRcode.png"
                 fillMode: Image.PreserveAspectFit
             }
         }
@@ -104,28 +103,30 @@ Item {
             Text {
                 id: logoTitle
                 x: 34
-                y: 35
+                y: 25
                 text: "信息修改"
                 font.pixelSize: 29
                 font.weight: Font.Normal
             }
-
-            VerticalInput {
+            InformationMInput {
                 id: inputID
                 x: 25
-                y: 94
-                textAreaPlaceholderText: "请输入要修改的账户"
-                title: "请输入要修改的账户"
+                y: 75
+                labelFontSize: 14
+                textAreaPlaceholderText: "请输入ID信息"
+                title: "请输入ID信息"
+                inputText.echoMode: TextInput.Password
                 inputText.onAccepted: userVerify()
 
-                inputText.focus: true
                 KeyNavigation.tab: inputOldPw.inputText
             }
 
-            VerticalInput {
+            InformationMInput {
                 id: inputOldPw
                 x: 25
                 anchors.top: inputID.bottom
+                labelFontSize: 14
+                anchors.topMargin: 3
                 textAreaPlaceholderText: "请输入原有的密码"
                 title: "请输入原来的密码"
                 inputText.echoMode: TextInput.Password
@@ -133,18 +134,22 @@ Item {
 
                 KeyNavigation.tab: inputNewPw.inputText
             }
-            VerticalInput {
+            InformationMInput {
                 id: inputNewPw
                 x: 25
                 anchors.top: inputOldPw.bottom
+                labelFontSize: 14
+                anchors.topMargin: -3
                 inputText.echoMode: TextInput.Password
                 textAreaPlaceholderText: "请输入新密码"
                 title: "请输入新密码"
             }
-            VerticalInput {
+            InformationMInput {
                 id: inputNewPwTwice
                 x: 25
                 anchors.top: inputNewPw.bottom
+                anchors.topMargin: 3
+                labelFontSize: 14
                 inputText.echoMode: TextInput.Password
                 textAreaPlaceholderText: "请重复输入新密码"
                 title: "请重复输入新密码"
@@ -190,24 +195,21 @@ Item {
                 textItemText: "返 回"
                 onClicked: createLogin()
 
-                KeyNavigation.tab: inputID.inputText
-                Keys.onPressed: {
-                    if(event.key === Qt.Key_Enter || event.key === Qt.Key_Return)
-                        Qt.quit();
-                }
+
+
             }
 
             Text {
                 id: errorMsg
-                x: 34
-                y: 76
+                x: 25
+                y: 420
                 color: "#9a0000"
                 anchors.bottom: inputID.top
                 property string errMsg
                 font.pixelSize: 14
                 horizontalAlignment: Text.AlignLeft
                 verticalAlignment: Text.AlignVCenter
-                anchors.bottomMargin: 5
+                anchors.bottomMargin: -320
             }
 
 
@@ -217,7 +219,7 @@ Item {
 
     property var componentMainWindow : null
     property var objectMainWindow : null
-    property var objectLogin:null
+    property var objectLogin: null
 
     function userVerify(){
         if(inputID.inputText.text === ""){
@@ -330,7 +332,7 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:2}D{i:3}D{i:4}D{i:5}D{i:6}D{i:2}D{i:9}D{i:10}D{i:11}D{i:12}D{i:13}
-D{i:14}D{i:15}D{i:16}D{i:7}D{i:1}
+    D{i:0;formeditorZoom:1.1}D{i:3}D{i:4}D{i:5}D{i:6}D{i:2}D{i:9}D{i:10}D{i:11}D{i:12}
+D{i:13}D{i:14}D{i:15}D{i:16}D{i:7}D{i:1}
 }
 ##^##*/
