@@ -26,176 +26,153 @@ Rectangle {
         z: 2
     }
 
-    PassListBtn {
-        id: passListBtn0
-        text: "焊道0"
-        col: 0
+    ButtonGroup {
+        id: exclusiveGroup
+        onCheckedButtonChanged: {
+            refreshEditBtn();
+        }
+    }
+
+    Component {
+        id: passDelegate
+        PassListBtn {
+            id: passListBtn
+            col: i
+            text: "焊道" + col
+            ButtonGroup.group: exclusiveGroup
+            anchors.horizontalCenterOffset: 0
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            onClicked: refresh(col)
+            onDoubleClicked: {
+                if(haveRead){
+                    flag = !flag
+                    passFTableModel.callSetData(col, 24, flag)
+                }
+            }
+        }
+    }
+
+    ListModel {
+        id: pass1Model
+        ListElement {
+            i: 0
+        }
+        ListElement {
+            i: 1
+        }
+    }
+    ListModel {
+        id: pass2Model
+        ListElement {
+            i: 2
+        }
+        ListElement {
+            i: 3
+        }
+        ListElement {
+            i: 4
+        }
+        ListElement {
+            i: 5
+        }
+        ListElement {
+            i: 6
+        }
+        ListElement {
+            i: 7
+        }
+    }
+    ListModel {
+        id: pass3Model
+        ListElement {
+            i: 8
+        }
+        ListElement {
+            i: 9
+        }
+    }
+
+    ListView {
+        id: pass1View
+        width: 130
+        height: count * 30
         anchors.top: seperateLine.bottom
-        anchors.topMargin: 4
-        autoExclusive: true
-        anchors.horizontalCenterOffset: 0
+        spacing: 3
         anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 4
+        interactive: false
+        model: pass1Model
 
-        onClicked: refresh(0)
-        onDoubleClicked: {
-            flag = !flag
-            passFTableModel.callSetData(col, 24, flag)
+        delegate: passDelegate
+    }
+    ListView {
+        id: pass2View
+        width: 130
+        height: count * 30
+        anchors.top: pass1View.bottom
+        spacing: 3
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 0
+        interactive: false
+        model: pass2Model
+
+        delegate: passDelegate
+
+        onCountChanged: {
+            if(scheduler.isPdbLoaded()){
+                refreshPassName();
+                refreshPassFlag();
+            }
+            refreshEditBtn();
+        }
+    }
+    ListView {
+        id: pass3View
+        width: 130
+        height: count * 30
+        anchors.top: pass2View.bottom
+        spacing: 3
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.topMargin: 0
+        interactive: false
+        model: pass3Model
+
+        delegate: passDelegate
+    }
+
+    PassEditBtn {
+        id: addBtn
+        anchors.left: pass2View.left
+        anchors.leftMargin: -8
+        anchors.verticalCenter: pass2View.top
+        anchors.verticalCenterOffset: (pass2View.count - 1) * 30 + 13
+
+        textItemText: "+"
+        pos: pass2Model.count + pass1Model.count - 1
+        onClicked: {
+            if(pass2Model.count + pass1Model.count < pass3Model.get(0).i){
+                pass2Model.append({"i":pass2Model.count + pass1Model.count});
+            }
         }
     }
 
-    PassListBtn {
-        id: passListBtn1
-        text: "焊道1"
-        col: 1
-        anchors.top: passListBtn0.bottom
-        anchors.topMargin: 4
-        autoExclusive: true
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        onClicked: refresh(1)
-        onDoubleClicked: {
-            flag = !flag
-            passFTableModel.callSetData(col, 24, flag)
-        }
-    }
-
-    PassListBtn {
-        id: passListBtn2
-        text: "焊道2"
-        col: 2
-        anchors.top: passListBtn1.bottom
-        anchors.topMargin: 4
-        autoExclusive: true
-        anchors.horizontalCenterOffset: 0
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        onClicked: refresh(2)
-        onDoubleClicked: {
-            flag = !flag
-            passFTableModel.callSetData(col, 24, flag)
-        }
-    }
-
-    PassListBtn {
-        id: passListBtn3
-        text: "焊道3"
-        col: 3
-        anchors.top: passListBtn2.bottom
-        anchors.topMargin: 4
-        autoExclusive: true
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        onClicked: refresh(3)
-        onDoubleClicked: {
-            flag = !flag
-            passFTableModel.callSetData(col, 24, flag)
-        }
-    }
-
-    PassListBtn {
-        id: passListBtn4
-        text: "焊道4"
-        col: 4
-        anchors.top: passListBtn3.bottom
-        anchors.topMargin: 4
-        autoExclusive: true
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        onClicked: refresh(4)
-        onDoubleClicked: {
-            flag = !flag
-            passFTableModel.callSetData(col, 24, flag)
-        }
-    }
-
-    PassListBtn {
-        id: passListBtn5
-        text: "焊道5"
-        col: 5
-        anchors.top: passListBtn4.bottom
-        anchors.topMargin: 4
-        autoExclusive: true
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        onClicked: refresh(5)
-        onDoubleClicked: {
-            flag = !flag
-            passFTableModel.callSetData(col, 24, flag)
-        }
-    }
-
-    PassListBtn {
-        id: passListBtn6
-        text: "焊道6"
-        col: 6
-        anchors.top: passListBtn5.bottom
-        anchors.topMargin: 4
-        autoExclusive: true
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        onClicked: refresh(6)
-        onDoubleClicked: {
-            flag = !flag
-            passFTableModel.callSetData(col, 24, flag)
-        }
-    }
-
-    PassListBtn {
-        id: passListBtn7
-        text: "焊道7"
-        col: 7
-        anchors.top: passListBtn6.bottom
-        anchors.topMargin: 4
-        checkable: true
-        autoExclusive: true
-        anchors.horizontalCenterOffset: 0
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        onClicked: refresh(7)
-        onDoubleClicked: {
-            flag = !flag
-            passFTableModel.callSetData(col, 24, flag)
-        }
-    }
-
-    PassListBtn {
-        id: passListBtn8
-        text: "焊道8"
-        col: 8
-        anchors.top: passListBtn7.bottom
-        anchors.topMargin: 4
-        checkable: true
-        autoExclusive: true
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        onClicked: refresh(8)
-        onDoubleClicked: {
-            flag = !flag
-            passFTableModel.callSetData(col, 24, flag)
-        }
-    }
-
-    PassListBtn {
-        id: passListBtn9
-        text: "焊道9"
-        col: 9
-        anchors.top: passListBtn8.bottom
-        anchors.topMargin: 4
-        checkable: true
-        checked: false
-        autoExclusive: true
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        onClicked: refresh(9)
-        onDoubleClicked: {
-            flag = !flag
-            passFTableModel.callSetData(col, 24, flag)
+    PassEditBtn {
+        id: removeBtn
+        y: addBtn.y
+        anchors.right: pass2View.right
+        anchors.rightMargin: addBtn.anchors.leftMargin
+        pos: pass2Model.count + pass1Model.count - 1
+        onClicked: {
+            if(pass2View.count > 1){
+                pass2Model.remove(pass2Model.count - 1);
+            }
         }
     }
 
     function passListInitialize(){
-        passListBtn0.clicked();
-        passListBtn0.checked = true;
+        pass1View.currentItem.clicked();
+        pass1View.currentItem.checked = true;
         if(scheduler.isPdbLoaded())
         {
             refreshPassName();
@@ -225,29 +202,52 @@ Rectangle {
     }
 
     function getPassName(item){
-        for(var i = 0; i < item.children.length; i++){
-            if(item.children[i].type === "listBtn"){
-                item.children[i].text1Text = passFTableModel.fixedTablePopData(item.children[i].col, "showName");
-                item.children[i].haveRead = true;
-            }
+        if(item.type === "listBtn"){
+            item.text1Text = passFTableModel.fixedTablePopData(item.col, "showName");
+            item.haveRead = true;
+            return
         }
+        for(var i = 0; i < item.children.length; i++)
+            getPassName(item.children[i]);
+        return;
     }
 
     function getPassFlag(item){
-        for(var i = 0; i < item.children.length; i++){
-            if(item.children[i].type === "listBtn"){
-                item.children[i].flag = passFTableModel.fixedTablePopData(item.children[i].col, "flag");
-            }
+        if(item.type === "listBtn"){
+            item.flag = passFTableModel.fixedTablePopData(item.col, "flag");
         }
+        for(var i = 0; i < item.children.length; i++)
+            getPassFlag(item.children[i]);
+        return;
     }
 
     function resetPass(item){
-        for(var i = 0; i < item.children.length; i++){
-            if(item.children[i].type === "listBtn"){
-                item.children[i].text1Text = "";
-                item.children[i].flag = true;
-                item.children[i].haveRead = false;
+        if(item.type === "listBtn"){
+            item.text1Text = "";
+            item.flag = true;
+            item.haveRead = false;
+        }
+        for(var i = 0; i < item.children.length; i++)
+            resetPass(item.children[i]);
+        return;
+    }
+
+    function refreshEditBtn(){
+        addBtn.pos = pass2Model.count + pass1Model.count - 1;
+        removeBtn.pos = pass2Model.count + pass1Model.count - 1;
+        if(exclusiveGroup.checkedButton != null){
+            if(addBtn.pos === exclusiveGroup.checkedButton.col){
+                addBtn.flag = true;
+                removeBtn.flag = true;
             }
+            else{
+                addBtn.flag = false;
+                removeBtn.flag = false;
+            }
+        }
+        else{
+            addBtn.flag = false;
+            removeBtn.flag = false;
         }
     }
 }
@@ -255,3 +255,9 @@ Rectangle {
 
 
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:1.33}
+}
+##^##*/

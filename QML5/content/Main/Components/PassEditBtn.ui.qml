@@ -1,0 +1,113 @@
+import QtQuick 2.15
+import QtQuick.Controls 2.12
+
+Button {
+    id: control
+    width: 18
+    height: 18
+
+    implicitWidth: Math.max(
+                       buttonBackground ? buttonBackground.implicitWidth : 0,
+                       textItem.implicitWidth + leftPadding + rightPadding)
+    implicitHeight: Math.max(
+                        buttonBackground ? buttonBackground.implicitHeight : 0,
+                        textItem.implicitHeight + topPadding + bottomPadding)
+    leftPadding: 4
+    rightPadding: 4
+
+    text: "My Button"
+    property alias textItemText: textItem.text
+    property int pos
+    property bool flag: false
+
+    background: buttonBackground
+    Rectangle {
+        id: buttonBackground
+        color: "#00000000"
+        implicitWidth: 100
+        implicitHeight: 40
+        opacity: enabled ? 1 : 0.3
+        radius: 9
+        border.color: "#6a6a6a"
+    }
+
+    contentItem: textItem
+    Text {
+        id: textItem
+
+        opacity: enabled ? 1.0 : 0.3
+        color: "#6a6a6a"
+        text: "-"
+        font.pixelSize: 23
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
+        font.weight: Font.Normal
+    }
+
+    states: [
+        State {
+            name: "hover"
+            when: !flag && !control.down
+
+            PropertyChanges {
+                target: buttonBackground
+                color: "#00000000"
+                border.color: "#6a6a6a"
+            }
+
+            PropertyChanges {
+                target: textItem
+                color: "#6a6a6a"
+            }
+        },
+        State {
+            name: "press"
+            when: !flag && control.down
+            PropertyChanges {
+                target: textItem
+                color: "#dcdcdc"
+            }
+
+            PropertyChanges {
+                target: buttonBackground
+                color: "#6a6a6a"
+                border.color: "#00000000"
+            }
+        },
+        State {
+            name: "check"
+            when: flag && !control.down
+            PropertyChanges {
+                target: buttonBackground
+                border.color: "#ffffff"
+            }
+
+            PropertyChanges {
+                target: textItem
+                color: "#ffffff"
+            }
+        },
+        State {
+            name: "checkPress"
+            when: flag && control.down
+
+            PropertyChanges {
+                target: buttonBackground
+                color: "#ffffff"
+                border.color: "#8091C0"
+            }
+
+            PropertyChanges {
+                target: textItem
+                color: "#8091C0"
+            }
+        }
+    ]
+}
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:3}
+}
+##^##*/
+
