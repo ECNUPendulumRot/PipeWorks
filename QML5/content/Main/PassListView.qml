@@ -28,6 +28,9 @@ Rectangle {
 
     ButtonGroup {
         id: exclusiveGroup
+        onCheckedButtonChanged: {
+            refreshEditBtn();
+        }
     }
 
     Component {
@@ -92,7 +95,7 @@ Rectangle {
 
     ListView {
         id: pass1View
-        width: 110
+        width: 130
         height: count * 30
         anchors.top: seperateLine.bottom
         spacing: 3
@@ -105,7 +108,7 @@ Rectangle {
     }
     ListView {
         id: pass2View
-        width: 110
+        width: 130
         height: count * 30
         anchors.top: pass1View.bottom
         spacing: 3
@@ -121,11 +124,12 @@ Rectangle {
                 refreshPassName();
                 refreshPassFlag();
             }
+            refreshEditBtn();
         }
     }
     ListView {
         id: pass3View
-        width: 110
+        width: 130
         height: count * 30
         anchors.top: pass2View.bottom
         spacing: 3
@@ -137,25 +141,32 @@ Rectangle {
         delegate: passDelegate
     }
 
-    MainBarParameterBtn {
-        id: mainBarParameterBtn
-        x: 39
-        y: 506
+    PassEditBtn {
+        id: addBtn
+        anchors.left: pass2View.left
+        anchors.leftMargin: -8
+        anchors.verticalCenter: pass2View.top
+        anchors.verticalCenterOffset: (pass2View.count - 1) * 30 + 13
+
+        textItemText: "+"
+        pos: pass2Model.count + pass1Model.count - 1
         onClicked: {
-            if(pass2View.count > 1){
-                pass2Model.remove(pass2Model.count - 1);
+            if(pass2Model.count + pass1Model.count < pass3Model.get(0).i){
+                pass2Model.append({"i":pass2Model.count + pass1Model.count});
             }
         }
     }
 
-    MainBarParameterBtn {
-        id: mainBarParameterBtn1
-        x: 39
-        y: 620
+    PassEditBtn {
+        id: removeBtn
+        y: addBtn.y
+        anchors.right: pass2View.right
+        anchors.rightMargin: addBtn.anchors.leftMargin
+        pos: pass2Model.count + pass1Model.count - 1
         onClicked: {
-            if(pass2Model.count + pass1Model.count < pass3Model.get(0).i){
-                pass2Model.append({"i":pass2Model.count + pass1Model.count});
-            }1011
+            if(pass2View.count > 1){
+                pass2Model.remove(pass2Model.count - 1);
+            }
         }
     }
 
@@ -219,6 +230,25 @@ Rectangle {
         for(var i = 0; i < item.children.length; i++)
             resetPass(item.children[i]);
         return;
+    }
+
+    function refreshEditBtn(){
+        addBtn.pos = pass2Model.count + pass1Model.count - 1;
+        removeBtn.pos = pass2Model.count + pass1Model.count - 1;
+        if(exclusiveGroup.checkedButton != null){
+            if(addBtn.pos === exclusiveGroup.checkedButton.col){
+                addBtn.flag = true;
+                removeBtn.flag = true;
+            }
+            else{
+                addBtn.flag = false;
+                removeBtn.flag = false;
+            }
+        }
+        else{
+            addBtn.flag = false;
+            removeBtn.flag = false;
+        }
     }
 }
 

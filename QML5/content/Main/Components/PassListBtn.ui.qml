@@ -8,7 +8,7 @@ Button {
     property int col: 0
     property bool haveRead: false
     property bool flag: true
-    width: 130
+    width: 150
 
     implicitWidth: Math.max(
                        buttonBackground ? buttonBackground.implicitWidth : 0,
@@ -58,7 +58,7 @@ Button {
             font.pixelSize: 14
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            anchors.leftMargin: 40
+            anchors.leftMargin: 25
         }
     }
 
@@ -102,7 +102,7 @@ Button {
             PropertyChanges {
                 target: textItem
                 horizontalAlignment: Text.AlignLeft
-                anchors.leftMargin: 20
+                anchors.leftMargin: 30
             }
         },
         State {
@@ -112,7 +112,7 @@ Button {
             PropertyChanges {
                 target: textItem
                 horizontalAlignment: Text.AlignLeft
-                anchors.leftMargin: 20
+                anchors.leftMargin: 30
             }
 
             PropertyChanges {
@@ -127,7 +127,7 @@ Button {
             PropertyChanges {
                 target: textItem
                 horizontalAlignment: Text.AlignLeft
-                anchors.leftMargin: 20
+                anchors.leftMargin: 30
                 color: "#ffffff"
             }
 
@@ -149,7 +149,7 @@ Button {
             PropertyChanges {
                 target: textItem
                 horizontalAlignment: Text.AlignLeft
-                anchors.leftMargin: 20
+                anchors.leftMargin: 30
                 color: "#ffffff"
             }
 
@@ -174,6 +174,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;height:27;width:130}D{i:1}D{i:3}D{i:2}D{i:4}
+    D{i:0;height:27;width:130}
 }
 ##^##*/
+
