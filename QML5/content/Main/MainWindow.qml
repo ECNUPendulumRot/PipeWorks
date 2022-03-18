@@ -378,9 +378,10 @@ Rectangle {
                      AngleTable {
                         id : angleTable
                         anchors.fill: parent
-                        anchors.margins: 10
-                        onWebTableRequestFresh:
-                        (row, column, text )=>angleWebContainer.callUpdatePoint(row, column, text )
+                        anchors.leftMargin: 10
+                        anchors.topMargin: 10
+                        anchors.rightMargin: 10
+                        anchors.bottom: parent.bottom
                      }
                      ',
                     angleTableWrapper)

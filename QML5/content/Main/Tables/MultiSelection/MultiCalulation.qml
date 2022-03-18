@@ -1,9 +1,10 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Studio.Effects 1.0
 
 Item {
     id: control
-    width: 120
+    width: 150
     height: 40
 
     signal addRequest(var n)
@@ -12,7 +13,7 @@ Item {
     TextField {
         id: textField
         width: 65
-        height: 30
+        height: 25
         color: "#d90a0a0a"
         anchors.verticalCenter: parent.verticalCenter
         horizontalAlignment: Text.AlignHCenter
@@ -28,21 +29,35 @@ Item {
         background: texBg
         Rectangle {
             id: texBg
-            color: "#ffffff"
+            color: "#00ffffff"
             radius: 4
-            border.color: "#d3d3d3"
+            border.color: "#2e2e2e"
             border.width: 1
             anchors.fill: parent
+            layer.enabled: true
+            layer.effect: dropShadow
+            DropShadowEffect {
+                id: dropShadow
+                visible: false
+                horizontalOffset: 0
+                verticalOffset: 0.5
+                color: "#3c000000"
+                radius: 8
+                spread: 0.2
+            }
         }
+
+        onEditingFinished: focus = false
     }
 
     AmountBtn {
         id: add
-        x: 91
         width: 25
         height: 25
         anchors.verticalCenter: parent.verticalCenter
-        imageSource: "../images/plus.png"
+        anchors.left: textField.right
+        anchors.leftMargin: 10
+        imageSource: "../../../images/plus.png"
         anchors.verticalCenterOffset: 0
         onClicked: control.addRequest(textField.text)
     }
@@ -53,9 +68,34 @@ Item {
         width: 25
         height: 25
         anchors.verticalCenter: parent.verticalCenter
-        imageSource: "../images/minus.png"
+        anchors.right: textField.left
+        anchors.rightMargin: 10
+        imageSource: "../../../images/minus.png"
         onClicked: control.minusRequest(textField.text)
     }
+    states: [
+        State {
+            name: "unfocus"
+            when: !textField.activeFocus
+        },
+        State {
+            name: "unfocus1"
+            when: textField.activeFocus
 
+            PropertyChanges {
+                target: dropShadow
+                visible: true
+            }
 
+            PropertyChanges {
+                target: texBg
+                color: "#f5f5f5"
+                border.width: 0
+            }
+        }
+    ]
+
+    function clear(){
+        textField.text = "";
+    }
 }

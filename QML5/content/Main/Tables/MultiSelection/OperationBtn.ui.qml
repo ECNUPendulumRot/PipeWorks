@@ -19,20 +19,20 @@ Button {
     property alias textItemColor: textItem.color
 
     property alias buttonBackgroundBordercolor: buttonBackground.border.color
+    width: 75
+    height: 30
 
     background: buttonBackground
     Rectangle {
         id: buttonBackground
-        width: 120
         color: "#00ffffff"
-        implicitWidth: 120
+        implicitWidth: 80
         implicitHeight: 40
         opacity: enabled ? 1 : 0.3
         radius: 4
         border.color: "#202020"
         border.width: 2
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.fill: parent
 
         Rectangle {
             id: wrapper
@@ -50,7 +50,7 @@ Button {
         id: textItem
         text: control.text
         anchors.verticalCenter: parent.verticalCenter
-        font.pixelSize: 16
+        font.pixelSize: 13
 
         opacity: enabled ? 1.0 : 0.3
         color: "#202020"

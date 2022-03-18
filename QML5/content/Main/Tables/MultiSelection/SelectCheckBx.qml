@@ -31,7 +31,7 @@ CheckBox {
             opacity: 1
             visible: false
             anchors.fill: parent
-            source: "../images/check.png"
+            source: "../../../images/check.png"
             anchors.rightMargin: 5
             anchors.leftMargin: 5
             anchors.bottomMargin: 5
@@ -58,7 +58,7 @@ CheckBox {
         color: {
                 if(control.hovered){
                    if(control.pressed) return "#c0c0c0"
-                   else return "#ffffff"
+                   else return "#e7e7e7"
                 }
                 else{
                    return "transparent"

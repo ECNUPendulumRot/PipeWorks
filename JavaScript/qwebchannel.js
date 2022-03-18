@@ -54,7 +54,7 @@ var QWebChannelMessageTypes = {
 var QWebChannel = function(transport, initCallback)
 {
     if (typeof transport !== "object" || typeof transport.send !== "function") {
-        console.error("The QWebChannel expects a transport object with a send function and onmessage callback property." +
+        qDebug.error("The QWebChannel expects a transport object with a send function and onmessage callback property." +
                       " Given is: transport: " + typeof(transport) + ", transport.send: " + typeof(transport.send));
         return;
     }
@@ -87,7 +87,7 @@ var QWebChannel = function(transport, initCallback)
                 channel.handlePropertyUpdate(data);
                 break;
             default:
-                console.error("invalid message received:", message.data);
+                qDebug.error("invalid message received:", message.data);
                 break;
         }
     }
@@ -106,7 +106,7 @@ var QWebChannel = function(transport, initCallback)
             channel.execId = Number.MIN_VALUE;
         }
         if (data.hasOwnProperty("id")) {
-            console.error("Cannot exec message with property id: " + JSON.stringify(data));
+            qDebug.error("Cannot exec message with property id: " + JSON.stringify(data));
             return;
         }
         data.id = channel.execId++;
@@ -122,14 +122,14 @@ var QWebChannel = function(transport, initCallback)
         if (object) {
             object.signalEmitted(message.signal, message.args);
         } else {
-            console.warn("Unhandled signal: " + message.object + "::" + message.signal);
+            qDebug.warn("Unhandled signal: " + message.object + "::" + message.signal);
         }
     }
 
     this.handleResponse = function(message)
     {
         if (!message.hasOwnProperty("id")) {
-            console.error("Invalid response message received: ", JSON.stringify(message));
+            qDebug.error("Invalid response message received: ", JSON.stringify(message));
             return;
         }
         channel.execCallbacks[message.id](message.data);
@@ -143,7 +143,7 @@ var QWebChannel = function(transport, initCallback)
             if (object) {
                 object.propertyUpdate(data.signals, data.properties);
             } else {
-                console.warn("Unhandled property update: " + data.object + "::" + data.signal);
+                qDebug.warn("Unhandled property update: " + data.object + "::" + data.signal);
             }
         });
         channel.exec({type: QWebChannelMessageTypes.idle});
@@ -208,7 +208,7 @@ function QObject(name, data, webChannel)
             return webChannel.objects[objectId];
 
         if (!response.data) {
-            console.error("Cannot unwrap unknown QObject " + objectId + " without data.");
+            qDebug.error("Cannot unwrap unknown QObject " + objectId + " without data.");
             return;
         }
 
@@ -242,7 +242,7 @@ function QObject(name, data, webChannel)
         object[signalName] = {
             connect: function(callback) {
                 if (typeof(callback) !== "function") {
-                    console.error("Bad callback given to connect to signal " + signalName);
+                    qDebug.error("Bad callback given to connect to signal " + signalName);
                     return;
                 }
 
@@ -268,7 +268,7 @@ function QObject(name, data, webChannel)
             },
             disconnect: function(callback) {
                 if (typeof(callback) !== "function") {
-                    console.error("Bad callback given to disconnect from signal " + signalName);
+                    qDebug.error("Bad callback given to disconnect from signal " + signalName);
                     return;
                 }
                 // This makes a new list. This is important because it won't interfere with
@@ -396,14 +396,14 @@ function QObject(name, data, webChannel)
                 var propertyValue = object.__propertyCache__[propertyIndex];
                 if (propertyValue === undefined) {
                     // This shouldn't happen
-                    console.warn("Undefined value in property cache for property \"" + propertyName + "\" in object " + object.__id__);
+                    qDebug.warn("Undefined value in property cache for property \"" + propertyName + "\" in object " + object.__id__);
                 }
 
                 return propertyValue;
             },
             set: function(value) {
                 if (value === undefined) {
-                    console.warn("Property setter for " + propertyName + " called with undefined value!");
+                    qDebug.warn("Property setter for " + propertyName + " called with undefined value!");
                     return;
                 }
                 object.__propertyCache__[propertyIndex] = value;

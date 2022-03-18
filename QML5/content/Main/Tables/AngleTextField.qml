@@ -18,6 +18,8 @@ TextField {
 
     selectByMouse: true
 
+    property string type : "editable"
+
     background: bg
     Rectangle {
         id: bg
@@ -94,6 +96,16 @@ TextField {
             from: "selected,normal"
         }
     ]
+
+    function disable(){
+        textField.activeFocusOnPress = false;
+        textField.activeFocusOnTab = false;
+    }
+
+    function enable(){
+        textField.activeFocusOnPress = true;
+        textField.activeFocusOnTab = true;
+    }
 }
 
 /*##^##

@@ -9,16 +9,17 @@ Rectangle {
 
     signal webTableRequestFresh(int row, int column, string text )
 
-    width: 380
+    width: 300
     height: 770
+
     visible: true
     enabled: true
-    clip: true
-    color: "#f2ecec"
+    color: "transparent"
     border.color: "#ffffff"
     border.width: 0
 
     property bool isCheck : false
+    property var multiModeCopy : null
 
     property var engToChn : {//cmd <------> table column name
         "angle"         :"角度\n(度)",
@@ -169,8 +170,10 @@ Rectangle {
 
     TableView {
         id: checkboxView
+
+        width:0
+
         anchors.left: parent.left
-        anchors.right: view.left
         anchors.top: view.top
         anchors.bottom: view.bottom
         model:checkboxModel
@@ -179,12 +182,10 @@ Rectangle {
         syncView: view
         syncDirection:Qt.Vertical
         reuseItems: true
-
         delegate: Item {
             id: checkbxDelegate
-
             implicitHeight: 35
-            implicitWidth: 40
+            implicitWidth: 30
             property string type : "checkbox"
             property alias check: delegateCheckbx.checked
 
@@ -211,12 +212,14 @@ Rectangle {
 
     TableView {
         id: view
-        width: 400
 
+        width: parent.width
+
+        anchors.left: checkboxView.right
         anchors.right: parent.right
         anchors.top: header.bottom
-        anchors.bottom: calculation.top
-        anchors.bottomMargin: 20
+        anchors.bottom: calculation.bottom
+        anchors.bottomMargin: 0
         anchors.rightMargin: 0
 
         columnWidthProvider: function (column) { return view.width/view.columns }
@@ -239,7 +242,6 @@ Rectangle {
 
                 anchors.fill: parent
 
-
                 border.width: 0;
                 color: {
                     if(column === 0)
@@ -249,7 +251,7 @@ Rectangle {
                             return "transparent"
                         else{
                             if(isSelect)    return "#0D267B"
-                            else            return "#ffffff"
+                            else            return "transparent"
                         }
                     }
                 }
@@ -306,9 +308,9 @@ Rectangle {
 
                     onEditingFinished: {
                         angleRelatedTableModel.callSetData(row, column, text)
-                        widget.webTableRequestFresh(row, column, text)
                         textField.focus = false
                     }
+
                 }
             }
 
@@ -341,12 +343,11 @@ Rectangle {
         text: qsTr("批量操作")
         enabled: visible
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 30
+        anchors.bottomMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: {
-            // TODO: check whether this statement is reasonable here
-            //syncSelect()
-            reset()
+            disableSingleSelect(view)
+            restoreBeforeOp()
             widget.isCheck = true
         }
     }
@@ -362,11 +363,14 @@ Rectangle {
         visible : false
         enabled: visible
         anchors.right: parent.right
-        anchors.rightMargin: 40
+        anchors.rightMargin: 20
         anchors.verticalCenter: multiselect.verticalCenter
 
         onClicked: {
             reset()
+            enableSingleSelect(view);
+            refreshAfterCancel();
+
             widget.isCheck = false
         }
     }
@@ -382,11 +386,13 @@ Rectangle {
         visible: false
         enabled: visible
         anchors.left: parent.left
-        anchors.leftMargin: 40
+        anchors.leftMargin: 20
         anchors.verticalCenter: multiselect.verticalCenter
 
         onClicked: {
             reset()
+            enableSingleSelect(view);
+            calculation.clear()
             widget.isCheck = false
         }
     }
@@ -444,9 +450,15 @@ Rectangle {
             when: widget.isCheck
 
             PropertyChanges {
-                target: view
-                width: 360
+                target: checkboxView
+                width: 30
             }
+
+            PropertyChanges {
+                target: view
+                anchors.bottomMargin: calculation.height + 5
+            }
+
             PropertyChanges {
                 target: rootCheckbx
                 visible: true
@@ -491,20 +503,23 @@ Rectangle {
     transitions: [
         Transition {
             id: transition
-            ParallelAnimation {
-                SequentialAnimation {
-                    PauseAnimation {
-                        duration: 0
-                    }
-
-                    PropertyAnimation {
-                        target: view
-                        property: "width"
-                        duration: 100
-                    }
+            SequentialAnimation {
+                PropertyAnimation {
+                    target: view
+                    property: "anchors.bottomMargin"
+                    duration: 50
+                }
+                PropertyAnimation {
+                    target: checkboxView
+                    property: "width"
+                    duration: 100
+                }
+                PropertyAnimation {
+                    target: calculation
+                    property: "visible"
+                    duration: 0
                 }
             }
-
             onRunningChanged: {
                 if(running === true)
                     resizeTimer.start()
@@ -513,13 +528,40 @@ Rectangle {
                     view.forceLayout()
                 }
             }
-
-            to: "*"
+            to: "check"
+            from: "*"
+        },
+        Transition {
+            id: transition1
+            SequentialAnimation {
+                PropertyAnimation {
+                    target: calculation
+                    property: "visible"
+                    duration: 0
+                }
+                PropertyAnimation {
+                    target: checkboxView
+                    property: "width"
+                    duration: 100
+                }
+                PropertyAnimation {
+                    target: view
+                    property: "anchors.bottomMargin"
+                    duration: 50
+                }
+            }
+            onRunningChanged: {
+                if(running === true)
+                    resizeTimer.start()
+                else{
+                    resizeTimer.stop()
+                    view.forceLayout()
+                }
+            }
+            to: "normal"
             from: "*"
         }
     ]
-
-
     ///
     /// \functions and signals
     ///
@@ -527,7 +569,7 @@ Rectangle {
         for(var i = 0; i < view.rows; i++){
             checkboxModel.appendRow({"checkStatus":false})
         }
-        //console.log(checkboxModel.rows[2])
+        //qDebug.log(checkboxModel.rows[2])
     }
 
     function addGroup(button){
@@ -564,6 +606,27 @@ Rectangle {
         }
     }
 
+
+    function disableSingleSelect(item){
+        if(item.type === "editable"){
+            item.disable()
+            return
+        }
+        for(var i = 0; i < item.children.length; i++){
+            disableSingleSelect(item.children[i])
+        }
+    }
+
+    function enableSingleSelect(item){
+        if(item.type === "editable"){
+            item.enable()
+            return
+        }
+        for(var i = 0; i < item.children.length; i++){
+            enableSingleSelect(item.children[i])
+        }
+    }
+
     function rowSelectChange(index, checked){
         if(header.currentIndex === -1)
             return
@@ -577,7 +640,6 @@ Rectangle {
             angleRelatedTableModel.callSetSelect(i, index, false);
     }
 
-
     function enableColumn(index){
         for(var i = 0; i < view.rows; i++){
             for(var j = 1; j < view.columns; j++)
@@ -586,5 +648,40 @@ Rectangle {
                 else
                     angleRelatedTableModel.callSetSelect(i, j, false);
         }
+    }
+
+    function modelToCopy(){
+        var copy = []
+        for(var i = 0; i < view.rows; i++){
+            var storeRow = []
+            for(var j = 0; j < view.columns; j++)
+                storeRow.push(angleRelatedTableModel.callGetData(i, j))
+            copy.push(storeRow)
+        }
+        multiModeCopy =  copy;
+    }
+
+    function copyToModel(){
+        console.log("write")
+        if(multiModeCopy !== null){
+            for(var i = 0; i < view.rows; i++){
+                for(var j = 0; j < view.columns; j++){
+                    if(multiModeCopy[i][j] !== angleRelatedTableModel.callGetData(i, j)){
+                        angleRelatedTableModel.callSetData(i, j, multiModeCopy[i][j])
+                        console.log("write")
+                    }
+                    console.log(multiModeCopy[i][j])
+                }
+            }
+        }
+    }
+
+    function refreshAfterCancel(){
+        angleRelatedTableModel.callRevert();
+        copyToModel()
+    }
+
+    function restoreBeforeOp(){
+        modelToCopy()
     }
 }
