@@ -31,9 +31,10 @@ Button {
         layer.enabled: true
         layer.effect: DropShadowEffect {
             id: dropShadow
-            radius: 6
+            radius: 8
             verticalOffset: 0
             horizontalOffset: 0
+            color: "#52000000"
         }
     }
 
@@ -104,7 +105,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.33;height:40;width:100}
+    D{i:0;formeditorZoom:1.33;height:40;width:100}D{i:1}D{i:3}D{i:4}
 }
 ##^##*/
 

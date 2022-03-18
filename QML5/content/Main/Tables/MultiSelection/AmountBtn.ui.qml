@@ -3,20 +3,22 @@ import QtQuick.Controls 2.12
 
 Button {
     id: control
-    width: 40
-    height: 25
-    leftPadding: 4
-    rightPadding: 4
+    width: 30
+    height: 30
 
-    text: ""
+    implicitWidth: buttonBackground.implicitWidth
+    implicitHeight: buttonBackground.implicitHeight
+
+    text: "My Button"
+    property alias imageSource: image.source
     display: AbstractButton.IconOnly
 
     background: buttonBackground
     Rectangle {
         id: buttonBackground
         color: "#00000000"
-        implicitWidth: 60
-        implicitHeight: 25
+        implicitWidth: 30
+        implicitHeight: 30
         opacity: enabled ? 1 : 0.3
         radius: 2
         border.color: "#047eff"
@@ -24,22 +26,15 @@ Button {
         anchors.fill: parent
     }
 
+    contentItem: image
     Image {
-        id: mainIcon
-        width: 33
-        height: 22
+        id: image
+        width: 25
+        height: 25
         anchors.verticalCenter: parent.verticalCenter
-        source: "../../images/DpLogoMain.png"
-        antialiasing: true
-        mipmap: true
+        anchors.bottom: parent.bottom
+        source: "qrc:/qtquickplugin/images/template_image.png"
         anchors.horizontalCenter: parent.horizontalCenter
         fillMode: Image.PreserveAspectFit
     }
 }
-
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:2;height:30;width:35}D{i:1}D{i:2}
-}
-##^##*/
-

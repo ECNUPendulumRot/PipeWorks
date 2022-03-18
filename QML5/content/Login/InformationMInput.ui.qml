@@ -16,14 +16,16 @@ Item {
     Text {
         id: name
         x: 0
+        y: 8
         width: 102
         height: 25
         text: item1.title
-        anchors.top: parent.top
-        font.pixelSize: 16
+        anchors.bottom: textArea.top
+        font.pixelSize: 14
+        verticalAlignment: Text.AlignVCenter
+        anchors.bottomMargin: 3
         font.styleName: "Regular"
         textFormat: Text.RichText
-        anchors.topMargin: 5
     }
 
     TextField {
@@ -72,7 +74,7 @@ Item {
 
             PropertyChanges {
                 target: name
-                font.pixelSize: 18
+                font.pixelSize: 16
             }
         }
     ]

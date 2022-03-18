@@ -142,7 +142,7 @@ Rectangle {
         layer.effect: DropShadowEffect {
             id: dropShadow
             color: "#2a000000"
-            radius: 32
+            radius: 12
             spread: 0.2
             verticalOffset: 4
             horizontalOffset: 0
@@ -378,9 +378,10 @@ Rectangle {
                      AngleTable {
                         id : angleTable
                         anchors.fill: parent
-                        anchors.margins: 10
-                        onWebTableRequestFresh:
-                        (row, column, text )=>angleWebContainer.callUpdatePoint(row, column, text )
+                        anchors.leftMargin: 10
+                        anchors.topMargin: 10
+                        anchors.rightMargin: 10
+                        anchors.bottom: parent.bottom
                      }
                      ',
                     angleTableWrapper)
@@ -436,10 +437,12 @@ Rectangle {
     }
 }
 
+
+
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}D{i:2}D{i:1}D{i:3}D{i:7}D{i:5}D{i:8}D{i:10}
-D{i:12}D{i:14}D{i:16}D{i:17}D{i:19}D{i:20}D{i:21}D{i:22}D{i:23}D{i:24}D{i:25}D{i:26}
-D{i:27}D{i:28}D{i:29}
+    D{i:0;formeditorZoom:0.5}D{i:2}D{i:1}D{i:3}D{i:7}D{i:5}D{i:8}D{i:10}D{i:12}D{i:14}
+D{i:16}D{i:17}D{i:19}D{i:20}D{i:21}D{i:22}D{i:23}D{i:24}D{i:25}D{i:26}D{i:27}D{i:28}
+D{i:29}
 }
 ##^##*/

@@ -32,7 +32,8 @@ public:
     enum TableRoles{
         ColumnRole = Qt::UserRole + 1,
         RowRole,
-        DirtyRole
+        DirtyRole,
+        SelectionRole
     };
 
     QHash<int, QByteArray> roleNames() const override;
@@ -49,6 +50,8 @@ public slots:
 
     void callSetData(unsigned int row, unsigned int col, QVariant v);
 
+    QVariant callGetData(unsigned int i, unsigned int j);
+
     QString headerNameEng(unsigned int i);
 
     void callSubmit();
@@ -59,6 +62,15 @@ public slots:
 
     bool callIsDirty();
 
+    void callCrossSelect(unsigned int row, unsigned int col, bool b);
+
+    void callSetSelect(unsigned int row, unsigned int col, bool b);
+
+    bool select() override;
+
+    bool callAddToModel(double v, bool isAdd);
+
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
 signals:
 
@@ -76,9 +88,19 @@ signals:
     ///
     void modelChanged(QString s);
 
+
+    void modelSingleDataChanged(unsigned int i, unsigned int j, QVariant v);
+
 private:
 
+    bool **selection = nullptr;
+
     QString getChn(QString s);
+
+    void initializeSelection();
+
+    void releaseSelection();
+
 
     static inline QHash<unsigned int, Parameter> parameterCouple =
         QHash<unsigned int, Parameter>({//cmd <------> table column name
