@@ -25,6 +25,10 @@ Popup {
         color: "#ebebeb"
         border.width: 0
 
+        MouseArea {
+            anchors.fill: parent
+            onClicked: forceActiveFocus()
+        }
     }
 
     CommunicationParameter {

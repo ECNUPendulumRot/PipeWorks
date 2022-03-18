@@ -30,6 +30,17 @@ Item {
         height: 146
 
         Text {
+            id: text1
+            height: 30
+            color: Constants.tableFontColor
+            text: qsTr("QRcode")
+            anchors.left: parent.left
+            anchors.top: parent.top
+            font.pixelSize: 12
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        Text {
             id: text2
             x: 43
             y: 51
@@ -82,12 +93,22 @@ Item {
         }
 
         MessageLine {
+            id: qcode
+            x: 105
+            y: 21
+            width: 140
+            height: 30
+            anchors.left: text1.right
+            anchors.top: text1.top
+            anchors.leftMargin: 20
+        }
+
+        MessageLine {
             id: angles
             x: 105
             y: 51
             anchors.left: qcode.left
             anchors.top: qcode.bottom
-            text7Text: "倾角仪"
         }
 
         MessageLine {
@@ -96,7 +117,6 @@ Item {
             y: 81
             anchors.left: angles.left
             anchors.top: angles.bottom
-            text7Text: "采集卡"
         }
 
         MessageLine {
@@ -105,7 +125,6 @@ Item {
             y: 111
             anchors.left: captureCard.left
             anchors.top: captureCard.bottom
-            text7Text: "手持盒"
         }
 
         MessageLine {
@@ -115,7 +134,6 @@ Item {
             anchors.left: box.left
             anchors.top: box.bottom
             anchors.topMargin: 0
-            text7Text: "电机"
         }
 
         MessageLine {
@@ -216,27 +234,6 @@ Item {
             text7Text: "频率"
         }
 
-        Text {
-            id: text1
-            height: 30
-            color: Constants.tableFontColor
-            text: qsTr("QRcode")
-            anchors.left: parent.left
-            anchors.top: parent.top
-            font.pixelSize: 12
-            verticalAlignment: Text.AlignVCenter
-        }
-
-        MessageLine {
-            id: qcode
-            x: 105
-            y: 21
-            width: 140
-            height: 30
-            anchors.left: text1.right
-            anchors.top: text1.top
-            anchors.leftMargin: 20
-        }
     }
 
     Component.onCompleted: {

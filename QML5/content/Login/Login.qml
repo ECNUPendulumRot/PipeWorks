@@ -74,6 +74,7 @@ Item {
                 y: 393
                 width: 100
                 height: 100
+
                 source: "../images/QRcode.png"
                 fillMode: Image.PreserveAspectFit
             }

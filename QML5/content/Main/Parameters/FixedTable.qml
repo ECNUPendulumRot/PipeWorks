@@ -609,7 +609,6 @@ Item {
 
     function writeToBackend(s, text){
         if(scheduler.isPdbLoaded()){
-            console.log(s,text)
             passFTableModel.callSetData(control.passLine, colMapping[s], text)
             fixedTableRefreshData(control.passLine)
         }
