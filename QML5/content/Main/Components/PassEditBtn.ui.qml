@@ -27,7 +27,7 @@ Button {
         implicitWidth: 100
         implicitHeight: 40
         opacity: enabled ? 1 : 0.3
-        radius: 9
+        radius: 6
         border.color: "#6a6a6a"
     }
 
