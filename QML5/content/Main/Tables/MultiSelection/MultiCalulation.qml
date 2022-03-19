@@ -35,8 +35,7 @@ Item {
             border.width: 1
             anchors.fill: parent
             layer.enabled: true
-            layer.effect: dropShadow
-            DropShadowEffect {
+            layer.effect: DropShadowEffect {
                 id: dropShadow
                 visible: false
                 horizontalOffset: 0
