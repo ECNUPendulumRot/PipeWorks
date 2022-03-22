@@ -30,11 +30,14 @@ Rectangle {
             color: "#808080"
             text: qsTr("小车参数")
             anchors.verticalCenter: parent.verticalCenter
-            font.pixelSize: 12
+            font.pixelSize: 13
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 }
 
-
-
+/*##^##
+Designer {
+    D{i:0;height:132;width:165}
+}
+##^##*/

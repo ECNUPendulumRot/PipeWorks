@@ -29,7 +29,7 @@ Rectangle{
         x: 5
         text: qsTr("跟踪状态")
         color: Constants.tableFontColor
-        font.pixelSize: 12
+        font.pixelSize: 13
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         anchors.verticalCenter: parent.verticalCenter
@@ -203,6 +203,6 @@ Rectangle{
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.5;height:30;width:150}
+    D{i:0;height:30;width:150}
 }
 ##^##*/
