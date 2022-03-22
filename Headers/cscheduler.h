@@ -57,6 +57,7 @@ public slots:
     ///
     bool managerInit();
 
+    //bool registerModelPool(ModelPool *m, QString s);
     bool registerModel(TModel*, QString);
 
     ///

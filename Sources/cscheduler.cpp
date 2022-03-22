@@ -76,6 +76,8 @@ bool Scheduler::managerInit(){
     manager = user->getRole() == SeniorWorker ? new ModelManage("SW") : new ModelManage("W");
     QObject::connect(manager, &ModelManage::registerRequest,
                      this,  &Scheduler::registerModel);
+//    QObject::connect(manager, &ModelManage::registerRequestPool,
+//                     this,  &Scheduler::registerModelPool);
     return true;
 }
 
@@ -144,6 +146,17 @@ void Scheduler::callPassSelected(QString s)
     managerSetTable(2, s);
 }
 
+//bool Scheduler::registerModelPool(ModelPool *m, QString s)
+//{
+//    if(engine !=  nullptr){
+//        engine->rootContext()->setContextProperty(s, m);
+//        QObject::connect(m, &ModelPool::modelChanged,
+//                         this,  &Scheduler::modelChanged);
+//        return true;
+//    }
+//    else
+//        return false;
+//}
 
 bool Scheduler::registerModel(TModel *m, QString s)
 {
