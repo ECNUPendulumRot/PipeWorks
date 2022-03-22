@@ -38,7 +38,7 @@ Rectangle {
         PassListBtn {
             id: passListBtn
             col: i
-            text: "焊道" + col
+            text: "焊道"
             ButtonGroup.group: exclusiveGroup
             anchors.horizontalCenterOffset: 0
             anchors.horizontalCenter: parent.horizontalCenter
