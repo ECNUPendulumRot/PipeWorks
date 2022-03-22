@@ -62,6 +62,8 @@ public slots:
 
     bool callIsDirty();
 
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+
     void callCrossSelect(unsigned int row, unsigned int col, bool b);
 
     void callSetSelect(unsigned int row, unsigned int col, bool b);
@@ -69,8 +71,6 @@ public slots:
     bool select() override;
 
     bool callAddToModel(double v, bool isAdd);
-
-    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
 signals:
 
