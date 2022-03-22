@@ -15,26 +15,51 @@
 
 //} Parameter;
 
+typedef struct MapData{
+    int map_r;
+    int map_c;
+
+    QVariant v;
+
+    MapData(){};
+    ~MapData(){};
+    MapData(int r, int c, QVariant v):map_r(r), map_c(c), v(v)
+    {};
+
+} MapData;
+
 
 class PartModel : public QAbstractItemModel
 {
     Q_OBJECT
-
 public:
     explicit PartModel(QObject *parent = nullptr);
 
     bool setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role = Qt::EditRole) override;
 
     // Basic functionality:
+
+    enum TableRoles{
+        ColumnRole = Qt::UserRole + 1,
+        RowRole,
+        DirtyRole,
+        ChangeRole,
+        SelectionRole
+    };
+
     QModelIndex index(int row, int column,
                       const QModelIndex &parent = QModelIndex()) const override;
-    QModelIndex parent(const QModelIndex &index) const override;
+
+    // what is it? need to be fixed
+    // QModelIndex parent(const QModelIndex &index) const override;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
+    QHash<int, QByteArray> roleNames() const override;
 
     // Editable:
     bool setData(const QModelIndex &index, const QVariant &value,
@@ -47,18 +72,45 @@ public:
     // only for angular related table
     bool changeSelectIndex(int index);
 
-    void setArray(QList<QString> l);
+    bool changeBackendTable(TModel *newConnectedTable);
 
+    bool pullArray(QList<QString> l);
+
+    bool pushArray();
 
     // model related operation
     TModel *getConnectedTable() const;
 
     void setConnectedTable(TModel *newConnectedTable);
 
+    // selection related operation
+
+    void callCrossSelect(unsigned int row, unsigned int col, bool b);
+
+    void callSetSelect(unsigned int row, unsigned int col, bool b);
+
+    bool callAddToModel(double v, bool isAdd);
+
+signals:
+
+    void dataReady();
+
+    void partDataChanged(int r, int c, QVariant v);
+
+    void partSelectChanged(int r, int c, bool b);
+
 private:
 
-    QVariant **array = nullptr;
+    // selection related operation
+    bool **selection = nullptr;
+
+    void initializeSelection();
+
+    void releaseSelection();
+
+    MapData **array = nullptr;
     unsigned int r = 0, c = 0;
+
     // array related operation
     void createArray(unsigned int row, unsigned int col);
 
