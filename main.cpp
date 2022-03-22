@@ -1,4 +1,4 @@
-#include <QApplication>
+﻿#include <QApplication>
 #include <QSqlTableModel>
 #include <QtWidgets>
 #include <QDir>
@@ -10,7 +10,7 @@
 
 #include <cscheduler.h>
 #include <cparamdatabase.h>
-
+#include <modelpool.h>
 int main(int argc, char *argv[])
 {
     QCoreApplication::setOrganizationName("QtExamples");

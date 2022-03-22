@@ -12,6 +12,7 @@ SOURCES += \
     Sources/cparamdatabase.cpp \
     Sources/cTmodel.cpp \
     Sources/cscheduler.cpp \
+    Sources/modelpool.cpp \
     main.cpp \
     Sources/cmodelmanage.cpp \
     Sources/cuserdb.cpp \
@@ -28,7 +29,8 @@ HEADERS += \
     Headers/cdatabase.h \
     Headers/cuserdb.h \
     Headers/cscheduler.h \
-    Headers/utility.h \
+    Headers/modelpool.h \
+    Headers/utility.h
     partmodel.h
 
 QML_IMPORT_PATH = QML5/imports
