@@ -194,7 +194,7 @@ bool PartModel::pushArray()
     return true;
 }
 
-
+// array create and destroy
 // these two must call as pair
 void PartModel::createArray(unsigned int row, unsigned int col)
 {
@@ -208,6 +208,7 @@ void PartModel::createArray(unsigned int row, unsigned int col)
     for(unsigned int i = 0; i < row; i++)
         this->array[i] = new MapData[col];
 }
+
 
 void PartModel::deleteArray()
 {
@@ -236,7 +237,6 @@ void PartModel::setConnectedTable(TModel *newConnectedTable)
 
 
 // selection related function
-
 bool TModel::callAddToModel(double v, bool isAdd)
 {
     for(int i = 0; i < this->rowCount(); i++){
