@@ -7,6 +7,11 @@
 #include <cTmodel.h>
 #include <cparamdatabase.h>
 
+QT_BEGIN_NAMESPACE
+class PartModel;
+class ModelPool;
+QT_END_NAMESPACE
+
 class ModelManage : public QObject
 {
     Q_OBJECT
@@ -19,9 +24,25 @@ public:
 
     ModelManage(QString role);
 
+    ///
+    /// \brief setModel
+    /// \param db : database used to initialize model
+    ///
+    void setModel(ParamDatabase *pdb);
+
+    void deleteModels();
+
     bool Submit();
 
     bool Rvert();
+
+
+    //新添加
+    bool addModelPool(ParamDatabase* pdb, QString modelName);   //add to pool
+    bool changePass(QString modelName);                         //原setModelTable
+    void Clear();                                               //原deleteModels
+    QString changeSelectIndex(QList<unsigned int> cl);          //原MTruncate
+    //新添加
 
     ///
     /// \brief MTruncate
@@ -29,17 +50,9 @@ public:
     /// \param cl : parameters to be used
     /// \return
     ///
-    QString MTruncate(unsigned int index, QList<unsigned int> cl); //model truncate
-
-    ///
-    /// \brief setModel
-    /// \param db : database used to initialize model
-    ///
-    void setModel(ParamDatabase *pdb);
+    QString MTruncate(unsigned int index, QList<unsigned int> cl);
 
     bool setModelTable(unsigned int index, QString tableName);
-
-    QString role;
 
     TModel* getMTable(unsigned int index);
 
@@ -47,22 +60,22 @@ public:
 
     void callFixedTablesInitialize();
 
-    void deleteModels();
+    QString role;
 
 private:
 
     QSqlDatabase mdb;
 
-    //const static int MTableCount = 7;
+    PartModel* pm;
 
-    static inline TModel* passFTableModel;    //
-    static inline TModel* systemFTableModel;  //
-    static inline TModel* motionFTableModel;  // workers' access
+    ModelPool* mPool;           //
+    TModel* passFTableModel;    //
+    TModel* systemFTableModel;  //
+    TModel* motionFTableModel;  // workers' access
+    TModel* controlFTableModel; //
+    TModel* comFTableModel;     // senior workers' access
 
-    static inline TModel* controlFTableModel; //
-    static inline TModel* comFTableModel;     // senior workers' access
-
-    static inline QHash<unsigned int, TModel*> indexToTModel =
+    QHash<unsigned int, TModel*> indexToModel =
             QHash<unsigned int, TModel*>({
                                         {0, passFTableModel},
                                         {1, systemFTableModel},
@@ -77,7 +90,7 @@ private:
 
 signals:
     void registerRequest(TModel*, QString);
-
+    void registerRequestPool(ModelPool*, QString);
 };
 
 #endif // CMODELMANAGE_H
