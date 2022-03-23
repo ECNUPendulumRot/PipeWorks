@@ -250,7 +250,7 @@ Rectangle {
                         if(!widget.isCheck)
                             return "transparent"
                         else{
-                            if(isSelect)    return "#0D267B"
+                            if(model.isSelect)    return "#0D267B"
                             else            return "transparent"
                         }
                     }
@@ -301,7 +301,7 @@ Rectangle {
 
                 AngleTextField {
                     id:textField
-                    text: display
+                    text: model.display
                     color: widget.isCheck ? (isSelect? "#ffffff" : isDirty ? "#cc5555" : "#0d0d0d") : (isDirty ? "#cc5555":"#0d0d0d")
                     readOnly: column === 0 ? true: false
                     anchors.fill: parent
@@ -315,6 +315,11 @@ Rectangle {
             }
 
         }
+
+//        Component.onCompleted: {
+//            console.log("view columns after complete: " + view.columns)
+//            console.log("model (row, column) :" + "(" + angleRelatedTableModel.rowCount() + "," + angleRelatedTableModel.columnCount() + ")")
+//        }
 
         ScrollBar.vertical: ScrollBar{}
     }

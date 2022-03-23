@@ -35,8 +35,6 @@ class PartModel : public QAbstractItemModel
 public:
     explicit PartModel(QObject *parent = nullptr);
 
-    bool setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role = Qt::EditRole) override;
-
     // Basic functionality:
 
     enum TableRoles{
@@ -50,12 +48,12 @@ public:
     QModelIndex index(int row, int column,
                       const QModelIndex &parent = QModelIndex()) const override;
 
-    // what is it? need to be fixed
-    // QModelIndex parent(const QModelIndex &index) const override;
+    // what is it? need to be fixeds
+    QModelIndex parent(const QModelIndex &index) const override;
 
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    Q_INVOKABLE int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    Q_INVOKABLE int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
@@ -91,9 +89,16 @@ public:
 
     bool callAddToModel(double v, bool isAdd);
 
+    void clear();
+
+    QString webData(QList<QString>);
+
+public slots:
+    QString headerNameEng(unsigned int i);
+
 signals:
 
-    void dataReady();
+    void dataReady(QString s);
 
     void partDataChanged(int r, int c, QVariant v);
 
@@ -108,10 +113,11 @@ private:
 
     void releaseSelection();
 
+    // array related operation
     MapData **array = nullptr;
+
     unsigned int r = 0, c = 0;
 
-    // array related operation
     void createArray(unsigned int row, unsigned int col);
 
     void deleteArray();
@@ -131,6 +137,25 @@ private:
                                          {8,    Parameter("TargetCur"      , QStringLiteral("垂向目标值"), true)},
                                      });
 
+    static inline QHash<QString, QString> engToChn =
+            QHash<QString, QString>({
+                                        {"angle",               "角度"},
+                                        {"stayTime_Lead",       "前枪边停时间"},
+                                        {"stayTime_Trail",      "后枪边停时间"},
+                                        {"oscWidth_Lead",       "前枪摆宽"},
+                                        {"oscWidth_Trail",      "后枪摆宽"},
+                                        {"oscFreq_Lead",        "前枪摆动周期"},
+                                        {"oscFreq_Trail",       "后枪摆动周期"},
+                                        {"feedRate_Lead",       "前枪送丝速度"},
+                                        {"feedRate_Trail",      "后枪送丝速度"},
+                                        {"Arc_Rate_Lead",       "前枪电弧修正"},
+                                        {"Arc_Rate_Trail",      "后枪电弧修正"},
+                                        {"leadTargetCur",       "前枪垂向目标值"},
+                                        {"trailTargetCur",      "后枪垂向目标值"},
+                                        {"carACC",              "小车加速度"},
+                                        {"carSPEED",            "小车速度"},
+
+                                    });
 };
 
 #endif // PARTMODEL_H

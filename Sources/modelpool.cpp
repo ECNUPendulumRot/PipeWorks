@@ -1,53 +1,81 @@
 ﻿#include "modelpool.h"
 #include <qdebug.h>
-modelPool::modelPool()
+ModelPool::ModelPool()
 {
 
 }
 
 
-bool modelPool::initModel(ParamDatabase* pdb){
-    QSqlDatabase m_db = pdb->getdb();
+bool ModelPool::initModel(QSqlDatabase& pdb){
     for(int i =0;i<10;i++){
         QString s = "Pass"+QString::number(i)+"Parameter";
-        Pool.insert(s, new TModel(m_db));
+        pool.insert(s, new TModel(pdb));
     }
     return true;
 }
 
-
-TModel* modelPool::getModel(QString modelName){//check model name
-    QHash<QString, TModel*>::iterator i = Pool.find(modelName);
-    if(i != Pool.end() && i.key() == "HDR")
-        return Pool[modelName];
-}
-
-bool modelPool::addModel(QString modelName, ParamDatabase* pdb){
-    QSqlDatabase m_db = pdb->getdb();
-    TModel* model = new TModel(m_db);
-    Pool.insert(modelName,model);
-    return true;
-}
-
-bool modelPool::deleteModel(QString modelName){
-    if(Pool.remove(modelName))
+bool ModelPool::inPool(QString modelName)
+{
+    QHash<QString, TModel*>::iterator i = pool.find(modelName);
+    if(i != pool.end() && i.key() == modelName)
         return true;
     else
         return false;
 }
 
-bool modelPool::checkModel(){
-    qDebug()<<Pool.keys();
+bool ModelPool::isDirty()
+{
+    if(pool.size() == 0)
+        return false;
+
+    bool dirty = false;
+
+    QHash<QString, TModel*>::iterator iter = pool.begin();
+    while(iter != pool.end()){
+        dirty = dirty || iter.value()->isDirty();
+        ++iter;
+    }
+    return dirty;
+}
+
+
+TModel* ModelPool::getModel(QString modelName){//check model name
+    QHash<QString, TModel*>::iterator i = pool.find(modelName);
+    if(i != pool.end() && i.key() == modelName)
+        return pool[modelName];
+    else
+        return nullptr;
+}
+
+bool ModelPool::addModel(QString modelName, QSqlDatabase& pdb){
+    TModel* model = new TModel(pdb);
+
+    model->setTable(modelName);// the name should be same to the database table
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->select();
+
+    pool.insert(modelName,model);
     return true;
 }
 
-bool modelPool::clearModel(){
-    QHash<QString, TModel*>::iterator iter = Pool.begin();
-        while(iter != Pool.end())
-        {
-            iter.value()->~TModel();
-            ++iter;
-        }
-    Pool.clear();
+bool ModelPool::deleteModel(QString modelName){
+    if(pool.remove(modelName))
+        return true;
+    else
+        return false;
+}
+
+bool ModelPool::checkModel(){
+    qDebug()<<pool.keys();
+    return true;
+}
+
+bool ModelPool::clearModel(){
+    QHash<QString, TModel*>::iterator iter = pool.begin();
+    while(iter != pool.end()){
+        delete iter.value();
+        ++iter;
+    }
+    pool.clear();
     return true;
 }

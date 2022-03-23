@@ -10,43 +10,31 @@ PartModel::PartModel(QObject *parent)
     this->c = 0;
 }
 
-
-bool PartModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role)
-{
-    if (value != headerData(section, orientation, role)) {
-        // FIXME: Implement me!
-        emit headerDataChanged(orientation, section, section);
-        return true;
-    }
-    return false;
-}
-
 QModelIndex PartModel::index(int row, int column, const QModelIndex &parent) const
 {
+    if(row < 0 || row >= (int)r || column < 0 || column > (int)c)
+        return QModelIndex();
     return this->createIndex(row, column);
 }
 
 
-//QModelIndex PartModel::parent(const QModelIndex &index) const
-//{
-//    // FIXME: Implement me!
-//}
+QModelIndex PartModel::parent(const QModelIndex &index) const
+{
+    // FIXME: Implement me!
+    return QModelIndex();
+}
 
 
 int PartModel::rowCount(const QModelIndex &parent) const
 {
-    if (!parent.isValid())
-        return 0;
-
+    //qDebug() << "call rowCount: r = " << r;
     // customize:
     return this->r;
 }
 
 int PartModel::columnCount(const QModelIndex &parent) const
 {
-    if (!parent.isValid())
-        return 0;
-
+    //qDebug() << "call columnCount: c = " << c;
     // customize:
     return this->c;
 }
@@ -63,7 +51,6 @@ QHash<int, QByteArray> PartModel::roleNames() const
 
     // pair role for edit and display
     roles[Qt::DisplayRole] = "display";
-    roles[Qt::EditRole] = "display";
     return roles;
 }
 
@@ -97,6 +84,11 @@ bool PartModel::setData(const QModelIndex &index, const QVariant &value, int rol
         switch(role){
         // self related role
         case Qt::EditRole:
+            this->array[index.row()][index.column()].v = value;
+            emit dataChanged(index, index, QVector<int>({Qt::DisplayRole, ChangeRole}));
+            emit partDataChanged(index.row(), index.column(), value);
+            return true;
+        case Qt::DisplayRole:
             this->array[index.row()][index.column()].v = value;
             emit dataChanged(index, index, QVector<int>({Qt::DisplayRole, ChangeRole}));
             emit partDataChanged(index.row(), index.column(), value);
@@ -141,7 +133,27 @@ bool PartModel::changeSelectIndex(int index)
     else
         l.push_back(parameterCouple[index].name);
 
+# ifdef QT_DEBUG
+    qDebug() << "start pulling array...";
+    QString s;
+    for(int i = 0; i < l.size(); i ++){
+        s += l[i] + " ";
+    }
+    qDebug() << "Content is" << s;
+# endif
     pullArray(l);
+# ifdef QT_DEBUG
+    qDebug() << "finish pulling array...";
+    //qDebug() << "row column counts:" << this->rowCount() << " ," << this->columnCount();
+# endif
+    QString forWeb = this->webData(l);
+
+# ifdef QT_DEBUG
+    qDebug() << forWeb;
+    //qDebug() << "row column counts:" << this->rowCount() << " ," << this->columnCount();
+# endif
+
+    emit this->dataReady(forWeb);
 
     return true;
 }
@@ -156,24 +168,25 @@ bool PartModel::changeBackendTable(TModel *newConnectedTable)
 bool PartModel::pullArray(QList<QString> l)
 // Pop data by header name list L and push them into array
 {
-    if(this->array == nullptr || this->connectedTable == nullptr)
+    if(this->connectedTable == nullptr)
         return false;
 
     // body
 
     createArray(connectedTable->rowCount(), l.size());
+    initializeSelection();
 
     for(int i = 0; i < connectedTable->rowCount(); i++){
         QSqlRecord r = connectedTable->record(i);
         int j = 0;
+
         for(int k = 0; k < r.count(); k++){
-            if(r.fieldName(k) == l[j]){
+            if( j < l.size() && r.fieldName(k) == l[j]){
                 this->array[i][j] = MapData(i, k, r.value(k));
                 j++;
             }
         }
     }
-    emit this->dataReady();
     // body
     return true;
 }
@@ -219,6 +232,7 @@ void PartModel::deleteArray()
         delete  this->array[i];
     }
     delete this->array;
+    this->array = nullptr;
     this->r = 0;
     this->c = 0;
 }
@@ -235,9 +249,14 @@ void PartModel::setConnectedTable(TModel *newConnectedTable)
     connectedTable = newConnectedTable;
 }
 
+QString PartModel::headerNameEng(unsigned int i)
+{
+    return this->connectedTable->record().fieldName(i);
+}
+
 
 // selection related function
-bool TModel::callAddToModel(double v, bool isAdd)
+bool PartModel::callAddToModel(double v, bool isAdd)
 {
     for(int i = 0; i < this->rowCount(); i++){
         for(int j = 1; j < this->columnCount(); j++){
@@ -257,6 +276,13 @@ bool TModel::callAddToModel(double v, bool isAdd)
         }
     }
     return true;
+}
+
+
+void PartModel::clear()
+{
+    this->deleteArray();
+    this->releaseSelection();
 }
 
 
@@ -300,4 +326,24 @@ void PartModel::releaseSelection()
 
     delete this->selection;
     this->selection = nullptr;
+}
+
+
+QString PartModel::webData(QList<QString> header)
+{
+    QString s;
+    s += QString::number(this->columnCount()) + " ";
+
+    for(int i = 1; i < header.size(); i++){
+        s += engToChn[header[i]] + " ";
+    }
+
+    if(this->columnCount() < 3)
+        s += "null ";
+
+    for(int i = 1; i < this->columnCount(); i++){
+        for(int j = 0; j < this->rowCount(); j ++)
+            s += this->array[j][i].v.toString() + " ";
+    }
+    return s;
 }

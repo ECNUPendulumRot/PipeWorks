@@ -26,7 +26,6 @@ ComboBox {
         4:4,
         5:6,
         6:7
-
                 }
 
     delegate: ItemDelegate {

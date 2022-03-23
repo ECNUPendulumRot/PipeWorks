@@ -3,7 +3,7 @@
 #include <QSqlTableModel>
 #include <QList>
 #include <cparamdatabase.h>
-#include "cdatabase.h"
+#include <cdatabase.h>
 
 typedef struct Parameter {
     QString name;
@@ -62,7 +62,7 @@ public slots:
 
     bool callIsDirty();
 
-    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+    //bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
     void callCrossSelect(unsigned int row, unsigned int col, bool b);
 
@@ -70,7 +70,7 @@ public slots:
 
     bool select() override;
 
-    bool callAddToModel(double v, bool isAdd);
+    //bool callAddToModel(double v, bool isAdd);
 
 signals:
 

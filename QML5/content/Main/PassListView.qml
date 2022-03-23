@@ -182,6 +182,7 @@ Rectangle {
             scheduler.callPassSelected("Pass" + i + "Parameter")
 
             passListRequestRefreshcombobx()
+
             passListRequestFixTableRefresh(i);
         }
     }

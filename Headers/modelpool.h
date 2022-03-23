@@ -4,15 +4,16 @@
 #include <QObject>
 #include <cTmodel.h>
 #include <cparamdatabase.h>
-class modelPool : public QObject
+
+class ModelPool : public QObject
 {
     Q_OBJECT
 public:
-    modelPool();
+    ModelPool();
 
     TModel* getModel(QString modelName);
 
-    bool addModel(QString modelName, ParamDatabase* pdb);
+    bool addModel(QString modelName, QSqlDatabase& pdb);
 
     bool deleteModel(QString modelName);
 
@@ -20,12 +21,15 @@ public:
 
     bool clearModel();
 
-    bool initModel(ParamDatabase* pdb);
+    bool initModel(QSqlDatabase& pdb);
+
+    bool inPool(QString modelName);
+
+    bool isDirty();
 
 private:
 
-    static inline QHash<QString, TModel*> Pool =
-        QHash<QString, TModel*>();
+    QHash<QString, TModel*> pool = QHash<QString, TModel*>();
 
 };
 
