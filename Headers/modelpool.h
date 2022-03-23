@@ -22,7 +22,6 @@ public:
 
     bool initModel(ParamDatabase* pdb);
 
-
 private:
 
     static inline QHash<QString, TModel*> Pool =

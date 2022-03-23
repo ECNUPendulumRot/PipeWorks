@@ -18,7 +18,7 @@ SOURCES += \
     Sources/cuserdb.cpp \
     Sources/cuser.cpp \
     Sources/cdatabase.cpp \
-    partmodel.cpp
+    Sources/partmodel.cpp
 
 
 HEADERS += \
@@ -30,8 +30,8 @@ HEADERS += \
     Headers/cuserdb.h \
     Headers/cscheduler.h \
     Headers/modelpool.h \
-    Headers/utility.h
-    partmodel.h
+    Headers/utility.h \
+    Headers/partmodel.h
 
 QML_IMPORT_PATH = QML5/imports
 
