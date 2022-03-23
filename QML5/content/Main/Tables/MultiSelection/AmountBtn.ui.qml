@@ -37,4 +37,26 @@ Button {
         anchors.horizontalCenter: parent.horizontalCenter
         fillMode: Image.PreserveAspectFit
     }
+    states: [
+        State {
+            name: "normal"
+        },
+        State {
+            name: "hover"
+            when: control.hovered && !control.pressed
+
+            PropertyChanges {
+                target: buttonBackground
+                color: "#33616161"
+            }
+        },
+        State {
+            name: "hover1"
+            when: control.pressed
+            PropertyChanges {
+                target: buttonBackground
+                color: "#96676767"
+            }
+        }
+    ]
 }
