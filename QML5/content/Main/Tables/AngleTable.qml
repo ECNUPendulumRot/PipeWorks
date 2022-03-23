@@ -35,8 +35,8 @@ Rectangle {
         "feedRate_Trail":"后枪送丝速度\n(毫米/秒)",
         "carACC"        :"小车加速度\n(毫米/秒²)",
         "carSPEED"      :"小车速度\n(毫米/秒)",
-        "leadTargetCur" :"前枪垂向目标值\n(毫米)",
-        "trailTargetCur":"后枪垂向目标值\n(毫米)"
+        "leadTargetCur" :"前枪干伸高度值\n(毫米)",
+        "trailTargetCur":"后枪干伸高度值\n(毫米)"
     }
 
 
@@ -302,24 +302,22 @@ Rectangle {
                 AngleTextField {
                     id:textField
                     text: model.display
-                    color: widget.isCheck ? (isSelect? "#ffffff" : isDirty ? "#cc5555" : "#0d0d0d") : (isDirty ? "#cc5555":"#0d0d0d")
+                    color: widget.isCheck ? (model.isSelect? "#ffffff" : model.isChanged ? "#0D267B" : model.isDirty ? "#cc5555":"#0d0d0d")
+                                          : (model.isDirty ? "#cc5555":"#0d0d0d")
                     readOnly: column === 0 ? true: false
                     anchors.fill: parent
 
                     onEditingFinished: {
-                        angleRelatedTableModel.callSetData(row, column, text)
+                        model.data = text
                         textField.focus = false
                     }
 
                 }
             }
-
+            function changeSelect(b){
+                model.isSelect = b
+            }
         }
-
-//        Component.onCompleted: {
-//            console.log("view columns after complete: " + view.columns)
-//            console.log("model (row, column) :" + "(" + angleRelatedTableModel.rowCount() + "," + angleRelatedTableModel.columnCount() + ")")
-//        }
 
         ScrollBar.vertical: ScrollBar{}
     }
@@ -352,7 +350,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: {
             disableSingleSelect(view)
-            restoreBeforeOp()
+            //restoreBeforeOp()
             widget.isCheck = true
         }
     }
@@ -374,7 +372,8 @@ Rectangle {
         onClicked: {
             reset()
             enableSingleSelect(view);
-            refreshAfterCancel();
+
+            angleRelatedTableModel.callFetchData();
 
             widget.isCheck = false
         }
@@ -396,6 +395,7 @@ Rectangle {
 
         onClicked: {
             reset()
+            angleRelatedTableModel.callWriteBack();
             enableSingleSelect(view);
             calculation.clear()
             widget.isCheck = false
@@ -637,7 +637,6 @@ Rectangle {
             return
         else angleRelatedTableModel.callSetSelect(index, header.currentIndex, checked);
     }
-
 
     // column related
     function disableColumn(index){

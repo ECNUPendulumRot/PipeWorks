@@ -72,7 +72,7 @@ public:
 
     bool changeBackendTable(TModel *newConnectedTable);
 
-    bool pullArray(QList<QString> l);
+    bool pullArray();
 
     bool pushArray();
 
@@ -85,16 +85,24 @@ public:
 
     void callCrossSelect(unsigned int row, unsigned int col, bool b);
 
+
+
+
+
+    void clear();
+
+    QString webData();
+
+public slots:
+    QString headerNameEng(unsigned int i);
+
     void callSetSelect(unsigned int row, unsigned int col, bool b);
 
     bool callAddToModel(double v, bool isAdd);
 
-    void clear();
+    void callWriteBack();
 
-    QString webData(QList<QString>);
-
-public slots:
-    QString headerNameEng(unsigned int i);
+    void callFetchData();
 
 signals:
 
@@ -116,11 +124,15 @@ private:
     // array related operation
     MapData **array = nullptr;
 
+    QList<QString> header;
+
     unsigned int r = 0, c = 0;
 
     void createArray(unsigned int row, unsigned int col);
 
     void deleteArray();
+
+    void writeBack(int row, int col);
 
     TModel *connectedTable = nullptr;
 
@@ -134,28 +146,28 @@ private:
                                          {5,    Parameter("Arc_Rate"       , QStringLiteral("电弧修正"), true)},
                                          {6,    Parameter("carACC"         , QStringLiteral("小车加速度"), false)},
                                          {7,    Parameter("carSPEED"       , QStringLiteral("小车速度"), false)},
-                                         {8,    Parameter("TargetCur"      , QStringLiteral("垂向目标值"), true)},
+                                         {8,    Parameter("TargetCur"      , QStringLiteral("干伸高度值"), true)},
                                      });
 
-    static inline QHash<QString, QString> engToChn =
-            QHash<QString, QString>({
-                                        {"angle",               "角度"},
-                                        {"stayTime_Lead",       "前枪边停时间"},
-                                        {"stayTime_Trail",      "后枪边停时间"},
-                                        {"oscWidth_Lead",       "前枪摆宽"},
-                                        {"oscWidth_Trail",      "后枪摆宽"},
-                                        {"oscFreq_Lead",        "前枪摆动周期"},
-                                        {"oscFreq_Trail",       "后枪摆动周期"},
-                                        {"feedRate_Lead",       "前枪送丝速度"},
-                                        {"feedRate_Trail",      "后枪送丝速度"},
-                                        {"Arc_Rate_Lead",       "前枪电弧修正"},
-                                        {"Arc_Rate_Trail",      "后枪电弧修正"},
-                                        {"leadTargetCur",       "前枪垂向目标值"},
-                                        {"trailTargetCur",      "后枪垂向目标值"},
-                                        {"carACC",              "小车加速度"},
-                                        {"carSPEED",            "小车速度"},
+//    static inline QHash<QString, QString> engToChn =
+//            QHash<QString, QString>({
+//                                        {"angle",               "角度"},
+//                                        {"stayTime_Lead",       "前枪边停时间"},
+//                                        {"stayTime_Trail",      "后枪边停时间"},
+//                                        {"oscWidth_Lead",       "前枪摆宽"},
+//                                        {"oscWidth_Trail",      "后枪摆宽"},
+//                                        {"oscFreq_Lead",        "前枪摆动周期"},
+//                                        {"oscFreq_Trail",       "后枪摆动周期"},
+//                                        {"feedRate_Lead",       "前枪送丝速度"},
+//                                        {"feedRate_Trail",      "后枪送丝速度"},
+//                                        {"Arc_Rate_Lead",       "前枪电弧修正"},
+//                                        {"Arc_Rate_Trail",      "后枪电弧修正"},
+//                                        {"leadTargetCur",       "前枪垂向目标值"},
+//                                        {"trailTargetCur",      "后枪垂向目标值"},
+//                                        {"carACC",              "小车加速度"},
+//                                        {"carSPEED",            "小车速度"},
 
-                                    });
+//                                    });
 };
 
 #endif // PARTMODEL_H

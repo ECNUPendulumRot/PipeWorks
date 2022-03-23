@@ -189,6 +189,7 @@ bool ModelManager::changePass(QString modelName){
     TModel *curModel;
     if(!mPool->inPool(modelName))
         addModelPool(modelName);
+
     curModel = mPool->getModel(modelName);
 
     if(curModel == nullptr)

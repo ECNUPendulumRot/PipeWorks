@@ -104,7 +104,7 @@ signals:
 
     void modelRegistered();
 
-    void modelDataReady();
+    void modelDataReady(QString s);
 
     void modelChanged(QString s);
 };

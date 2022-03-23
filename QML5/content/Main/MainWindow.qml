@@ -356,7 +356,7 @@ Rectangle {
     Connections {
         target: scheduler
         onModelDataReady: s => {
-            console.log("data ready")
+            console.log(s)
             refreshAngleTable(s)}
     }
 
