@@ -214,7 +214,6 @@ Item {
 
     }
 
-
     function createMain(){
         objectMainWindow = Qt.createQmlObject(
                     'import QtQuick 2.15
@@ -230,6 +229,9 @@ Item {
         check();
         window.w = 1366
         window.h = 768
+        window.flags = Qt.Window
+        window.minimumWidth = 1300
+        window.minimumHeight = 600
         window.visible = true
     }
 

@@ -42,7 +42,7 @@ Rectangle{
         anchors.verticalCenter: label.verticalCenter
         anchors.left: label.left
         padding: 0
-        font.pixelSize: 10
+        font.pixelSize: 12
         anchors.leftMargin: 64
         currentIndex: -1
         displayText: if(!(currentIndex + 1)) defaultString
@@ -76,7 +76,7 @@ Rectangle{
                     color: "#202020"
                     //font: control.font
                     elide: Text.ElideRight
-                    font.pixelSize: 10
+                    font.pixelSize: 11
                     anchors.verticalCenter: parent.verticalCenter
                 }
             }

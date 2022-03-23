@@ -40,7 +40,7 @@ Rectangle {
 
     Rectangle {
         id: angleTableWrapper
-        x: 1062
+        //x: 1062
         width: 300
         color: "#d4d4d4"
         border.width: 0
@@ -213,7 +213,7 @@ Rectangle {
 
     CancelBtn {
         id: myButton2
-        y: 681
+        //y: 681
         anchors.bottom: myButton3.top
         anchors.horizontalCenter: myButton3.horizontalCenter
         anchors.bottomMargin: 20
@@ -234,8 +234,15 @@ Rectangle {
 
     SubmitBtn {
         id: myButton3
-        x: 1208
-        y: 694
+
+        anchors{
+          right: parent.right
+          bottom: parent.bottom
+          rightMargin:45
+          bottomMargin: 45
+        }
+        //x: 1208
+        //y: 694
         z: 3
 
         onClicked:{
