@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.12
 
 Button {
@@ -16,6 +16,7 @@ Button {
     rightPadding: 4
 
     text: "My Button"
+    property alias textItemFontpixelSize: textItem.font.pixelSize
     property alias textItemText: textItem.text
     property int pos
     property bool isCheck: false
@@ -47,7 +48,7 @@ Button {
     states: [
         State {
             name: "hover"
-            when: !isCheck && !control.down
+            when: !checked && !control.down
 
             PropertyChanges {
                 target: buttonBackground
@@ -62,7 +63,7 @@ Button {
         },
         State {
             name: "press"
-            when: !isCheck && control.down
+            when: !checked && control.down
             PropertyChanges {
                 target: textItem
                 color: "#dcdcdc"
@@ -76,7 +77,7 @@ Button {
         },
         State {
             name: "check"
-            when: isCheck && !control.down
+            when: checked && !control.down
             PropertyChanges {
                 target: buttonBackground
                 border.color: "#ffffff"
@@ -89,7 +90,7 @@ Button {
         },
         State {
             name: "checkPress"
-            when: isCheck && control.down
+            when: checked && control.down
 
             PropertyChanges {
                 target: buttonBackground
@@ -107,7 +108,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:3}
+    D{i:0;height:18;width:18}
 }
 ##^##*/
 

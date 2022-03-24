@@ -111,6 +111,7 @@ Button {
 
             PropertyChanges {
                 target: textItem
+                color: "#dcdcdc"
                 horizontalAlignment: Text.AlignLeft
                 anchors.leftMargin: 30
             }
@@ -118,6 +119,16 @@ Button {
             PropertyChanges {
                 target: control
                 opacity: 0.5
+            }
+
+            PropertyChanges {
+                target: buttonBackground
+                color: "#6a6a6a"
+            }
+
+            PropertyChanges {
+                target: text1
+                color: "#dcdcdc"
             }
         },
         State {
@@ -156,7 +167,7 @@ Button {
             PropertyChanges {
                 target: buttonBackground
                 opacity: 0.446
-                color: "#10379d"
+                color: "#081d55"
             }
 
             PropertyChanges {

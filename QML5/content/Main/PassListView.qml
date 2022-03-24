@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "Components"
 
@@ -33,6 +33,10 @@ Rectangle {
         }
     }
 
+    ButtonGroup {
+        id: exclusiveGroup2
+    }
+
     Component {
         id: passDelegate
         PassListBtn {
@@ -44,12 +48,12 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
 
             onClicked: refresh(col)
-            onDoubleClicked: {
-                if(haveRead){
-                    flag = !flag
-                    passFTableModel.callSetData(col, 24, flag)
-                }
-            }
+//            onDoubleClicked: {
+//                if(haveRead){
+//                    flag = !flag
+//                    passFTableModel.callSetData(col, 24, flag)
+//                }
+//            }
         }
     }
 
@@ -111,6 +115,7 @@ Rectangle {
                 refreshPassFlag();
             }
             var p = addBtn.pos
+            refreshEditBtnPos();
             refreshEditBtn();
 
             if(pass2View.itemAtIndex(pass2Model.count - 1).haveRead){
@@ -145,24 +150,124 @@ Rectangle {
         anchors.verticalCenter: pass2View.top
         anchors.verticalCenterOffset: (pass2View.count - 1) * 30 + 13
 
+        ButtonGroup.group: exclusiveGroup2
         textItemText: "+"
         pos: pass2Model.count + pass1Model.count - 1
         onClicked: {
             if(pass2Model.count + pass1Model.count < pass3Model.get(0).i){
                 pass2Model.append({"i": pass2Model.count + pass1Model.count});
             }
+            refreshEditBtn()
         }
     }
 
     PassEditBtn {
         id: removeBtn
         y: addBtn.y
+        checked: addBtn.checked
         anchors.right: pass2View.right
         anchors.rightMargin: addBtn.anchors.leftMargin
         pos: pass2Model.count + pass1Model.count - 1
         onClicked: {
             if(pass2View.count > 1){
                 pass2Model.remove(pass2Model.count - 1);
+            }
+            refreshEditBtn()
+        }
+    }
+
+    PassEditBtn {
+        id: passEditBtn10
+        anchors.left: pass1View.left
+        anchors.leftMargin: -8
+        anchors.verticalCenter: pass1View.top
+        anchors.verticalCenterOffset: 0 * 30 + 13
+
+        ButtonGroup.group: exclusiveGroup2
+        textItemFontpixelSize: 15
+        textItemText: "×"
+        pos: 0
+        onClicked: {
+            refreshEditBtn()
+            if(pass1View.itemAtIndex(0).haveRead){
+                pass1View.itemAtIndex(0).flag = !pass1View.itemAtIndex(0).flag
+                passFTableModel.callSetData(pass1View.itemAtIndex(0).col, 24, pass1View.itemAtIndex(0).flag)
+                if(pass1View.itemAtIndex(0).flag)
+                    textItemText = "×"
+                else
+                    textItemText = "√"
+            }
+        }
+    }
+
+    PassEditBtn {
+        id: passEditBtn11
+        anchors.left: pass1View.left
+        anchors.leftMargin: -8
+        anchors.verticalCenter: pass1View.top
+        anchors.verticalCenterOffset: 1 * 30 + 13
+
+        ButtonGroup.group: exclusiveGroup2
+        textItemFontpixelSize: 15
+        textItemText: "×"
+        pos: 1
+        onClicked: {
+            refreshEditBtn()
+            if(pass1View.itemAtIndex(1).haveRead){
+                pass1View.itemAtIndex(1).flag = !pass1View.itemAtIndex(1).flag
+                passFTableModel.callSetData(pass1View.itemAtIndex(1).col, 24, pass1View.itemAtIndex(1).flag)
+                if(pass1View.itemAtIndex(1).flag)
+                    textItemText = "×"
+                else
+                    textItemText = "√"
+            }
+        }
+    }
+
+    PassEditBtn {
+        id: passEditBtn30
+        anchors.left: pass3View.left
+        anchors.leftMargin: -8
+        anchors.verticalCenter: pass3View.top
+        anchors.verticalCenterOffset: 0 * 30 + 13
+
+        ButtonGroup.group: exclusiveGroup2
+        textItemFontpixelSize: 15
+        textItemText: "×"
+        pos: 8
+        onClicked: {
+            refreshEditBtn()
+            if(pass3View.itemAtIndex(0).haveRead){
+                pass3View.itemAtIndex(0).flag = !pass3View.itemAtIndex(0).flag
+                passFTableModel.callSetData(pass3View.itemAtIndex(0).col, 24, pass3View.itemAtIndex(0).flag)
+                if(pass3View.itemAtIndex(0).flag)
+                    textItemText = "×"
+                else
+                    textItemText = "√"
+            }
+        }
+    }
+
+    PassEditBtn {
+        id: passEditBtn31
+        anchors.left: pass3View.left
+        anchors.leftMargin: -8
+        anchors.verticalCenter: pass3View.top
+        anchors.verticalCenterOffset: 1 * 30 + 13
+
+        ButtonGroup.group: exclusiveGroup2
+        textItemFontpixelSize: 15
+        textItemText: "×"
+        pos: 9
+        onClicked: {
+            refreshEditBtn()
+            if(pass3View.itemAtIndex(1).haveRead){
+                pass3View.itemAtIndex(1).flag = !pass3View.itemAtIndex(1).flag
+                passFTableModel.callSetData(pass3View.itemAtIndex(1).col, 24, pass3View.itemAtIndex(1).flag)
+                if(pass3View.itemAtIndex(1).flag)
+                    textItemText = "×"
+                else
+                    textItemText = "√"
             }
         }
     }
@@ -174,6 +279,22 @@ Rectangle {
         {
             refreshPassName();
             refreshPassFlag();
+            if(pass1View.itemAtIndex(0).flag)
+                passEditBtn10.textItemText = "×"
+            else
+                passEditBtn10.textItemText = "√"
+            if(pass1View.itemAtIndex(1).flag)
+                passEditBtn11.textItemText = "×"
+            else
+                passEditBtn11.textItemText = "√"
+            if(pass3View.itemAtIndex(0).flag)
+                passEditBtn30.textItemText = "×"
+            else
+                passEditBtn30.textItemText = "√"
+            if(pass3View.itemAtIndex(1).flag)
+                passEditBtn31.textItemText = "×"
+            else
+                passEditBtn31.textItemText = "√"
         }
     }
 
@@ -232,22 +353,38 @@ Rectangle {
         return;
     }
 
-    function refreshEditBtn(){
+    function refreshEditBtnPos(){
         addBtn.pos = pass2Model.count + pass1Model.count - 1;
         removeBtn.pos = pass2Model.count + pass1Model.count - 1;
+    }
+
+    function refreshEditBtn(){
         if(exclusiveGroup.checkedButton != null){
-            if(addBtn.pos === exclusiveGroup.checkedButton.col){
-                addBtn.isCheck = true;
-                removeBtn.isCheck = true;
-            }
-            else{
-                addBtn.isCheck = false;
-                removeBtn.isCheck = false;
+            switch(exclusiveGroup.checkedButton.col){
+            case addBtn.pos:
+                console.log("?")
+                addBtn.checked = true;
+                break;
+            case passEditBtn10.pos:
+                passEditBtn10.checked = true;
+                break;
+            case passEditBtn11.pos:
+                passEditBtn11.checked = true;
+                break;
+            case passEditBtn30.pos:
+                passEditBtn30.checked = true;
+                break;
+            case passEditBtn31.pos:
+                passEditBtn31.checked = true;
+                break;
+            default:
+                console.log("??")
+                exclusiveGroup2.checkState = Qt.Unchecked
+                break;
             }
         }
         else{
-            addBtn.isCheck = false;
-            removeBtn.isCheck = false;
+            exclusiveGroup2.checkState = Qt.Unchecked;
         }
     }
 }
@@ -258,6 +395,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.33}
+    D{i:0;formeditorZoom:1.25}
 }
 ##^##*/

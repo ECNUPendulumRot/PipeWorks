@@ -1,4 +1,4 @@
-#ifndef PARTMODEL_H
+﻿#ifndef PARTMODEL_H
 #define PARTMODEL_H
 
 #include <QAbstractItemModel>
