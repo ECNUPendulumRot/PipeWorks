@@ -181,7 +181,6 @@ bool PartModel::pullArray()
         return false;
 
     // body
-
     createArray(connectedTable->rowCount(), header.size());
     initializeSelection();
 
@@ -220,6 +219,8 @@ bool PartModel::pushArray()
 // these two must call as pair
 void PartModel::createArray(unsigned int row, unsigned int col)
 {
+    beginResetModel();
+
     if(this->array != nullptr)
         deleteArray();
 
@@ -229,6 +230,8 @@ void PartModel::createArray(unsigned int row, unsigned int col)
     this->array = new MapData*[row];
     for(unsigned int i = 0; i < row; i++)
         this->array[i] = new MapData[col];
+
+    endResetModel();
 }
 
 

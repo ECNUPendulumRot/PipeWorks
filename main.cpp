@@ -10,6 +10,7 @@
 
 #include <cscheduler.h>
 #include <cparamdatabase.h>
+#include <checkmodel.h>
 
 int main(int argc, char *argv[])
 {
@@ -19,6 +20,8 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     QQuickStyle::setStyle("Fusion");
+
+    qmlRegisterType<CheckModel>("ModelCraft", 1, 0, "CheckModel");
 
     QDir dir(QCoreApplication::applicationDirPath().append("/Database"));
     if(!dir.exists())

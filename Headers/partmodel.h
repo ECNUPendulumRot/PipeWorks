@@ -85,10 +85,6 @@ public:
 
     void callCrossSelect(unsigned int row, unsigned int col, bool b);
 
-
-
-
-
     void clear();
 
     QString webData();

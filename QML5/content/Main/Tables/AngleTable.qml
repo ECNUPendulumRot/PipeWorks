@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import Qt.labs.qmlmodels 1.0
 import QtQml 2.15
 import "MultiSelection"
+import ModelCraft 1.0
 
 Rectangle {
     id: widget
@@ -168,6 +169,16 @@ Rectangle {
         Component.onCompleted: checkbxModelCreate()
     }
 
+    CheckModel{
+        id: checkModel
+        Component.onCompleted: {
+            for(var i = 0; i < view.rows; i++){
+                checkModel.append(false)
+            }
+            checkModel.checkChanged.connect(rowSelectChange);
+        }
+    }
+
     TableView {
         id: checkboxView
 
@@ -176,12 +187,14 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: view.top
         anchors.bottom: view.bottom
-        model:checkboxModel
+
         flickableDirection: Flickable.VerticalFlick
         clip: true
         syncView: view
         syncDirection:Qt.Vertical
         reuseItems: true
+        model: checkModel
+
         delegate: Item {
             id: checkbxDelegate
             implicitHeight: 35
@@ -198,14 +211,11 @@ Rectangle {
                 display: AbstractButton.IconOnly
                 anchors.horizontalCenter: parent.horizontalCenter
 
-                onCheckedChanged: {
-                    model.display = checked
-                    rowSelectChange(row, checked);
-                }
+                onCheckedChanged: model.check = checked
             }
             Component.onCompleted: {
                 addGroup(delegateCheckbx)
-                delegateCheckbx.checked = model.display
+                delegateCheckbx.checked = model.check
             }
         }
     }
@@ -314,11 +324,7 @@ Rectangle {
 
                 }
             }
-            function changeSelect(b){
-                model.isSelect = b
-            }
         }
-
         ScrollBar.vertical: ScrollBar{}
     }
 
@@ -372,9 +378,7 @@ Rectangle {
         onClicked: {
             reset()
             enableSingleSelect(view);
-
             angleRelatedTableModel.callFetchData();
-
             widget.isCheck = false
         }
     }
@@ -441,11 +445,9 @@ Rectangle {
         onCheckStateChanged: {
             var i = 0
             if(checkState === Qt.Checked)
-                for(i = 0; i < checkboxModel.rowCount; i++)
-                    checkboxModel.setData(checkboxModel.index(i,0), "display", true)
+                checkModel.set(true)
             else if(checkState === Qt.Unchecked)
-                for(i = 0; i < checkboxModel.rowCount; i++)
-                    checkboxModel.setData(checkboxModel.index(i,0), "display", false)
+                checkModel.set(false)
         }
     }
 
@@ -582,22 +584,15 @@ Rectangle {
     }
 
     function reset(){
-        header.currentIndex = -1
-        initializeCheckModel()
-        initializeCheckbox(checkboxView)
-        initializeSelection()
+        header.currentIndex = -1;
+        checkModel.clear();
+        initializeSelection();
     }
 
     function initializeSelection(){
         for(var i = 0; i < view.rows; i++){
             for(var j = 1; j < view.columns; j++)
                  angleRelatedTableModel.callSetSelect(i, j, false);
-        }
-    }
-
-    function initializeCheckModel(){
-        for(var i = 0; i < checkboxModel.rowCount; i++){
-            checkboxModel.setData(checkboxModel.index(i,0), "display", false)
         }
     }
 
@@ -648,7 +643,7 @@ Rectangle {
         for(var i = 0; i < view.rows; i++){
             for(var j = 1; j < view.columns; j++)
                 if(j === index)
-                    angleRelatedTableModel.callSetSelect(i, j, checkboxModel.rows[i].checkStatus);
+                    angleRelatedTableModel.callSetSelect(i, j, checkModel.at(i));
                 else
                     angleRelatedTableModel.callSetSelect(i, j, false);
         }
