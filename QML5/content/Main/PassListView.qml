@@ -145,10 +145,11 @@ Rectangle {
 
     PassEditBtn {
         id: addBtn
-        anchors.left: pass2View.left
+        width: 70
+        anchors.left: pass3View.left
         anchors.leftMargin: -8
-        anchors.verticalCenter: pass2View.top
-        anchors.verticalCenterOffset: (pass2View.count - 1) * 30 + 13
+        anchors.verticalCenter: pass3View.top
+        anchors.verticalCenterOffset: pass3View.count * 30 + 13
 
         ButtonGroup.group: exclusiveGroup2
         textItemText: "+"
@@ -164,6 +165,7 @@ Rectangle {
     PassEditBtn {
         id: removeBtn
         y: addBtn.y
+        width: 70
         checked: addBtn.checked
         anchors.right: pass2View.right
         anchors.rightMargin: addBtn.anchors.leftMargin
@@ -185,7 +187,7 @@ Rectangle {
 
         ButtonGroup.group: exclusiveGroup2
         textItemFontpixelSize: 15
-        textItemText: "×"
+        textItemText: ""
         pos: 0
         onClicked: {
             refreshEditBtn()
@@ -193,9 +195,9 @@ Rectangle {
                 pass1View.itemAtIndex(0).flag = !pass1View.itemAtIndex(0).flag
                 passFTableModel.callSetData(pass1View.itemAtIndex(0).col, 24, pass1View.itemAtIndex(0).flag)
                 if(pass1View.itemAtIndex(0).flag)
-                    textItemText = "×"
-                else
                     textItemText = "√"
+                else
+                    textItemText = ""
             }
         }
     }
@@ -209,7 +211,7 @@ Rectangle {
 
         ButtonGroup.group: exclusiveGroup2
         textItemFontpixelSize: 15
-        textItemText: "×"
+        textItemText: ""
         pos: 1
         onClicked: {
             refreshEditBtn()
@@ -217,9 +219,9 @@ Rectangle {
                 pass1View.itemAtIndex(1).flag = !pass1View.itemAtIndex(1).flag
                 passFTableModel.callSetData(pass1View.itemAtIndex(1).col, 24, pass1View.itemAtIndex(1).flag)
                 if(pass1View.itemAtIndex(1).flag)
-                    textItemText = "×"
-                else
                     textItemText = "√"
+                else
+                    textItemText = ""
             }
         }
     }
@@ -233,7 +235,7 @@ Rectangle {
 
         ButtonGroup.group: exclusiveGroup2
         textItemFontpixelSize: 15
-        textItemText: "×"
+        textItemText: ""
         pos: 8
         onClicked: {
             refreshEditBtn()
@@ -241,9 +243,9 @@ Rectangle {
                 pass3View.itemAtIndex(0).flag = !pass3View.itemAtIndex(0).flag
                 passFTableModel.callSetData(pass3View.itemAtIndex(0).col, 24, pass3View.itemAtIndex(0).flag)
                 if(pass3View.itemAtIndex(0).flag)
-                    textItemText = "×"
-                else
                     textItemText = "√"
+                else
+                    textItemText = ""
             }
         }
     }
@@ -257,7 +259,7 @@ Rectangle {
 
         ButtonGroup.group: exclusiveGroup2
         textItemFontpixelSize: 15
-        textItemText: "×"
+        textItemText: ""
         pos: 9
         onClicked: {
             refreshEditBtn()
@@ -265,9 +267,9 @@ Rectangle {
                 pass3View.itemAtIndex(1).flag = !pass3View.itemAtIndex(1).flag
                 passFTableModel.callSetData(pass3View.itemAtIndex(1).col, 24, pass3View.itemAtIndex(1).flag)
                 if(pass3View.itemAtIndex(1).flag)
-                    textItemText = "×"
-                else
                     textItemText = "√"
+                else
+                    textItemText = ""
             }
         }
     }
@@ -280,21 +282,21 @@ Rectangle {
             refreshPassName();
             refreshPassFlag();
             if(pass1View.itemAtIndex(0).flag)
-                passEditBtn10.textItemText = "×"
-            else
                 passEditBtn10.textItemText = "√"
+            else
+                passEditBtn10.textItemText = ""
             if(pass1View.itemAtIndex(1).flag)
-                passEditBtn11.textItemText = "×"
-            else
                 passEditBtn11.textItemText = "√"
+            else
+                passEditBtn11.textItemText = ""
             if(pass3View.itemAtIndex(0).flag)
-                passEditBtn30.textItemText = "×"
-            else
                 passEditBtn30.textItemText = "√"
-            if(pass3View.itemAtIndex(1).flag)
-                passEditBtn31.textItemText = "×"
             else
+                passEditBtn30.textItemText = ""
+            if(pass3View.itemAtIndex(1).flag)
                 passEditBtn31.textItemText = "√"
+            else
+                passEditBtn31.textItemText = ""
         }
     }
 
@@ -320,10 +322,12 @@ Rectangle {
 
     function clear(){
         resetPass(rectangle);
-        passEditBtn10.textItemText = "×";
-        passEditBtn11.textItemText = "×"
-        passEditBtn30.textItemText = "×"
-        passEditBtn31.textItemText = "×"
+        pass2Model.clear();
+        pass2Model.append({"i": 2});
+        passEditBtn10.textItemText = "";
+        passEditBtn11.textItemText = ""
+        passEditBtn30.textItemText = ""
+        passEditBtn31.textItemText = ""
     }
 
     function getPassName(item){
@@ -366,7 +370,6 @@ Rectangle {
         if(exclusiveGroup.checkedButton != null){
             switch(exclusiveGroup.checkedButton.col){
             case addBtn.pos:
-                console.log("?")
                 addBtn.checked = true;
                 break;
             case passEditBtn10.pos:
@@ -382,7 +385,6 @@ Rectangle {
                 passEditBtn31.checked = true;
                 break;
             default:
-                console.log("??")
                 exclusiveGroup2.checkState = Qt.Unchecked
                 break;
             }

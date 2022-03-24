@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Components 1.0
 import "Components"
@@ -256,25 +256,25 @@ Item {
     }
 
     function getData(){
-        angles.inputText = comFTableModel.fixedTablePopData(0, "ComAdress");
-        angles1.inputText = comFTableModel.fixedTablePopData(0, "ComBaudrate").toString();
+        angles.inputText = comFTableModel.fixedTablePopData(0, "ComAdress").toUpperCase();
+        angles1.inputText = comFTableModel.fixedTablePopData(0, "ComBaudrate");
         angles2.inputText = comFTableModel.fixedTablePopData(0, "ComFreq");
 
-        box.inputText = comFTableModel.fixedTablePopData(1, "ComAdress");
-        box1.inputText =   comFTableModel.fixedTablePopData(1, "ComBaudrate").toString();
+        box.inputText = comFTableModel.fixedTablePopData(1, "ComAdress").toUpperCase();
+        box1.inputText =   comFTableModel.fixedTablePopData(1, "ComBaudrate");
         box2.inputText =  comFTableModel.fixedTablePopData(1, "ComFreq");
 
-        captureCard.inputText =  comFTableModel.fixedTablePopData(2, "ComAdress");
-        captureCard1.inputText =  comFTableModel.fixedTablePopData(2, "ComBaudrate").toString();
+        captureCard.inputText =  comFTableModel.fixedTablePopData(2, "ComAdress").toUpperCase();
+        captureCard1.inputText =  comFTableModel.fixedTablePopData(2, "ComBaudrate");
         captureCard2.inputText =  comFTableModel.fixedTablePopData(2, "ComFreq");
 
-        motion.inputText =  comFTableModel.fixedTablePopData(3, "ComAdress");
-        motion1.inputText =  comFTableModel.fixedTablePopData(3, "ComBaudrate").toString();
+        motion.inputText =  comFTableModel.fixedTablePopData(3, "ComAdress").toUpperCase();
+        motion1.inputText =  comFTableModel.fixedTablePopData(3, "ComBaudrate");
         motion2.inputText =  comFTableModel.fixedTablePopData(3, "ComFreq");
 
 
-        qcode.inputText =  comFTableModel.fixedTablePopData(4, "ComAdress");
-        qcode1.inputText =   comFTableModel.fixedTablePopData(4, "ComBaudrate").toString();
+        qcode.inputText =  comFTableModel.fixedTablePopData(4, "ComAdress").toUpperCase();
+        qcode1.inputText =   comFTableModel.fixedTablePopData(4, "ComBaudrate");
         qcode2.inputText = comFTableModel.fixedTablePopData(4, "ComFreq");
     }
 

@@ -66,7 +66,7 @@ Button {
             when: !checked && control.down
             PropertyChanges {
                 target: textItem
-                color: "#dcdcdc"
+                color: "#00dcdcdc"
             }
 
             PropertyChanges {
@@ -80,12 +80,12 @@ Button {
             when: checked && !control.down
             PropertyChanges {
                 target: buttonBackground
-                border.color: "#ffffff"
+                border.color: "#6a6a6a"
             }
 
             PropertyChanges {
                 target: textItem
-                color: "#ffffff"
+                color: "#6a6a6a"
             }
         },
         State {
@@ -93,14 +93,14 @@ Button {
             when: checked && control.down
 
             PropertyChanges {
-                target: buttonBackground
-                color: "#ffffff"
-                border.color: "#8091C0"
+                target: textItem
+                color: "#00dcdcdc"
             }
 
             PropertyChanges {
-                target: textItem
-                color: "#8091C0"
+                target: buttonBackground
+                color: "#6a6a6a"
+                border.color: "#00000000"
             }
         }
     ]

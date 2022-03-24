@@ -16,6 +16,8 @@ Button {
     rightPadding: 4
 
     text: "My Button"
+    property alias textItemLeftPadding: textItem.leftPadding
+    property alias textItemHorizontalAlignment: textItem.horizontalAlignment
     property alias buttonBackgroundRadius: buttonBackground.radius
 
     background: buttonBackground
@@ -66,6 +68,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;height:30;width:128}D{i:1}D{i:2}
+    D{i:0;height:30;width:128}
 }
 ##^##*/
+
