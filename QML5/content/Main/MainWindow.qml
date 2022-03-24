@@ -302,7 +302,15 @@ Rectangle {
             }
         }
 
+        saveAsBtn.onClicked: {
+            if(scheduler.isPdbLoaded()){
+                popupDb.close();
+                saveDialog.open();
+            }
+        }
+
         downloadBtn.onClicked: {
+            popupDb.close();
             downloadFile.open();
         }
 
@@ -415,7 +423,20 @@ Rectangle {
         }
     }
 
+    FileDialog {
+        id:saveDialog
+        x: (root.width - reconnectDialog.width)/2
+        y: (root.height - reconnectDialog.height)/2
 
+        selectExisting: false
+        nameFilters: [ "database files (*.db)" ]
+
+        onAccepted: {
+            console.log(fileUrl)
+            scheduler.saveToFile(fileDialog.fileUrl, saveDialog.fileUrl);
+
+        }
+    }
 
     ///
     /// signals and functions

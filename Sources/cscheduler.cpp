@@ -1,5 +1,8 @@
 ﻿#include "cscheduler.h"
 #include <QCoreApplication>
+#include <QFile>
+#include <QDataStream>
+
 Scheduler::Scheduler(QObject *parent): QObject{parent}
 {
     udb     = nullptr;
@@ -140,6 +143,17 @@ bool Scheduler::callIsDirty()
         return manager->isDirty();
     else
         return false;
+}
+
+void Scheduler::saveToFile(QUrl source ,QUrl dest)
+{
+    qDebug() << source << " " << dest;
+    QString sourceString = source.toLocalFile();
+    QString destString = dest.toLocalFile();
+    qDebug() << sourceString << " " << destString;
+
+    if(!QFile::copy(sourceString, destString))
+        qDebug() << "copy failed";
 }
 
 
