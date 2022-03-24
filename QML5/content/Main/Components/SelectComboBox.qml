@@ -11,7 +11,7 @@ ComboBox {
     width: 300
     height: 30
     padding: 0
-    font.pixelSize: 12
+    font.pixelSize: 14
     currentIndex: -1
     displayText: if(!(currentIndex + 1)) "选择数据类型"
     model: ["边停时间", "摆宽", "摆动频率", "送丝速度", "电弧修正", "小车速度", "干伸高度值"]
@@ -55,7 +55,7 @@ ComboBox {
                 color: "#202020"
                 //font: control.font
                 elide: Text.ElideRight
-                font.pixelSize: 10
+                font.pixelSize: 12
                 anchors.verticalCenter: parent.verticalCenter
             }
         }

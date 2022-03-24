@@ -78,22 +78,6 @@ Button {
         State {
             name: "checked"
             when: control.checked && !haveRead && flag
-
-            PropertyChanges {
-                target: buttonBackground
-                opacity: 0.446
-                color: "#10379d"
-            }
-
-            PropertyChanges {
-                target: textItem
-                color: "#ffffff"
-            }
-
-            PropertyChanges {
-                target: text1
-                color: "#ffffff"
-            }
         },
         State {
             name: "readin"
@@ -104,6 +88,12 @@ Button {
                 horizontalAlignment: Text.AlignLeft
                 anchors.leftMargin: 30
             }
+
+            PropertyChanges {
+                target: buttonBackground
+                opacity: 0.7
+                color: "#c67171"
+            }
         },
         State {
             name: "readinnoflag"
@@ -111,24 +101,14 @@ Button {
 
             PropertyChanges {
                 target: textItem
-                color: "#dcdcdc"
                 horizontalAlignment: Text.AlignLeft
                 anchors.leftMargin: 30
             }
 
             PropertyChanges {
-                target: control
-                opacity: 0.5
-            }
-
-            PropertyChanges {
                 target: buttonBackground
-                color: "#6a6a6a"
-            }
-
-            PropertyChanges {
-                target: text1
-                color: "#dcdcdc"
+                opacity: 0.7
+                color: "#6c81bd"
             }
         },
         State {
@@ -139,18 +119,14 @@ Button {
                 target: textItem
                 horizontalAlignment: Text.AlignLeft
                 anchors.leftMargin: 30
-                color: "#ffffff"
             }
 
             PropertyChanges {
                 target: buttonBackground
-                opacity: 0.446
-                color: "#10379d"
-            }
-
-            PropertyChanges {
-                target: text1
-                color: "#ffffff"
+                opacity: 0.7
+                color: "#c67171"
+                border.color: "#ff0404"
+                border.width: 3
             }
         },
         State {
@@ -161,23 +137,13 @@ Button {
                 target: textItem
                 horizontalAlignment: Text.AlignLeft
                 anchors.leftMargin: 30
-                color: "#ffffff"
             }
 
             PropertyChanges {
                 target: buttonBackground
-                opacity: 0.446
-                color: "#081d55"
-            }
-
-            PropertyChanges {
-                target: text1
-                color: "#ffffff"
-            }
-
-            PropertyChanges {
-                target: control
-                opacity: 0.5
+                opacity: 0.7
+                color: "#6c81bd"
+                border.width: 3
             }
         }
     ]

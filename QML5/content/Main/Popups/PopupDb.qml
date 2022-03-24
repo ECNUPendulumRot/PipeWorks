@@ -68,6 +68,8 @@ Popup{
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
+            textItemLeftPadding: 30
+            textItemHorizontalAlignment: 1
             anchors.rightMargin: 1
             anchors.leftMargin: 1
             buttonBackgroundRadius: 8
@@ -95,6 +97,8 @@ Popup{
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: openBtn.bottom
+            textItemLeftPadding: 30
+            textItemHorizontalAlignment: 1
             anchors.rightMargin: 1
             anchors.leftMargin: 1
             buttonBackgroundRadius: 8
@@ -119,7 +123,9 @@ Popup{
             text: "关闭"
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: saveAsBtn.bottom
+            anchors.top: ftpBtn.bottom
+            textItemLeftPadding: 30
+            textItemHorizontalAlignment: 1
             anchors.leftMargin: 1
             buttonBackgroundRadius: 8
             anchors.rightMargin: 1
@@ -141,10 +147,12 @@ Popup{
         DbBtn {
             id: uploadBtn
             height: control.implicitHeight/6
-            text: "上传"
+            text: "上传至中控"
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: disconnectBtn.bottom
+            anchors.top: saveAsBtn.bottom
+            textItemLeftPadding: 30
+            textItemHorizontalAlignment: 1
             anchors.leftMargin: 1
             buttonBackgroundRadius: 8
             anchors.rightMargin: 1
@@ -166,10 +174,12 @@ Popup{
         DbBtn {
             id: downloadBtn
             height:control.implicitHeight/6
-            text: "下载"
+            text: "下载至本地"
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: uploadBtn.bottom
+            textItemLeftPadding: 30
+            textItemHorizontalAlignment: 1
             anchors.topMargin: 0
             buttonBackgroundRadius: 8
             anchors.rightMargin: 1
@@ -192,10 +202,12 @@ Popup{
         DbBtn {
             id: ftpBtn
             height:control.implicitHeight/6
-            text: "ftp设置"
+            text: "FTP设置"
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: downloadBtn.bottom
+            textItemLeftPadding: 30
+            textItemHorizontalAlignment: 1
             anchors.topMargin: -1
             buttonBackgroundRadius: 8
             anchors.rightMargin: 1
@@ -229,3 +241,9 @@ Popup{
 }
 
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:1.33}
+}
+##^##*/

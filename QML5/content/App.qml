@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
 **
 ** Copyright (C) 2021 The Qt Company Ltd.
 ** Contact: https://www.qt.io/licensing/
@@ -38,7 +38,7 @@ import "Main"
 Window {
     id: window
     visible: true
-    title: "QML"
+    title: "PipeWorks"
     flags: Qt.FramelessWindowHint | Qt.Window
 
     property int w: 800

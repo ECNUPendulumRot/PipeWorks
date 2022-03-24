@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Components 1.0
 import QtQuick.Layouts 1.15
@@ -284,6 +284,7 @@ Item {
                             width: 220
                             height: 130
                             radius: 4
+                            labelColor: "#202020"
                             labelText: "起弧前"
                         }
 
@@ -337,6 +338,7 @@ Item {
                             width: rectangle1.width
                             height: rectangle1.height
                             radius: 4
+                            labelColor: "#202020"
                             labelText: "起弧后"
                         }
 
@@ -658,7 +660,7 @@ Item {
                                     id: label
                                     width: 14
                                     height: 18
-                                    color: "#808080"
+                                    color: "#202020"
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
@@ -679,6 +681,8 @@ Item {
                                     id: rectangle6
                                     radius: 4
                                     anchors.fill: parent
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -733,6 +737,8 @@ Item {
                                     radius: 4
                                     anchors.fill: parent
                                     labelText: "向内缩枪"
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -801,7 +807,7 @@ Item {
                                     id: label2
                                     width: 14
                                     height: 18
-                                    color: "#808080"
+                                    color: "#202020"
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
@@ -822,6 +828,8 @@ Item {
                                     id: rectangle12
                                     radius: 4
                                     anchors.fill: parent
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -885,6 +893,8 @@ Item {
                                     radius: 4
                                     anchors.fill: parent
                                     labelText: "向内缩枪"
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -971,7 +981,6 @@ Item {
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
 
-
                     }
                 }
 
@@ -1021,7 +1030,7 @@ Item {
                                     id: label4
                                     width: 14
                                     height: 18
-                                    color: "#808080"
+                                    color: "#202020"
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
@@ -1043,6 +1052,8 @@ Item {
                                     radius: 4
                                     anchors.fill: parent
                                     labelText: "向上抬枪"
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -1094,6 +1105,8 @@ Item {
                                     radius: 4
                                     anchors.fill: parent
                                     labelText: "向下压枪"
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -1158,7 +1171,7 @@ Item {
                                     id: label5
                                     width: 14
                                     height: 18
-                                    color: "#808080"
+                                    color: "#202020"
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
@@ -1180,6 +1193,8 @@ Item {
                                     radius: 4
                                     anchors.fill: parent
                                     labelText: "向上抬枪"
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -1232,6 +1247,8 @@ Item {
                                     radius: 4
                                     anchors.fill: parent
                                     labelText: "向下压枪"
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -1282,6 +1299,7 @@ Item {
                             height: 406
                             label4Color: "#202020"
                             label4Text: "焊枪竖直抬压运动"
+                            label4FontpixelSize: 12
                         }
                     }
 
@@ -1318,6 +1336,7 @@ Item {
                             height: 62
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
+                            label4FontpixelSize: 12
                         }
                     }
                 }
@@ -1377,7 +1396,7 @@ Item {
                                     id: label1
                                     width: 14
                                     height: 18
-                                    color: "#808080"
+                                    color: "#202020"
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
@@ -1398,6 +1417,8 @@ Item {
                                     id: rectangle18
                                     radius: 4
                                     anchors.fill: parent
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -1446,6 +1467,8 @@ Item {
                                     radius: 4
                                     anchors.fill: parent
                                     labelText: "向内缩枪"
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -1510,7 +1533,7 @@ Item {
                                     id: label3
                                     width: 14
                                     height: 18
-                                    color: "#808080"
+                                    color: "#202020"
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
@@ -1531,6 +1554,8 @@ Item {
                                     id: rectangle22
                                     radius: 4
                                     anchors.fill: parent
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -1589,6 +1614,8 @@ Item {
                                     radius: 4
                                     anchors.fill: parent
                                     labelText: "向内缩枪"
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -1717,7 +1744,7 @@ Item {
                                     id: label6
                                     width: 14
                                     height: 18
-                                    color: "#808080"
+                                    color: "#202020"
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
@@ -1739,6 +1766,8 @@ Item {
                                     radius: 4
                                     anchors.fill: parent
                                     labelText: "向上抬枪"
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -1787,6 +1816,8 @@ Item {
                                     radius: 4
                                     anchors.fill: parent
                                     labelText: "向下压枪"
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -1851,7 +1882,7 @@ Item {
                                     id: label7
                                     width: 14
                                     height: 18
-                                    color: "#808080"
+                                    color: "#202020"
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
@@ -1873,6 +1904,8 @@ Item {
                                     radius: 4
                                     anchors.fill: parent
                                     labelText: "向上抬枪"
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -1925,6 +1958,8 @@ Item {
                                     radius: 4
                                     anchors.fill: parent
                                     labelText: "向下压枪"
+                                    labelFontpixelSize: 12
+                                    labelColor: "#202020"
                                 }
 
                                 MyEditLine {
@@ -1975,6 +2010,7 @@ Item {
                             height: 406
                             label4Color: "#202020"
                             label4Text: "焊枪竖直抬压运动"
+                            label4FontpixelSize: 12
                         }
                     }
 
@@ -2011,6 +2047,7 @@ Item {
                             height: 62
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
+                            label4FontpixelSize: 12
                         }
                     }
                 }
@@ -2264,3 +2301,9 @@ Item {
 }
 
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.75}
+}
+##^##*/
