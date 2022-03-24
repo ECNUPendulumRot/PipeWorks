@@ -402,7 +402,7 @@ Rectangle {
         }
     }
 
-    FtpDialog{
+    FtpDoalog {
         id:ftpDialog
         x: (root.width - reconnectDialog.width)/2
         y: (root.height - reconnectDialog.height)/2
