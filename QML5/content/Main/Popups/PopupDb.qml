@@ -8,10 +8,11 @@ Popup{
     property alias saveAsBtn: saveAsBtn
     property alias openBtn: openBtn
     width: 130
-    height: 150
+    height: 180
     property alias disconnectBtn: disconnectBtn
     property alias uploadBtn: uploadBtn
     property alias downloadBtn: downloadBtn
+    property alias ftpBtn: ftpBtn
     rightPadding: 0
     leftPadding: 0
     bottomPadding: 0
@@ -22,7 +23,7 @@ Popup{
     topMargin: 0
 
     implicitWidth: 130
-    implicitHeight: 150
+    implicitHeight: 180
 
 
     closePolicy: Popup.CloseOnPressOutside
@@ -62,7 +63,7 @@ Popup{
 
         DbBtn {
             id: openBtn
-            height: control.implicitHeight/5
+            height: control.implicitHeight/6
             text: "打开"
             anchors.left: parent.left
             anchors.right: parent.right
@@ -89,7 +90,7 @@ Popup{
 
         DbBtn {
             id: saveAsBtn
-            height: control.implicitHeight/5
+            height: control.implicitHeight/6
             text: "另存为"
             anchors.left: parent.left
             anchors.right: parent.right
@@ -114,7 +115,7 @@ Popup{
 
         DbBtn {
             id: disconnectBtn
-            height: control.implicitHeight/5
+            height: control.implicitHeight/6
             text: "关闭"
             anchors.left: parent.left
             anchors.right: parent.right
@@ -139,12 +140,11 @@ Popup{
 
         DbBtn {
             id: uploadBtn
-            height: control.implicitHeight/5
+            height: control.implicitHeight/6
             text: "上传"
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: disconnectBtn.bottom
-            enabled: false
             anchors.leftMargin: 1
             buttonBackgroundRadius: 8
             anchors.rightMargin: 1
@@ -165,19 +165,56 @@ Popup{
 
         DbBtn {
             id: downloadBtn
-            height:control.implicitHeight/5
+            height:control.implicitHeight/6
             text: "下载"
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: uploadBtn.bottom
-            anchors.bottom: parent.bottom
-            enabled: false
             anchors.topMargin: 0
             buttonBackgroundRadius: 8
             anchors.rightMargin: 1
             anchors.leftMargin: 1
-            anchors.bottomMargin: 1
+            Rectangle {
+                height: 1
+                color: "#c8c8c8"
+                border.color: "#343434"
+                border.width: 0
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.leftMargin: 5
+                anchors.rightMargin: 5
+                anchors.bottomMargin: 0
+            }
         }
+
+
+        DbBtn {
+            id: ftpBtn
+            height:control.implicitHeight/6
+            text: "ftp设置"
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: downloadBtn.bottom
+            anchors.topMargin: -1
+            buttonBackgroundRadius: 8
+            anchors.rightMargin: 1
+            anchors.leftMargin: 1
+            anchors.bottomMargin: 1
+            Rectangle {
+                height: 1
+                color: "#c8c8c8"
+                border.color: "#343434"
+                border.width: 0
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.leftMargin: 5
+                anchors.rightMargin: 5
+                anchors.bottomMargin: 0
+            }
+        }
+
 
 
     }
@@ -191,9 +228,4 @@ Popup{
     }
 }
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;height:480;width:640}D{i:2}D{i:1}D{i:4}D{i:6}D{i:8}D{i:10}D{i:12}
-D{i:3}
-}
-##^##*/
+
