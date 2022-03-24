@@ -12,8 +12,6 @@ class Downloader : public QObject
 public:
     explicit Downloader(QObject *parent = nullptr);
 
-
-
 public slots:
 
     void setHostPort(const QString &host, int port = 21);
@@ -26,7 +24,21 @@ public slots:
 
     QString toLocal(const QString &path);
 
+    void readConfig();
+    void writeConfig();
+
+    QString getIP();
+    QString getPort();
+    QString getUser();
+    QString getPassword();
+    QString getUploadName();
+    void setIP(QString ip);
+    void setPort(QString port);
+    void setUser(QString user);
+    void setPassword(QString password);
+    void setUploadName(QString uploadName);
 signals:
+
     void error(QNetworkReply::NetworkError);
 
     void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
@@ -42,7 +54,7 @@ private:
     QUrl pUrl;
     QFile file;
     QNetworkAccessManager manager;
-
+    QString ip,port,user,password,uploadName;
 };
 
 #endif // CDOWNLOADER_H

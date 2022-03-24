@@ -308,6 +308,7 @@ Rectangle {
 
         ftpBtn.onClicked:{
             popupDb.close();
+            getFTPConfig();
             ftpDialog.open();
         }
 
@@ -411,6 +412,7 @@ Rectangle {
 
         confirmBtn.onClicked: {
             ftpConfig(ip, port, user, password)
+            setFTPConfig()
             ftpDialog.close()
         }
     }
@@ -532,6 +534,22 @@ Rectangle {
     function ftpConfig(ip, port, user, password){
         downloader.setHostPort(ip, port)
         downloader.setUserInfo(user, password)
+    }
+
+    function getFTPConfig(){
+        downloader.readConfig()
+        ftpDialog.ip = downloader.getIP()
+        ftpDialog.port = downloader.getPort()
+        ftpDialog.user = downloader.getUser()
+        ftpDialog.password = downloader.getPassword()
+    }
+
+    function setFTPConfig(){
+        downloader.setIP(ftpDialog.ip)
+        downloader.setPort(ftpDialog.port)
+        downloader.setUser(ftpDialog.user)
+        downloader.setPassword(ftpDialog.password)
+        downloader.writeConfig()
     }
 }
 
