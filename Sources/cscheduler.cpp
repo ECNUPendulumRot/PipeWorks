@@ -73,9 +73,13 @@ void Scheduler::callCloseDataBase()
 bool Scheduler::managerInit(){
     if(user->getRole() != SeniorWorker && user->getRole() != Worker )
         return false;
-    manager = user->getRole() == SeniorWorker ? new ModelManage("SW") : new ModelManage("W");
-    QObject::connect(manager, &ModelManage::registerRequest,
+    manager = user->getRole() == SeniorWorker ? new ModelManager("SW") : new ModelManager("W");
+    QObject::connect(manager, &ModelManager::registerRequest,
                      this,  &Scheduler::registerModel);
+    QObject::connect(manager, &ModelManager::registerRequestPartModel,
+                     this,  &Scheduler::registerPartModel);
+//    QObject::connect(manager, &ModelManager::registerRequestPool,
+//                     this,  &Scheduler::registerModelPool);
     return true;
 }
 
@@ -121,29 +125,48 @@ void Scheduler::callUserDbClose()
 
 
 bool Scheduler::submitData(){
-    this->manager->Submit();
+    this->manager->submit();
     return true;
 }
 
 bool Scheduler::revertData(){
-    this->manager->Rvert();
+    this->manager->revert();
     return true;
+}
+
+bool Scheduler::callIsDirty()
+{
+    if(manager != nullptr)
+        return manager->isDirty();
+    else
+        return false;
 }
 
 
 bool Scheduler::callAngleTable(unsigned int index)
 {
-    this->manager->MTruncate(2, {index});
-    // emit modelChanged(s);
+    // fix!
+    manager->changeSelectIndex(index);
     return true;
 }
 
 
 void Scheduler::callPassSelected(QString s)
 {
-    managerSetTable(2, s);
+    manager->changePass(s);
 }
 
+//bool Scheduler::registerModelPool(ModelPool *m, QString s)
+//{
+//    if(engine !=  nullptr){
+//        engine->rootContext()->setContextProperty(s, m);
+//        QObject::connect(m, &ModelPool::modelChanged,
+//                         this,  &Scheduler::modelChanged);
+//        return true;
+//    }
+//    else
+//        return false;
+//}
 
 bool Scheduler::registerModel(TModel *m, QString s)
 {
@@ -157,11 +180,22 @@ bool Scheduler::registerModel(TModel *m, QString s)
         return false;
 }
 
+bool Scheduler::registerPartModel(PartModel *m, QString s)
+{
+    if(engine !=  nullptr){
+        engine->rootContext()->setContextProperty(s, m);
+        QObject::connect(m, &PartModel::dataReady,
+                         this,  &Scheduler::modelDataReady);
+        return true;
+    }
+    else
+        return false;
+}
+
 void Scheduler::setEngine(QQmlApplicationEngine* e)
 {
     engine = e;
 }
-
 
 bool Scheduler::managerSetTable(unsigned int i, QString TableName){
     this->manager->setModelTable(i, TableName);
@@ -169,6 +203,5 @@ bool Scheduler::managerSetTable(unsigned int i, QString TableName){
 }
 
 TModel* Scheduler::managerGetTable(unsigned int i){
-
     return this->manager->getMTable(i);
 }

@@ -36,7 +36,6 @@ Rectangle {
         }
     }
 
-    
 
     Rectangle {
         id: angleTableWrapper
@@ -363,16 +362,21 @@ Rectangle {
 
     Connections {
         target: scheduler
-        onModelChanged: s => refreshAngleTable(s)
+        onModelDataReady: s => {
+            console.log(s)
+            refreshAngleTable(s)}
     }
 
     function mainLoadDb(file){
+
         scheduler.callParamDb(file);
 
         fixedTable.establishConnection()
 
         angleWebContainer.connectToModel();
+
         passListView.passListInitialize();
+
         fixedPopupInitialize();
     }
 

@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import Qt.labs.qmlmodels 1.0
 import QtQml 2.15
 import "MultiSelection"
+import ModelCraft 1.0
 
 Rectangle {
     id: widget
@@ -34,9 +35,10 @@ Rectangle {
         "oscFreq_Trail" :"后枪摆动频率\n(次/分钟)",
         "feedRate_Trail":"后枪送丝速度\n(米/分钟)",
         "carACC"        :"小车加速度\n(毫米/秒²)",
-        "carSPEED"      :"小车速度\n(毫米/分钟)",
-        "leadTargetCur" :"前枪干伸高度\n(毫米)",
-        "trailTargetCur":"后枪干伸高度\n(毫米)"
+        "carSPEED"      :"小车速度\n(毫米/秒)",
+        "leadTargetCur" :"前枪干伸高度值\n(毫米)",
+        "trailTargetCur":"后枪干伸高度值\n(毫米)"
+
     }
 
 
@@ -72,14 +74,8 @@ Rectangle {
         highlight: Rectangle {
             width: header.width/header.count; height: 35
             color: "lightsteelblue"; radius: 5
-//            x: list.currentItem.x
-//            Behavior on x {
-//                SpringAnimation {
-//                    spring: 3
-//                    damping: 0.2
-//                }
-//            }
-            }
+        }
+
         delegate: Button {
             id: headerDelegate
 
@@ -168,6 +164,16 @@ Rectangle {
         Component.onCompleted: checkbxModelCreate()
     }
 
+    CheckModel{
+        id: checkModel
+        Component.onCompleted: {
+            for(var i = 0; i < view.rows; i++){
+                checkModel.append(false)
+            }
+            checkModel.checkChanged.connect(rowSelectChange);
+        }
+    }
+
     TableView {
         id: checkboxView
 
@@ -176,12 +182,14 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: view.top
         anchors.bottom: view.bottom
-        model:checkboxModel
+
         flickableDirection: Flickable.VerticalFlick
         clip: true
         syncView: view
         syncDirection:Qt.Vertical
         reuseItems: true
+        model: checkModel
+
         delegate: Item {
             id: checkbxDelegate
             implicitHeight: 35
@@ -197,15 +205,11 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 display: AbstractButton.IconOnly
                 anchors.horizontalCenter: parent.horizontalCenter
-
-                onCheckedChanged: {
-                    model.display = checked
-                    rowSelectChange(row, checked);
-                }
+                checked: model.check
+                onClicked: model.check = checked
             }
             Component.onCompleted: {
                 addGroup(delegateCheckbx)
-                delegateCheckbx.checked = model.display
             }
         }
     }
@@ -250,7 +254,7 @@ Rectangle {
                         if(!widget.isCheck)
                             return "transparent"
                         else{
-                            if(isSelect)    return "#0D267B"
+                            if(model.isSelect)    return "#0D267B"
                             else            return "transparent"
                         }
                     }
@@ -301,21 +305,20 @@ Rectangle {
 
                 AngleTextField {
                     id:textField
-                    text: display
-                    color: widget.isCheck ? (isSelect? "#ffffff" : isDirty ? "#cc5555" : "#0d0d0d") : (isDirty ? "#cc5555":"#0d0d0d")
+                    text: model.display
+                    color: widget.isCheck ? (model.isSelect? "#ffffff" : model.isChanged ? "#0D267B" : model.isDirty ? "#cc5555":"#0d0d0d")
+                                          : (model.isDirty ? "#cc5555":"#0d0d0d")
                     readOnly: column === 0 ? true: false
                     anchors.fill: parent
 
                     onEditingFinished: {
-                        angleRelatedTableModel.callSetData(row, column, text)
+                        model.data = text
                         textField.focus = false
                     }
 
                 }
             }
-
         }
-
         ScrollBar.vertical: ScrollBar{}
     }
 
@@ -332,6 +335,7 @@ Rectangle {
         onMinusRequest: angleRelatedTableModel.callAddToModel(n, false)
     }
 
+
     OperationBtn {
         id: multiselect
         y: 723
@@ -347,7 +351,6 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: {
             disableSingleSelect(view)
-            restoreBeforeOp()
             widget.isCheck = true
         }
     }
@@ -369,8 +372,7 @@ Rectangle {
         onClicked: {
             reset()
             enableSingleSelect(view);
-            refreshAfterCancel();
-
+            angleRelatedTableModel.callFetchData();
             widget.isCheck = false
         }
     }
@@ -391,6 +393,7 @@ Rectangle {
 
         onClicked: {
             reset()
+            angleRelatedTableModel.callWriteBack();
             enableSingleSelect(view);
             calculation.clear()
             widget.isCheck = false
@@ -436,11 +439,9 @@ Rectangle {
         onCheckStateChanged: {
             var i = 0
             if(checkState === Qt.Checked)
-                for(i = 0; i < checkboxModel.rowCount; i++)
-                    checkboxModel.setData(checkboxModel.index(i,0), "display", true)
+                checkModel.set(true)
             else if(checkState === Qt.Unchecked)
-                for(i = 0; i < checkboxModel.rowCount; i++)
-                    checkboxModel.setData(checkboxModel.index(i,0), "display", false)
+                checkModel.set(false)
         }
     }
 
@@ -577,10 +578,9 @@ Rectangle {
     }
 
     function reset(){
-        header.currentIndex = -1
-        initializeCheckModel()
-        initializeCheckbox(checkboxView)
-        initializeSelection()
+        header.currentIndex = -1;
+        checkModel.reset();
+        initializeSelection();
     }
 
     function initializeSelection(){
@@ -589,23 +589,6 @@ Rectangle {
                  angleRelatedTableModel.callSetSelect(i, j, false);
         }
     }
-
-    function initializeCheckModel(){
-        for(var i = 0; i < checkboxModel.rowCount; i++){
-            checkboxModel.setData(checkboxModel.index(i,0), "display", false)
-        }
-    }
-
-    function initializeCheckbox(item){
-        if(item.type === "checkbox"){
-            item.check = false
-            return
-        }
-        for(var i = 0; i < item.children.length; i++){
-            initializeCheckbox(item.children[i])
-        }
-    }
-
 
     function disableSingleSelect(item){
         if(item.type === "editable"){
@@ -633,7 +616,6 @@ Rectangle {
         else angleRelatedTableModel.callSetSelect(index, header.currentIndex, checked);
     }
 
-
     // column related
     function disableColumn(index){
         for(var i =0; i < view.rows; i++)
@@ -644,7 +626,7 @@ Rectangle {
         for(var i = 0; i < view.rows; i++){
             for(var j = 1; j < view.columns; j++)
                 if(j === index)
-                    angleRelatedTableModel.callSetSelect(i, j, checkboxModel.rows[i].checkStatus);
+                    angleRelatedTableModel.callSetSelect(i, j, checkModel.at(i));
                 else
                     angleRelatedTableModel.callSetSelect(i, j, false);
         }
@@ -661,6 +643,7 @@ Rectangle {
         multiModeCopy =  copy;
     }
 
+
     function copyToModel(){
         console.log("write")
         if(multiModeCopy !== null){
@@ -675,6 +658,7 @@ Rectangle {
             }
         }
     }
+
 
     function refreshAfterCancel(){
         angleRelatedTableModel.callRevert();

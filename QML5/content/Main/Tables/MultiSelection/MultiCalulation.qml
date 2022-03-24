@@ -58,7 +58,7 @@ Item {
         anchors.leftMargin: 10
         imageSource: "../../../images/plus.png"
         anchors.verticalCenterOffset: 0
-        onClicked: control.addRequest(textField.text)
+        onClicked: if(textField.text != "") control.addRequest(textField.text)
     }
 
     AmountBtn {
@@ -70,7 +70,7 @@ Item {
         anchors.right: textField.left
         anchors.rightMargin: 10
         imageSource: "../../../images/minus.png"
-        onClicked: control.minusRequest(textField.text)
+        onClicked: if(textField.text != "") control.minusRequest(textField.text)
     }
     states: [
         State {

@@ -14,20 +14,20 @@ ComboBox {
     font.pixelSize: 12
     currentIndex: -1
     displayText: if(!(currentIndex + 1)) "选择数据类型"
-    model: ["边停时间", "摆宽", "摆动频率", "送丝速度", "电弧修正",  "小车速度", "干伸高度"]
+    model: ["边停时间", "摆宽", "摆动频率", "送丝速度", "电弧修正", "小车速度", "干伸高度值"]
+
 
     onCurrentIndexChanged: cmbBxCallSelect(indexMap[currentIndex])
 
     property var indexMap: {
-        0:0,
-        1:1,
-        2:2,
-        3:3,
-        4:4,
-        5:6,
-        6:7
-
-                }
+        0:1,
+        1:2,
+        2:3,
+        3:4,
+        4:5,
+        5:7,
+        6:8
+      }
 
     delegate: ItemDelegate {
         id: element
@@ -179,12 +179,12 @@ ComboBox {
         if(currentIndex === -1)
             currentIndex = 0;
         else
-            cmbBxCallSelect(currentIndex)
+            cmbBxCallSelect(indexMap[currentIndex])
     }
 
     function cmbBxCallSelect(index){
         if(scheduler.isPdbLoaded())
-            scheduler.callAngleTable(index + 1)
+            scheduler.callAngleTable(index)
     }
 }
 

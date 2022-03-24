@@ -1,4 +1,4 @@
-#include <QApplication>
+﻿#include <QApplication>
 #include <QSqlTableModel>
 #include <QtWidgets>
 #include <QDir>
@@ -10,6 +10,7 @@
 
 #include <cscheduler.h>
 #include <cparamdatabase.h>
+#include <checkmodel.h>
 
 int main(int argc, char *argv[])
 {
@@ -17,10 +18,10 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-
-
     QApplication a(argc, argv);
     QQuickStyle::setStyle("Fusion");
+
+    qmlRegisterType<CheckModel>("ModelCraft", 1, 0, "CheckModel");
 
     QDir dir(QCoreApplication::applicationDirPath().append("/Database"));
     if(!dir.exists())
