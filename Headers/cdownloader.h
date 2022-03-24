@@ -31,6 +31,8 @@ signals:
 
     void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 
+    void upProgress(qint64 bytesSent, qint64 bytesTotal);
+
 private slots:
 
     void uploadProgress(qint64 bytesSent, qint64 bytesTotal);

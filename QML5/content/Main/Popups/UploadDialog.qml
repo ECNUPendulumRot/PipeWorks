@@ -9,8 +9,9 @@ Popup{
     height:200
     property alias cancelBtn: cancelBtn
     property alias confirmBtn: confirmBtn
+    property alias completeBtn: completeBtn
     property alias fileName: textField.text
-
+    property alias progressBarValue: progressBar.value
     dim: true
     modal: true
 
@@ -34,17 +35,25 @@ Popup{
         ConfirmBtn {
             id: confirmBtn
             x: 303
-            y: 68
             width: 70
             height: 24
-            text: "确定"
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
+            text: "上传"
+            anchors.verticalCenter: textField.verticalCenter
             pressRecColor: "#00101010"
             textItemColor: "#f6f6f6"
             buttonBackgroundColor: "#3b7ecc"
-            anchors.rightMargin: 27
-            anchors.bottomMargin: 108
+        }
+        ConfirmBtn {
+            id: completeBtn
+            x: 303
+            width: 70
+            height: 24
+            text: "完成"
+            anchors.verticalCenter: textField.verticalCenter
+            cvisible: false
+            pressRecColor: "#00101010"
+            textItemColor: "#f6f6f6"
+            buttonBackgroundColor: "#3b7ecc"
         }
 
         Text {
@@ -71,9 +80,9 @@ Popup{
             id: progressBar
             value: 0.0
             x: 31
-            y: 115
+            y: 118
             width: 253
-            height: 24
+            height: 19
         }
     }
 
