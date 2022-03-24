@@ -33,65 +33,80 @@ Item {
             id: logoTitle
             x: 34
             y: 25
-            text: "信息修改"
+            text: "密码修改"
             font.pixelSize: 29
             font.weight: Font.Normal
+            font.family: "Microsoft Yahei"
         }
-        InformationMInput {
+        VerticalInput {
             id: inputID
-            x: 25
-            y: 75
-            labelFontSize: 14
-            textAreaPlaceholderText: "请输入ID信息"
-            title: "请输入ID信息"
+
+            anchors{
+              top: logoTitle.bottom
+              left: parent.left
+              topMargin: 20
+              leftMargin: 20
+            }
+            textAreaPlaceholderText: "请输入用户名"
+            title: "用户名"
+            //inputText.echoMode: TextInput.Password
             inputText.onAccepted: userVerify()
 
+            inputText.focus: true
             KeyNavigation.tab: inputOldPw.inputText
         }
 
-        InformationMInput {
+        VerticalInput {
             id: inputOldPw
-            x: 25
-            anchors.top: inputID.bottom
-            labelFontSize: 14
-            anchors.topMargin: 3
-            textAreaPlaceholderText: "请输入原有的密码"
-            title: "请输入原来的密码"
+            anchors{
+              top: inputID.bottom
+              left: inputID.left
+              topMargin: 10
+            }
+            textAreaPlaceholderText: "请输入该用户的原有密码"
+            title: "该用户的原有密码"
             inputText.echoMode: TextInput.Password
             inputText.onAccepted: userVerify()
 
             KeyNavigation.tab: inputNewPw.inputText
         }
-        InformationMInput {
+
+        VerticalInput {
             id: inputNewPw
-            x: 25
-            anchors.top: inputOldPw.bottom
-            labelFontSize: 14
-            anchors.topMargin: -3
+            anchors{
+              top: inputOldPw.bottom
+              left: inputOldPw.left
+              topMargin: 10
+            }
             inputText.echoMode: TextInput.Password
-            textAreaPlaceholderText: "请输入新密码"
+            textAreaPlaceholderText: "新密码"
             title: "请输入新密码"
         }
-        InformationMInput {
+
+        VerticalInput {
             id: inputNewPwTwice
-            x: 25
-            anchors.top: inputNewPw.bottom
-            anchors.topMargin: 3
-            labelFontSize: 14
+            anchors{
+              top: inputNewPw.bottom
+              left: inputNewPw.left
+              topMargin: 10
+            }
             inputText.echoMode: TextInput.Password
-            textAreaPlaceholderText: "请重复输入新密码"
-            title: "请重复输入新密码"
+            textAreaPlaceholderText: "再输入一次新密码"
+            title: "请再输入一次新密码"
         }
+
 
         LoginButton {
             id: loginButton
             x: 221
             y: 401
             width: 140
-            anchors.verticalCenter: loginButton1.verticalCenter
-            anchors.right: parent.right
-            anchors.rightMargin: 39
-            textItemText: "确 定"
+            anchors{
+                verticalCenter: loginButton1.verticalCenter
+                right: inputNewPwTwice.right
+                rightMargin: 20
+             }
+            textItemText: "确定修改"
             onClicked: {
                 if(userVerify()){
                     if(pwVerify()){
@@ -113,12 +128,18 @@ Item {
 
         LoginButton {
             id: loginButton1
-            y: 420
+            //y: 420
             width: 140
-            anchors.left: parent.left
-            anchors.leftMargin: 44
+            anchors{
+              top: inputNewPwTwice.bottom
+              left: inputNewPwTwice.left
+              topMargin: 20
+              leftMargin:20
+            }
             textItemText: "返 回"
             onClicked: backToLogin()
+
+            KeyNavigation.tab: inputID.inputText
         }
 
         Text {
@@ -126,12 +147,16 @@ Item {
             x: 25
             y: 420
             color: "#9a0000"
-            anchors.bottom: inputID.top
+            anchors{
+             right:inputID.right
+             bottom: inputID.top
+             bottomMargin: 10
+             rightMargin:10
+            }
             property string errMsg
             font.pixelSize: 14
             horizontalAlignment: Text.AlignLeft
             verticalAlignment: Text.AlignVCenter
-            anchors.bottomMargin: -320
         }
     }
 
@@ -141,16 +166,16 @@ Item {
 
     function userVerify(){
         if(inputID.inputText.text === ""){
-            errorMsg.text = "您还没有输入ID信息"
+            errorMsg.text = "你还没有输入用户名"
             return false
         }
         else if(inputOldPw.inputText.text === ""){
-            errorMsg.text = "您还没有输入密码"
+            errorMsg.text = "你还没有输入密码"
             return false
         }
         else{
             if(!scheduler.userVerify(inputID.inputText.text, inputOldPw.inputText.text)){
-                errorMsg.text = "账户与密码错误"
+                errorMsg.text = "用户名或密码输入错误"
                 return false
             }
             else{
@@ -162,11 +187,11 @@ Item {
 
     function pwVerify(){
         if(inputNewPw.inputText.text === ""){
-            errorMsg.text = "您还没有输入新的密码"
+            errorMsg.text = "你还没有输入新密码"
             return false
         }
         else if(inputNewPwTwice.inputText.text === ""){
-            errorMsg.text = "您还没有第二次输入新的密码"
+            errorMsg.text = "你需要再次输入一次新密码"
             return false
         }
         else{
