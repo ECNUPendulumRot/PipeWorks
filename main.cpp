@@ -10,7 +10,9 @@
 
 #include <cscheduler.h>
 #include <cparamdatabase.h>
+#include <cdownloader.h>
 #include <checkmodel.h>
+
 
 int main(int argc, char *argv[])
 {
@@ -30,12 +32,15 @@ int main(int argc, char *argv[])
 
     Scheduler s;
 
+    Downloader d;
+
     QQmlApplicationEngine engine;
 
     s.setEngine(&engine);
 
     engine.addImportPath("qrc:/QML/imports");
     engine.rootContext()->setContextProperty(QStringLiteral("scheduler"), &s);
+    engine.rootContext()->setContextProperty(QStringLiteral("downloader"), &d);
 //    engine.rootContext()->setContextProperty(QStringLiteral("customModel"), m);
     engine.load(QStringLiteral("qrc:/QML5/content/App.qml"));
 
