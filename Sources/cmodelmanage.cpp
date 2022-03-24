@@ -190,4 +190,5 @@ void ModelManager::deleteModels()
             indexToModel[i] = nullptr;
         }
     }
+    mPool->clearModel();
 }
