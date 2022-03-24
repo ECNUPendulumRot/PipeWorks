@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Effects 1.0
 import QtQuick.Dialogs 1.3
@@ -277,6 +277,8 @@ Rectangle {
         y: dbConnectBtn.y + dbConnectBtn.height + 1
         z: 2
 
+        property var fileUrl
+
         openBtn.onClicked:{
             popupDb.close();
             if(scheduler.isPdbLoaded()){
@@ -289,6 +291,24 @@ Rectangle {
         disconnectBtn.onClicked:{
             popupDb.close();
             disconnect();
+        }
+
+        uploadBtn.onClicked: {
+            if(!scheduler.isPdbLoaded())
+                console.log("no file");
+            else{
+                popupDb.close();
+                uploadDialog.open()
+            }
+        }
+
+        downloadBtn.onClicked: {
+            downloadFile.open();
+        }
+
+        ftpBtn.onClicked:{
+            popupDb.close();
+            ftpDialog.open();
         }
 
     }
@@ -353,8 +373,49 @@ Rectangle {
         id: fileDialog
         nameFilters:["Datase files(*.db)"]
         folder: shortcuts.home
-        onAccepted: mainLoadDb(fileUrl)
+        onAccepted: {
+            popupDb.fileUrl = fileUrl
+            //console.log(popupDb.fileUrl)
+            mainLoadDb(fileUrl)
+        }
     }
+
+    FileDialog {
+        id: downloadFile
+        selectFolder : true
+        nameFilters:["Datase files(*.db)"]
+        folder: shortcuts.home
+        onAccepted: {
+            downloadfile(fileUrl)
+        }
+    }
+
+    UploadDialog{
+        id:uploadDialog
+        x: (root.width - reconnectDialog.width)/2
+        y: (root.height - reconnectDialog.height)/2
+
+        cancelBtn.onClicked: uploadDialog.close()
+
+        confirmBtn.onClicked: {
+            uploadFile(fileName)
+        }
+    }
+
+    FtpDoalog {
+        id:ftpDialog
+        x: (root.width - reconnectDialog.width)/2
+        y: (root.height - reconnectDialog.height)/2
+
+        cancelBtn.onClicked: ftpDialog.close()
+
+        confirmBtn.onClicked: {
+            ftpConfig(ip, port, user, password)
+            ftpDialog.close()
+        }
+    }
+
+
 
     ///
     /// signals and functions
@@ -413,9 +474,7 @@ Rectangle {
     function disconnect(){
         if(scheduler.isPdbLoaded()){
             destroyAngleTable()
-
             scheduler.callCloseDataBase();
-
             passListView.clear();
             fixedTable.clear();
             commPop.clear();
@@ -452,6 +511,28 @@ Rectangle {
         mainBar.ctrlParamBtn.visible = false;
         mainBar.commParamBtn.visible = false;
     }
+
+    function uploadFile(fileName){
+//        downloader.setHostPort("localhost", 21);
+//        downloader.setUserInfo("tzz", "tzz0519");
+        var uploadUrl = downloader.toLocal(popupDb.fileUrl)
+        downloader.put(uploadUrl, fileName);
+        uploadDialog.close()
+    }
+
+    function downloadfile(fileUrl){
+//        downloader.setHostPort("localhost", 21);
+//        downloader.setUserInfo("tzz", "tzz0519");
+        var downloadUrl = downloader.toLocal(fileUrl)
+        console.log(downloadUrl+"/weldParmeter.db")
+        downloader.get("/weldParmeter.db",  downloadUrl+"/weldParmeter.db")
+        uploadDialog.close()
+    }
+
+    function ftpConfig(ip, port, user, password){
+        downloader.setHostPort(ip, port)
+        downloader.setUserInfo(user, password)
+    }
 }
 
 
@@ -460,6 +541,6 @@ Rectangle {
 Designer {
     D{i:0;formeditorZoom:0.5}D{i:2}D{i:1}D{i:3}D{i:7}D{i:5}D{i:8}D{i:10}D{i:12}D{i:14}
 D{i:16}D{i:17}D{i:19}D{i:20}D{i:21}D{i:22}D{i:23}D{i:24}D{i:25}D{i:26}D{i:27}D{i:28}
-D{i:29}
+D{i:29}D{i:30}D{i:31}D{i:32}
 }
 ##^##*/

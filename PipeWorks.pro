@@ -9,6 +9,7 @@ CONFIG += qtquickcompiler c++17
 INCLUDEPATH += ./Headers
 
 SOURCES += \
+    Sources/cdownloader.cpp \
     Sources/cparamdatabase.cpp \
     Sources/cTmodel.cpp \
     Sources/cscheduler.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
 
 
 HEADERS += \
+    Headers/cdownloader.h \
     Headers/cparamdatabase.h \
     Headers/cuser.h \
     Headers/cTmodel.h \
@@ -60,5 +62,6 @@ DISTFILES += \
     QML5/content/Login/InformationMangemet.qml \
     QML5/content/Login/PwUpdateButton.qml \
     QML5/content/Main/Components/SelectComboBoxFix.qml \
+    QML5/content/Main/Popups/UploadDialog.qml \
     QML5/content/Main/Parameters/MotionParameterLite.qml \
     QML5/content/images/DpLogoMain.png

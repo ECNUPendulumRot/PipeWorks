@@ -202,7 +202,8 @@ bool PartModel::refresh()
     for(int i = 0; i < this->rowCount(); i++)
         for(int j = 0; j < this->columnCount(); j++){
             MapData m = this->array[i][j];
-            this->setData(this->index(i, j), this->connectedTable->data(this->connectedTable->index(m.map_r, m.map_c), DirtyRole));
+            this->setData(this->index(i, j), this->connectedTable->data(this->connectedTable->index(m.map_r, m.map_c), DirtyRole), DirtyRole);
+            this->setData(this->index(i, j), this->connectedTable->data(this->connectedTable->index(m.map_r, m.map_c), Qt::DisplayRole));
         }
     return true;
 }
