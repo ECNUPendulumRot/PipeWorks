@@ -45,7 +45,6 @@ Rectangle {
     ListView {
         id: header
 
-
         implicitWidth: parent.width
         height: 35
         anchors.left: view.left
@@ -57,7 +56,6 @@ Rectangle {
 
         interactive: false
         enabled: false
-
 
         currentIndex: -1
 
@@ -110,8 +108,7 @@ Rectangle {
                     anchors.right: parent.right
                     anchors.top: parent.top
                     height: 1
-                    color: "#cecece"
-
+                    color: index === 0 ? "#cecece" : widget.isCheck ? "#0D267B" : "#cecece";
                     visible: false
                 }
 
@@ -121,21 +118,22 @@ Rectangle {
                     anchors.bottom: parent.bottom
                     anchors.top: parent.top
                     width: 1
-                    color: "#cecece"
+
+                    color: index === 0 ? "#cecece" : widget.isCheck ? "#0D267B" : "#cecece";
 
                     visible: index === 0 ? false : true
                 }
 
-                Rectangle {
-                    id:hRightLine
-                    anchors.right: parent.right
-                    anchors.bottom: parent.bottom
-                    anchors.top: parent.top
-                    width: 1
-                    color: "#cecece"
+//                Rectangle {
+//                    id:hRightLine
+//                    anchors.right: parent.right
+//                    anchors.bottom: parent.bottom
+//                    anchors.top: parent.top
+//                    width: 1
+//                    color: index === 0 ? "#cecece" : widget.isCheck ? "#0D267B" : "#cecece";
 
-                    visible: index === header.count - 1 ? false : true
-                }
+//                    visible: false//index === header.count - 1 ? false : true
+//                }
 
                 Text {
                     text: headerName
@@ -144,7 +142,9 @@ Rectangle {
                     font.pixelSize: 12
                 }
             }
+
             enabled: index === 0 ? false : true
+
             onClicked: {
                 if(header.currentIndex === index){
                     disableColumn(index);
@@ -287,20 +287,9 @@ Rectangle {
                     anchors.bottom: parent.bottom
                     anchors.top: parent.top
                     width: 1
-                    color: "#cecece"
+                    color: index === 0 ? "#cecece" : widget.isCheck ? "#0D267B" : "#cecece";
 
                     visible: column === 0 ? false : true
-                }
-
-                Rectangle {
-                    id:rightLine
-                    anchors.right: parent.right
-                    anchors.bottom: parent.bottom
-                    anchors.top: parent.top
-                    width: 1
-                    color: "#cecece"
-
-                    visible: column === view.columns - 1 ? false : true
                 }
 
                 AngleTextField {
