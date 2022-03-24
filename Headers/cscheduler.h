@@ -57,8 +57,10 @@ public slots:
     ///
     bool managerInit();
 
+    //bool registerModelPool(ModelPool *m, QString s);
     bool registerModel(TModel*, QString);
 
+    bool registerPartModel(PartModel*, QString);
     ///
     /// \brief callParamDb
     /// \param url : file location chosen by user
@@ -72,7 +74,6 @@ public slots:
 
     void callCloseDataBase();
 
-
     ///
     /// \brief callAngleTable
     /// \param index : index of the parameter
@@ -80,17 +81,18 @@ public slots:
     ///
     bool callAngleTable(unsigned int index);
 
-    //TODO:
-    void callPassSelected(QString s);
+    void callPassSelected(QString s);// change the backendtable in partmodel
 
     bool submitData();
 
     bool revertData();
 
+    bool callIsDirty();
+
 private:
 
     User *user;
-    ModelManage *manager;
+    ModelManager *manager;
     UserDb *udb;
     ParamDatabase *pdb;
 
@@ -99,7 +101,10 @@ private:
     bool status = false; //load :true
 
 signals:
+
     void modelRegistered();
+
+    void modelDataReady(QString s);
 
     void modelChanged(QString s);
 };

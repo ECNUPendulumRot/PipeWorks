@@ -11,16 +11,19 @@
 #include <cscheduler.h>
 #include <cparamdatabase.h>
 #include <cdownloader.h>
+#include <checkmodel.h>
+
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setOrganizationName("QtExamples");
     QCoreApplication::setAttribute(Qt::AA_ShareOpenGLContexts);
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-
-
     QApplication a(argc, argv);
     QQuickStyle::setStyle("Fusion");
+
+    qmlRegisterType<CheckModel>("ModelCraft", 1, 0, "CheckModel");
 
     QDir dir(QCoreApplication::applicationDirPath().append("/Database"));
     if(!dir.exists())

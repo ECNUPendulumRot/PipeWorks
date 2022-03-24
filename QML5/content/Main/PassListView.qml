@@ -178,10 +178,13 @@ Rectangle {
     }
 
     function refresh(i){
+        console.log("Pass" + i + "Parameter")
         if(scheduler.isPdbLoaded()){
+
             scheduler.callPassSelected("Pass" + i + "Parameter")
 
             passListRequestRefreshcombobx()
+
             passListRequestFixTableRefresh(i);
         }
     }

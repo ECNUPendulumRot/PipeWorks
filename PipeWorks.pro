@@ -13,11 +13,14 @@ SOURCES += \
     Sources/cparamdatabase.cpp \
     Sources/cTmodel.cpp \
     Sources/cscheduler.cpp \
+    Sources/modelpool.cpp \
+    Sources/checkmodel.cpp \
     main.cpp \
     Sources/cmodelmanage.cpp \
     Sources/cuserdb.cpp \
     Sources/cuser.cpp \
-    Sources/cdatabase.cpp
+    Sources/cdatabase.cpp \
+    Sources/partmodel.cpp
 
 
 HEADERS += \
@@ -29,7 +32,10 @@ HEADERS += \
     Headers/cdatabase.h \
     Headers/cuserdb.h \
     Headers/cscheduler.h \
-    Headers/utility.h
+    Headers/modelpool.h \
+    Headers/utility.h \
+    Headers/partmodel.h \
+    Headers/checkmodel.h
 
 QML_IMPORT_PATH = QML5/imports
 
@@ -57,4 +63,5 @@ DISTFILES += \
     QML5/content/Login/PwUpdateButton.qml \
     QML5/content/Main/Components/SelectComboBoxFix.qml \
     QML5/content/Main/Popups/UploadDialog.qml \
+    QML5/content/Main/Parameters/MotionParameterLite.qml \
     QML5/content/images/DpLogoMain.png

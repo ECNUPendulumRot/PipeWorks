@@ -53,12 +53,13 @@ Rectangle {
     }
 
     function connectToModel(){
-        angleRelatedTableModel.modelDataChanged.connect(refreshWebTable)
-        angleRelatedTableModel.modelSingleDataChanged.connect(callUpdatePoint)
+        //angleRelatedTableModel.modelDataChanged.connect(refreshWebTable)
+        angleRelatedTableModel.partDataChanged.connect(callUpdatePoint)
     }
 
     function refreshWebTable(s){
         webobj.chartFresh(s)
+        console.log("refreshed!")
     }
 
     function callUpdatePoint(x,y,v){

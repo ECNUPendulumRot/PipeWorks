@@ -227,11 +227,11 @@ Item {
                      ',
                     window)
         check();
-        window.w = 1366
-        window.h = 768
-        window.flags = Qt.Window
         window.minimumWidth = 1300
         window.minimumHeight = 600
+        window.flags = Qt.Window
+        window.w = 1366
+        window.h = 768
         window.visible = true
     }
 
@@ -248,7 +248,7 @@ Item {
                         anchors.fill: parent
                      }
                      ',
-                    window)
+                    lWindow)
         //check();
         window.w = 800
         window.h = 600

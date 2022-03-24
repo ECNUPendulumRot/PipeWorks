@@ -31,17 +31,22 @@ Popup {
         }
     }
 
-    MotionParameter {
+    Rectangle {
         id: motionParameter
-        y: 27
-        width: 712
-        anchors.horizontalCenterOffset: -1
+        y: 28
+        width: motionContent.width
+        height: motionContent.height
+        color: "transparent"
         anchors.horizontalCenter: parent.horizontalCenter
+        MotionParameter {
+            id: motionContent
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+        }
     }
 
     Item {
         id: groupItem
-        x: 411
         width: 352
         height: 33
         anchors.right: motionParameter.right
@@ -97,24 +102,53 @@ Popup {
                 if(scheduler.isPdbLoaded())
                     write()
             }
-        }  
+        }
     }
 
+    property var objectMotionLite : null
+
     function motionLoad() {
-        motionParameter.refreshData(motionParameter);
+        motionParameter.children[0].refreshData(motionParameter);
     }
 
     function write(){
-        motionParameter.writeInData(motionParameter)
-        motionParameter.refreshData(motionParameter)
+        motionParameter.children[0].writeInData(motionParameter)
+        motionParameter.children[0].refreshData(motionParameter)
     }
 
     function clear(){
-        motionParameter.clearData(motionParameter)
+        motionParameter.children[0].clearData(motionParameter)
     }
 
     function disable(){
-        motionParameter.disableInput(motionParameter)
+        motionParameter.children[0].destroy()
+        objectMotionLite = Qt.createQmlObject(
+                    'import QtQuick 2.15
+                     import QtQuick.Controls 2.15
+                     import "../Parameters"
+
+                     MotionParameterLite {
+                         id: motionContent
+                         y: 28
+                         width: 712
+                         anchors.horizontalCenter: parent.horizontalCenter
+                     }
+                     ',
+                    motionParameter)
+        backgroundRec.width = 695
+        backgroundRec.height = 450
+        motionParameter.y = 8
+        motionParameter.width = 620
+        motionParameter.height = 350
+        groupItem.anchors.topMargin = 40
+
+        //motionParameter.disableInput(motionParameter)
     }
 
 }
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.66}D{i:5}
+}
+##^##*/
