@@ -6,23 +6,20 @@
 
 #include <cTmodel.h>
 #include <cparamdatabase.h>
+#include <partmodel.h>
+#include <modelpool.h>
 
-QT_BEGIN_NAMESPACE
-class PartModel;
-class ModelPool;
-QT_END_NAMESPACE
-
-class ModelManage : public QObject
+class ModelManager : public QObject
 {
     Q_OBJECT
 
 public:
 
-    ModelManage();
+    ModelManager();
 
-    ModelManage(ParamDatabase* pdb);
+    ModelManager(ParamDatabase* pdb);
 
-    ModelManage(QString role);
+    ModelManager(QString role);
 
     ///
     /// \brief setModel
@@ -32,17 +29,9 @@ public:
 
     void deleteModels();
 
-    bool Submit();
+    bool submit();
 
-    bool Rvert();
-
-
-    //新添加
-    bool addModelPool(ParamDatabase* pdb, QString modelName);   //add to pool
-    bool changePass(QString modelName);                         //原setModelTable
-    void Clear();                                               //原deleteModels
-    QString changeSelectIndex(QList<unsigned int> cl);          //原MTruncate
-    //新添加
+    bool revert();
 
     ///
     /// \brief MTruncate
@@ -50,11 +39,11 @@ public:
     /// \param cl : parameters to be used
     /// \return
     ///
-    QString MTruncate(unsigned int index, QList<unsigned int> cl);
+    //QString MTruncate(unsigned int index, QList<unsigned int> cl);
 
     bool setModelTable(unsigned int index, QString tableName);
 
-    TModel* getMTable(unsigned int index);
+    TModel* getMTable(int index);
 
     void callAngleTableInitialize();
 
@@ -62,13 +51,34 @@ public:
 
     QString role;
 
+    //新添加
+
+    bool addModelPool(QString modelName);   //add to pool
+
+    bool changePass(QString modelName);                         //原setModelTable
+
+    void clear();                                               //原deleteModels
+
+    void changeSelectIndex(unsigned int index);          //原MTruncate
+
+
+    bool isDirty();
+    //新添加
+
+signals:
+
+    void registerRequest(TModel*, QString);
+
+    void registerRequestPartModel(PartModel*, QString);
+
 private:
 
     QSqlDatabase mdb;
 
     PartModel* pm;
 
-    ModelPool* mPool;           //
+    ModelPool* mPool;
+
     TModel* passFTableModel;    //
     TModel* systemFTableModel;  //
     TModel* motionFTableModel;  // workers' access
@@ -81,16 +91,13 @@ private:
                                         {1, systemFTableModel},
                                         {2, motionFTableModel},
                                         {3, controlFTableModel},
-                                        {4, comFTableModel},
+                                        {4, comFTableModel}
                                     });
 
+    static inline QList<QString> registerNames =    {"passFTableModel", "systemFTableModel", "motionFTableModel", "controlFTableModel", "comFTableModel"};
 
-//    static inline QList<QString> modelNames = {"passFTableModel", "passTableModel", "angleRelatedTableModel", "systemFTableModel", "motionFTableModel", // workers' access
-//                                               "controlFTableModel", "comFTableModel"}; // senior workers' access
+    static inline QList<QString> tableNames    =    {"pass",            "SystemParameter",   "MotionJog",          "ControlParameter",  "CommunicationParameter"};
 
-signals:
-    void registerRequest(TModel*, QString);
-    void registerRequestPool(ModelPool*, QString);
 };
 
 #endif // CMODELMANAGE_H

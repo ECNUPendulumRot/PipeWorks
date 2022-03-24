@@ -35,8 +35,6 @@ class PartModel : public QAbstractItemModel
 public:
     explicit PartModel(QObject *parent = nullptr);
 
-    bool setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role = Qt::EditRole) override;
-
     // Basic functionality:
 
     enum TableRoles{
@@ -50,12 +48,12 @@ public:
     QModelIndex index(int row, int column,
                       const QModelIndex &parent = QModelIndex()) const override;
 
-    // what is it? need to be fixed
-    // QModelIndex parent(const QModelIndex &index) const override;
+    // what is it? need to be fixeds
+    QModelIndex parent(const QModelIndex &index) const override;
 
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    Q_INVOKABLE int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    Q_INVOKABLE int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
@@ -74,26 +72,42 @@ public:
 
     bool changeBackendTable(TModel *newConnectedTable);
 
-    bool pullArray(QList<QString> l);
+    bool pullArray();
 
     bool pushArray();
+
+    bool refresh();
 
     // model related operation
     TModel *getConnectedTable() const;
 
     void setConnectedTable(TModel *newConnectedTable);
 
-    // selection related operation
 
+    // selection related operation
     void callCrossSelect(unsigned int row, unsigned int col, bool b);
+
+    void clear();
+
+    QString webData();
+
+public slots:
+
+    QString headerNameEng(unsigned int i);
+
+    void callSetData(int i, int j, QVariant v);
 
     void callSetSelect(unsigned int row, unsigned int col, bool b);
 
     bool callAddToModel(double v, bool isAdd);
 
+    void callWriteBack();
+
+    void callFetchData();
+
 signals:
 
-    void dataReady();
+    void dataReady(QString s);
 
     void partDataChanged(int r, int c, QVariant v);
 
@@ -108,13 +122,18 @@ private:
 
     void releaseSelection();
 
+    // array related operation
     MapData **array = nullptr;
+
+    QList<QString> header;
+
     unsigned int r = 0, c = 0;
 
-    // array related operation
     void createArray(unsigned int row, unsigned int col);
 
     void deleteArray();
+
+    void writeBack(int row, int col);
 
     TModel *connectedTable = nullptr;
 
@@ -128,9 +147,8 @@ private:
                                          {5,    Parameter("Arc_Rate"       , QStringLiteral("电弧修正"), true)},
                                          {6,    Parameter("carACC"         , QStringLiteral("小车加速度"), false)},
                                          {7,    Parameter("carSPEED"       , QStringLiteral("小车速度"), false)},
-                                         {8,    Parameter("TargetCur"      , QStringLiteral("垂向目标值"), true)},
+                                         {8,    Parameter("TargetCur"      , QStringLiteral("干伸高度值"), true)},
                                      });
-
 };
 
 #endif // PARTMODEL_H
