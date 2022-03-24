@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Effects 1.0
 
@@ -16,41 +16,47 @@ Item {
     Text {
         id: name
         x: 0
-        width: 102
+        //width: 102
+        width: 260
         height: 25
         text: item1.title
         anchors.top: parent.top
         font.pixelSize: 16
         font.styleName: "Regular"
+        font.family: "Microsoft YaHei"
         textFormat: Text.RichText
         anchors.topMargin: 5
     }
 
     TextField {
         id: textArea
-        x: 2
-        y: 38
+        height: 35
+        //x: 2
+        //y: 38
         color: "#232323"
+        text: qsTr("")
         selectByMouse: true
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        font.pixelSize: 14
+        anchors {
+            left: parent.left
+            top: name.bottom
+            right: parent.right
+            leftMargin: 2
+            rightMargin: 2
+            topMargin: 7
+        }
+        font.pixelSize: 18
+        font.family: "Microsoft YaHei"
         verticalAlignment: Text.AlignVCenter
+        antialiasing: true
         placeholderTextColor: "#c1c1c1"
         leftPadding: 5
-        anchors.rightMargin: 2
-        anchors.leftMargin: 2
-        anchors.bottomMargin: 4
-        anchors.topMargin: 36
 
         background: rectangle
         Rectangle {
             id: rectangle
             opacity: 1
             color: "#00ffffff"
-            radius: 8
+            radius: 4
             border.color: "#4f4f4f"
             border.width: 1
             anchors.fill: parent
@@ -66,7 +72,7 @@ Item {
             PropertyChanges {
                 target: rectangle
                 color: "#f2f2f2"
-                border.color: "#0d267b"
+                border.color: "#1c76c2"
                 border.width: 2
             }
 

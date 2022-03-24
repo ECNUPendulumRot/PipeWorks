@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.12
 import QtQuick.Studio.Effects 1.0
 
@@ -34,17 +34,18 @@ Button {
         textFormat: Text.RichText
         font.weight: Font.Medium
         font.pixelSize: 16
+        font.family: "Microsoft Yahei"
     }
 
     background: buttonBackground
     Rectangle {
         id: buttonBackground
-        color: "#b0b0b0"
+        color: "#1c76c2"
         implicitWidth: 100
         implicitHeight: 40
         opacity: enabled ? 1 : 0.3
         radius: 8
-        border.color: "#707070"
+        border.color: "#1c76c2"
         anchors.fill: parent
         z: 0
     }
@@ -55,8 +56,9 @@ Button {
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#8b8b8b"
-                border.color: "#5b5b5b"
+                color: "#4c8fc7"
+                border.color: "#045ba4"
+                border.width: 3
             }
         },
         State {
@@ -70,8 +72,8 @@ Button {
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#707070"
-                border.color: "#b0b0b0"
+                color: "#1c76c2"
+                border.color: "#d1d1d1"
             }
         }
     ]

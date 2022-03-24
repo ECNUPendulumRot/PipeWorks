@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.12
 import QtQuick.Studio.Effects 1.0
 
@@ -48,7 +48,7 @@ Button {
 
             PropertyChanges {
                 target: textItem
-                color: "#2b2ed9"
+                color: "#000000"
             }
         }
 

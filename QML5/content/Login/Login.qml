@@ -46,6 +46,7 @@ Item {
                 color: "#ffffff"
                 text: qsTr("德平科技")
                 font.pixelSize: 46
+                font.family: "Microsoft YaHei"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 anchors.horizontalCenterOffset: 0
@@ -108,6 +109,7 @@ Item {
                 text: "用户登录"
                 font.pixelSize: 29
                 font.weight: Font.Normal
+                font.family: "Microsoft Yahei"
             }
 
             VerticalInput {
@@ -115,7 +117,7 @@ Item {
                 x: 25
                 y: 130
                 textAreaPlaceholderText: "请输入用户名"
-                title: "账户"
+                title: "用户名"
                 inputText.onAccepted: userLogin()
 
                 inputText.focus: true
@@ -199,9 +201,9 @@ Item {
 
     function userLogin(){
         if(inputID.inputText.text === "")
-            errorMsg.text = "您还没有输入ID信息"
+            errorMsg.text = "你还没有输入用户名"
         else if(inputPw.inputText.text === "")
-                errorMsg.text = "您还没有输入密码"
+                errorMsg.text = "你还没有输入密码"
             else if(!scheduler.userCreate(inputID.inputText.text, inputPw.inputText.text))
                     errorMsg.text = "账户或者密码错误"
                 else{
