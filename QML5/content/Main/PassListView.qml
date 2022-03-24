@@ -320,6 +320,10 @@ Rectangle {
 
     function clear(){
         resetPass(rectangle);
+        passEditBtn10.textItemText = "×";
+        passEditBtn11.textItemText = "×"
+        passEditBtn30.textItemText = "×"
+        passEditBtn31.textItemText = "×"
     }
 
     function getPassName(item){
