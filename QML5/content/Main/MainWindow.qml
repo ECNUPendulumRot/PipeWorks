@@ -238,8 +238,8 @@ Rectangle {
         anchors{
           right: parent.right
           bottom: parent.bottom
-          rightMargin:45
-          bottomMargin: 45
+          rightMargin:40
+          bottomMargin: 50
         }
         //x: 1208
         //y: 694
@@ -429,8 +429,12 @@ Rectangle {
     function userLogout(){
         disconnect();
         root.destroy()
+        window.minimumWidth = 0
+        window.minimumHeight = 0
+        window.flags = Qt.FramelessWindowHint | Qt.Window
         window.w = 800
         window.h = 600
+
     }
     
     function refreshModelData(row, col, value){
