@@ -442,9 +442,11 @@ Rectangle {
     }
 
     function disable(){
-        ctrlPop.disable();
-        commPop.disable();
+        //ctrlPop.disable();
+        //commPop.disable();
         motionPop.disable();
+        mainBar.ctrlParamBtn.visible = false;
+        mainBar.commParamBtn.visible = false;
     }
 }
 
