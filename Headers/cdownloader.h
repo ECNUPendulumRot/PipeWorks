@@ -29,11 +29,12 @@ public slots:
 signals:
     void error(QNetworkReply::NetworkError);
 
-    void uploadProgress(qint64 bytesSent, qint64 bytesTotal);
-
     void downloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 
 private slots:
+
+    void uploadProgress(qint64 bytesSent, qint64 bytesTotal);
+
     void finished();
     void showError(QNetworkReply::NetworkError error);
 

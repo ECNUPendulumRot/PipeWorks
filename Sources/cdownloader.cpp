@@ -30,7 +30,7 @@ void Downloader::put(const QString &fileName, const QString &path)
 
     QNetworkReply *pReply = manager.put(QNetworkRequest(pUrl), data);
 
-    //connect(pReply, SIGNAL(uploadProgress(qint64, qint64)), this, SIGNAL(uploadProgress(qint64, qint64)));
+    connect(pReply, SIGNAL(uploadProgress(qint64, qint64)), this, SLOT(uploadProgress(qint64, qint64)));
     connect(pReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SIGNAL(error(QNetworkReply::NetworkError)));
     connect(this, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(showError(QNetworkReply::NetworkError)));
 }
@@ -87,4 +87,8 @@ void Downloader::showError(QNetworkReply::NetworkError error)
         qDebug()<<error;
         break;
     }
+}
+
+void Downloader::uploadProgress(qint64 bytesSent, qint64 bytesTotal){
+    qDebug() << "upload" << bytesSent << "of" << bytesTotal;
 }

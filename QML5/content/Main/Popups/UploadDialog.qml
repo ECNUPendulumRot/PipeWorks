@@ -23,18 +23,18 @@ Popup{
 
         ConfirmBtn {
             id: cancelBtn
-            x: 226
+            x: 303
+            y: 115
             width: 70
             height: 24
             text: "取消"
-            anchors.verticalCenter: confirmBtn.verticalCenter
-            anchors.verticalCenterOffset: 0
             anchors.rightMargin: 15
         }
 
         ConfirmBtn {
             id: confirmBtn
-            y: 119
+            x: 303
+            y: 68
             width: 70
             height: 24
             text: "确定"
@@ -43,14 +43,14 @@ Popup{
             pressRecColor: "#00101010"
             textItemColor: "#f6f6f6"
             buttonBackgroundColor: "#3b7ecc"
-            anchors.rightMargin: 17
-            anchors.bottomMargin: 7
+            anchors.rightMargin: 27
+            anchors.bottomMargin: 108
         }
 
         Text {
             id: text1
             x: 88
-            y: 38
+            y: 25
             text: "请编辑您上传的文件名称"
             font.pixelSize: 18
             anchors.verticalCenterOffset: -1
@@ -60,11 +60,20 @@ Popup{
 
         TextField {
             id: textField
-            x: 74
-            y: 88
+            x: 31
+            y: 68
             width: 253
             height: 24
             placeholderText: qsTr("文件名")
+        }
+
+        ProgressBar {
+            id: progressBar
+            value: 0.0
+            x: 31
+            y: 115
+            width: 253
+            height: 24
         }
     }
 
