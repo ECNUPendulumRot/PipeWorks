@@ -160,4 +160,5 @@ void Downloader::showError(QNetworkReply::NetworkError error)
 
 void Downloader::uploadProgress(qint64 bytesSent, qint64 bytesTotal){
     qDebug() << "upload" << bytesSent << "of" << bytesTotal;
+    emit upProgress(bytesSent, bytesTotal);
 }

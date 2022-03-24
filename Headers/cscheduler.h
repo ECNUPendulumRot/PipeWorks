@@ -89,6 +89,8 @@ public slots:
 
     bool callIsDirty();
 
+    void saveToFile(QUrl s, QUrl d);
+
 private:
 
     User *user;
