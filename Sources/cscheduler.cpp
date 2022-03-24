@@ -64,7 +64,7 @@ bool Scheduler::isPdbLoaded() const
 
 void Scheduler::callCloseDataBase()
 {
-    this->manager->deleteModels();
+    this->manager->clear();
     this->pdb->closeDatabase();
     this->status = false;
 }

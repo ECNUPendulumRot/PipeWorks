@@ -316,6 +316,7 @@ void PartModel::clear()
     this->header.clear();
     this->deleteArray();
     this->releaseSelection();
+    emit dataReady("");
 }
 
 
