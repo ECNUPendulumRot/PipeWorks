@@ -30,7 +30,6 @@ Popup {
     ControlParameter {
         id: ctrlParameter
         y: 28
-        anchors.horizontalCenterOffset: 7
         anchors.horizontalCenter: parent.horizontalCenter
     }
 

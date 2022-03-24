@@ -33,9 +33,8 @@ Popup {
 
     MotionParameter {
         id: motionParameter
-        y: 27
+        y: 28
         width: 712
-        anchors.horizontalCenterOffset: -1
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
@@ -97,7 +96,7 @@ Popup {
                 if(scheduler.isPdbLoaded())
                     write()
             }
-        }  
+        }
     }
 
     function motionLoad() {
