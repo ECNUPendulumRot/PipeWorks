@@ -57,7 +57,7 @@ Item {
                 y: 550
                 opacity: enabled ? 1.0 : 0.3
                 color: "#ffffff"
-                text: "2022 (v1.0) Windows7/10"
+                text: "2022 (v1.1) Windows7/10"
                 font.pixelSize: 14
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
