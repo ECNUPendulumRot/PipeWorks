@@ -14,6 +14,7 @@ Button {
     property alias pressRecColor: pressRec.color
     property alias textItemColor: textItem.color
     property alias buttonBackgroundColor: buttonBackground.color
+    property alias cvisible: control.visible
 
     background: buttonBackground
     Rectangle {

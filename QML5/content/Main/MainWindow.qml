@@ -403,10 +403,23 @@ Rectangle {
         x: (root.width - reconnectDialog.width)/2
         y: (root.height - reconnectDialog.height)/2
 
-        cancelBtn.onClicked: uploadDialog.close()
+        cancelBtn.onClicked: {
+            fileName =""
+            progressBarValue = 0.0
+            completeBtn.cvisible = false;
+            confirmBtn.cvisible = true;
+            uploadDialog.close()}
 
         confirmBtn.onClicked: {
             uploadFile(fileName)
+        }
+
+        completeBtn.onClicked: {
+            fileName =""
+            progressBarValue = 0.0
+            completeBtn.cvisible = false;
+            confirmBtn.cvisible = true;
+            uploadDialog.close()
         }
     }
 
@@ -421,6 +434,7 @@ Rectangle {
             ftpConfig(ip, port, user, password)
             ftpDialog.close()
         }
+
     }
 
     FileDialog {
@@ -447,6 +461,17 @@ Rectangle {
         onModelDataReady: s => {
             console.log(s)
             refreshAngleTable(s)}
+    }
+
+    Connections {
+        target: downloader
+        onUpProgress: (bytesSent, bytesTotal)=> {
+            uploadDialog.progressBarValue = bytesSent/bytesTotal
+            if(bytesSent/bytesTotal === 1.0){
+                uploadDialog.completeBtn.cvisible = true;
+                uploadDialog.confirmBtn.cvisible = false;
+                          }
+            }
     }
 
     function mainLoadDb(file){
@@ -534,16 +559,11 @@ Rectangle {
     }
 
     function uploadFile(fileName){
-//        downloader.setHostPort("localhost", 21);
-//        downloader.setUserInfo("tzz", "tzz0519");
         var uploadUrl = downloader.toLocal(popupDb.fileUrl)
         downloader.put(uploadUrl, fileName);
-        uploadDialog.close()
     }
 
     function downloadfile(fileUrl){
-//        downloader.setHostPort("localhost", 21);
-//        downloader.setUserInfo("tzz", "tzz0519");
         var downloadUrl = downloader.toLocal(fileUrl)
         console.log(downloadUrl+"/weldParmeter.db")
         downloader.get("/weldParmeter.db",  downloadUrl+"/weldParmeter.db")
@@ -562,6 +582,6 @@ Rectangle {
 Designer {
     D{i:0;formeditorZoom:0.5}D{i:2}D{i:1}D{i:3}D{i:7}D{i:5}D{i:8}D{i:10}D{i:12}D{i:14}
 D{i:16}D{i:17}D{i:19}D{i:20}D{i:21}D{i:22}D{i:23}D{i:24}D{i:25}D{i:26}D{i:27}D{i:28}
-D{i:29}D{i:30}D{i:31}D{i:32}
+D{i:29}D{i:30}D{i:31}D{i:32}D{i:33}
 }
 ##^##*/
