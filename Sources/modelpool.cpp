@@ -38,6 +38,25 @@ bool ModelPool::isDirty()
     return dirty;
 }
 
+void ModelPool::submit()
+{
+    QHash<QString, TModel*>::iterator iter = pool.begin();
+    while(iter != pool.end()){
+        iter.value()->callSubmit();
+        ++iter;
+    }
+}
+
+
+void ModelPool::revert()
+{
+    QHash<QString, TModel*>::iterator iter = pool.begin();
+    while(iter != pool.end()){
+        iter.value()->callRevert();
+        ++iter;
+    }
+}
+
 
 TModel* ModelPool::getModel(QString modelName){//check model name
     QHash<QString, TModel*>::iterator i = pool.find(modelName);

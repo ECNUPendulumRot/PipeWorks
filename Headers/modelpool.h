@@ -27,6 +27,9 @@ public:
 
     bool isDirty();
 
+    void submit();
+
+    void revert();
 private:
 
     QHash<QString, TModel*> pool = QHash<QString, TModel*>();

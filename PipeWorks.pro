@@ -13,7 +13,7 @@ SOURCES += \
     Sources/cTmodel.cpp \
     Sources/cscheduler.cpp \
     Sources/modelpool.cpp \
-    checkmodel.cpp \
+    Sources/checkmodel.cpp \
     main.cpp \
     Sources/cmodelmanage.cpp \
     Sources/cuserdb.cpp \
@@ -33,7 +33,7 @@ HEADERS += \
     Headers/modelpool.h \
     Headers/utility.h \
     Headers/partmodel.h \
-    checkmodel.h
+    Headers/checkmodel.h
 
 QML_IMPORT_PATH = QML5/imports
 

@@ -62,39 +62,21 @@ void ModelManager::setModel(ParamDatabase* pdb)
 }
 
 
-bool ModelManager::Submit(){
-    if(role == "W"){
-        for(int i = 0; i < 3; i++)
-            indexToModel[i]->callSubmit();
-        //mPool->callSubmit();
-        return true;
+bool ModelManager::submit(){
+    for(int i = 0; i < indexToModel.size(); i++){
+        indexToModel[i]->submitAll();
     }
-    else if(role =="SW"){
-        for(int i = 0; i < indexToModel.size(); i++)
-            indexToModel[i]->callSubmit();
-        //mPool->callSubmit();
-        return true;
-    }
-    else
-        return false;
+    mPool->submit();
+    return true;
 }
 
 
-bool ModelManager::Rvert(){
-    if(role == "W"){
-        for(int i = 0; i < 3; i++)
-            indexToModel[i]->callRevert();
-        //mPool->callRevert();
-        return true;
+bool ModelManager::revert(){
+    for(int i = 0; i < indexToModel.size(); i++){
+        indexToModel[i]->revertAll();
     }
-    else if(role =="SW"){
-        for(int i = 0; i < indexToModel.size(); i++)
-            indexToModel[i]->callRevert();
-        //mPool->callRevert();
-        return true;
-    }
-    else
-        return false;
+    mPool->revert();
+    return true;
 }
 
 //QString ModelManager::MTruncate(unsigned int index, QList<unsigned int> cl){

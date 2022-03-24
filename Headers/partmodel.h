@@ -76,13 +76,15 @@ public:
 
     bool pushArray();
 
+    bool refresh();
+
     // model related operation
     TModel *getConnectedTable() const;
 
     void setConnectedTable(TModel *newConnectedTable);
 
-    // selection related operation
 
+    // selection related operation
     void callCrossSelect(unsigned int row, unsigned int col, bool b);
 
     void clear();
@@ -90,7 +92,10 @@ public:
     QString webData();
 
 public slots:
+
     QString headerNameEng(unsigned int i);
+
+    void callSetData(int i, int j, QVariant v);
 
     void callSetSelect(unsigned int row, unsigned int col, bool b);
 

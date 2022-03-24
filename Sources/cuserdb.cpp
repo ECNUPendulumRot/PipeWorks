@@ -5,10 +5,12 @@ UserDb::UserDb():Database()
 
 }
 
+
 UserDb::UserDb(QString s):Database(s)
 {
 
 }
+
 
 Role UserDb::verify(QString id, QString pw)
 {
@@ -20,6 +22,8 @@ Role UserDb::verify(QString id, QString pw)
         r = q.value("role").toString() == "SW" ? SeniorWorker : Worker;
     return r;
 }
+
+
 //informationUpdate(QString id, QString opw, QString npw);
 bool UserDb::informationUpdate(QString id, QString opw, QString npw){
 

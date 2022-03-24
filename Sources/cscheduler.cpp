@@ -125,12 +125,12 @@ void Scheduler::callUserDbClose()
 
 
 bool Scheduler::submitData(){
-    this->manager->Submit();
+    this->manager->submit();
     return true;
 }
 
 bool Scheduler::revertData(){
-    this->manager->Rvert();
+    this->manager->revert();
     return true;
 }
 

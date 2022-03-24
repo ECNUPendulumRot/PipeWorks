@@ -29,9 +29,9 @@ public:
 
     void deleteModels();
 
-    bool Submit();
+    bool submit();
 
-    bool Rvert();
+    bool revert();
 
     ///
     /// \brief MTruncate

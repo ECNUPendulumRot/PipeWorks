@@ -92,12 +92,12 @@ void CheckModel::clear()
     endResetModel();
 }
 
+
 void CheckModel::reset()
 {
-    for( int i = 0; i < this->list.size(); i++){
-        this->setData(this->index(i, 0), false, CheckRole);
-    }
+    this->set(false);
 }
+
 
 void CheckModel::set(bool b)
 {
@@ -105,6 +105,7 @@ void CheckModel::set(bool b)
         this->setData(this->index(i, 0), b, CheckRole);
     }
 }
+
 
 bool CheckModel::at(int i)
 {

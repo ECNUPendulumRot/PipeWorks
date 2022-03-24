@@ -28,15 +28,11 @@ QModelIndex PartModel::parent(const QModelIndex &index) const
 
 int PartModel::rowCount(const QModelIndex &parent) const
 {
-    //qDebug() << "call rowCount: r = " << r;
-    // customize:
     return this->r;
 }
 
 int PartModel::columnCount(const QModelIndex &parent) const
 {
-    //qDebug() << "call columnCount: c = " << c;
-    // customize:
     return this->c;
 }
 
@@ -58,11 +54,6 @@ QHash<int, QByteArray> PartModel::roleNames() const
 
 QVariant PartModel::data(const QModelIndex &index, int role) const
 {
-
-# ifdef QT_DEBUG
-    qDebug() << "data called at ("<<
-                index.row() << "," << index.column()<< ") The role is : " << role;
-# endif
     MapData m = this->array[index.row()][index.column()];
     if (!index.isValid())
         return QVariant();
@@ -88,11 +79,6 @@ QVariant PartModel::data(const QModelIndex &index, int role) const
 
 bool PartModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
-# ifdef QT_DEBUG
-    qDebug() << "set data called at ("<<
-                index.row() << "," << index.column()<< ") The role is : " << role;
-# endif
-
     if (data(index, role) != value) {
         switch(role){
         // self related role
@@ -114,12 +100,16 @@ bool PartModel::setData(const QModelIndex &index, const QVariant &value, int rol
                 emit partSelectChanged(index.row(), index.column(), value.toBool());
             }
             return true;
+
+        case DirtyRole:
+            emit dataChanged(index, index, QVector<int>({DirtyRole}));
+            return true;
         }
-        //emit dataChanged(index, index, QVector<int>() << role);
         return true;
     }
     return false;
 }
+
 
 Qt::ItemFlags PartModel::flags(const QModelIndex &index) const
 {
@@ -132,7 +122,7 @@ Qt::ItemFlags PartModel::flags(const QModelIndex &index) const
 
 }
 
-// array related operation
+
 bool PartModel::changeSelectIndex(int index)
 {
     if(index >= parameterCouple.size())
@@ -148,39 +138,30 @@ bool PartModel::changeSelectIndex(int index)
     else
         header.push_back(parameterCouple[index].name);
 
-# ifdef QT_DEBUG
-    qDebug() << "start pulling array...";
-    QString s;
-    for(int i = 0; i < header.size(); i ++){
-        s += header[i] + " ";
-    }
-    qDebug() << "Content is" << s;
-# endif
     pullArray();
-# ifdef QT_DEBUG
-    qDebug() << "finish pulling array...";
-    //qDebug() << "row column counts:" << this->rowCount() << " ," << this->columnCount();
-# endif
+
     QString forWeb = this->webData();
     emit this->dataReady(forWeb);
 
     return true;
 }
 
+
 bool PartModel::changeBackendTable(TModel *newConnectedTable)
 {
+    if(this->connectedTable != nullptr)
+        QObject::disconnect(this->connectedTable, &TModel::refreshDirty, this, &PartModel::refresh);
     deleteArray();
     setConnectedTable(newConnectedTable);
     return true;
 }
 
+
 bool PartModel::pullArray()
-// Pop data by header name list L and push them into array
 {
     if(this->connectedTable == nullptr)
         return false;
 
-    // body
     createArray(connectedTable->rowCount(), header.size());
     initializeSelection();
 
@@ -196,9 +177,9 @@ bool PartModel::pullArray()
             }
         }
     }
-    // body
     return true;
 }
+
 
 bool PartModel::pushArray()
 {
@@ -214,6 +195,18 @@ bool PartModel::pushArray()
     }
     return true;
 }
+
+
+bool PartModel::refresh()
+{
+    for(int i = 0; i < this->rowCount(); i++)
+        for(int j = 0; j < this->columnCount(); j++){
+            MapData m = this->array[i][j];
+            this->setData(this->index(i, j), this->connectedTable->data(this->connectedTable->index(m.map_r, m.map_c), DirtyRole));
+        }
+    return true;
+}
+
 
 // array create and destroy
 // these two must call as pair
@@ -239,15 +232,8 @@ void PartModel::deleteArray()
 {
     if(this->array == nullptr)
         return;
-
-# ifdef QT_DEBUG
-        qDebug() << "start delete ...";
-# endif
     for(unsigned int i = 0; i < this->r; i++){
         delete [] this->array[i];
-# ifdef QT_DEBUG
-        qDebug() << "deleted " << i;
-# endif
     }
     delete this->array;
     this->array = nullptr;
@@ -255,16 +241,11 @@ void PartModel::deleteArray()
     this->c = 0;
 }
 
+
 void PartModel::writeBack(int row, int col)
 {
-# ifdef QT_DEBUG
-    qDebug() << "writing back started...";
-#endif
     MapData m = this->array[row][col];
     this->connectedTable->setData(this->connectedTable->index(m.map_r, m.map_c), m.v);
-# ifdef QT_DEBUG
-    qDebug() << "writing back end. Current data is " << this->connectedTable->data(this->connectedTable->index(m.map_r, m.map_r)).toString();
-#endif
 }
 
 
@@ -274,14 +255,24 @@ TModel *PartModel::getConnectedTable() const
     return connectedTable;
 }
 
+
 void PartModel::setConnectedTable(TModel *newConnectedTable)
 {
     connectedTable = newConnectedTable;
+    QObject::connect(newConnectedTable, &TModel::refreshDirty, this, &PartModel::refresh);
 }
+
 
 QString PartModel::headerNameEng(unsigned int i)
 {
     return this->header[i];
+}
+
+
+void PartModel::callSetData(int row, int col, QVariant v)
+{
+    QModelIndex i = this->index(row, col);
+    this->setData(i, v);
 }
 
 

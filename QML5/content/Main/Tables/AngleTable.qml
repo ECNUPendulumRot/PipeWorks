@@ -73,14 +73,8 @@ Rectangle {
         highlight: Rectangle {
             width: header.width/header.count; height: 35
             color: "lightsteelblue"; radius: 5
-//            x: list.currentItem.x
-//            Behavior on x {
-//                SpringAnimation {
-//                    spring: 3
-//                    damping: 0.2
-//                }
-//            }
-            }
+        }
+
         delegate: Button {
             id: headerDelegate
 
@@ -210,12 +204,11 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 display: AbstractButton.IconOnly
                 anchors.horizontalCenter: parent.horizontalCenter
-
-                onCheckedChanged: model.check = checked
+                checked: model.check
+                onClicked: model.check = checked
             }
             Component.onCompleted: {
                 addGroup(delegateCheckbx)
-                delegateCheckbx.checked = model.check
             }
         }
     }
@@ -341,6 +334,7 @@ Rectangle {
         onMinusRequest: angleRelatedTableModel.callAddToModel(n, false)
     }
 
+
     OperationBtn {
         id: multiselect
         y: 723
@@ -356,7 +350,6 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: {
             disableSingleSelect(view)
-            //restoreBeforeOp()
             widget.isCheck = true
         }
     }
@@ -585,7 +578,7 @@ Rectangle {
 
     function reset(){
         header.currentIndex = -1;
-        checkModel.clear();
+        checkModel.reset();
         initializeSelection();
     }
 
@@ -595,17 +588,6 @@ Rectangle {
                  angleRelatedTableModel.callSetSelect(i, j, false);
         }
     }
-
-    function initializeCheckbox(item){
-        if(item.type === "checkbox"){
-            item.check = false
-            return
-        }
-        for(var i = 0; i < item.children.length; i++){
-            initializeCheckbox(item.children[i])
-        }
-    }
-
 
     function disableSingleSelect(item){
         if(item.type === "editable"){
@@ -660,6 +642,7 @@ Rectangle {
         multiModeCopy =  copy;
     }
 
+
     function copyToModel(){
         console.log("write")
         if(multiModeCopy !== null){
@@ -674,6 +657,7 @@ Rectangle {
             }
         }
     }
+
 
     function refreshAfterCancel(){
         angleRelatedTableModel.callRevert();
