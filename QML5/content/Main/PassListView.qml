@@ -145,6 +145,7 @@ Rectangle {
 
     PassEditBtn {
         id: addBtn
+        width: 70
         anchors.left: pass3View.left
         anchors.leftMargin: -8
         anchors.verticalCenter: pass3View.top
@@ -164,6 +165,7 @@ Rectangle {
     PassEditBtn {
         id: removeBtn
         y: addBtn.y
+        width: 70
         checked: addBtn.checked
         anchors.right: pass2View.right
         anchors.rightMargin: addBtn.anchors.leftMargin
