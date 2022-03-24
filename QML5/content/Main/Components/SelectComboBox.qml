@@ -16,6 +16,7 @@ ComboBox {
     displayText: if(!(currentIndex + 1)) "选择数据类型"
     model: ["边停时间", "摆宽", "摆动频率", "送丝速度", "电弧修正", "小车速度", "干伸高度值"]
 
+
     onCurrentIndexChanged: cmbBxCallSelect(indexMap[currentIndex])
 
     property var indexMap: {

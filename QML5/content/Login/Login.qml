@@ -28,9 +28,9 @@ Item {
 
             Image {
                 id: logoDpLogin
-                y: 160
-                width: 125
-                height: 80
+                y: 125
+                width: 147
+                height: 123
                 source: "../images/DPLogin.png"
                 mipmap: true
                 asynchronous: false
@@ -48,17 +48,17 @@ Item {
                 font.pixelSize: 46
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
-                anchors.horizontalCenterOffset: -1
+                anchors.horizontalCenterOffset: 0
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
             Text {
                 id: textItem
-                y: 540
+                y: 550
                 opacity: enabled ? 1.0 : 0.3
                 color: "#ffffff"
-                text: "2022 v1.0"
-                font.pixelSize: 16
+                text: "2022 (v1.0) Windows7/10"
+                font.pixelSize: 14
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.WordWrap
@@ -214,7 +214,6 @@ Item {
 
     }
 
-
     function createMain(){
         objectMainWindow = Qt.createQmlObject(
                     'import QtQuick 2.15
@@ -228,6 +227,9 @@ Item {
                      ',
                     window)
         check();
+        window.minimumWidth = 1300
+        window.minimumHeight = 600
+        window.flags = Qt.Window
         window.w = 1366
         window.h = 768
         window.visible = true
@@ -246,7 +248,7 @@ Item {
                         anchors.fill: parent
                      }
                      ',
-                    window)
+                    lWindow)
         //check();
         window.w = 800
         window.h = 600
@@ -263,3 +265,9 @@ Item {
 
 
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.66}
+}
+##^##*/

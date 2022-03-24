@@ -36,7 +36,7 @@ Item {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        font.pixelSize: 12
+        font.pixelSize: 14
         verticalAlignment: Text.AlignVCenter
         placeholderTextColor: "#c1c1c1"
         leftPadding: 5
@@ -127,7 +127,7 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;height:75;width:350}D{i:1}D{i:3}D{i:2}D{i:11;transitionDuration:2000}
+    D{i:0;height:75;width:350}D{i:11;transitionDuration:2000}
 }
 ##^##*/
 

@@ -39,7 +39,7 @@ Rectangle {
 
     Rectangle {
         id: angleTableWrapper
-        x: 1062
+        //x: 1062
         width: 300
         color: "#d4d4d4"
         border.width: 0
@@ -212,7 +212,7 @@ Rectangle {
 
     CancelBtn {
         id: myButton2
-        y: 681
+        //y: 681
         anchors.bottom: myButton3.top
         anchors.horizontalCenter: myButton3.horizontalCenter
         anchors.bottomMargin: 20
@@ -233,8 +233,15 @@ Rectangle {
 
     SubmitBtn {
         id: myButton3
-        x: 1208
-        y: 694
+
+        anchors{
+          right: parent.right
+          bottom: parent.bottom
+          rightMargin:40
+          bottomMargin: 50
+        }
+        //x: 1208
+        //y: 694
         z: 3
 
         onClicked:{
@@ -426,8 +433,12 @@ Rectangle {
     function userLogout(){
         disconnect();
         root.destroy()
+        window.minimumWidth = 0
+        window.minimumHeight = 0
+        window.flags = Qt.FramelessWindowHint | Qt.Window
         window.w = 800
         window.h = 600
+
     }
     
     function refreshModelData(row, col, value){

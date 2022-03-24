@@ -43,6 +43,8 @@ Rectangle {
 
         radius: alertLight.width/2
         anchors.verticalCenter: parent.verticalCenter
+        anchors.right: syncText.left
+        anchors.rightMargin: 5
         anchors.verticalCenterOffset: 1
     }
 
@@ -50,10 +52,10 @@ Rectangle {
         id: syncText
 //        text: qsTr("已同步")
         anchors.verticalCenter: parent.verticalCenter
-        anchors.left: alertLight.right
+        anchors.right: time.left
         anchors.verticalCenterOffset: 0
         font.pixelSize: 10
-        anchors.leftMargin: 5
+        anchors.rightMargin: 100
     }
 
     Text {
@@ -118,3 +120,9 @@ Rectangle {
 }
 
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:1.1;height:16;width:1366}
+}
+##^##*/

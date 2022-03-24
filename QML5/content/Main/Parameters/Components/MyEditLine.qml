@@ -37,7 +37,7 @@ Rectangle {
         color: Constants.tableFontColor
         text: qsTr("运动减速度")
         anchors.verticalCenter: parent.verticalCenter
-        font.pixelSize: 12
+        font.pixelSize: 13
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.WordWrap
     }
@@ -67,7 +67,7 @@ Rectangle {
         text: qsTr("毫米/秒<sup>2<sup>")
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: textField.left
-        font.pixelSize: 12
+        font.pixelSize: 13
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.WordWrap
         anchors.leftMargin: 90
@@ -95,6 +95,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;height:30;width:260}
+    D{i:0;formeditorZoom:1.1;height:30;width:260}
 }
 ##^##*/

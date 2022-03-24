@@ -95,7 +95,7 @@ Item {
                         id: arcLeadSVPercent
                         mapString : "arcLeadSVPercent"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         labelText: "弧压百分比"
@@ -108,7 +108,7 @@ Item {
                         id: arcLeadSWSPercent
                         mapString : "arcLeadSWSPercent"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -121,7 +121,7 @@ Item {
                         id: arcLeadSOWPercent
                         mapString : "arcLeadSOWPercent"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -134,7 +134,7 @@ Item {
                         id: arcLeadSTime
                         mapString : "arcLeadSTime"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "\u79d2"
@@ -187,7 +187,7 @@ Item {
 
                         mapString : "arcLeadOVPercent"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -201,7 +201,7 @@ Item {
 
                         mapString: "arcLeadOWSPercent"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -215,7 +215,7 @@ Item {
 
                         mapString: "arcLeadOOWPercent"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -228,7 +228,7 @@ Item {
                         id: arcLeadOTime
 
                         mapString: "arcLeadOTime"
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "\u79d2"
@@ -309,7 +309,7 @@ Item {
 
                         mapString: "arcTrailSVPercent"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -323,7 +323,7 @@ Item {
 
                         mapString: "arcTrailSWSPercent"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -337,7 +337,7 @@ Item {
 
                         mapString: "arcTrailSOWPercent"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -351,7 +351,7 @@ Item {
 
                         mapString : "arcTrailSTime"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "\u79d2"
@@ -402,7 +402,7 @@ Item {
 
                         mapString : "arcTrailOVPercent"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         textFieldWidth: 40
                         label1AnchorsleftMargin: 50
                         label1Text: "%"
@@ -416,7 +416,7 @@ Item {
 
                         mapString : "arcTrailOWSPercent"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         textFieldWidth: 40
                         label1AnchorsleftMargin: 50
                         label1Text: "%"
@@ -430,7 +430,7 @@ Item {
 
                         mapString : "arcTrailOOWPercent"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         textFieldWidth: 40
                         label1AnchorsleftMargin: 50
                         label1Text: "%"
@@ -444,7 +444,7 @@ Item {
 
                         mapString : "arcTrailOTime"
 
-                        textFieldAnchorsleftMargin: 64
+                        textFieldAnchorsleftMargin: 68
                         textFieldWidth: 40
                         label1AnchorsleftMargin: 50
                         label1Text: "\u79d2"
@@ -545,7 +545,7 @@ Item {
 
                     mapString : "potPercent"
 
-                    textFieldAnchorsleftMargin: 76
+                    textFieldAnchorsleftMargin: 80
                     label6AnchorsleftMargin: 50
                     textFieldWidth: 40
                     label6Text: "%"
@@ -561,7 +561,7 @@ Item {
                     mapString : "startAngle"
 
                     width: 145
-                    textFieldAnchorsleftMargin: 76
+                    textFieldAnchorsleftMargin: 80
                     label6AnchorsleftMargin: 50
                     textFieldWidth: 40
                     label6Text: "\u5ea6"
@@ -575,7 +575,7 @@ Item {
                     mapString : "endAngle"
 
                     width: 145
-                    textFieldAnchorsleftMargin: 76
+                    textFieldAnchorsleftMargin: 80
                     label6AnchorsleftMargin: 50
                     textFieldWidth: 40
                     label6Text: "\u5ea6"
@@ -662,7 +662,7 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.75;height:160;width:1206}
+    D{i:0;formeditorZoom:1.33;height:160;width:1206}
 }
 ##^##*/
 
