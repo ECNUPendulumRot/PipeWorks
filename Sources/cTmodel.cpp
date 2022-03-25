@@ -20,7 +20,6 @@ TModel::~TModel()
 {
     releaseSelection();
     emit modelDataChanged(QString(""));
-    qDebug() << "deleted";
 }
 
 

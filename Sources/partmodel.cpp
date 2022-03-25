@@ -65,8 +65,6 @@ QVariant PartModel::data(const QModelIndex &index, int role) const
     case ChangeRole:
         return !(this->connectedTable->data(this->connectedTable->index(m.map_r,m.map_c)).toString() == m.v.toString());
     case DirtyRole:
-        qDebug() << "dirty role : " << this->connectedTable->data(this->connectedTable->index(m.map_r, m.map_c)).toString()
-                                    << this->connectedTable->isDirty(connectedTable->index(m.map_r, m.map_c));
         return this->connectedTable->isDirty(connectedTable->index(m.map_r, m.map_c));
     case SelectionRole:
         return this->selection[index.row()][index.column()];
