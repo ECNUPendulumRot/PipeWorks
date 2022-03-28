@@ -112,7 +112,7 @@ Rectangle {
             color: "#38000000"
             radius: 8
             horizontalOffset: 1
-            spread: 0.2
+            spread: 0.1
             verticalOffset: 0
         }
         z: 2
@@ -289,8 +289,13 @@ Rectangle {
 
     LogoutPopup{
         id:logoutPopup
-        x: exitBtn.x - (logoutPopup.width - exitBtn.width)
-        y: exitBtn.y + exitBtn.height
+        anchors{
+          right: exitBtn.right
+          top: exitBtn.bottom
+        }
+        //anchors.centerIn: parent
+        //x: exitBtn.x - (logoutPopup.width - exitBtn.width)
+        //y: exitBtn.y + exitBtn.height
         z:3
 
         closeBtn.onClicked: Qt.quit()

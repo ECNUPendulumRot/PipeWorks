@@ -22,112 +22,62 @@ Item {
             width: 320
             height: 600
             opacity: 1
-            color: "#0166bb"
+            color: "#1c76c2"
             border.color: "#707070"
             border.width: 0
 
             Image {
-                id: logoCompany
-                //y: 125
-                width: 150
-                //height: 123
-                anchors{
-                   top: parent.top
-                   topMargin: 125
-                   horizontalCenter: parent.horizontalCenter
-                }
+                id: logoDpLogin
+                y: 125
+                width: 147
+                height: 123
                 source: "../images/DPLogin.png"
-                fillMode: Image.PreserveAspectFit
                 mipmap: true
                 asynchronous: false
                 antialiasing: true
-
-
-
-                //anchors.horizontalCenterOffset: 0
-                //anchors.horizontalCenter: parent.horizontalCenter
-
+                anchors.horizontalCenterOffset: 0
+                anchors.horizontalCenter: parent.horizontalCenter
+                fillMode: Image.PreserveAspectFit
             }
 
             Label {
-                id: labelCompany
-                //y: 277
-                anchors{
-                   top: logoCompany.bottom
-                   topMargin: 30
-                   horizontalCenter: parent.horizontalCenter
-                }
+                id: label
+                y: 277
                 color: "#ffffff"
                 text: qsTr("德平科技")
                 font.pixelSize: 46
                 font.family: "Microsoft YaHei"
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
-                //anchors.horizontalCenterOffset: 0
-                //anchors.horizontalCenter: parent.horizontalCenter
-            }
-
-
-
-            Rectangle {
-                id: imageborder
-                //x: 362
-                //y: 50
-                anchors
-                {
-                    horizontalCenter: parent.horizontalCenter
-                    top: labelCompany.bottom
-                    topMargin: 100
-                }
-                width: 100
-                height: 100
-                opacity: 1
-                color: "#ffffff"
-                border.width: 0
-                antialiasing: false
-                layer.enabled: true
-                layer.effect: DropShadowEffect {
-                    id: dropShadow
-                    color: "#c8ffffff"
-                    radius: 8
-                    verticalOffset: 0
-                    horizontalOffset: 0
-                    spread: 0.2
-                }
-                z: 1
-
-                Image {
-                    id: qrcode
-                    anchors
-                    {
-                        fill: parent
-                        margins:4
-                    }
-                    source: "../images/QRcode.png"
-                    fillMode: Image.PreserveAspectFit
-                }
+                anchors.horizontalCenterOffset: 0
+                anchors.horizontalCenter: parent.horizontalCenter
             }
 
             Text {
                 id: textItem
-                anchors
-                {
-                    bottom: parent.bottom
-                    bottomMargin: 30
-                    horizontalCenter: parent.horizontalCenter
-                }
+                y: 550
                 opacity: enabled ? 1.0 : 0.3
                 color: "#ffffff"
-                text: qsTr("2022 (v1.1) Windows7/10")
+                text: "2022 (v1.1) Windows7/10"
                 font.pixelSize: 14
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.WordWrap
-                font.family: "Verdana"
-                //anchors.horizontalCenterOffset: -1
-                //anchors.horizontalCenter: labelCompany.horizontalCenter
+                anchors.horizontalCenterOffset: -1
+                anchors.horizontalCenter: label.horizontalCenter
                 z: 1
                 font.weight: Font.Medium
+            }
+
+            Image {
+                id: image
+                x: 108
+                y: 393
+                width: 100
+                height: 100
+
+                source: "../images/QRcode.png"
+                fillMode: Image.PreserveAspectFit
             }
         }
 
@@ -143,6 +93,7 @@ Item {
             antialiasing: false
             layer.enabled: true
             layer.effect: DropShadowEffect {
+                id: dropShadow
                 color: "#c8000000"
                 radius: 8
                 verticalOffset: 0
@@ -317,4 +268,8 @@ Item {
 
 
 
-
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.66}
+}
+##^##*/

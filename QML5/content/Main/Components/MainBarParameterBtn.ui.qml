@@ -8,13 +8,13 @@ Button {
     leftPadding: 4
     rightPadding: 4
 
-    text: "My text"
+    text: "参数配置"
 
     //property string type: "accessable"
     property alias imageSource: image.source
     property alias textItemText: text1.text
-    width: 96
-    height: 40
+    width: 100
+    height: 45
 
     background: buttonBackground
     Rectangle {
@@ -23,14 +23,14 @@ Button {
         width: parent.width
         height: parent.height
         radius: 4
-        border.color: "#d3d3d3"
-        border.width: 1
+        border.color: "#8c8c8c"
+        border.width: 2
         anchors.fill: parent
         layer.enabled: true
         layer.effect: DropShadowEffect {
             id: dropShadow
             color: "#3c000000"
-            radius: 16
+            radius: 8
             spread: 0.2
             verticalOffset: 0
             horizontalOffset: 0
@@ -44,20 +44,6 @@ Button {
         id: itemContent
         anchors.fill: parent
 
-        Text {
-            id: text1
-            y: 46
-            width: 50
-            height: 15
-            text: control.text
-            anchors.bottom: parent.bottom
-            font.pixelSize: 12
-            horizontalAlignment: Text.AlignHCenter
-            anchors.bottomMargin: 3
-            font.weight: Font.Medium
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
         Image {
             id: image
             width: 18
@@ -70,6 +56,24 @@ Button {
             anchors.horizontalCenter: parent.horizontalCenter
             fillMode: Image.PreserveAspectFit
         }
+
+        Text {
+            id: text1
+            y: 46
+            width: 50
+            height: 16
+            text: control.text
+            anchors {
+                bottom: parent.bottom
+                bottomMargin: 8
+                horizontalCenter: parent.horizontalCenter
+            }
+            font.pixelSize: 14
+            font.family: "Microsoft Yahei"
+            horizontalAlignment: Text.AlignHCenter
+            //font.weight: Font.Medium
+            //anchors.horizontalCenter: parent.horizontalCenter
+        }
     }
     states: [
         State {
@@ -81,7 +85,7 @@ Button {
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#f2f2f2"
+                color: "#ffffff"
             }
         },
         State {
@@ -118,7 +122,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}D{i:1}D{i:4}D{i:5}D{i:3}
+    D{i:0;autoSize:true;formeditorZoom:1.25;height:480;width:640}D{i:1}D{i:4}D{i:5}D{i:3}
 }
 ##^##*/
 

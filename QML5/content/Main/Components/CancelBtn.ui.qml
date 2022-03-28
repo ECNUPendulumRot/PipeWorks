@@ -13,19 +13,20 @@ Button {
     background: buttonBackground
     Rectangle {
         id: buttonBackground
-        color: "#e3e3e3"
+        color: "#e7e7e7"
 
         opacity: enabled ? 1 : 0.3
-        radius: 8
-        border.color: "#d3d3d3"
-        border.width: 1
+        radius: 4
+        border.color: "#8c8c8c"
+        border.width: 2
         layer.enabled: true
         layer.effect: DropShadowEffect {
             id: dropShadow
             radius: 8
             verticalOffset: 0
             horizontalOffset: 0
-            color: "#52000000"
+            color: "#3c000000"
+            spread: 0.2
         }
     }
 
@@ -37,8 +38,9 @@ Button {
         opacity: enabled ? 1.0 : 0.3
         color: "#000000"
         text: "撤销修改"
+        font.family: "Microsoft Yahei"
         anchors.verticalCenter: parent.verticalCenter
-        font.pixelSize: 12
+        font.pixelSize: 14
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         z: 0
@@ -59,6 +61,18 @@ Button {
     }
 
     states: [
+        State {
+            name: "normal"
+        },
+        State {
+            name: "hover"
+            when: control.hovered && !control.pressed
+
+            PropertyChanges {
+                target: buttonBackground
+                color: "#ffffff"
+            }
+        },
         State {
             name: "press"
             when: control.pressed

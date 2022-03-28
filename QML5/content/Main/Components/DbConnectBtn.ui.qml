@@ -4,7 +4,7 @@ import QtQuick.Studio.Effects 1.0
 
 Button {
     id: control
-    width: 120
+    width: 140
     height: 30
 
     text: "工艺文件"
@@ -16,15 +16,15 @@ Button {
         id: buttonBackground
         color: "#e7e7e7"
         opacity: enabled ? 1 : 0.3
-        radius: 8
-        border.color: "#d3d3d3"
-        border.width: 1
+        radius: 4
+        border.color: "#8c8c8c"
+        border.width: 2
         anchors.fill: parent
         layer.enabled: true
         layer.effect: DropShadowEffect {
             id: dropShadow
             color: "#3c000000"
-            radius: 16
+            radius: 8
             spread: 0.2
             verticalOffset: 0
             horizontalOffset: 0
@@ -39,8 +39,8 @@ Button {
 
         Image {
             id: dataDb
-            x: 10
-            y: 14
+            //x: 10
+            //y: 14
             width: 19
             height: 16
             anchors.verticalCenter: parent.verticalCenter
@@ -54,8 +54,8 @@ Button {
 
         Image {
             id: arrow
-            x: 176
-            y: 14
+            //x: 176
+            //y: 14
             width: 18
             height: 16
             anchors.verticalCenter: parent.verticalCenter
@@ -69,13 +69,13 @@ Button {
 
         Text {
             id: textItem
-            x: 29
-            y: 0
+            //x: 29
+            //y: 0
             height: 30
 
             opacity: enabled ? 1.0 : 0.3
 
-            color: "#161616"
+            color: "#000000"
             text: "工艺文件"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: dataDb.right
@@ -88,8 +88,9 @@ Button {
             anchors.rightMargin: 13
             fontSizeMode: Text.VerticalFit
             font.bold: false
-            font.weight: Font.Light
+            //font.weight: Font.Light
             font.pixelSize: 14
+            font.family: "Microsoft Yahei"
             styleColor: "#121212"
         }
     }
@@ -103,7 +104,7 @@ Button {
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#f2f2f2"
+                color: "#ffffff"
             }
         },
         State {
@@ -141,8 +142,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;height:33;width:120}D{i:12;transitionDuration:2000}D{i:1}D{i:4}D{i:5}D{i:6}
-D{i:3}
+    D{i:0;height:33;width:120}D{i:1}D{i:4}D{i:5}D{i:6}D{i:3}D{i:12;transitionDuration:2000}
 }
 ##^##*/
 

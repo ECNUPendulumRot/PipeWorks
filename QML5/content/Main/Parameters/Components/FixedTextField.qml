@@ -6,7 +6,8 @@ TextField {
     id: textField
     width: 100
     height: 20
-    color: "#202020"
+    color: "#000000"
+
     font.pixelSize: 14
     horizontalAlignment: Text.AlignLeft
     property alias rectangle1Color: rectangle1.color
@@ -21,13 +22,14 @@ TextField {
     background: rectangle1
 
     onTextChanged: {
-        textField.color = "#50BFFA"
+        textField.color = "#e5004f"
     }
 
     Rectangle {
         id: rectangle1
         color: "#ffffff"
-        border.width: 0
+        border.width: 1
+        border.color: "#d2d2d2"
         anchors.fill: parent
     }
     states: [
@@ -37,8 +39,8 @@ TextField {
 
             PropertyChanges {
                 target: rectangle1
-                border.color: "#384489"
-                border.width: 2
+                border.color: "#1c76c2"
+                border.width: 1
             }
         }
     ]

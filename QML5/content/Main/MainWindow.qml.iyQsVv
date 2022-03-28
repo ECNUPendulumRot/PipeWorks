@@ -112,7 +112,7 @@ Rectangle {
             color: "#38000000"
             radius: 8
             horizontalOffset: 1
-            spread: 0.2
+            spread: 0.1
             verticalOffset: 0
         }
         z: 2
@@ -270,31 +270,16 @@ Rectangle {
 
     ExitBtn {
         id: exitBtn
-        //x: 1317
-        //y: 8
+        x: 1317
+        y: 8
         width: 50
-        anchors{
-          right: mainBar.right
-          verticalCenter: mainBar.verticalCenter
-        }
-        //anchors.right: mainBar.right
-        //anchors.top: mainBar.top
-        //anchors.bottom: mainBar.bottom
-        antialiasing: true
+        anchors.right: parent.right
+        anchors.top: mainBar.top
+        anchors.bottom: mainBar.bottom
+        antialiasing: false
         z: 4
 
         onClicked: logoutPopup.open();
-    }
-
-
-    LogoutPopup{
-        id:logoutPopup
-        x: exitBtn.x - (logoutPopup.width - exitBtn.width)
-        y: exitBtn.y + exitBtn.height
-        z:3
-
-        closeBtn.onClicked: Qt.quit()
-        logoutBtn.onClicked: userLogout()
     }
 
     PopupDb {
@@ -373,6 +358,15 @@ Rectangle {
         }
     }
 
+    LogoutPopup{
+        id:logoutPopup
+        x: exitBtn.x - (logoutPopup.width - exitBtn.width)
+        y: exitBtn.y + exitBtn.height
+        z:3
+
+        closeBtn.onClicked: Qt.quit()
+        logoutBtn.onClicked: userLogout()
+    }
 
     CommPopup {
         id: commPop

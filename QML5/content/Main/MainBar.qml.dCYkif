@@ -45,7 +45,7 @@ Rectangle {
           leftMargin: 6
           //verticalCenterOffset: 1
         }
-        font.pixelSize: 18
+        font.pixelSize: 16
         font.family:"Microsoft Yahei"
     }
 
@@ -82,7 +82,7 @@ Rectangle {
           verticalCenterOffset: 0
         }
         textItemText: "控制参数配置"
-        imageSource: "../images/control.png"
+        imageSource: "../images/motion.png"
     }
 
 
@@ -96,7 +96,7 @@ Rectangle {
           verticalCenterOffset: 0
         }
         textItemText: "通讯参数配置"
-        imageSource: "../images/commmunication.png"
+        imageSource: "../images/motion.png"
     }
 
 

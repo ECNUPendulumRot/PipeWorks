@@ -68,21 +68,15 @@ Popup{
 
         DbBtn {
             id: openBtn
-            //height: 48
             height: control.implicitHeight/6-2
             text: "打开"
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            font.pixelSize: 12
-            bottomPadding: 2
-            topPadding: 2
-            highlighted: false
-            flat: false
             anchors.leftMargin: 2
             anchors.rightMargin: 2
             anchors.topMargin: 2
-            anchors.bottomMargin: 2
+            //anchors.bottomMargin: 2
 
             textItemLeftPadding: 30
             textItemHorizontalAlignment: 1
@@ -106,10 +100,6 @@ Popup{
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: openBtn.bottom
-            font.pixelSize: 12
-            bottomPadding: 2
-            topPadding: 2
-            font.capitalization: Font.MixedCase
             textItemLeftPadding: 30
             textItemHorizontalAlignment: 1
             anchors.leftMargin: 2
@@ -132,6 +122,33 @@ Popup{
             }
         }
 
+        DbBtn {
+            id: disconnectBtn
+            height: control.implicitHeight/6-2
+            text: "关闭工艺文件"
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: ftpBtn.bottom
+            textItemLeftPadding: 30
+            textItemHorizontalAlignment: 1
+            buttonBackgroundRadius: 0
+            anchors.leftMargin: 2
+            anchors.rightMargin: 2
+            anchors.topMargin: 2
+            //anchors.bottomMargin: 2
+            Rectangle {
+                height: 1
+                color: "#c8c8c8"
+                border.color: "#343434"
+                border.width: 0
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.leftMargin: 5
+                anchors.rightMargin: 5
+                anchors.bottomMargin: 0
+            }
+        }
 
         DbBtn {
             id: uploadBtn
@@ -146,7 +163,7 @@ Popup{
             anchors.leftMargin: 2
             anchors.rightMargin: 2
             anchors.topMargin: 2
-            anchors.bottomMargin: 2
+            //anchors.bottomMargin: 2
             Rectangle {
                 height: 1
                 color: "#c8c8c8"
@@ -163,7 +180,7 @@ Popup{
 
         DbBtn {
             id: downloadBtn
-            height: control.implicitHeight/6-2
+            height:control.implicitHeight/6-2
             text: "下载至本地"
             anchors.left: parent.left
             anchors.right: parent.right
@@ -174,7 +191,7 @@ Popup{
             anchors.leftMargin: 2
             anchors.rightMargin: 2
             anchors.topMargin: 2
-            anchors.bottomMargin: 2
+            //anchors.bottomMargin: 2
             Rectangle {
                 height: 1
                 color: "#c8c8c8"
@@ -192,7 +209,7 @@ Popup{
 
         DbBtn {
             id: ftpBtn
-            height: control.implicitHeight/6-2
+            height:control.implicitHeight/6-2
             text: "中控FTP设置"
             anchors.left: parent.left
             anchors.right: parent.right
@@ -203,49 +220,21 @@ Popup{
             anchors.leftMargin: 2
             anchors.rightMargin: 2
             anchors.topMargin: 2
-            anchors.bottomMargin: 2
-
-//            Rectangle {
-//                height: 1
-//                color: "#c8c8c8"
-//                border.color: "#343434"
-//                border.width: 0
-//                anchors.left: parent.left
-//                anchors.right: parent.right
-//                anchors.top: parent.bottom
-//                anchors.leftMargin: 5
-//                anchors.rightMargin: 5
-//                anchors.bottomMargin: 0
-//            }
-        //}
-
-            DbBtn {
-                id: disconnectBtn
-                height: control.implicitHeight/6-2
-                text: "关闭工艺文件"
+            anchors.bottomMargin: 0
+            Rectangle {
+                height: 1
+                color: "#c8c8c8"
+                border.color: "#343434"
+                border.width: 0
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.top: ftpBtn.bottom
-                textItemLeftPadding: 30
-                textItemHorizontalAlignment: 1
-                buttonBackgroundRadius: 0
-                anchors.leftMargin: 2
-                anchors.rightMargin: 2
-                anchors.topMargin: 2
-                anchors.bottomMargin: 2
-                Rectangle {
-                    height: 1
-                    color: "#c8c8c8"
-                    border.color: "#343434"
-                    border.width: 0
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.bottom: parent.bottom
-                    anchors.leftMargin: 5
-                    anchors.rightMargin: 5
-                    anchors.bottomMargin: 0
-                }
+                anchors.bottom: parent.bottom
+                anchors.leftMargin: 5
+                anchors.rightMargin: 5
+                anchors.bottomMargin: 0
             }
+        //}
+
 
 
     }
@@ -263,7 +252,7 @@ Popup{
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.33}D{i:2}D{i:1}D{i:4}D{i:3}D{i:6}D{i:5}D{i:8}D{i:7}D{i:10}
-D{i:9}D{i:12}D{i:11}D{i:13}
+    D{i:0;formeditorZoom:1.33}D{i:2}D{i:1}D{i:5}D{i:4}D{i:7}D{i:6}D{i:9}D{i:8}D{i:11}
+D{i:10}D{i:13}D{i:12}D{i:15}D{i:14}D{i:3}
 }
 ##^##*/

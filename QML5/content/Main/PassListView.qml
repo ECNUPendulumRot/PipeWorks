@@ -181,7 +181,7 @@ Rectangle {
     PassEditBtn {
         id: passEditBtn10
         anchors.left: pass1View.left
-        anchors.leftMargin: -8
+        anchors.leftMargin: 0
         anchors.verticalCenter: pass1View.top
         anchors.verticalCenterOffset: 0 * 30 + 13
 
@@ -205,7 +205,7 @@ Rectangle {
     PassEditBtn {
         id: passEditBtn11
         anchors.left: pass1View.left
-        anchors.leftMargin: -8
+        anchors.leftMargin: 0
         anchors.verticalCenter: pass1View.top
         anchors.verticalCenterOffset: 1 * 30 + 13
 
@@ -229,7 +229,7 @@ Rectangle {
     PassEditBtn {
         id: passEditBtn30
         anchors.left: pass3View.left
-        anchors.leftMargin: -8
+        anchors.leftMargin: 0
         anchors.verticalCenter: pass3View.top
         anchors.verticalCenterOffset: 0 * 30 + 13
 
@@ -253,7 +253,7 @@ Rectangle {
     PassEditBtn {
         id: passEditBtn31
         anchors.left: pass3View.left
-        anchors.leftMargin: -8
+        anchors.leftMargin: 0
         anchors.verticalCenter: pass3View.top
         anchors.verticalCenterOffset: 1 * 30 + 13
 

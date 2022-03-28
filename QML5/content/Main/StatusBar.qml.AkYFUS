@@ -7,13 +7,13 @@ Rectangle {
     height: 18
     color: "#ffffff"
 
-//    property var dataMap: {"Friday":"星期五",
-//                           "Monday":"星期一",
-//                           "Tuesday" :"星期二",
-//                            "Wednesday":"星期三",
-//                            "Thursday":"星期四",
-//                            "Saturday":"星期六",
-//                            "Sunday":"星期日"}
+    property var dataMap: {"Friday":"星期五",
+                           "Monday":"星期一",
+                           "Tuesday" :"星期二",
+                            "Wednesday":"星期三",
+                            "Thursday":"星期四",
+                            "Saturday":"星期六",
+                            "Sunday":"星期日"}
 
     Text {
         id: connectionStatusTitle
@@ -55,7 +55,7 @@ Rectangle {
         height: width
         radius: width/2
         anchors.left: statusText.right
-        anchors.leftMargin: 250
+        anchors.leftMargin: 150
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: 0
     }
@@ -91,16 +91,16 @@ Rectangle {
            interval: 500; running: true; repeat: true
            onTriggered:  monitorDb()
        }
-//    Timer {
-//           id:syncDb
-//           interval: 500; running: true; repeat: true
-//           onTriggered: monitorSync()
-//       }
+    Timer {
+           id:syncDb
+           interval: 500; running: true; repeat: true
+           onTriggered: monitorSync()
+       }
 
 
-//    function getData(){
-//        return dataMap[Qt.formatDateTime(new Date(), "dddd")]
-//    }
+    function getData(){
+        return dataMap[Qt.formatDateTime(new Date(), "dddd")]
+    }
 
     function monitorDb(){
         if(scheduler.isPdbLoaded()){
@@ -112,7 +112,6 @@ Rectangle {
             statusText.text= "未连接!"
         }
     }
-
     function monitorSync(){
         var sync =  "#2fc350"
         var unsync =  "#f4f42f"
@@ -126,16 +125,15 @@ Rectangle {
             syncLight.color = sync
             syncText.text = "数据已提交保存!"
         }
+
+//        if(scheduler.isPdbLoaded()){//db is load)
+//        }
+//        else{
+//            alertLight.color = unconnect
+//            syncText.text = "未连接工艺数据库"
+//        }
+
     }
-
-////        if(scheduler.isPdbLoaded()){//db is load)
-////        }
-////        else{
-////            alertLight.color = unconnect
-////            syncText.text = "未连接工艺数据库"
-////        }
-
-//    }
 
 }
 

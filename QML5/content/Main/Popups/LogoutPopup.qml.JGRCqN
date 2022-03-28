@@ -1,0 +1,81 @@
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+
+Popup {
+    id: popup
+    width: 100
+    height: 70
+
+    implicitWidth: 100
+    implicitHeight: 70
+
+    rightPadding: 0
+    leftPadding: 0
+    bottomPadding: 0
+    topPadding: 0
+    rightMargin: 0
+    leftMargin: 0
+    bottomMargin: 0
+    topMargin: 0
+
+    closePolicy: Popup.CloseOnPressOutside
+    //modal: true
+    clip:true
+
+
+    z:3
+
+    property alias closeBtn: close
+    property alias logoutBtn: logout
+
+    background:rectangle1
+    Rectangle {
+        id: rectangle1
+        color: "#e9e9e9"
+        anchors.fill: parent
+    }
+
+    DbBtn {
+        id: close
+        height: parent.height/2
+        text: "退出"
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        font.pointSize: 12
+        anchors.topMargin: 0
+        z: 1
+        anchors.leftMargin: 4
+
+        Rectangle {
+            id: rectangle
+            height: 1
+            color: "#d2d2d2"
+            border.width: 0
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+        }
+    }
+
+    DbBtn {
+        id: logout
+        text: "切换用户"
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: close.bottom
+        anchors.bottom: parent.bottom
+        font.pointSize: 12
+        anchors.bottomMargin: 0
+        z: 1
+        anchors.leftMargin: 4
+    }
+
+
+}
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:3}D{i:1}D{i:3}D{i:2}D{i:4}
+}
+##^##*/

@@ -112,7 +112,7 @@ Rectangle {
             color: "#38000000"
             radius: 8
             horizontalOffset: 1
-            spread: 0.2
+            spread: 0.1
             verticalOffset: 0
         }
         z: 2

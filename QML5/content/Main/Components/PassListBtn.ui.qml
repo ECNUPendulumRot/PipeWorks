@@ -34,7 +34,7 @@ Button {
         implicitWidth: 66
         implicitHeight: 27
         opacity: enabled ? 1 : 0.3
-        radius: 8
+        radius: 2
         border.color: "#047eff"
         border.width: 0
     }
@@ -44,7 +44,7 @@ Button {
         id: textItem
 
         opacity: enabled ? 1.0 : 0.3
-        color: "#6a6a6a"
+        color: "#000000"
         text: control.text
         anchors.fill: parent
         horizontalAlignment: Text.AlignHCenter
@@ -53,12 +53,12 @@ Button {
 
         Text {
             id: text1
-            color: "#6a6a6a"
+            color: "#000000"
             anchors.fill: parent
             font.pixelSize: 14
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
-            anchors.leftMargin: 25
+            anchors.leftMargin: 35
         }
     }
 
@@ -86,13 +86,13 @@ Button {
             PropertyChanges {
                 target: textItem
                 horizontalAlignment: Text.AlignLeft
-                anchors.leftMargin: 30
+                anchors.leftMargin: 35
             }
 
             PropertyChanges {
                 target: buttonBackground
-                opacity: 0.7
-                color: "#c67171"
+                //opacity: 0.7
+                //color: "#c67171"
             }
         },
         State {
@@ -102,13 +102,13 @@ Button {
             PropertyChanges {
                 target: textItem
                 horizontalAlignment: Text.AlignLeft
-                anchors.leftMargin: 30
+                anchors.leftMargin: 35
             }
 
             PropertyChanges {
                 target: buttonBackground
-                opacity: 0.7
-                color: "#6c81bd"
+                //opacity: 0.7
+                //color: "#6c81bd"
             }
         },
         State {
@@ -118,14 +118,14 @@ Button {
             PropertyChanges {
                 target: textItem
                 horizontalAlignment: Text.AlignLeft
-                anchors.leftMargin: 30
+                anchors.leftMargin: 40
             }
 
             PropertyChanges {
                 target: buttonBackground
-                opacity: 0.7
-                color: "#c67171"
-                border.color: "#ff0404"
+                //opacity: 0.7
+                //color: "#c67171"
+                border.color: "#045ba4"
                 border.width: 3
             }
         },
@@ -136,13 +136,15 @@ Button {
             PropertyChanges {
                 target: textItem
                 horizontalAlignment: Text.AlignLeft
-                anchors.leftMargin: 30
+                anchors.leftMargin: 40
             }
 
             PropertyChanges {
                 target: buttonBackground
-                opacity: 0.7
-                color: "#6c81bd"
+                //opacity: 0.7
+                //color: "#6c81bd"
+                //border.width: 3
+                border.color: "#045ba4"
                 border.width: 3
             }
         }

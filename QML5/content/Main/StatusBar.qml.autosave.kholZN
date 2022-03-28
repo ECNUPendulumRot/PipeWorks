@@ -7,13 +7,13 @@ Rectangle {
     height: 18
     color: "#ffffff"
 
-//    property var dataMap: {"Friday":"星期五",
-//                           "Monday":"星期一",
-//                           "Tuesday" :"星期二",
-//                            "Wednesday":"星期三",
-//                            "Thursday":"星期四",
-//                            "Saturday":"星期六",
-//                            "Sunday":"星期日"}
+    property var dataMap: {"Friday":"星期五",
+                           "Monday":"星期一",
+                           "Tuesday" :"星期二",
+                            "Wednesday":"星期三",
+                            "Thursday":"星期四",
+                            "Saturday":"星期六",
+                            "Sunday":"星期日"}
 
     Text {
         id: connectionStatusTitle
@@ -28,46 +28,44 @@ Rectangle {
     Rectangle {
         id: connectionLight
         color: "#ff0000"
-        width: parent.height-4
+        width: parent.height
         height: width
         radius: width/2
+        anchors.verticalCenter: parent.verticalCenter
         anchors.left: connectionStatusTitle.right
         anchors.leftMargin: 5
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: 0
+        anchors.verticalCenterOffset: 1
     }
 
     Text {
         id: statusText
         color: "#000000"
-         font.pixelSize: 12
         text: qsTr("未连接")
+        anchors.verticalCenter: parent.verticalCenter
         anchors.left: connectionLight.right
         anchors.leftMargin: 10
-        anchors.verticalCenter: parent.verticalCenter
-
+        font.pixelSize: 12
     }
 
     Rectangle {
         id: syncLight
-        color: "#00ff00"
-        width: parent.height-4
+        color: "#00bb00"
+        width: parent.height
         height: width
         radius: width/2
-        anchors.left: statusText.right
-        anchors.leftMargin: 250
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: 0
+        anchors.left: statusText.right
+        anchors.leftMargin: 50
+        anchors.verticalCenterOffset: 1
     }
 
     Text {
         id: syncText
-        color: "#000000"
         font.pixelSize: 12
-        text: qsTr("数据已提交保存!")
+//        text: qsTr("已同步")
 
         anchors.left: syncLight.right
-        anchors.leftMargin: 10
+        anchors.leftMargin: 100
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: 0
     }
@@ -89,30 +87,29 @@ Rectangle {
     Timer {
            id:dbConnect
            interval: 500; running: true; repeat: true
-           onTriggered:  monitorDb()
+           onTriggered: statusText.text= monitorDb()
        }
-//    Timer {
-//           id:syncDb
-//           interval: 500; running: true; repeat: true
-//           onTriggered: monitorSync()
-//       }
+    Timer {
+           id:syncDb
+           interval: 500; running: true; repeat: true
+           onTriggered: monitorSync()
+       }
 
 
-//    function getData(){
-//        return dataMap[Qt.formatDateTime(new Date(), "dddd")]
-//    }
+    function getData(){
+        return dataMap[Qt.formatDateTime(new Date(), "dddd")]
+    }
 
     function monitorDb(){
         if(scheduler.isPdbLoaded()){
             connectionLight.color = "#00ff00"
-            statusText.text= "连接成功!"
+            return "连接成功!"
         }
         else{
             connectionLight.color = "#ff0000"
-            statusText.text= "未连接!"
+            return "未连接!"
         }
     }
-
     function monitorSync(){
         var sync =  "#2fc350"
         var unsync =  "#f4f42f"
@@ -120,22 +117,21 @@ Rectangle {
 
         if(scheduler.callIsDirty()){
             syncLight.color = unsync
-            syncText.text = "修改后的数据未提交!"
+            syncText.text = "修改后的数据未提交"
         }
         else{
             syncLight.color = sync
-            syncText.text = "数据已提交保存!"
+            syncText.text = "修改后的数据已提交"
         }
+
+//        if(scheduler.isPdbLoaded()){//db is load)
+//        }
+//        else{
+//            alertLight.color = unconnect
+//            syncText.text = "未连接工艺数据库"
+//        }
+
     }
-
-////        if(scheduler.isPdbLoaded()){//db is load)
-////        }
-////        else{
-////            alertLight.color = unconnect
-////            syncText.text = "未连接工艺数据库"
-////        }
-
-//    }
 
 }
 

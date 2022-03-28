@@ -48,9 +48,9 @@ Rectangle {
         height: 16
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: label.left
+        anchors.leftMargin: 70
         font.pixelSize: 12
         rectangle1Color: "#ffffff"
-        anchors.leftMargin: 70
         anchors.verticalCenterOffset: 0
 
         onAccepted: {

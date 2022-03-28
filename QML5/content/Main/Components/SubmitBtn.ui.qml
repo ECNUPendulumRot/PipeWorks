@@ -16,25 +16,25 @@ Button {
     leftPadding: 4
     rightPadding: 4
 
-    text: "My Button"
+    text: "ButtonText"
 
     background: buttonBackground
     Rectangle {
         id: buttonBackground
-        color: "#0d267b"
+        color: "#1c76c2"
         implicitWidth: 100
         implicitHeight: 40
         opacity: enabled ? 1 : 0.3
-        radius: 8
-        border.color: "#047eff"
-        border.width: 0
+        radius: 4
+        border.color: "#1c76c2"
+        border.width: 2
         layer.enabled: true
         layer.effect: DropShadowEffect {
             id: dropShadow
-            radius: 8
+            radius: 4
             verticalOffset: 0
             horizontalOffset: 0
-            color: "#52000000"
+            color: "#3c000000"
         }
     }
 
@@ -46,7 +46,8 @@ Button {
         opacity: enabled ? 1.0 : 0.3
         color: "#ffffff"
         text: "提交数据"
-        font.pixelSize: 12
+        font.pixelSize: 14
+        font.family: "Microsoft Yahei"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
     }
@@ -72,8 +73,8 @@ Button {
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#122261"
-                border.color: "#047eff"
+                color: "#4c8fc7"
+                border.color: "#045ba4"
             }
 
             PropertyChanges {
@@ -91,8 +92,8 @@ Button {
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#081750"
-                border.color: "#00000000"
+                color: "#1c76c2"
+                border.color: "#d1d1d1"
             }
 
             PropertyChanges {
@@ -105,7 +106,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.33;height:40;width:100}D{i:1}D{i:3}D{i:4}
+    D{i:0;formeditorZoom:10;height:40;width:100}D{i:1}D{i:3}D{i:4}
 }
 ##^##*/
 
