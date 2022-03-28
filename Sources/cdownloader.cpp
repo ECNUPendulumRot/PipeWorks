@@ -46,7 +46,7 @@ void Downloader::get(const QString &path, const QString &fileName)
     QNetworkReply *pReply = manager.get(QNetworkRequest(pUrl));
 
     connect(pReply, SIGNAL(finished()), this, SLOT(finished()));
-    //connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SIGNAL(downloadProgress(qint64, qint64)));
+    connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(downloadProgress(qint64, qint64)));
     connect(pReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SIGNAL(error(QNetworkReply::NetworkError)));
     connect(this, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(showError(QNetworkReply::NetworkError)));
 }
@@ -69,6 +69,8 @@ void Downloader::readConfig()
     user = in.readLine();
     password = in.readLine();
     uploadName = in.readLine();
+    downloadName = in.readLine();
+    qDebug()<<downloadName + "gg";
 }
 
 void Downloader::writeConfig()
@@ -83,6 +85,7 @@ void Downloader::writeConfig()
     out << user << "\n";
     out << password << "\n";
     out << uploadName << "\n";
+    out << downloadName << "\n";
 }
 
 QString Downloader::getIP()
@@ -105,6 +108,10 @@ QString Downloader::getUploadName()
 {
     return uploadName;
 }
+QString Downloader::getDownloadName()
+{
+    return downloadName;
+}
 void Downloader::setIP(QString ip)
 {
     this->ip = ip;
@@ -124,6 +131,11 @@ void Downloader::setPassword(QString password)
 void Downloader::setUploadName(QString uploadName)
 {
     this->uploadName = uploadName;
+}
+
+void Downloader::setDownloadName(QString downloadName)
+{
+    this->uploadName = downloadName;
 }
 
 void Downloader::finished()
@@ -161,4 +173,10 @@ void Downloader::showError(QNetworkReply::NetworkError error)
 void Downloader::uploadProgress(qint64 bytesSent, qint64 bytesTotal){
     qDebug() << "upload" << bytesSent << "of" << bytesTotal;
     emit upProgress(bytesSent, bytesTotal);
+}
+
+void Downloader::downloadProgress(qint64 bytesSent, qint64 bytesTotal)
+{
+    qDebug() << "download" << bytesSent << "of" << bytesTotal;
+    emit downProgress(bytesSent, bytesTotal);
 }

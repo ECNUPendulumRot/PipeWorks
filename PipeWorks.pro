@@ -62,6 +62,7 @@ DISTFILES += \
     QML5/content/Login/InformationMangemet.qml \
     QML5/content/Login/PwUpdateButton.qml \
     QML5/content/Main/Components/SelectComboBoxFix.qml \
+    QML5/content/Main/Popups/DownloadDialog.qml \
     QML5/content/Main/Popups/UploadDialog.qml \
     QML5/content/Main/Parameters/MotionParameterLite.qml \
     QML5/content/images/DpLogoMain.png
