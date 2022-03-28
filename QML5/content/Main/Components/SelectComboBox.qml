@@ -161,7 +161,7 @@ ComboBox {
             color: "#e7e7e7"
             border.color: "#D3D3D3"
             border.width: 0
-            radius: 8
+            radius: 4
 
 
         }

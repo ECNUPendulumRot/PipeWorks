@@ -513,7 +513,6 @@ Rectangle {
         }
     }
 
-
     Popup {
         id: pwPopup
 
@@ -559,6 +558,13 @@ Rectangle {
             }
         }
     }
+
+    MouseArea {
+        anchors.fill: parent
+        z: -10
+        onClicked: forceActiveFocus()
+    }
+
 
     ///
     /// signals and functions

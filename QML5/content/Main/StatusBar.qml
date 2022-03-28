@@ -28,11 +28,11 @@ Rectangle {
     Rectangle {
         id: connectionLight
         color: "#ff0000"
-        width: parent.height-15
+        width: statusText.height + 5
         height: width
         radius: width/2
         anchors.left: connectionStatusTitle.right
-        anchors.leftMargin: 5
+        anchors.leftMargin: 25
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: 0
     }
@@ -51,11 +51,11 @@ Rectangle {
     Rectangle {
         id: syncLight
         color: "#eee"
-        width: parent.height-15
+        width: syncText.height + 5
         height: width
         radius: width/2
-        anchors.left: statusText.right
-        anchors.leftMargin: 250
+        anchors.left: connectionLight.right
+        anchors.leftMargin: 300
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: 0
     }
@@ -140,7 +140,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.9;height:16;width:1366}D{i:1}D{i:2}D{i:3}D{i:4}D{i:5}D{i:6}
-D{i:7}D{i:8}D{i:9}
+    D{i:0;formeditorZoom:0.9;height:16;width:1366}
 }
 ##^##*/
