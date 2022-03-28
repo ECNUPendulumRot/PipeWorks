@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 
@@ -63,7 +63,7 @@ Popup{
 
         TextField {
             id: ipaddress
-            text: "localhost"
+            text: ""
             x: 57
             y: 67
             width: 122
@@ -72,7 +72,7 @@ Popup{
 
         TextField {
             id: user
-            text: "tzz"
+            text: ""
             x: 57
             y: 110
             width: 122
@@ -81,7 +81,7 @@ Popup{
 
         TextField {
             id: port
-            text: "21"
+            text: ""
             x: 261
             y: 67
             width: 122
@@ -90,7 +90,7 @@ Popup{
 
         TextField {
             id: password
-            text: "tzz0519"
+            text: ""
             x: 261
             y: 110
             width: 122

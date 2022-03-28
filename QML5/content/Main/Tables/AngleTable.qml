@@ -1,26 +1,19 @@
 ﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
-import Qt.labs.qmlmodels 1.0
 import QtQml 2.15
 import "MultiSelection"
 import ModelCraft 1.0
 
-Rectangle {
+Item {
     id: widget
 
     signal webTableRequestFresh(int row, int column, string text )
 
-    width: 300
-    height: 770
-
-    visible: true
-    enabled: true
-    color: "transparent"
-    border.color: "#ffffff"
-    border.width: 0
+    anchors.fill: parent
+    anchors.margins: 10
+    anchors.bottomMargin: 0
 
     property bool isCheck : false
-    property var multiModeCopy : null
 
     property var engToChn : {//cmd <------> table column name
         "angle"         :"角度\n(度)",
@@ -41,6 +34,115 @@ Rectangle {
 
     }
 
+    OperationBtn {
+        id: multiselect
+
+        textItemColor: "#202020"
+        buttonBackgroundBordercolor: "#202020"
+        wrapperColor: "#472b2b2b"
+
+        text: qsTr("批量操作")
+        enabled: visible
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {
+            if(scheduler.isPdbLoaded()){
+                disableSingleSelect(view)
+                widget.isCheck = true
+            }
+        }
+    }
+
+
+    OperationBtn {
+        id: cancel
+        text: qsTr("取消")
+
+        textItemColor: "#B90000"
+        buttonBackgroundBordercolor: "#B90000"
+        wrapperColor: "#5df74f4f"
+        visible : false
+        enabled: visible
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+        anchors.verticalCenter: multiselect.verticalCenter
+
+        onClicked: {
+            reset()
+            enableSingleSelect(view);
+            angleRelatedTableModel.callFetchData();
+            widget.isCheck = false
+        }
+    }
+
+    OperationBtn {
+        id: confirm
+        text: qsTr("确认")
+
+        textItemColor: "#0B8559"
+        buttonBackgroundBordercolor: "#0B8559"
+        wrapperColor: "#5f4df056"
+
+        visible: false
+        enabled: visible
+        anchors.left: parent.left
+        anchors.leftMargin: 20
+        anchors.verticalCenter: multiselect.verticalCenter
+
+        onClicked: {
+            reset()
+            angleRelatedTableModel.callWriteBack();
+            enableSingleSelect(view);
+            calculation.clear()
+            widget.isCheck = false
+        }
+    }
+
+    Timer {
+        id: resizeTimer
+        interval: 10
+        running: false
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {view.forceLayout()}
+    }
+
+    ButtonGroup {
+        id: groupBtn
+        exclusive: false
+        checkState: rootCheckbx.checkState
+    }
+
+    SelectCheckBx {
+        id: rootCheckbx
+        checked: display
+        width: 20
+        height: 20
+        visible: false
+
+        tristate: true
+        anchors.verticalCenter: header.verticalCenter
+        display: AbstractButton.IconOnly
+        anchors.horizontalCenter: checkboxView.horizontalCenter
+        checkState: groupBtn.checkState
+
+
+        nextCheckState: function() {
+                if (checkState === Qt.Checked)
+                    return Qt.Unchecked
+                else
+                    return Qt.Checked
+            }
+
+        onCheckStateChanged: {
+            var i = 0
+            if(checkState === Qt.Checked)
+                checkModel.set(true)
+            else if(checkState === Qt.Unchecked)
+                checkModel.set(false)
+        }
+    }
 
     ListView {
         id: header
@@ -156,12 +258,6 @@ Rectangle {
                 }
             }
         }
-    }
-
-    TableModel {
-        id: checkboxModel
-        TableModelColumn { display: "checkStatus" }
-        Component.onCompleted: checkbxModelCreate()
     }
 
     CheckModel{
@@ -325,114 +421,6 @@ Rectangle {
     }
 
 
-    OperationBtn {
-        id: multiselect
-        y: 723
-
-        textItemColor: "#202020"
-        buttonBackgroundBordercolor: "#202020"
-        wrapperColor: "#472b2b2b"
-
-        text: qsTr("批量操作")
-        enabled: visible
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 10
-        anchors.horizontalCenter: parent.horizontalCenter
-        onClicked: {
-            disableSingleSelect(view)
-            widget.isCheck = true
-        }
-    }
-
-
-    OperationBtn {
-        id: cancel
-        text: qsTr("取消")
-
-        textItemColor: "#B90000"
-        buttonBackgroundBordercolor: "#B90000"
-        wrapperColor: "#5df74f4f"
-        visible : false
-        enabled: visible
-        anchors.right: parent.right
-        anchors.rightMargin: 20
-        anchors.verticalCenter: multiselect.verticalCenter
-
-        onClicked: {
-            reset()
-            enableSingleSelect(view);
-            angleRelatedTableModel.callFetchData();
-            widget.isCheck = false
-        }
-    }
-
-    OperationBtn {
-        id: confirm
-        text: qsTr("确认")
-
-        textItemColor: "#0B8559"
-        buttonBackgroundBordercolor: "#0B8559"
-        wrapperColor: "#5f4df056"
-
-        visible: false
-        enabled: visible
-        anchors.left: parent.left
-        anchors.leftMargin: 20
-        anchors.verticalCenter: multiselect.verticalCenter
-
-        onClicked: {
-            reset()
-            angleRelatedTableModel.callWriteBack();
-            enableSingleSelect(view);
-            calculation.clear()
-            widget.isCheck = false
-        }
-    }
-
-    Timer {
-        id: resizeTimer
-        interval: 10
-        running: false
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: {view.forceLayout()}
-    }
-
-    ButtonGroup {
-        id: groupBtn
-        exclusive: false
-        checkState: rootCheckbx.checkState
-    }
-
-    SelectCheckBx {
-        id: rootCheckbx
-        checked: display
-        width: 20
-        height: 20
-        visible: false
-
-        tristate: true
-        anchors.verticalCenter: header.verticalCenter
-        display: AbstractButton.IconOnly
-        anchors.horizontalCenter: checkboxView.horizontalCenter
-        checkState: groupBtn.checkState
-
-
-        nextCheckState: function() {
-                if (checkState === Qt.Checked)
-                    return Qt.Unchecked
-                else
-                    return Qt.Checked
-            }
-
-        onCheckStateChanged: {
-            var i = 0
-            if(checkState === Qt.Checked)
-                checkModel.set(true)
-            else if(checkState === Qt.Unchecked)
-                checkModel.set(false)
-        }
-    }
 
     states: [
         State {
@@ -555,12 +543,6 @@ Rectangle {
     ///
     /// \functions and signals
     ///
-    function checkbxModelCreate(){
-        for(var i = 0; i < view.rows; i++){
-            checkboxModel.appendRow({"checkStatus":false})
-        }
-        //qDebug.log(checkboxModel.rows[2])
-    }
 
     function addGroup(button){
         groupBtn.addButton(button)
@@ -621,40 +603,39 @@ Rectangle {
         }
     }
 
-    function modelToCopy(){
-        var copy = []
-        for(var i = 0; i < view.rows; i++){
-            var storeRow = []
-            for(var j = 0; j < view.columns; j++)
-                storeRow.push(angleRelatedTableModel.callGetData(i, j))
-            copy.push(storeRow)
-        }
-        multiModeCopy =  copy;
-    }
+//    function modelToCopy(){
+//        var copy = []
+//        for(var i = 0; i < view.rows; i++){
+//            var storeRow = []
+//            for(var j = 0; j < view.columns; j++)
+//                storeRow.push(angleRelatedTableModel.callGetData(i, j))
+//            copy.push(storeRow)
+//        }
+//        multiModeCopy =  copy;
+//    }
 
 
-    function copyToModel(){
-        console.log("write")
-        if(multiModeCopy !== null){
-            for(var i = 0; i < view.rows; i++){
-                for(var j = 0; j < view.columns; j++){
-                    if(multiModeCopy[i][j] !== angleRelatedTableModel.callGetData(i, j)){
-                        angleRelatedTableModel.callSetData(i, j, multiModeCopy[i][j])
-                        console.log("write")
-                    }
-                    console.log(multiModeCopy[i][j])
-                }
-            }
-        }
-    }
+//    function copyToModel(){
+//        console.log("write")
+//        if(multiModeCopy !== null){
+//            for(var i = 0; i < view.rows; i++){
+//                for(var j = 0; j < view.columns; j++){
+//                    if(multiModeCopy[i][j] !== angleRelatedTableModel.callGetData(i, j)){
+//                        angleRelatedTableModel.callSetData(i, j, multiModeCopy[i][j])
+//                        console.log("write")
+//                    }
+//                    console.log(multiModeCopy[i][j])
+//                }
+//            }
+//        }
+//    }
 
+//    function refreshAfterCancel(){
+//        angleRelatedTableModel.callRevert();
+//        copyToModel()
+//    }
 
-    function refreshAfterCancel(){
-        angleRelatedTableModel.callRevert();
-        copyToModel()
-    }
-
-    function restoreBeforeOp(){
-        modelToCopy()
-    }
+//    function restoreBeforeOp(){
+//        modelToCopy()
+//    }
 }

@@ -6,6 +6,7 @@ import "Components"
 import "Tables"
 import "Popups"
 import "Parameters"
+import ModelCraft 1.0
 
 Rectangle {
     id: root
@@ -14,7 +15,7 @@ Rectangle {
     width: 1366
     height: 768
 
-    property var angleTableContainer : null
+    //property var angleTableContainer : null
     
     Rectangle {
         id: webEngineWrapper
@@ -54,6 +55,17 @@ Rectangle {
             horizontalOffset: -1
             spread: 0.1
             verticalOffset: 0
+        }
+
+        Loader {
+            id: angleTableContainer
+            anchors.fill : parent
+            anchors.leftMargin : 10
+            anchors.topMargin : 10
+            anchors.rightMargin : 10
+            anchors.bottom : parent.bottom
+
+            source: ""
         }
     }
 
@@ -316,6 +328,7 @@ Rectangle {
 
         ftpBtn.onClicked:{
             popupDb.close();
+            getFTPConfig();
             ftpDialog.open();
         }
 
@@ -432,6 +445,7 @@ Rectangle {
 
         confirmBtn.onClicked: {
             ftpConfig(ip, port, user, password)
+            setFTPConfig()
             ftpDialog.close()
         }
 
@@ -487,39 +501,59 @@ Rectangle {
         fixedPopupInitialize();
     }
 
-    function createAngleTable(){
-        angleTableContainer = Qt.createQmlObject(
-                    'import QtQuick 2.15
-                     import QtQuick.Controls 2.15
-                     import "Tables"
+//    function createAngleTable(){
+//        var component = Qt.createComponent("Tables/AngleTable.qml");
+//        if (component.status === Component.Ready) {
+//            angleTableContainer = component.createObject(angleTableWrapper);
+//            angleTableContainer.anchors.fill = angleTableWrapper
+//            angleTableContainer.anchors.leftMargin = 10
+//            angleTableContainer.anchors.topMargin = 10
+//            angleTableContainer.anchors.rightMargin = 10
+//            angleTableContainer.anchors.bottom =  angleTableWrapper.bottom
+//        }
+//        angleTableContainer = Qt.createQmlObject(
+//                    'import QtQuick 2.15
+//                     import QtQuick.Controls 2.15
+//                     import "Tables"
+//                     import ModelCraft 1.0
 
-                     AngleTable {
-                        id : angleTable
-                        anchors.fill: parent
-                        anchors.leftMargin: 10
-                        anchors.topMargin: 10
-                        anchors.rightMargin: 10
-                        anchors.bottom: parent.bottom
-                     }
-                     ',
-                    angleTableWrapper)
-    }
+//                     AngleTable {
+//                        id : angleTable
+//                        anchors.fill: parent
+//                        anchors.leftMargin: 10
+//                        anchors.topMargin: 10
+//                        anchors.rightMargin: 10
+//                        anchors.bottom: parent.bottom
+//                     }
+//                     ',
+//                    angleTableWrapper)
+//    }
 
     function destroyAngleTable(){
-        angleTableContainer.destroy();
+//        angleTableContainer.destroy();
+//        angleTableContainer = null;
+//        angleTableContainer.visible = false;
+        //angleTableContainer.item.destroy();
+        angleTableContainer.source = "";
+
     }
 
     /// refresh angletable and webview
     function refreshAngleTable(s){
-        if(angleTableContainer !== null)
+        if(angleTableContainer.source !== ""){
             destroyAngleTable();
-        createAngleTable();
+            console.log(angleTableContainer.source)
+        }
+
+        //createAngleTable();
+
+        angleTableContainer.source = "Tables/AngleTable.qml"
         angleWebContainer.refreshWebTable(s)
     }
 
     function disconnect(){
         if(scheduler.isPdbLoaded()){
-            destroyAngleTable()
+            destroyAngleTable();
             scheduler.callCloseDataBase();
             passListView.clear();
             fixedTable.clear();
@@ -573,6 +607,22 @@ Rectangle {
     function ftpConfig(ip, port, user, password){
         downloader.setHostPort(ip, port)
         downloader.setUserInfo(user, password)
+    }
+
+    function getFTPConfig(){
+        downloader.readConfig()
+        ftpDialog.ip = downloader.getIP()
+        ftpDialog.port = downloader.getPort()
+        ftpDialog.user = downloader.getUser()
+        ftpDialog.password = downloader.getPassword()
+    }
+
+    function setFTPConfig(){
+        downloader.setIP(ftpDialog.ip)
+        downloader.setPort(ftpDialog.port)
+        downloader.setUser(ftpDialog.user)
+        downloader.setPassword(ftpDialog.password)
+        downloader.writeConfig()
     }
 }
 
