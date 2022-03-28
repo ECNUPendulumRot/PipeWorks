@@ -31,81 +31,6 @@ Item {
         "carSPEED"      :"小车速度\n(毫米/秒)",
         "leadTargetCur" :"前枪干伸高度值\n(毫米)",
         "trailTargetCur":"后枪干伸高度值\n(毫米)"
-
-    }
-
-    OperationBtn {
-        id: multiselect
-
-        textItemColor: "#202020"
-        buttonBackgroundBordercolor: "#202020"
-        wrapperColor: "#472b2b2b"
-
-        text: qsTr("批量操作")
-        enabled: visible
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 10
-        anchors.horizontalCenter: parent.horizontalCenter
-        onClicked: {
-            if(scheduler.isPdbLoaded()){
-                disableSingleSelect(view)
-                widget.isCheck = true
-            }
-        }
-    }
-
-
-    OperationBtn {
-        id: cancel
-        text: qsTr("取消")
-
-        textItemColor: "#B90000"
-        buttonBackgroundBordercolor: "#B90000"
-        wrapperColor: "#5df74f4f"
-        visible : false
-        enabled: visible
-        anchors.right: parent.right
-        anchors.rightMargin: 20
-        anchors.verticalCenter: multiselect.verticalCenter
-
-        onClicked: {
-            reset()
-            enableSingleSelect(view);
-            angleRelatedTableModel.callFetchData();
-            widget.isCheck = false
-        }
-    }
-
-    OperationBtn {
-        id: confirm
-        text: qsTr("确认")
-
-        textItemColor: "#0B8559"
-        buttonBackgroundBordercolor: "#0B8559"
-        wrapperColor: "#5f4df056"
-
-        visible: false
-        enabled: visible
-        anchors.left: parent.left
-        anchors.leftMargin: 20
-        anchors.verticalCenter: multiselect.verticalCenter
-
-        onClicked: {
-            reset()
-            angleRelatedTableModel.callWriteBack();
-            enableSingleSelect(view);
-            calculation.clear()
-            widget.isCheck = false
-        }
-    }
-
-    Timer {
-        id: resizeTimer
-        interval: 10
-        running: false
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: {view.forceLayout()}
     }
 
     ButtonGroup {
@@ -420,7 +345,80 @@ Item {
         onMinusRequest: angleRelatedTableModel.callAddToModel(n, false)
     }
 
+    OperationBtn {
+        id: multiselect
 
+        textItemColor: "#202020"
+        buttonBackgroundBordercolor: "#202020"
+        wrapperColor: "#472b2b2b"
+
+        text: qsTr("批量操作")
+        enabled: visible
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {
+            if(scheduler.isPdbLoaded()){
+                disableSingleSelect(view)
+                widget.isCheck = true
+                header.currentIndex = 1;
+            }
+        }
+    }
+
+    OperationBtn {
+        id: cancel
+        text: qsTr("取消")
+
+        textItemColor: "#B90000"
+        buttonBackgroundBordercolor: "#B90000"
+        wrapperColor: "#5df74f4f"
+        visible : false
+        enabled: visible
+        anchors.right: parent.right
+        anchors.rightMargin: 20
+        anchors.verticalCenter: multiselect.verticalCenter
+
+        onClicked: {
+            reset()
+            enableSingleSelect(view);
+            angleRelatedTableModel.callFetchData();
+            widget.isCheck = false
+        }
+    }
+
+    OperationBtn {
+        id: confirm
+        text: qsTr("确认")
+
+        textItemColor: "#0B8559"
+        buttonBackgroundBordercolor: "#0B8559"
+        wrapperColor: "#5f4df056"
+
+        visible: false
+        enabled: visible
+        anchors.left: parent.left
+        anchors.leftMargin: 20
+        anchors.verticalCenter: multiselect.verticalCenter
+
+        onClicked: {
+            reset()
+            angleRelatedTableModel.callWriteBack();
+            enableSingleSelect(view);
+            calculation.clear()
+            widget.isCheck = false
+            header.currentIndex = -1
+        }
+    }
+
+    Timer {
+        id: resizeTimer
+        interval: 10
+        running: false
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: view.forceLayout()
+    }
 
     states: [
         State {

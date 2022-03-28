@@ -65,7 +65,7 @@ ComboBox {
             anchors.fill: parent
             color: element.pressed ? "#D2D2D2" : "transparent"
             border.width: 0
-            radius: 8
+            radius: 4
 
 
             layer.enabled: true
@@ -121,7 +121,7 @@ ComboBox {
         color: control.pressed ? "#D3D3D3" : "#E7E7E7"
         border.color: "#D3D3D3"
         border.width: control.visualFocus ? 2 : 1
-        radius: 8
+        radius: 4
 
         layer.enabled: true
         layer.effect: DropShadowEffect {

@@ -67,8 +67,6 @@ Item {
                 //anchors.horizontalCenter: parent.horizontalCenter
             }
 
-
-
             Rectangle {
                 id: imageborder
                 //x: 362
@@ -132,7 +130,7 @@ Item {
         }
 
         Rectangle {
-            id: rectangle1
+            id: content
             x: 362
             y: 50
             width: 400
@@ -296,10 +294,14 @@ Item {
 
                      InformationManagemet {
                         id : im
-                        anchors.fill: parent
+
+                        x: 362
+                        y: 50
+
+
                      }
                      ',
-                    lWindow)
+                    loginWindow)
         //check();
         window.w = 800
         window.h = 600
