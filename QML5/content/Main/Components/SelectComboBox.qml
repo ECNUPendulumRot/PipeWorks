@@ -65,7 +65,7 @@ ComboBox {
             anchors.fill: parent
             color: element.pressed ? "#D2D2D2" : "transparent"
             border.width: 0
-            radius: 8
+            radius: 4
 
 
             layer.enabled: true

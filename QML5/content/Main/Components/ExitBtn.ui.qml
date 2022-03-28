@@ -33,15 +33,15 @@ Button {
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.bottom: parent.bottom
-        source: "../../images/power-off-red.png"
+        source: "../../images/user.png"
         antialiasing: true
         mipmap: true
         sourceSize.height: 256
         sourceSize.width: 256
-        anchors.rightMargin: 12
-        anchors.leftMargin: 12
-        anchors.bottomMargin: 10
-        anchors.topMargin: 10
+        anchors.rightMargin: 5
+        anchors.leftMargin: 5
+        anchors.bottomMargin: 5
+        anchors.topMargin: 5
         fillMode: Image.PreserveAspectFit
     }
     states: [
@@ -67,11 +67,9 @@ Button {
     ]
 }
 
-
-
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:3;height:54;width:50}
+    D{i:0;formeditorZoom:3;height:54;width:50}D{i:1}D{i:2}
 }
 ##^##*/
 

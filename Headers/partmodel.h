@@ -51,9 +51,9 @@ public:
     // what is it? need to be fixeds
     QModelIndex parent(const QModelIndex &index) const override;
 
-    Q_INVOKABLE int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
-    Q_INVOKABLE int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 

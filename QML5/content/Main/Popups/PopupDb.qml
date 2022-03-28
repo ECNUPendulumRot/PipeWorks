@@ -1,4 +1,4 @@
-﻿import QtQuick 2.15
+import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Effects 1.0
 
@@ -12,8 +12,6 @@ Popup{
     property alias downloadBtn: downloadBtn
     property alias ftpBtn: ftpBtn
 
-
-
     rightPadding: 0
     leftPadding: 0
     bottomPadding: 0
@@ -23,16 +21,11 @@ Popup{
     bottomMargin: 0
     topMargin: 0
 
-
     width: 130
     height: 240
 
     implicitWidth: 130
     implicitHeight: 240
-
-
-    closePolicy: Popup.CloseOnPressOutside
-    //modal: true
 
     background: bg
 
@@ -53,198 +46,184 @@ Popup{
             horizontalOffset: 0
         }
     }
+    DbBtn {
+        id: openBtn
+        //height: 48
+        height: control.implicitHeight/6-2
+        text: "打开"
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        font.pixelSize: 12
+        bottomPadding: 2
+        topPadding: 2
+        highlighted: false
+        flat: false
+        anchors.leftMargin: 2
+        anchors.rightMargin: 2
+        anchors.topMargin: 2
+        anchors.bottomMargin: 2
 
-//    Item {
-//        id: buttons
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        anchors.top: parent.top
-//        anchors.bottom: parent.bottom
-//        anchors.rightMargin: 0
-//        anchors.leftMargin: 0
-//        anchors.bottomMargin: 0
-//        anchors.topMargin: 0
+        textItemLeftPadding: 30
+        textItemHorizontalAlignment: 1
+        buttonBackgroundRadius: 0
 
-
-        DbBtn {
-            id: openBtn
-            //height: 48
-            height: control.implicitHeight/6-2
-            text: "打开"
+        Rectangle {
+            height: 1
+            color: "#c8c8c8"
+            border.color: "#343434"
+            border.width: 0
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: parent.top
-            font.pixelSize: 12
-            bottomPadding: 2
-            topPadding: 2
-            highlighted: false
-            flat: false
-            anchors.leftMargin: 2
-            anchors.rightMargin: 2
-            anchors.topMargin: 2
-            anchors.bottomMargin: 2
-
-            textItemLeftPadding: 30
-            textItemHorizontalAlignment: 1
-            buttonBackgroundRadius: 0
-
-            Rectangle {
-                height: 1
-                color: "#c8c8c8"
-                border.color: "#343434"
-                border.width: 0
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 5
-                anchors.leftMargin: 5
-           }
-        }
-
-        DbBtn {
-            id: saveAsBtn
-            height: control.implicitHeight/6-2
-            text: "另存为..."
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: openBtn.bottom
-            font.pixelSize: 12
-            buttonBackgroundRadius: 0
-            bottomPadding: 2
-            topPadding: 2
-            font.capitalization: Font.MixedCase
-            textItemLeftPadding: 30
-            textItemHorizontalAlignment: 1
-            anchors.leftMargin: 2
-            anchors.rightMargin: 2
-            anchors.topMargin: 2
-            anchors.bottomMargin: 2
-            //buttonBackgroundRadius: 0
-
-            Rectangle {
-                height: 1
-                color: "#c8c8c8"
-                border.color: "#343434"
-                border.width: 0
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 0
-                anchors.leftMargin: 5
-                anchors.rightMargin: 5
-            }
-        }
-
-
-        DbBtn {
-            id: uploadBtn
-            height: control.implicitHeight/6-2
-            text: "上传至中控"
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: saveAsBtn.bottom
-            bottomPadding: 2
-            topPadding: 2
-            textItemLeftPadding: 30
-            textItemHorizontalAlignment: 1
-            buttonBackgroundRadius: 0
-            anchors.leftMargin: 2
-            anchors.rightMargin: 2
-            anchors.topMargin: 2
-            anchors.bottomMargin: 2
-            Rectangle {
-                height: 1
-                color: "#c8c8c8"
-                border.color: "#343434"
-                border.width: 0
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.leftMargin: 5
-                anchors.rightMargin: 5
-                anchors.bottomMargin: 0
-            }
-        }
-
-        DbBtn {
-            id: downloadBtn
-            height: control.implicitHeight/6-2
-            text: "下载至本地"
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: uploadBtn.bottom
-            bottomPadding: 2
-            topPadding: 2
-            textItemLeftPadding: 30
-            textItemHorizontalAlignment: 1
-            buttonBackgroundRadius: 0
-            anchors.leftMargin: 2
-            anchors.rightMargin: 2
-            anchors.topMargin: 2
-            anchors.bottomMargin: 2
-            Rectangle {
-                height: 1
-                color: "#c8c8c8"
-                border.color: "#343434"
-                border.width: 0
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.leftMargin: 5
-                anchors.rightMargin: 5
-                anchors.bottomMargin: 0
-            }
-        }
-
-
-        DbBtn {
-            id: ftpBtn
-            height: control.implicitHeight/6-2
-            text: "中控FTP设置"
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: downloadBtn.bottom
-            bottomPadding: 2
-            topPadding: 2
-            textItemLeftPadding: 30
-            textItemHorizontalAlignment: 1
-            buttonBackgroundRadius: 0
-            anchors.leftMargin: 2
-            anchors.rightMargin: 2
-            anchors.topMargin: 2
-            anchors.bottomMargin: 2
-            Rectangle {
-                height: 1
-                color: "#c8c8c8"
-                border.color: "#343434"
-                border.width: 0
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.leftMargin: 5
-                anchors.rightMargin: 5
-                anchors.bottomMargin: 0
-            }
-        }
-
-        DbBtn {
-            id: disconnectBtn
-            text: "关闭工艺文件"
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: ftpBtn.bottom
             anchors.bottom: parent.bottom
-            bottomPadding: 2
-            topPadding: 2
-            textItemLeftPadding: 30
-            textItemHorizontalAlignment: 1
-            buttonBackgroundRadius: 0
-            anchors.leftMargin: 2
-            anchors.rightMargin: 2
-            anchors.topMargin: 2
-            anchors.bottomMargin: 2
-        }
+       }
+    }
 
+    DbBtn {
+        id: saveAsBtn
+        height: control.implicitHeight/6-2
+        text: "另存为..."
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: openBtn.bottom
+        font.pixelSize: 12
+        bottomPadding: 2
+        topPadding: 2
+        font.capitalization: Font.MixedCase
+        textItemLeftPadding: 30
+        textItemHorizontalAlignment: 1
+        anchors.leftMargin: 2
+        anchors.rightMargin: 2
+        anchors.topMargin: 2
+        anchors.bottomMargin: 2
+        //buttonBackgroundRadius: 0
+
+        Rectangle {
+            height: 1
+            color: "#c8c8c8"
+            border.color: "#343434"
+            border.width: 0
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
+            anchors.leftMargin: 5
+            anchors.rightMargin: 5
+        }
+    }
+
+    DbBtn {
+        id: uploadBtn
+        height: control.implicitHeight/6-2
+        text: "上传至中控"
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: saveAsBtn.bottom
+        textItemLeftPadding: 30
+        textItemHorizontalAlignment: 1
+        buttonBackgroundRadius: 0
+        anchors.leftMargin: 2
+        anchors.rightMargin: 2
+        anchors.topMargin: 2
+        anchors.bottomMargin: 2
+        Rectangle {
+            height: 1
+            color: "#c8c8c8"
+            border.color: "#343434"
+            border.width: 0
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.leftMargin: 5
+            anchors.rightMargin: 5
+            anchors.bottomMargin: 0
+        }
+    }
+
+    DbBtn {
+        id: downloadBtn
+        height: control.implicitHeight/6-2
+        text: "下载至本地"
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: uploadBtn.bottom
+        textItemLeftPadding: 30
+        textItemHorizontalAlignment: 1
+        buttonBackgroundRadius: 0
+        anchors.leftMargin: 2
+        anchors.rightMargin: 2
+        anchors.topMargin: 2
+        anchors.bottomMargin: 2
+        Rectangle {
+            height: 1
+            color: "#c8c8c8"
+            border.color: "#343434"
+            border.width: 0
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.leftMargin: 5
+            anchors.rightMargin: 5
+            anchors.bottomMargin: 0
+        }
+    }
+
+    DbBtn {
+        id: ftpBtn
+        height: control.implicitHeight/6-2
+        text: "中控FTP设置"
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: downloadBtn.bottom
+        textItemLeftPadding: 30
+        textItemHorizontalAlignment: 1
+        buttonBackgroundRadius: 0
+        anchors.leftMargin: 2
+        anchors.rightMargin: 2
+        anchors.topMargin: 2
+        anchors.bottomMargin: 2
+
+        Rectangle {
+            height: 1
+            color: "#c8c8c8"
+            border.color: "#343434"
+            border.width: 0
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: parent.bottom
+            anchors.leftMargin: 5
+            anchors.rightMargin: 5
+            anchors.bottomMargin: 0
+        }
+    }
+
+    DbBtn {
+        id: disconnectBtn
+        height: control.implicitHeight/6-2
+        text: "关闭工艺文件"
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: ftpBtn.bottom
+        textItemLeftPadding: 30
+        textItemHorizontalAlignment: 1
+        buttonBackgroundRadius: 0
+        anchors.leftMargin: 2
+        anchors.rightMargin: 2
+        anchors.topMargin: 2
+        anchors.bottomMargin: 2
+//        Rectangle {
+//            height: 1
+//            color: "#c8c8c8"
+//            border.color: "#343434"
+//            border.width: 0
+//            anchors.left: parent.left
+//            anchors.right: parent.right
+//            anchors.bottom: parent.bottom
+//            anchors.leftMargin: 5
+//            anchors.rightMargin: 5
+//            anchors.bottomMargin: 0
+//        }
+    }
 
     enter: Transition {
         NumberAnimation { property: "height"; easing.bezierCurve: [0.454,0.00593,0.476,1,1,1]; from: 0.0; to: control.implicitHeight; duration: 100}
@@ -259,6 +238,7 @@ Popup{
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.33}D{i:13}
+    D{i:0;formeditorZoom:1.33}D{i:2}D{i:1}D{i:4}D{i:3}D{i:6}D{i:5}D{i:8}D{i:7}D{i:10}
+D{i:9}D{i:12}D{i:11}D{i:13}
 }
 ##^##*/
