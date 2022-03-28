@@ -274,9 +274,8 @@ Item {
                     defaultString:""
                     x: 21
                     y: 0
-                    width: 150
                     controlWidth: 68
-                    controlAnchorsleftMargin: 63
+                    controlAnchorsleftMargin: 67
                     onDataChanged: (s, text) => writeToBackend(s, text)
 
                 }
@@ -488,10 +487,8 @@ Item {
                     id: trimTrailMode
                     x: trimLeadMode.x
                     y: trimLeadMode.y
-                    width: 150
-                    height: 30
                     controlWidth: 68
-                    controlAnchorsleftMargin: 63
+                    controlAnchorsleftMargin: 67
                     mapString: "trimTrailMode"
                     defaultString:""
                     onDataChanged: (s, text) => writeToBackend(s, text)
@@ -559,9 +556,8 @@ Item {
 
                 SelectComboBoxFix {
                     id: potFunc
-                    width: 150
                     controlWidth: 68
-                    controlAnchorsleftMargin: 75
+                    controlAnchorsleftMargin: 78
                     labelText: "电位器功能"
                     defaultString: ""
                     cbxModel: ["不开启","主枪送丝","副枪送丝","小车行走"]
@@ -692,7 +688,7 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.33;height:160;width:1206}
+    D{i:0;formeditorZoom:1.66;height:160;width:1206}
 }
 ##^##*/
 

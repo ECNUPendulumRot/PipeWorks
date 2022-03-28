@@ -244,6 +244,28 @@ Item {
 
     }
 
+    MouseArea {
+        property real deltaX: 0
+        property real deltaY: 0
+        property real preX: 0
+        property real preY: 0
+
+        z: -10
+        anchors.fill: parent
+
+        onPressed: {
+            preX = mouseX
+            preY = mouseY
+        }
+        onPositionChanged: {
+            deltaX = mouseX - preX
+            deltaY = mouseY - preY
+            window.x += deltaX
+            window.y += deltaY
+        }
+    }
+
+
     property var componentMainWindow : null
     property var objectMainWindow : null
     property var objectIM : null

@@ -26,13 +26,14 @@ Rectangle{
 
     Label {
         id: label
-        //x: 5
+        x: 5
         width: parent.width/3
         text: qsTr("跟踪状态")
         color: Constants.tableFontColor
         font.pixelSize: 14
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
         anchors{
-          left: parent.left
           verticalCenter: parent.verticalCenter
         }
         //horizontalAlignment: Text.AlignHCenter
@@ -47,8 +48,7 @@ Rectangle{
 
         anchors.verticalCenter: label.verticalCenter
         anchors.left: label.left
-        anchors.leftMargin: parent.width/2
-        //anchors.leftMargin: 64
+        anchors.leftMargin: 64
         padding: 0
         font.pixelSize: 12
 
@@ -86,6 +86,7 @@ Rectangle{
                     elide: Text.ElideRight
                     font.pixelSize: 11
                     anchors.verticalCenter: parent.verticalCenter
+                    leftPadding: 8
                 }
             }
 
@@ -134,7 +135,7 @@ Rectangle{
 
         contentItem: Text {
             id:content
-            leftPadding: 4
+            leftPadding: 6
             rightPadding: control.indicator.width + control.spacing
 
             text: control.displayText
@@ -165,7 +166,7 @@ Rectangle{
 
             contentItem: ListView {
                 topMargin: 1
-                leftMargin: 10
+                leftMargin: 0
                 clip: true
                 implicitWidth: contentWidth
                 implicitHeight: contentHeight
@@ -217,6 +218,6 @@ Rectangle{
 
 /*##^##
 Designer {
-    D{i:0;height:30;width:150}
+    D{i:0;formeditorZoom:1.66;height:30;width:150}
 }
 ##^##*/

@@ -121,7 +121,7 @@ ComboBox {
         color: control.pressed ? "#D3D3D3" : "#E7E7E7"
         border.color: "#D3D3D3"
         border.width: control.visualFocus ? 2 : 1
-        radius: 8
+        radius: 4
 
         layer.enabled: true
         layer.effect: DropShadowEffect {
@@ -161,7 +161,7 @@ ComboBox {
             color: "#e7e7e7"
             border.color: "#D3D3D3"
             border.width: 0
-            radius: 8
+            radius: 4
 
 
         }

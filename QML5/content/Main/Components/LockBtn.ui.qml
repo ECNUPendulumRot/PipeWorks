@@ -22,7 +22,7 @@ Button {
         implicitWidth: 66
         implicitHeight: 28
         opacity: enabled ? 1 : 0.3
-        radius: 8
+        radius: 4
         border.color: "#d3d3d3"
         border.width: 1
         anchors.fill: parent
@@ -186,6 +186,3 @@ Button {
         }
     ]
 }
-
-
-
