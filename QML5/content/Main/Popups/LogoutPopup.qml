@@ -55,7 +55,7 @@ Popup {
     DbBtn {
         id: close
         height: parent.height/2
-        text: "退出"
+        text: "修改密码"
         font.pixelSize: 12
         font.family: "Microsoft Yahei"
         anchors{
@@ -116,6 +116,6 @@ Popup {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:3}D{i:1}D{i:4}D{i:3}D{i:10}
+    D{i:0;formeditorZoom:3}D{i:1}D{i:4}D{i:3}D{i:5}
 }
 ##^##*/

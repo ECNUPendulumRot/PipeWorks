@@ -6,6 +6,7 @@ import "Components"
 import "Tables"
 import "Popups"
 import "Parameters"
+import "../Login"
 //import ModelCraft 1.0
 
 Rectangle {
@@ -17,7 +18,7 @@ Rectangle {
     height: 768
 
     //property var angleTableContainer : null
-    
+
     Rectangle {
         id: webEngineWrapper
         color: "#858585"
@@ -188,8 +189,63 @@ Rectangle {
         }
         z: 2
 
+        PopupDb {
+            id: popupDb
+
+            x: 25
+            y: parent.height + 1
+
+            property var fileUrl
+            closePolicy: Popup.CloseOnReleaseOutsideParent
+
+            openBtn.onClicked:{
+                popupDb.close();
+                if(scheduler.isPdbLoaded()){
+                    reconnectDialog.open();
+                }
+                else
+                    fileDialog.open();
+            }
+
+            disconnectBtn.onClicked:{
+                popupDb.close();
+                disconnect();
+            }
+
+            uploadBtn.onClicked: {
+                if(!scheduler.isPdbLoaded())
+                    console.log("no file");
+                else{
+                    popupDb.close();
+                    uploadDialog.open()
+                }
+            }
+
+            saveAsBtn.onClicked: {
+                if(scheduler.isPdbLoaded()){
+                    popupDb.close();
+                    saveDialog.open();
+                }
+            }
+
+            downloadBtn.onClicked: {
+                popupDb.close();
+                downloadFile.open();
+            }
+
+            ftpBtn.onClicked:{
+                popupDb.close();
+                getFTPConfig();
+                ftpDialog.open();
+            }
+
+        }
+
         onClicked: {
-            popupDb.open();
+            if(popupDb.opened)
+                popupDb.close();
+            else
+                popupDb.open();
         }
 
     }
@@ -209,8 +265,6 @@ Rectangle {
         anchors.right: webEngineWrapper.right
         anchors.rightMargin: 35
         z: 3
-
-
 
         layer.enabled: true
         layer.effect: DropShadowEffect {
@@ -270,9 +324,12 @@ Rectangle {
 
     ExitBtn {
         id: exitBtn
+        x: 1316
         //x: 1317
         //y: 8
-        width: 50
+        width: 42
+        height: 37
+        anchors.rightMargin: 8
         anchors{
           right: mainBar.right
           verticalCenter: mainBar.verticalCenter
@@ -283,69 +340,32 @@ Rectangle {
         antialiasing: true
         z: 4
 
-        onClicked: logoutPopup.open();
-    }
+        LogoutPopup{
+            id:logoutPopup
+            x: exitBtn.x - (logoutPopup.width - exitBtn.width)
+            y: exitBtn.y + exitBtn.height
+            z:3
 
+            closePolicy: Popup.CloseOnReleaseOutsideParent
 
-    LogoutPopup{
-        id:logoutPopup
-        x: exitBtn.x - (logoutPopup.width - exitBtn.width)
-        y: exitBtn.y + exitBtn.height
-        z:3
+            closeBtn.onClicked: {
+                logoutPopup.close();
+                pwPopup.open();
 
-        closeBtn.onClicked: Qt.quit()
-        logoutBtn.onClicked: userLogout()
-    }
-
-    PopupDb {
-        id: popupDb
-        x: dbConnectBtn.x  + 25
-        y: dbConnectBtn.y + dbConnectBtn.height + 1
-        z: 2
-
-        property var fileUrl
-
-        openBtn.onClicked:{
-            popupDb.close();
-            if(scheduler.isPdbLoaded()){
-                reconnectDialog.open();
             }
+
+            logoutBtn.onClicked:{
+                logoutPopup.close();
+                userLogout()
+            }
+        }
+
+        onClicked: {
+            if(logoutPopup.opened)
+                logoutPopup.close();
             else
-                fileDialog.open();
+                logoutPopup.open();
         }
-
-        disconnectBtn.onClicked:{
-            popupDb.close();
-            disconnect();
-        }
-
-        uploadBtn.onClicked: {
-            if(!scheduler.isPdbLoaded())
-                console.log("no file");
-            else{
-                popupDb.close();
-                uploadDialog.open()
-            }
-        }
-
-        saveAsBtn.onClicked: {
-            if(scheduler.isPdbLoaded()){
-                popupDb.close();
-                saveDialog.open();
-            }
-        }
-
-        downloadBtn.onClicked: {
-            popupDb.close();
-            downloadFile.open();
-        }
-
-        ftpBtn.onClicked:{
-            popupDb.close();
-            getFTPConfig();
-            ftpDialog.open();
-        }
-
     }
 
     ReconnectDialog {
@@ -398,7 +418,7 @@ Rectangle {
     FileDialog {
         id: fileDialog
         nameFilters:["Datase files(*.db)"]
-        folder: shortcuts.home
+
         onAccepted: {
             popupDb.fileUrl = fileUrl
             //console.log(popupDb.fileUrl)
@@ -419,8 +439,8 @@ Rectangle {
 
     UploadDialog{
         id:uploadDialog
-        x: (root.width - reconnectDialog.width)/2
-        y: (root.height - reconnectDialog.height)/2
+        x: (root.width - uploadDialog.width)/2
+        y: (root.height - uploadDialog.height)/2
 
         cancelBtn.onClicked: {
             cvisibleProgress = false
@@ -467,8 +487,8 @@ Rectangle {
 
     FtpDialog {
         id:ftpDialog
-        x: (root.width - reconnectDialog.width)/2
-        y: (root.height - reconnectDialog.height)/2
+        x: (root.width - ftpDialog.width)/2
+        y: (root.height - ftpDialog.height)/2
 
         cancelBtn.onClicked: ftpDialog.close()
 
@@ -482,8 +502,6 @@ Rectangle {
 
     FileDialog {
         id:saveDialog
-        x: (root.width - reconnectDialog.width)/2
-        y: (root.height - reconnectDialog.height)/2
 
         selectExisting: false
         nameFilters: [ "database files (*.db)" ]
@@ -492,6 +510,53 @@ Rectangle {
             console.log(fileUrl)
             scheduler.saveToFile(fileDialog.fileUrl, saveDialog.fileUrl);
 
+        }
+    }
+
+
+    Popup {
+        id: pwPopup
+
+        x: (root.width - pwPopup.width)/2
+        y: (root.height - pwPopup.height)/2
+
+        width: 400
+        height: 500
+
+        modal: true
+
+        closePolicy: Popup.NoAutoClose
+
+        Overlay.modal: Rectangle {
+            color: "#c0515151"
+        }
+
+        background: bg
+        Rectangle {
+            id:bg
+            anchors.fill: parent
+            color: "transparent"
+            border.width: 0
+        }
+
+        InformationManagemet {
+            id: im
+            anchors.centerIn: parent
+            radius: 8
+            z: 1
+            back.onClicked: pwPopup.close();
+            confirm.onClicked:{
+                if(userVerify()){
+                    if(pwVerify()){
+                        if(pwUpdate(inputID.inputText.text,inputOldPw.inputText.text,inputNewPw.inputText.text)){
+                            errorMsg.text = "密码修改成功！";
+                            pwPopup.close();
+                        }
+                        else
+                            errorMsg.text = "密码修改失败，请检查是否符合规范";
+                    }
+                }
+            }
         }
     }
 
@@ -541,41 +606,12 @@ Rectangle {
         fixedPopupInitialize();
     }
 
-//    function createAngleTable(){
-//        var component = Qt.createComponent("Tables/AngleTable.qml");
-//        if (component.status === Component.Ready) {
-//            angleTableContainer = component.createObject(angleTableWrapper);
-//            angleTableContainer.anchors.fill = angleTableWrapper
-//            angleTableContainer.anchors.leftMargin = 10
-//            angleTableContainer.anchors.topMargin = 10
-//            angleTableContainer.anchors.rightMargin = 10
-//            angleTableContainer.anchors.bottom =  angleTableWrapper.bottom
-//        }
-//        angleTableContainer = Qt.createQmlObject(
-//                    'import QtQuick 2.15
-//                     import QtQuick.Controls 2.15
-//                     import "Tables"
-//                     import ModelCraft 1.0
-
-//                     AngleTable {
-//                        id : angleTable
-//                        anchors.fill: parent
-//                        anchors.leftMargin: 10
-//                        anchors.topMargin: 10
-//                        anchors.rightMargin: 10
-//                        anchors.bottom: parent.bottom
-//                     }
-//                     ',
-//                    angleTableWrapper)
-//    }
+    function createAngleTable(){
+        angleTableContainer.source = "Tables/AngleTable.qml"
+    }
 
     function destroyAngleTable(){
-//        angleTableContainer.destroy();
-//        angleTableContainer = null;
-//        angleTableContainer.visible = false;
-        //angleTableContainer.item.destroy();
         angleTableContainer.source = "";
-
     }
 
     /// refresh angletable and webview
@@ -584,10 +620,8 @@ Rectangle {
             destroyAngleTable();
             console.log(angleTableContainer.source)
         }
+        createAngleTable();
 
-        //createAngleTable();
-
-        angleTableContainer.source = "Tables/AngleTable.qml"
         angleWebContainer.refreshWebTable(s)
     }
 
@@ -619,7 +653,7 @@ Rectangle {
         window.h = 600
 
     }
-    
+
     function refreshModelData(row, col, value){
         angleRelatedTableModel.callSetData(row, col, value)
     }
@@ -671,15 +705,3 @@ Rectangle {
         downloader.writeConfig()
     }
 }
-
-
-
-
-
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:1.1;height:768;width:1366}D{i:2}D{i:1}D{i:5}D{i:3}D{i:8}D{i:6}
-D{i:9}D{i:11}D{i:13}D{i:15}D{i:17}D{i:18}D{i:20}D{i:21}D{i:22}D{i:23}D{i:24}D{i:25}
-D{i:26}D{i:27}D{i:28}D{i:29}D{i:30}D{i:31}D{i:32}D{i:33}D{i:34}D{i:35}D{i:36}D{i:37}
-}
-##^##*/

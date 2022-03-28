@@ -166,10 +166,10 @@ bool PartModel::pullArray()
     for(int i = 0; i < connectedTable->rowCount(); i++){
         QSqlRecord r = connectedTable->record(i);
         int j = 0;
-
         for(int k = 0; k < r.count(); k++){
             if( j < header.size() && r.fieldName(k) == header[j]){
                 this->array[i][j] = MapData(i, k, r.value(k));
+                emit partDataChanged(i, j, r.value(k));
                 emit dataChanged(this->index(i, j), this->index(i, j), QVector<int>({Qt::DisplayRole, ChangeRole, DirtyRole}));
                 j++;
             }

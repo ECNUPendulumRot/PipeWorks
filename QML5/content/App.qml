@@ -49,30 +49,6 @@ Window {
     x: Screen.width / 2 - width / 2
     y: Screen.height / 2 - height / 2
 
-    MouseArea {
-        property real deltaX: 0
-        property real deltaY: 0
-        property real preX: 0
-        property real preY: 0
-
-        z: -10
-        anchors.fill: parent
-
-        onPressed: {
-            preX = mouseX
-            preY = mouseY
-        }
-        onPositionChanged: {
-            deltaX = mouseX - preX
-            deltaY = mouseY - preY
-            window.x += deltaX
-            window.y += deltaY
-        }
-        onClicked: {
-            forceActiveFocus()
-        }
-    }
-
     Login {
         id: lWindow
     }
