@@ -4,7 +4,7 @@ import QtQuick 2.0
 Rectangle {
     id: wrapper
     width: 1366
-    height: 18
+    height: 40
     color: "#ffffff"
 
 //    property var dataMap: {"Friday":"星期五",
@@ -28,7 +28,7 @@ Rectangle {
     Rectangle {
         id: connectionLight
         color: "#ff0000"
-        width: parent.height-4
+        width: parent.height-15
         height: width
         radius: width/2
         anchors.left: connectionStatusTitle.right
@@ -50,8 +50,8 @@ Rectangle {
 
     Rectangle {
         id: syncLight
-        color: "#00ff00"
-        width: parent.height-4
+        color: "#eee"
+        width: parent.height-15
         height: width
         radius: width/2
         anchors.left: statusText.right
@@ -64,7 +64,7 @@ Rectangle {
         id: syncText
         color: "#000000"
         font.pixelSize: 12
-        text: qsTr("数据已提交保存!")
+        text: qsTr("未连接工艺数据库")
 
         anchors.left: syncLight.right
         anchors.leftMargin: 10
@@ -91,11 +91,11 @@ Rectangle {
            interval: 500; running: true; repeat: true
            onTriggered:  monitorDb()
        }
-//    Timer {
-//           id:syncDb
-//           interval: 500; running: true; repeat: true
-//           onTriggered: monitorSync()
-//       }
+    Timer {
+           id:syncDb
+           interval: 1000; running: true; repeat: true
+           onTriggered: monitorSync()
+       }
 
 
 //    function getData(){
@@ -105,37 +105,34 @@ Rectangle {
     function monitorDb(){
         if(scheduler.isPdbLoaded()){
             connectionLight.color = "#00ff00"
-            statusText.text= "连接成功!"
+            statusText.text= "连接成功"
         }
         else{
             connectionLight.color = "#ff0000"
-            statusText.text= "未连接!"
+            statusText.text= "未连接"
         }
     }
 
     function monitorSync(){
-        var sync =  "#2fc350"
+        var sync =  "#00ff00"
         var unsync =  "#f4f42f"
-        //var unconnect =  "#eee"
-
-        if(scheduler.callIsDirty()){
-            syncLight.color = unsync
-            syncText.text = "修改后的数据未提交!"
+        var unconnect =  "#eee"
+        if(scheduler.isPdbLoaded()){//db is load)
+            if(scheduler.callIsDirty()){
+                syncLight.color = unsync
+                syncText.text = "修改后的数据未提交"
+            }
+            else{
+                syncLight.color = sync
+                syncText.text = "数据已提交保存"
+            }
         }
         else{
-            syncLight.color = sync
-            syncText.text = "数据已提交保存!"
+            syncLight.color = unconnect
+            syncText.text = "未连接工艺数据库"
         }
+
     }
-
-////        if(scheduler.isPdbLoaded()){//db is load)
-////        }
-////        else{
-////            alertLight.color = unconnect
-////            syncText.text = "未连接工艺数据库"
-////        }
-
-//    }
 
 }
 
@@ -143,7 +140,7 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.1;height:16;width:1366}D{i:1}D{i:2}D{i:3}D{i:4}D{i:5}D{i:6}
-D{i:7}D{i:8}
+    D{i:0;formeditorZoom:0.9;height:16;width:1366}D{i:1}D{i:2}D{i:3}D{i:4}D{i:5}D{i:6}
+D{i:7}D{i:8}D{i:9}
 }
 ##^##*/

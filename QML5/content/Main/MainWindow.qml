@@ -413,6 +413,7 @@ Rectangle {
         folder: shortcuts.home
         onAccepted: {
             downloadfile(fileUrl)
+            downloadDialog.open()
         }
     }
 
@@ -422,22 +423,45 @@ Rectangle {
         y: (root.height - reconnectDialog.height)/2
 
         cancelBtn.onClicked: {
-            fileName =""
+            cvisibleProgress = false
             progressBarValue = 0.0
             completeBtn.cvisible = false;
             confirmBtn.cvisible = true;
             uploadDialog.close()}
 
         confirmBtn.onClicked: {
-            uploadFile(fileName)
+            uploadFile(ftpDialog.uploadName)
         }
 
         completeBtn.onClicked: {
-            fileName =""
+            cvisibleProgress = false
             progressBarValue = 0.0
             completeBtn.cvisible = false;
             confirmBtn.cvisible = true;
             uploadDialog.close()
+        }
+    }
+
+    DownloadDialog{
+        id:downloadDialog
+        x: (root.width - reconnectDialog.width)/2
+        y: (root.height - reconnectDialog.height)/2
+        cancelBtn.onClicked: {
+            progressBarValue = 0.0
+            completeBtn.cvisible = false;
+            downloadDialog.close()
+        }
+        completeBtn.onClicked: {
+            progressBarValue = 0.0
+            completeBtn.cvisible = false;
+            downloadDialog.close()
+            if(!scheduler.isPdbLoaded()){
+                var downloadFileUrl = downloadFile.fileUrl
+                var downloadFlieName = "/" + ftpDialog.downloadName
+                var totalUrl = downloadFileUrl+downloadFlieName
+                popupDb.fileUrl = totalUrl
+                mainLoadDb(totalUrl)
+            }
         }
     }
 
@@ -489,6 +513,17 @@ Rectangle {
             if(bytesSent/bytesTotal === 1.0){
                 uploadDialog.completeBtn.cvisible = true;
                 uploadDialog.confirmBtn.cvisible = false;
+                          }
+            }
+    }
+
+    Connections {
+        target: downloader
+        onDownProgress: (bytesSent, bytesTotal)=> {
+            downloadDialog.progressBarValue = bytesSent/bytesTotal
+            if(bytesSent/bytesTotal === 1.0){
+
+                downloadDialog.completeBtn.cvisible = true;
                           }
             }
     }
@@ -598,14 +633,16 @@ Rectangle {
     }
 
     function uploadFile(fileName){
+        uploadDialog.cvisibleProgress = true;
         var uploadUrl = downloader.toLocal(popupDb.fileUrl)
         downloader.put(uploadUrl, fileName);
     }
 
     function downloadfile(fileUrl){
-        var downloadUrl = downloader.toLocal(fileUrl)
-        console.log(downloadUrl+"/weldParmeter.db")
-        downloader.get("/weldParmeter.db",  downloadUrl+"/weldParmeter.db")
+        var downloadFileUrl = downloader.toLocal(fileUrl)
+        var downloadFlieName = "/" + ftpDialog.downloadName
+        //console.log(downloadFlieName)
+        downloader.get(downloadFlieName,  downloadFileUrl+downloadFlieName)
         uploadDialog.close()
     }
 
@@ -620,6 +657,8 @@ Rectangle {
         ftpDialog.port = downloader.getPort()
         ftpDialog.user = downloader.getUser()
         ftpDialog.password = downloader.getPassword()
+        ftpDialog.uploadName = downloader.getUploadName();
+        ftpDialog.downloadName = downloader.getDownloadName();
     }
 
     function setFTPConfig(){
@@ -627,16 +666,20 @@ Rectangle {
         downloader.setPort(ftpDialog.port)
         downloader.setUser(ftpDialog.user)
         downloader.setPassword(ftpDialog.password)
+        downloader.setUploadName(ftpDialog.uploadName)
+        downloader.setDownloadName(ftpDialog.downloadName)
         downloader.writeConfig()
     }
 }
 
 
 
+
+
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.1;height:768;width:1366}D{i:2}D{i:1}D{i:5}D{i:3}D{i:8}D{i:6}
+    D{i:0;formeditorZoom:0.5;height:768;width:1366}D{i:2}D{i:1}D{i:5}D{i:3}D{i:8}D{i:6}
 D{i:9}D{i:11}D{i:13}D{i:15}D{i:17}D{i:18}D{i:20}D{i:21}D{i:22}D{i:23}D{i:24}D{i:25}
-D{i:26}D{i:27}D{i:28}D{i:29}D{i:30}D{i:31}D{i:32}D{i:33}D{i:34}D{i:35}
+D{i:26}D{i:27}D{i:28}D{i:29}D{i:30}D{i:31}D{i:32}D{i:33}D{i:34}D{i:35}D{i:36}D{i:37}
 }
 ##^##*/

@@ -8,10 +8,8 @@ Popup{
     width:400
     height:200
     property alias cancelBtn: cancelBtn
-    property alias confirmBtn: confirmBtn
     property alias completeBtn: completeBtn
     property alias progressBarValue: progressBar.value
-    property alias cvisibleProgress: progressBar.visible
     dim: true
     modal: true
 
@@ -33,17 +31,6 @@ Popup{
         }
 
         ConfirmBtn {
-            id: confirmBtn
-            x: 215
-            y: 157
-            width: 70
-            height: 24
-            text: "上传"
-            pressRecColor: "#00101010"
-            textItemColor: "#f6f6f6"
-            buttonBackgroundColor: "#3b7ecc"
-        }
-        ConfirmBtn {
             id: completeBtn
             x: 215
             y: 157
@@ -58,9 +45,9 @@ Popup{
 
         Text {
             id: text1
-            x: 47
+            x: 118
             y: 25
-            text: "您是否要将当前文件上传到中控？"
+            text: "正在开始下载文件"
             font.pixelSize: 18
             anchors.verticalCenterOffset: -1
             font.family: "Courier"
@@ -75,7 +62,6 @@ Popup{
             y: 91
             width: 365
             height: 19
-            visible: false
         }
     }
 
