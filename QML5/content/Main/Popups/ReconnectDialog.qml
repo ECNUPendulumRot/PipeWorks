@@ -21,16 +21,7 @@ Popup{
         anchors.fill: parent
         z: 1
 
-        ConfirmBtn {
-            id: cancelBtn
-            x: 68
-            width: 70
-            height: 24
-            text: "直接关闭"
-            anchors.verticalCenter: confirmBtn.verticalCenter
-            anchors.right: editBtn.left
-            anchors.rightMargin: 15
-        }
+
 
         ConfirmBtn {
             id: confirmBtn
@@ -45,6 +36,17 @@ Popup{
             buttonBackgroundColor: "#3b7ecc"
             anchors.rightMargin: 17
             anchors.bottomMargin: 7
+        }
+
+        ConfirmBtn {
+            id: cancelBtn
+            x: 68
+            width: 70
+            height: 24
+            text: "直接关闭"
+            anchors.verticalCenter: confirmBtn.verticalCenter
+            anchors.right: editBtn.left
+            anchors.rightMargin: 15
         }
 
         ConfirmBtn {
