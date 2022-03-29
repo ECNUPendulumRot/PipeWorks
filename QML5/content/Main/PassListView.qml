@@ -48,12 +48,6 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
 
             onClicked: refresh(col)
-//            onDoubleClicked: {
-//                if(haveRead){
-//                    flag = !flag
-//                    passFTableModel.callSetData(col, 24, flag)
-//                }
-//            }
         }
     }
 

@@ -277,6 +277,7 @@ Rectangle {
         }
     }
 
+
     CancelBtn {
         id: myButton2
         //y: 681
@@ -285,17 +286,36 @@ Rectangle {
         anchors.bottomMargin: 20
         z: 3
 
-        onClicked:{
-            if(scheduler.isPdbLoaded()){
-                scheduler.revertData();
-                fixedTable.fixedTableRefreshData();
-                passListView.refreshPassFlag();
-                commPop.commLoad();
-                ctrlPop.ctrlLoad();
-                motionPop.motionLoad();
-            }
+        InfoDialog {
+            id: dbCancelDialog
 
+            parent: Overlay.overlay
+            x: (parent.width - dbCancelDialog.width)/2
+            y: (parent.height - dbCancelDialog.height)/2
+
+            text.text: "这个操作将不可被撤销，请确认是否撤销所有修改"
+            title: "您确定要撤销所有修改吗"
+            text.color: "#202020"
+            imageSource: "../images/information.png"
+
+            cancelBtn.onClicked: dbCancelDialog.close()
+
+            confirmBtn.onClicked: {
+                if(scheduler.isPdbLoaded()){
+                    scheduler.revertData();
+                    fixedTable.fixedTableRefreshData();
+                    passListView.refreshPassFlag();
+                    commPop.commLoad();
+                    ctrlPop.ctrlLoad();
+                    motionPop.motionLoad();
+                }
+
+            }
         }
+
+        onClicked:if(scheduler.callIsDirty()) dbCancelDialog.open()
+
+
     }
 
     SubmitBtn {
@@ -309,17 +329,33 @@ Rectangle {
         }
         z: 3
 
-        onClicked:{
-            if(scheduler.isPdbLoaded()){
-                scheduler.submitData();
-                fixedTable.fixedTableRefreshData();
-                passListView.refreshPassFlag();
-                commPop.commLoad();
-                ctrlPop.ctrlLoad();
-                motionPop.motionLoad();
+        InfoDialog {
+            id: dbSubmitDialog
+
+            parent: Overlay.overlay
+            x: (parent.width - dbSubmitDialog.width)/2
+            y: (parent.height - dbSubmitDialog.height)/2
+
+            text.text: "这个操作将不可被撤销，请确认是否提交修改"
+            title: "您确定要提交吗"
+            text.color: "#202020"
+            imageSource: "../images/information.png"
+
+            cancelBtn.onClicked: dbSubmitDialog.close()
+
+            confirmBtn.onClicked:{
+                if(scheduler.isPdbLoaded()){
+                    scheduler.submitData();
+                    fixedTable.fixedTableRefreshData();
+                    passListView.refreshPassFlag();
+                    commPop.commLoad();
+                    ctrlPop.ctrlLoad();
+                    motionPop.motionLoad();
+                }
             }
         }
 
+        onClicked: if(scheduler.callIsDirty()) dbSubmitDialog.open()
     }
 
     ExitBtn {
@@ -484,6 +520,7 @@ Rectangle {
             }
         }
     }
+
 
     FtpDialog {
         id:ftpDialog

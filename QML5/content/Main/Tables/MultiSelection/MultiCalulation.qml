@@ -37,12 +37,13 @@ Item {
             layer.enabled: true
             layer.effect: DropShadowEffect {
                 id: dropShadow
-                visible: false
+                visible: true
                 horizontalOffset: 0
                 verticalOffset: 0.5
                 color: "#3c000000"
                 radius: 8
-                spread: 0.2
+                spread: 0.1
+                samples: textField.activeFocus ? 17 : 0
             }
         }
 
@@ -78,13 +79,8 @@ Item {
             when: !textField.activeFocus
         },
         State {
-            name: "unfocus1"
+            name: "focus"
             when: textField.activeFocus
-
-            PropertyChanges {
-                target: dropShadow
-                visible: true
-            }
 
             PropertyChanges {
                 target: texBg

@@ -24,8 +24,9 @@ Button {
         implicitHeight: 40
         opacity: enabled ? 1 : 0.3
         radius: 4
-        border.color: "#d3d3d3"
         anchors.fill: parent
+        border.width: 0
+
         layer.enabled: true
         layer.effect: DropShadowEffect {
             id: dropShadow
