@@ -427,10 +427,12 @@ Rectangle {
             progressBarValue = 0.0
             completeBtn.cvisible = false;
             confirmBtn.cvisible = true;
+            errorMessage.clear()
             uploadDialog.close()}
 
         confirmBtn.onClicked: {
             uploadFile(ftpDialog.uploadName)
+
         }
 
         completeBtn.onClicked: {
@@ -438,7 +440,9 @@ Rectangle {
             progressBarValue = 0.0
             completeBtn.cvisible = false;
             confirmBtn.cvisible = true;
+            errorMessage.clear()
             uploadDialog.close()
+
         }
     }
 
@@ -527,6 +531,14 @@ Rectangle {
                           }
             }
     }
+
+//    Connections{
+//        target: downloader
+//        onUploadSendErrorMsg: errorMsg => {
+//               errorMessage.visible = true;
+//               errorMessage.text = errorMsg
+//            }
+//    }
 
     function mainLoadDb(file){
 
@@ -681,5 +693,6 @@ Designer {
     D{i:0;formeditorZoom:0.5;height:768;width:1366}D{i:2}D{i:1}D{i:5}D{i:3}D{i:8}D{i:6}
 D{i:9}D{i:11}D{i:13}D{i:15}D{i:17}D{i:18}D{i:20}D{i:21}D{i:22}D{i:23}D{i:24}D{i:25}
 D{i:26}D{i:27}D{i:28}D{i:29}D{i:30}D{i:31}D{i:32}D{i:33}D{i:34}D{i:35}D{i:36}D{i:37}
+D{i:38}
 }
 ##^##*/

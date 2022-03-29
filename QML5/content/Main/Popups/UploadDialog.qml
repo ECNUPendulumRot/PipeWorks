@@ -12,6 +12,7 @@ Popup{
     property alias completeBtn: completeBtn
     property alias progressBarValue: progressBar.value
     property alias cvisibleProgress: progressBar.visible
+    property alias errorMessage: errorMsg
     dim: true
     modal: true
 
@@ -77,6 +78,20 @@ Popup{
             height: 19
             visible: false
         }
+
+        Text {
+            id: errorMsg
+            x: 42
+            y: 122
+            text: qsTr("error")
+            color: "#00ff00"
+            visible: false
+            font.pixelSize: 12
+            function clear(){
+                text = ""
+                visible = false
+            }
+        }
     }
 
     background:rectangle
@@ -109,6 +124,8 @@ Popup{
     Overlay.modal: Rectangle {
         color: "#c0515151"
     }
+
+
 }
 
 

@@ -144,7 +144,7 @@ Popup{
             id: text6
             x: 8
             y: 131
-            text: qsTr("下载文件名")
+            text: qsTr("上传文件名")
             font.pixelSize: 12
         }
 

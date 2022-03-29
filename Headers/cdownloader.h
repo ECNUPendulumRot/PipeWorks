@@ -22,6 +22,10 @@ public slots:
 
     void get(const QString &path, const QString &fileName);
 
+    void setFileName(const QString &fileName, int i);
+
+    bool checkConfig();
+
     QString toLocal(const QString &path);
 
     void readConfig();
@@ -47,6 +51,8 @@ signals:
 
     void downProgress(qint64 bytesSent, qint64 bytesTotal);
 
+    void uploadSendErrorMsg(QString errorMsg);
+
 private slots:
 
     void uploadProgress(qint64 bytesSent, qint64 bytesTotal);
@@ -59,6 +65,7 @@ private:
     QUrl pUrl;
     QFile file;
     QNetworkAccessManager manager;
+    QNetworkReply *pReply;
     QString ip,port,user,password,uploadName,downloadName;
 };
 

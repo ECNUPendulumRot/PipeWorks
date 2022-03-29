@@ -29,7 +29,7 @@ void Downloader::put(const QString &fileName, const QString &path)
     pUrl.setPath(path);
     qDebug()<<pUrl;
 
-    QNetworkReply *pReply = manager.put(QNetworkRequest(pUrl), data);
+    pReply = manager.put(QNetworkRequest(pUrl), data);
 
     connect(pReply, SIGNAL(uploadProgress(qint64, qint64)), this, SLOT(uploadProgress(qint64, qint64)));
     connect(pReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SIGNAL(error(QNetworkReply::NetworkError)));
@@ -38,17 +38,46 @@ void Downloader::put(const QString &fileName, const QString &path)
 
 void Downloader::get(const QString &path, const QString &fileName)
 {
-    file.setFileName(fileName);
-    file.open(QIODevice::WriteOnly | QIODevice::Append);
+//    file.setFileName(fileName);
+//    if(!file.exists()){
+//        qDebug()<<"start to download";
+//        file.open(QIODevice::WriteOnly | QIODevice::Append);
+//    }
+//    else{
+//    }
+    setFileName(fileName, 1);
     pUrl.setPath(path);
-    qDebug()<<pUrl;
+    //qDebug()<<pUrl;
 
-    QNetworkReply *pReply = manager.get(QNetworkRequest(pUrl));
-
+    pReply = manager.get(QNetworkRequest(pUrl));
+    qDebug()<< pReply->isReadable();
     connect(pReply, SIGNAL(finished()), this, SLOT(finished()));
     connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(downloadProgress(qint64, qint64)));
     connect(pReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SIGNAL(error(QNetworkReply::NetworkError)));
     connect(this, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(showError(QNetworkReply::NetworkError)));
+}
+
+void Downloader::setFileName(const QString &fileName, int i)
+{
+    QString tempName = fileName;
+    file.setFileName(tempName);
+    if(!file.exists()){
+        qDebug()<<"start to download";
+        file.open(QIODevice::WriteOnly | QIODevice::Append);
+    }
+    else{
+        QString label = "(" + QString::number(i) + ")";
+        tempName = tempName.mid(0,tempName.lastIndexOf(".")) +label+tempName.mid(tempName.lastIndexOf("."),tempName.size());
+        setFileName(tempName, i+1);
+    }
+}
+
+bool Downloader::checkConfig()
+{
+    if(ip == "" || port =="" || user == "" || password == "" || uploadName== "" || downloadName ==""){
+        return false;
+    }
+    else return true;
 }
 
 QString Downloader::toLocal(const QString &path)
@@ -70,7 +99,6 @@ void Downloader::readConfig()
     password = in.readLine();
     uploadName = in.readLine();
     downloadName = in.readLine();
-    qDebug()<<downloadName + "gg";
 }
 
 void Downloader::writeConfig()
@@ -159,14 +187,30 @@ void Downloader::finished()
 
 void Downloader::showError(QNetworkReply::NetworkError error)
 {
-    switch (error) {
-    case QNetworkReply::HostNotFoundError :
-        qDebug()<<QString::fromLocal8Bit("主机没有找到");
-        break;
-        // 其他错误处理
-    default:
-        qDebug()<<error;
-        break;
+    if(checkConfig()){
+        emit uploadSendErrorMsg("FTP配置未设置完全");
+    }
+    else{
+        switch (error) {
+        case QNetworkReply::HostNotFoundError :
+            qDebug()<<QString::fromLocal8Bit("主机没有找到");
+            emit uploadSendErrorMsg("主机没有找到");
+            break;
+        case QNetworkReply::ContentOperationNotPermittedError :
+            qDebug()<<QString::fromLocal8Bit("FTP账号密码错误");
+            emit uploadSendErrorMsg("FTP账号密码错误");
+            break;
+        case QNetworkReply::ContentNotFoundError :
+            qDebug()<<QString::fromLocal8Bit("该文件在中控端不存在");
+            emit uploadSendErrorMsg("该文件在中控端不存在");
+            break;
+            // 其他错误处理
+        default:
+            qDebug()<<"error:";
+            qDebug()<<error;
+            emit uploadSendErrorMsg("error");
+            break;
+        }
     }
 }
 
