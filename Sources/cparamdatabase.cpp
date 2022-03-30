@@ -1,4 +1,4 @@
-#include "cparamdatabase.h"
+﻿#include "cparamdatabase.h"
 
 ParamDatabase::ParamDatabase()
     : Database()
@@ -6,7 +6,7 @@ ParamDatabase::ParamDatabase()
 }
 
 
-ParamDatabase::ParamDatabase(QString s):Database(s)
+ParamDatabase::ParamDatabase(QString s):Database(s,"SQLITECIPHER","dpWelder2022")
 {
 }
 
