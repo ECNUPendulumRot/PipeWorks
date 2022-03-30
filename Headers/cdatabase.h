@@ -11,12 +11,13 @@ public:
 
     // Constructor
     Database();
-    Database(QString s);
+    Database(QString filename, QString type, QString pw);
 
     // Destructor
     ~Database();
 
-    bool createConnection(QString s);
+    bool createConnection(QString filename, QString type, QString pw);
+
     bool isConnected();
 
     QSqlDatabase& getdb();

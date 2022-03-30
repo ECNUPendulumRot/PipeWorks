@@ -6,7 +6,7 @@ UserDb::UserDb():Database()
 }
 
 
-UserDb::UserDb(QString s):Database(s)
+UserDb::UserDb(QString s):Database(s,"QSQLITE","")
 {
 
 }

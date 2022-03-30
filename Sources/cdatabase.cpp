@@ -1,4 +1,4 @@
-#include <cdatabase.h>
+﻿#include <cdatabase.h>
 #include <QDir>
 #include <QDebug>
 #include <QStringList>
@@ -9,10 +9,10 @@ Database::Database()
 }
 
 
-Database::Database(QString s)
+Database::Database(QString filename, QString type, QString pw)
 {
     this->status = false;
-    createConnection(s);
+    createConnection(filename,type,pw);
 }
 
 
@@ -23,19 +23,21 @@ Database::~Database()
 }
 
 
-bool Database::createConnection(QString s)
+bool Database::createConnection(QString filename, QString type, QString pw)
 {
-    if(QSqlDatabase::isDriverAvailable("QSQLITE"))
-         db = QSqlDatabase::addDatabase("QSQLITE");
+    if(QSqlDatabase::isDriverAvailable(type))
+        db = QSqlDatabase::addDatabase(type);
 
-    db.setDatabaseName(s);
+    db.setDatabaseName(filename);
+    db.setPassword(pw);
+    if(type == "SQLITECIPHER")
+        db.setConnectOptions("QSQLITE_USE_CIPHER=sqlcipher");
     this->status = db.open();
 
     if (this->status){
         qDebug() << "connected";
         return true;
     }
-
     else
         return false;
 }
