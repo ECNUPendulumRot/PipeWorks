@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.12
 
 Button {
@@ -34,6 +34,7 @@ Button {
         id: textItem
         text: control.text
         font.pixelSize: 12
+        font.family: "Microsoft Yahei"
 
         opacity: enabled ? 1.0 : 0.3
         color: "#808080"

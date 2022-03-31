@@ -35,6 +35,7 @@ Rectangle {
         text: qsTr("手动送丝百分比")
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 12
+        font.family: "Microsoft Yahei"
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.WordWrap
     }
@@ -66,6 +67,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: textField.left
         font.pixelSize: 12
+        font.family: "Microsoft Yahei"
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.WordWrap
         anchors.leftMargin: 110

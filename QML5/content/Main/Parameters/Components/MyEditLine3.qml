@@ -34,6 +34,7 @@ Rectangle {
         text: qsTr("前后枪间距")
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 13
+        font.family: "Microsoft Yahei"
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.WordWrap
     }
@@ -66,6 +67,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: textField.left
         font.pixelSize: 13
+        font.family: "Microsoft Yahei"
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.WordWrap
         anchors.leftMargin: 110

@@ -28,6 +28,7 @@ Rectangle {
         text: qsTr("地址")
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 12
+        font.family: "Microsoft Yahei"
         minimumPointSize: 14
     }
 

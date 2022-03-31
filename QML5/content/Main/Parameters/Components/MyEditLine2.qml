@@ -30,6 +30,7 @@ Rectangle {
         text: qsTr("M4值")
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 12
+        font.family: "Microsoft Yahei"
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.WordWrap
         anchors.verticalCenterOffset: 0

@@ -31,6 +31,7 @@ Rectangle{
         text: qsTr("跟踪状态")
         color: Constants.tableFontColor
         font.pixelSize: 14
+        font.family: "Microsoft Yahei"
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
         anchors{

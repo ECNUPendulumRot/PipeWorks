@@ -664,6 +664,7 @@ Item {
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
+                                    font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
                                     anchors.horizontalCenter: parent.horizontalCenter
@@ -811,6 +812,7 @@ Item {
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
+                                    font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
                                     anchors.horizontalCenter: parent.horizontalCenter
@@ -1034,6 +1036,7 @@ Item {
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
+                                    font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
                                     anchors.horizontalCenter: parent.horizontalCenter
@@ -1175,6 +1178,7 @@ Item {
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
+                                    font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
                                     anchors.horizontalCenter: parent.horizontalCenter
@@ -1400,6 +1404,7 @@ Item {
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
+                                    font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
                                     anchors.horizontalCenter: parent.horizontalCenter
@@ -1537,6 +1542,7 @@ Item {
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
+                                    font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
                                     anchors.horizontalCenter: parent.horizontalCenter
@@ -1748,6 +1754,7 @@ Item {
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
+                                    font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
                                     anchors.horizontalCenter: parent.horizontalCenter
@@ -1886,6 +1893,7 @@ Item {
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
                                     font.pixelSize: 12
+                                    font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
                                     anchors.horizontalCenter: parent.horizontalCenter

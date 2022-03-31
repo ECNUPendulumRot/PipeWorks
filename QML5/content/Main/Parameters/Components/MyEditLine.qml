@@ -38,6 +38,7 @@ Rectangle {
         text: qsTr("运动减速度")
         anchors.verticalCenter: parent.verticalCenter
         font.pixelSize: 13
+        font.family: "Microsoft Yahei"
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.WordWrap
     }
@@ -68,6 +69,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: textField.left
         font.pixelSize: 13
+        font.family: "Microsoft Yahei"
         verticalAlignment: Text.AlignVCenter
         wrapMode: Text.WordWrap
         anchors.leftMargin: 90
@@ -95,6 +97,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.1;height:30;width:260}
+    D{i:0;formeditorZoom:0.9;height:30;width:260}
 }
 ##^##*/

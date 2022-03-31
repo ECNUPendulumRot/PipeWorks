@@ -37,6 +37,7 @@ Item {
             anchors.left: parent.left
             anchors.top: parent.top
             font.pixelSize: 12
+            font.family: "Microsoft Yahei"
             verticalAlignment: Text.AlignVCenter
         }
 
@@ -50,6 +51,7 @@ Item {
             anchors.left: text1.left
             anchors.top: text1.bottom
             font.pixelSize: 12
+            font.family: "Microsoft Yahei"
             verticalAlignment: Text.AlignVCenter
         }
 
@@ -63,6 +65,7 @@ Item {
             anchors.left: text2.left
             anchors.top: text2.bottom
             font.pixelSize: 12
+            font.family: "Microsoft Yahei"
             verticalAlignment: Text.AlignVCenter
         }
 
@@ -76,6 +79,7 @@ Item {
             anchors.left: text1.left
             anchors.top: text3.bottom
             font.pixelSize: 12
+            font.family: "Microsoft Yahei"
             verticalAlignment: Text.AlignVCenter
         }
 
@@ -89,6 +93,7 @@ Item {
             anchors.left: text1.left
             anchors.top: text4.bottom
             font.pixelSize: 12
+            font.family: "Microsoft Yahei"
             verticalAlignment: Text.AlignVCenter
         }
 
@@ -380,8 +385,4 @@ Item {
 
 
 
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:1.33}
-}
-##^##*/
+

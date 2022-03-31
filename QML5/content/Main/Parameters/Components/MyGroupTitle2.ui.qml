@@ -31,6 +31,7 @@ Rectangle {
             text: qsTr("小车参数")
             anchors.verticalCenter: parent.verticalCenter
             font.pixelSize: 13
+            font.family: "Microsoft Yahei"
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
@@ -41,3 +42,4 @@ Designer {
     D{i:0;height:132;width:165}
 }
 ##^##*/
+
