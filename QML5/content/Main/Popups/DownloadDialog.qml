@@ -10,6 +10,7 @@ Popup{
     property alias cancelBtn: cancelBtn
     property alias completeBtn: completeBtn
     property alias progressBarValue: progressBar.value
+    property alias title: title.text
     dim: true
     modal: true
 
@@ -44,10 +45,10 @@ Popup{
         }
 
         Text {
-            id: text1
+            id: title
             x: 118
             y: 25
-            text: "正在开始下载文件"
+            text: "正在下载文件中..."
             font.pixelSize: 18
             anchors.verticalCenterOffset: -1
             font.family: "Courier"
