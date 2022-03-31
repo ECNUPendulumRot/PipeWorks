@@ -4,6 +4,7 @@ import QtQuick.Studio.Effects 1.0
 import "Components"
 import "Parameters"
 
+
 Rectangle {
     id: rectangle
     width: 1366
@@ -11,7 +12,6 @@ Rectangle {
     color: "#fafafa"
     border.color: "#000000"
     border.width: 0
-
     Rectangle{
         width: parent.width
         height: 1

@@ -4,6 +4,7 @@ Downloader::Downloader(QObject *parent)
     : QObject{parent}
 {
     pUrl.setScheme("ftp");
+    //manager.setTransferTimeout(1000);
 }
 
 void Downloader::setHostPort(const QString &host, int port)
@@ -22,7 +23,7 @@ void Downloader::put(const QString &fileName, const QString &path)
 {
     QFile file(fileName);
     file.open(QIODevice::ReadOnly);
-    transfromData = file.readAll();
+    QByteArray transfromData = file.readAll();
     file.close();
 
     pUrl.setPath(path);
@@ -35,13 +36,25 @@ void Downloader::put(const QString &fileName, const QString &path)
 
 void Downloader::get(const QString &path, const QString &fileName)
 {
-    setFileName(fileName, 1);
+
+    file.setFileName(fileName);
+    file.remove();
+    file.open(QIODevice::WriteOnly | QIODevice::Append);
     pUrl.setPath(path);
     pReply = manager.get(QNetworkRequest(pUrl));
     ReplyTimeout::set(pReply, 1000);//reply time out
     connect(pReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
     connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(downloadProgress(qint64, qint64)));
     connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleDownloadError(QNetworkReply::NetworkError)));
+}
+
+bool Downloader::checkIfExist(const QString &fileName)
+{
+    file.setFileName(fileName);
+    if(file.exists())
+        return true;
+    else
+        return false;
 }
 
 void Downloader::setFileName(const QString &fileName, int i)
@@ -153,6 +166,8 @@ void Downloader::setDownloadName(QString downloadName)
     this->uploadName = downloadName;
 }
 
+
+
 void Downloader::downloadFinished()
 {
 
@@ -171,13 +186,14 @@ void Downloader::downloadFinished()
     file.close();
     qDebug()<<"finished"<<pReply->isFinished();
     pReply->deleteLater();
+    manager.clearAccessCache();
 }
 
 void Downloader::uploadFinished()
 {
     switch (pReply->error()) {
     case QNetworkReply::NoError : {
-        pReply->deleteLater();
+
         qDebug()<<"finished"<<pReply->isFinished();
     }
         break;
@@ -185,9 +201,8 @@ void Downloader::uploadFinished()
         qDebug()<<pReply->errorString();
         break;
     }
-    transfromData.clear();
-    qDebug()<<pUrl.host()<<"finished"<<pReply->isFinished();
     pReply->deleteLater();
+    manager.clearAccessCache();
 }
 
 void Downloader::handleUploadError(QNetworkReply::NetworkError error)
@@ -195,17 +210,17 @@ void Downloader::handleUploadError(QNetworkReply::NetworkError error)
     switch (error) {
     case QNetworkReply::OperationCanceledError :
         qDebug()<<QString::fromLocal8Bit("IP or port error ");
-        emit sendErrorMsg("IP or port error , please check your ftp setting");
+        emit sendErrorMsg("OperationCanceledError");
         break;
     case QNetworkReply::AuthenticationRequiredError :
         qDebug()<<QString::fromLocal8Bit("FTP账号密码错误");
-        emit sendErrorMsg("ID or passoword error ");
+        emit sendErrorMsg("AuthenticationRequiredError");
         break;
         // 其他错误处理
     default:
         qDebug()<<"error:";
         qDebug()<<error;
-        emit sendErrorMsg("there are someting error occured");
+        emit sendErrorMsg("error");
         break;
     }
 }
@@ -215,21 +230,21 @@ void Downloader::handleDownloadError(QNetworkReply::NetworkError error)
     switch (error) {
     case QNetworkReply::OperationCanceledError :
         qDebug()<<QString::fromLocal8Bit("IP or port error ");
-        emit sendErrorMsg("IP or port error , please check your ftp setting");
+        emit sendErrorMsg("OperationCanceledError");
         break;
     case QNetworkReply::AuthenticationRequiredError :
         qDebug()<<QString::fromLocal8Bit("FTP账号密码错误");
-        emit sendErrorMsg("ID or passoword error  ");
+        emit sendErrorMsg("AuthenticationRequiredError");
         break;
     case QNetworkReply::ContentNotFoundError :
         qDebug()<<QString::fromLocal8Bit("要下载的文件不存在");
-        emit sendErrorMsg("file not found");
+        emit sendErrorMsg("ContentNotFoundError");
         break;
         // 其他错误处理ContentNotFoundError
     default:
         qDebug()<<"error:";
         qDebug()<<error;
-        emit sendErrorMsg("there are someting error occured");
+        emit sendErrorMsg("error");
         break;
     }
 }

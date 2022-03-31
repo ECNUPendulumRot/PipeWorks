@@ -12,6 +12,7 @@ Popup{
     property alias completeBtn: completeBtn
     property alias progressBarValue: progressBar.value
     property alias cvisibleProgress: progressBar.visible
+    property alias title: title.text
     dim: true
     modal: true
 
@@ -57,7 +58,7 @@ Popup{
         }
 
         Text {
-            id: text1
+            id: title
             x: 47
             y: 25
             text: "您是否要将当前文件上传到中控？"

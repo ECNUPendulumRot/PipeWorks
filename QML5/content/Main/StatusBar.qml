@@ -7,13 +7,6 @@ Rectangle {
     height: 40
     color: "#ffffff"
 
-//    property var dataMap: {"Friday":"星期五",
-//                           "Monday":"星期一",
-//                           "Tuesday" :"星期二",
-//                            "Wednesday":"星期三",
-//                            "Thursday":"星期四",
-//                            "Saturday":"星期六",
-//                            "Sunday":"星期日"}
 
     Text {
         id: connectionStatusTitle
@@ -22,7 +15,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 15
-        font.pixelSize: 12
+        font.pixelSize: 14
     }
 
     Rectangle {
@@ -40,7 +33,7 @@ Rectangle {
     Text {
         id: statusText
         color: "#000000"
-         font.pixelSize: 12
+        font.pixelSize: 14
         text: qsTr("未连接")
         anchors.left: connectionLight.right
         anchors.leftMargin: 10
@@ -63,7 +56,7 @@ Rectangle {
     Text {
         id: syncText
         color: "#000000"
-        font.pixelSize: 12
+        font.pixelSize: 14
         text: qsTr("未连接工艺数据库")
 
         anchors.left: syncLight.right
@@ -74,7 +67,7 @@ Rectangle {
 
     Text {
         id: datetimeText
-        font.pixelSize: 12
+        font.pixelSize: 14
         //x: 1236
         anchors.right: parent.right
         anchors.rightMargin: 20
@@ -140,6 +133,7 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.9;height:16;width:1366}
+    D{i:0;formeditorZoom:0.9;height:16;width:1366}D{i:1}D{i:2}D{i:3}D{i:4}D{i:5}D{i:6}
+D{i:7}D{i:8}D{i:9}
 }
 ##^##*/

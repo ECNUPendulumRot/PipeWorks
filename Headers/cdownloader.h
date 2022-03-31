@@ -24,6 +24,8 @@ public slots:
 
     void get(const QString &path, const QString &fileName);
 
+    bool checkIfExist(const QString &fileName);
+
     void setFileName(const QString &fileName, int i);
 
     bool checkConfig();
@@ -66,13 +68,13 @@ private slots:
     void handleUploadError(QNetworkReply::NetworkError error);
     void handleDownloadError(QNetworkReply::NetworkError error);
 
+
 private:
     QUrl pUrl;
     QFile file;
     QNetworkAccessManager manager;
     QNetworkReply *pReply;
     QString ip,port,user,password,uploadName,downloadName;
-    QByteArray transfromData;
 };
 
 

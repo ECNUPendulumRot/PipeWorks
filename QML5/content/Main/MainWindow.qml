@@ -16,7 +16,13 @@ Rectangle {
     border.width: 1
     width: 1366
     height: 768
-
+    property var errorMap: {"OperationCanceledError":"IP或端口错误",
+                           "AuthenticationRequiredError":"FTP账号密码错误",
+                           "ContentNotFoundError" :"该文件在中控端不存在",
+                            "otherError":"出现了预料之外的错误",
+                            "downloadConflict":"当前文件已存在且已打开，无法完成下载",
+                            "Saturday":"星期六",
+                            "Sunday":"星期日"}
     //property var angleTableContainer : null
 
     Rectangle {
@@ -195,7 +201,7 @@ Rectangle {
             x: 25
             y: parent.height + 1
 
-            property var fileUrl
+            //property var fileUrl
             closePolicy: Popup.CloseOnReleaseOutsideParent
 
             openBtn.onClicked:{
@@ -454,11 +460,15 @@ Rectangle {
     FileDialog {
         id: fileDialog
         nameFilters:["Datase files(*.db)"]
-
+        property var curruntFileUrl
         onAccepted: {
-            popupDb.fileUrl = fileUrl
+            fileDialog.curruntFileUrl = fileUrl
+            //popupDb.fileUrl = fileUrl
             //console.log(popupDb.fileUrl)
             mainLoadDb(fileUrl)
+        }
+        function clear(){
+            curruntFileUrl = ""
         }
     }
 
@@ -468,8 +478,9 @@ Rectangle {
         nameFilters:["Datase files(*.db)"]
         folder: shortcuts.home
         onAccepted: {
-            downloadfile(fileUrl)
-            downloadDialog.open()
+            downloadfile()
+
+
         }
     }
 
@@ -483,10 +494,12 @@ Rectangle {
             progressBarValue = 0.0
             completeBtn.cvisible = false;
             confirmBtn.cvisible = true;
+            title = "您是否要将当前文件上传到中控？"
             uploadDialog.close()}
 
         confirmBtn.onClicked: {
             uploadFile(ftpDialog.uploadName)
+            title = "正在传输中..."
         }
 
         completeBtn.onClicked: {
@@ -494,6 +507,7 @@ Rectangle {
             progressBarValue = 0.0
             completeBtn.cvisible = false;
             confirmBtn.cvisible = true;
+            title = "您是否要将当前文件上传到中控？"
             uploadDialog.close()
         }
     }
@@ -505,6 +519,7 @@ Rectangle {
         cancelBtn.onClicked: {
             progressBarValue = 0.0
             completeBtn.cvisible = false;
+            title = "正在下载文件中..."
             downloadDialog.close()
         }
         completeBtn.onClicked: {
@@ -515,9 +530,10 @@ Rectangle {
                 var downloadFileUrl = downloadFile.fileUrl
                 var downloadFlieName = "/" + ftpDialog.downloadName
                 var totalUrl = downloadFileUrl+downloadFlieName
-                popupDb.fileUrl = totalUrl
+                fileDialog.curruntFileUrl = totalUrl
                 mainLoadDb(totalUrl)
             }
+            title = "正在下载文件中..."
         }
     }
 
@@ -566,6 +582,35 @@ Rectangle {
                         }
 
         cancelBtn.visible: false
+
+    }
+
+    InfoDialog {
+        id: fileConflict
+
+        x: (parent.width - errorDialog.width)/2
+        y: (parent.height - errorDialog.height)/2
+
+        //text.text: "这个操作将不可被撤销，请确认是否撤销所有修改"
+        title: "出现了错误"
+        text.text: "该文件在该目录下已存在，是否覆盖？"
+        text.color: "#202020"
+        imageSource: "../images/information.png"
+        confirmBtn.text: "确定"
+        confirmBtn.onClicked: {
+            var downloadFileUrl = downloader.toLocal(downloadFile.fileUrl)   // "D:/datasave"
+            var downloadFlieName = "/" + ftpDialog.downloadName // "/wp.db"
+
+            var downName = downloadFileUrl+downloadFlieName
+//            var loadName = downloader.toLocal(fileDialog.curruntFileUrl)
+            fileConflict.close()
+            downloadDialog.open()
+            downloader.get(downloadFlieName, downName)
+        }
+
+
+
+        cancelBtn.onClicked: fileConflict.close()
 
     }
 
@@ -640,6 +685,7 @@ Rectangle {
             if(bytesSent/bytesTotal === 1.0){
                 uploadDialog.completeBtn.cvisible = true;
                 uploadDialog.confirmBtn.cvisible = false;
+                uploadDialog.title = "传输完成"
                           }
             }
     }
@@ -651,6 +697,7 @@ Rectangle {
             if(bytesSent/bytesTotal === 1.0){
 
                 downloadDialog.completeBtn.cvisible = true;
+                downloadDialog.title = "传输完成"
                           }
             }
     }
@@ -658,7 +705,7 @@ Rectangle {
     Connections {
         target: downloader
         onSendErrorMsg: errorMsg => {
-            errorDialog.text.text = errorMsg
+            errorDialog.text.text = errorMap[errorMsg]
             errorDialog.open()
             }
     }
@@ -704,6 +751,7 @@ Rectangle {
             commPop.clear();
             ctrlPop.clear();
             motionPop.clear();
+            fileDialog.clear();//clear curruntFileurl
         }
     }
 
@@ -738,18 +786,30 @@ Rectangle {
 
     function uploadFile(fileName){
         uploadDialog.cvisibleProgress = true;
-        var uploadUrl = downloader.toLocal(popupDb.fileUrl)
+        var uploadUrl = downloader.toLocal(fileDialog.curruntFileUrl)
         downloader.put(uploadUrl, fileName);
     }
 
-    function downloadfile(fileUrl){
-        var downloadFileUrl = downloader.toLocal(fileUrl)
-        var downloadFlieName = "/" + ftpDialog.downloadName
-        //console.log(downloadFlieName)
-        downloader.get(downloadFlieName,  downloadFileUrl+downloadFlieName)
+    function downloadfile(){
+        var downloadFileUrl = downloader.toLocal(downloadFile.fileUrl)   // "D:/datasave"
+        var downloadFlieName = "/" + ftpDialog.downloadName // "/wp.db"
 
-
+        var downName = downloadFileUrl+downloadFlieName
+        var loadName = downloader.toLocal(fileDialog.curruntFileUrl)
+        if(downName === loadName && scheduler.isPdbLoaded() ){
+            errorDialog.text.text = errorMap["downloadConflict"]
+            errorDialog.open()
+        }
+        else if(!downloader.checkIfExist(downName)){
+            downloadDialog.open()
+            downloader.get(downloadFlieName,  downloadFileUrl+downloadFlieName)
+        }
+            else
+                fileConflict.open()
     }
+
+
+
 
     function ftpConfig(ip, port, user, password){
         downloader.setHostPort(ip, port)
