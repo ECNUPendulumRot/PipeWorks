@@ -550,6 +550,25 @@ Rectangle {
         }
     }
 
+    InfoDialog {
+        id: errorDialog
+
+        x: (parent.width - errorDialog.width)/2
+        y: (parent.height - errorDialog.height)/2
+
+        //text.text: "这个操作将不可被撤销，请确认是否撤销所有修改"
+        title: "出现了错误"
+        text.color: "#202020"
+        imageSource: "../images/information.png"
+        confirmBtn.text: "确定"
+        confirmBtn.onClicked: {
+            errorDialog.close()
+                        }
+
+        cancelBtn.visible: false
+
+    }
+
     Popup {
         id: pwPopup
 
@@ -633,6 +652,14 @@ Rectangle {
 
                 downloadDialog.completeBtn.cvisible = true;
                           }
+            }
+    }
+
+    Connections {
+        target: downloader
+        onSendErrorMsg: errorMsg => {
+            errorDialog.text.text = errorMsg
+            errorDialog.open()
             }
     }
 
@@ -720,7 +747,8 @@ Rectangle {
         var downloadFlieName = "/" + ftpDialog.downloadName
         //console.log(downloadFlieName)
         downloader.get(downloadFlieName,  downloadFileUrl+downloadFlieName)
-        uploadDialog.close()
+
+
     }
 
     function ftpConfig(ip, port, user, password){
