@@ -163,7 +163,7 @@ void Downloader::setUploadName(QString uploadName)
 
 void Downloader::setDownloadName(QString downloadName)
 {
-    this->uploadName = downloadName;
+    this->downloadName = downloadName;
 }
 
 
