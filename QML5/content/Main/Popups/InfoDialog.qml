@@ -110,6 +110,8 @@ Popup {
                 Layout.preferredHeight: 80
                 Layout.leftMargin: 45
                 Layout.fillWidth: true
+
+                wrapMode: Text.Wrap
             }
 
             Item {

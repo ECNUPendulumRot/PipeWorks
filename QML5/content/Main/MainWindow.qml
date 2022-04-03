@@ -239,12 +239,18 @@ Rectangle {
                 downloadFile.open();
             }
 
+            passBtn.onClicked:{
+                if(scheduler.isPdbLoaded()){
+                    popupDb.close();
+                    onePassDialog.open();
+                }
+            }
+
             ftpBtn.onClicked:{
                 popupDb.close();
                 getFTPConfig();
                 ftpDialog.open();
             }
-
         }
 
         onClicked: {
@@ -320,7 +326,6 @@ Rectangle {
         }
 
         onClicked:if(scheduler.callIsDirty()) dbCancelDialog.open()
-
 
     }
 
@@ -583,6 +588,26 @@ Rectangle {
 
         cancelBtn.visible: false
 
+    }
+
+    InfoDialog {
+        id: onePassDialog
+
+        x: (parent.width - onePassDialog.width)/2
+        y: (parent.height - onePassDialog.height)/2
+
+        text.text: "这将会把显示在主界面的焊道数据上传至中控，并且操作将不可被撤销，请确认是否上传数据"
+        title: "您是否要上传显示的焊道数据？"
+        text.color: "#202020"
+        imageSource: "../images/information.png"
+        confirmBtn.text: "确定"
+        confirmBtn.onClicked: {
+
+        }
+
+        cancelBtn.onClicked: {
+            onePassDialog.close();
+        }
     }
 
     InfoDialog {
