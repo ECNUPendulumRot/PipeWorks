@@ -156,6 +156,29 @@ void Scheduler::saveToFile(QUrl source ,QUrl dest)
         qDebug() << "copy failed";
 }
 
+bool Scheduler::pushSelectedTable()
+{
+    if(!this->isPdbLoaded())
+        return false;
+
+    QVector<QString>* query = this->manager->getTableQuery();// ---
+
+    ParamDatabase target("/Users/dozersherman/Desktop/db/target.db");
+
+    QSqlDatabase &db = target.getdb();
+    qDebug() << db.tables();
+
+    db.transaction();
+    for(int i = 0; i < query->count(); i++){
+        db.exec(query->at(i));
+    }
+    db.commit();
+
+    delete query;// ---
+
+    return true;
+}
+
 
 bool Scheduler::callAngleTable(unsigned int index)
 {

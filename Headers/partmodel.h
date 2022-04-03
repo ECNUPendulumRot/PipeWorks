@@ -4,16 +4,16 @@
 #include <QAbstractItemModel>
 #include <cTmodel.h>
 
-//typedef struct Parameter {
-//    QString name;
-//    QString chn;
-//    bool isCouple;
-//    Parameter(){};
-//    ~Parameter(){};
-//    Parameter(QString n, QString c, bool is):name(n), chn(c), isCouple(is)
-//    {};
+typedef struct Parameter {
+    QString name;
+    QString chn;
+    bool isCouple;
+    Parameter(){};
+    ~Parameter(){};
+    Parameter(QString n, QString c, bool is):name(n), chn(c), isCouple(is)
+    {};
 
-//} Parameter;
+} Parameter;
 
 typedef struct MapData{
     int map_r;
@@ -88,6 +88,8 @@ public:
     void callCrossSelect(unsigned int row, unsigned int col, bool b);
 
     void clear();
+
+    bool isReady();
 
     QString webData();
 

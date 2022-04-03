@@ -91,6 +91,8 @@ public slots:
 
     void saveToFile(QUrl s, QUrl d);
 
+    bool pushSelectedTable();
+
 private:
 
     User *user;

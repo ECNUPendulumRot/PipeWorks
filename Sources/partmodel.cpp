@@ -317,6 +317,11 @@ void PartModel::clear()
     emit dataReady("");
 }
 
+bool PartModel::isReady()
+{
+    return !(connectedTable == nullptr);
+}
+
 
 void PartModel::callCrossSelect(unsigned int row, unsigned int col, bool b)
 {

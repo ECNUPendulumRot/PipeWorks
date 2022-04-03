@@ -61,10 +61,10 @@ public:
 
     void changeSelectIndex(unsigned int index);          //原MTruncate
 
-
     bool isDirty();
     //新添加
 
+    QVector<QString>* getTableQuery();
 signals:
 
     void registerRequest(TModel*, QString);

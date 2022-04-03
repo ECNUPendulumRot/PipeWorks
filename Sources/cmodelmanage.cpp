@@ -164,6 +164,11 @@ bool ModelManager::isDirty()
     return dirty;
 }
 
+QVector<QString> *ModelManager::getTableQuery()
+{
+    return this->pm->getConnectedTable()->getTableQuery();
+}
+
 bool ModelManager::changePass(QString modelName){
     //mPool->setTable(modelName);
     //mPool->setEditStrategy(QSqlTableModel::OnManualSubmit);
