@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     engine.addImportPath("qrc:/QML/imports");
     engine.rootContext()->setContextProperty(QStringLiteral("scheduler"), &s);
     engine.rootContext()->setContextProperty(QStringLiteral("downloader"), &d);
-
+    engine.rootContext()->setContextProperty("appDir", qApp->applicationDirPath());
 //    engine.rootContext()->setContextProperty(QStringLiteral("customModel"), m);
     engine.load(QStringLiteral("qrc:/QML5/content/App.qml"));
 

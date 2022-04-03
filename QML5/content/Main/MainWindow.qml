@@ -503,7 +503,7 @@ Rectangle {
             uploadDialog.close()}
 
         confirmBtn.onClicked: {
-            uploadFile(ftpDialog.uploadName)
+            uploadFile()
             title = "正在传输中..."
         }
 
@@ -522,15 +522,11 @@ Rectangle {
         x: (root.width - reconnectDialog.width)/2
         y: (root.height - reconnectDialog.height)/2
         cancelBtn.onClicked: {
-            progressBarValue = 0.0
-            completeBtn.cvisible = false;
-            title = "正在下载文件中..."
-            downloadDialog.close()
+            downloadDialog.clear()
+
         }
         completeBtn.onClicked: {
-            progressBarValue = 0.0
-            completeBtn.cvisible = false;
-            downloadDialog.close()
+            downloadDialog.clear()
             if(!scheduler.isPdbLoaded()){
                 var downloadFileUrl = downloadFile.fileUrl
                 var downloadFlieName = "/" + ftpDialog.downloadName
@@ -538,7 +534,13 @@ Rectangle {
                 fileDialog.curruntFileUrl = totalUrl
                 mainLoadDb(totalUrl)
             }
+
+        }
+        function clear(){
+            progressBarValue = 0.0
+            completeBtn.cvisible = false;
             title = "正在下载文件中..."
+            downloadDialog.close()
         }
     }
 
@@ -603,13 +605,43 @@ Rectangle {
         confirmBtn.text: "确定"
         confirmBtn.onClicked: {
             if(scheduler.isPdbLoaded()){
-                scheduler.pushSelectedTable(passListView.currentIndex);
+                pushSelectedTableToRemote()
+                //scheduler.pushSelectedTable(passListView.currentIndex, ftpDialog.downloadName);
                 onePassDialog.close();
+                onePassComplete.open();
             }
         }
 
         cancelBtn.onClicked: {
             onePassDialog.close();
+        }
+    }
+
+    InfoDialog {
+        id: onePassComplete
+
+        x: (parent.width - onePassDialog.width)/2
+        y: (parent.height - onePassDialog.height)/2
+
+        text.text: ""
+        title: "正在上传中..."
+        text.color: "#202020"
+        imageSource: "../images/information.png"
+        cancelBtn.text: "取消"
+        cancelBtn.onClicked: {
+            onePassComplete.close()
+            onePassComplete.clear()
+        }
+
+        completeBtn.onClicked: {
+            onePassComplete.close()
+            onePassComplete.clear()
+        }
+        confirmBtn.visible: false
+        completeBtn.text: "完成"
+        function clear(){
+            title =  "正在上传中..."
+            completeBtn.visible = false
         }
     }
 
@@ -633,7 +665,7 @@ Rectangle {
 //            var loadName = downloader.toLocal(fileDialog.curruntFileUrl)
             fileConflict.close()
             downloadDialog.open()
-            downloader.get(downloadFlieName, downName)
+            downloader.get(downloadFlieName, downName,"default")
         }
 
 
@@ -737,6 +769,30 @@ Rectangle {
             errorDialog.open()
             }
     }
+//singleTableStep1Finished
+
+    Connections {
+        target: downloader
+        onStartSingleTableStep2and3: {
+            var tempName = "temp.db"; //临时文件名称
+            var tempFileUrl = appDir+"/Database/" + tempName;
+            var downloadFlieName = "/" + ftpDialog.downloadName; // "/wp.db"
+            console.log(ftpDialog.uploadName);
+            setFTPConfig()
+            scheduler.pushSelectedTable(passListView.currentIndex, tempName);//write
+            downloader.put(tempFileUrl, ftpDialog.uploadName, "singleTable"); //upload to remote
+            }
+    }
+
+    Connections {
+        target: downloader
+        onSingleTableAllFinished: {
+                onePassComplete.title = "传输完成"
+                onePassComplete.completeBtn.visible =true;
+            }
+    }
+
+
 
     function mainLoadDb(file){
 
@@ -812,10 +868,10 @@ Rectangle {
         mainBar.commParamBtn.visible = false;
     }
 
-    function uploadFile(fileName){
+    function uploadFile(){
         uploadDialog.cvisibleProgress = true;
         var uploadUrl = downloader.toLocal(fileDialog.curruntFileUrl)
-        downloader.put(uploadUrl, fileName);
+        downloader.put(uploadUrl, ftpDialog.uploadName,"default");
     }
 
     function downloadfile(){
@@ -830,7 +886,7 @@ Rectangle {
         }
         else if(!downloader.checkIfExist(downName)){
             downloadDialog.open()
-            downloader.get(downloadFlieName,  downloadFileUrl+downloadFlieName)
+            downloader.get(downloadFlieName,  downloadFileUrl+downloadFlieName, "default")
         }
             else
                 fileConflict.open()
@@ -860,4 +916,17 @@ Rectangle {
         downloader.setDownloadName(ftpDialog.downloadName)
         downloader.writeConfig()
     }
+
+    function pushSelectedTableToRemote(){//step1
+        var tempName = "temp.db"
+        var tempFileUrl = appDir+"/Database/" + tempName
+
+        console.log("GG:"+tempFileUrl)
+        var downloadFlieName = "/" + ftpDialog.downloadName // "/wp.db"
+        downloader.get(downloadFlieName, tempFileUrl, "singleTable") //download temp.db to appDir
+        //scheduler.pushSelectedTable(tableIndex, tempName);//write
+        //downloader.put(tempFileUrl, ftpDialog.uploadName); //upload to remote
+    }
+
+
 }

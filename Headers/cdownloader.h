@@ -20,9 +20,9 @@ public slots:
 
     void setUserInfo(const QString &userName, const QString &password);
 
-    void put(const QString &fileName, const QString &path);
+    void put(const QString &fileName, const QString &path,QString method);
 
-    void get(const QString &path, const QString &fileName);
+    void get(const QString &path, const QString &fileName, QString method);
 
     bool checkIfExist(const QString &fileName);
 
@@ -57,6 +57,9 @@ signals:
 
     void sendErrorMsg(QString errorMsg);
 
+    void startSingleTableStep2and3();
+
+    void singleTableAllFinished();
 
 private slots:
 
@@ -64,6 +67,8 @@ private slots:
     void downloadProgress(qint64 bytesSent, qint64 bytesTotal);
 
     void downloadFinished();
+    void singleTable1Finished();
+    void singleTable3Finished();
     void uploadFinished();
     void handleUploadError(QNetworkReply::NetworkError error);
     void handleDownloadError(QNetworkReply::NetworkError error);

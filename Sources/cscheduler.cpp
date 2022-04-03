@@ -157,7 +157,7 @@ void Scheduler::saveToFile(QUrl source ,QUrl dest)
         qDebug() << "copy failed";
 }
 
-bool Scheduler::pushSelectedTable(int index)
+bool Scheduler::pushSelectedTable(int index,const QString &DbName)
 {
     if(!this->isPdbLoaded())
         return false;
@@ -165,8 +165,8 @@ bool Scheduler::pushSelectedTable(int index)
     QVector<QString>* query = this->manager->getTableQuery();// ---
     QString fixed = this->manager->getRowQuery(index, 0);
 
-    ParamDatabase target("/Users/dozersherman/Desktop/db/target.db");// this should be changed
-
+    ParamDatabase target(QCoreApplication::applicationDirPath().append("/Database/"+ DbName));// this should be changed
+    //qDebug()<<"GG:"+QCoreApplication::applicationDirPath().append("/Database/"+ DbName);
     QSqlDatabase &db = target.getdb();
     qDebug() << db.tables();
 
