@@ -1,4 +1,4 @@
-#include "partmodel.h"
+﻿#include "partmodel.h"
 #include <QSqlRecord>
 #include <utility.h>
 
@@ -297,6 +297,29 @@ bool PartModel::callAddToModel(double v, bool isAdd)
     }
     return true;
 }
+
+bool PartModel::callSetToModel(double v)
+{
+    for(int i = 0; i < this->rowCount(); i++){
+        for(int j = 1; j < this->columnCount(); j++){
+            if(this->selection[i][j] == true){
+                QVariant oldData = this->data(this->index(i,j));
+                double newData = v;
+                //qDebug() << newData;
+                int round = digitsAfterDecimal(newData);
+                //qDebug() << round;
+                if(round == 0)
+                    this->setData(this->index(i,j), QVariant(int(newData)));
+                else{
+                    double multiplier = std::pow(10.0, round);
+                    this->setData(this->index(i,j), QVariant(std::round(newData * multiplier)/multiplier), Qt::DisplayRole);
+                }
+            }
+        }
+    }
+    return true;
+}
+
 
 void PartModel::callWriteBack()
 {

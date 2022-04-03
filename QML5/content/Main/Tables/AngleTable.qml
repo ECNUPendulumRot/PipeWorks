@@ -343,6 +343,28 @@ Item {
 
         onAddRequest: angleRelatedTableModel.callAddToModel(n, true)
         onMinusRequest: angleRelatedTableModel.callAddToModel(n, false)
+        onSetRequest: angleRelatedTableModel.callSetToModel(n)
+    }
+
+    EditModeSwitch {
+        id: editMode
+
+        visible: false
+        enabled:  visible
+        anchors.left: calculation.right
+        anchors.verticalCenter: calculation.verticalCenter
+
+        onCheckedChanged: {
+            if(checked){
+                calculation.addVisible = false;
+                calculation.minusVisible = false;
+
+            }
+            else{
+                calculation.addVisible = true;
+                calculation.minusVisible = true;
+            }
+        }
     }
 
     OperationBtn {
@@ -383,6 +405,7 @@ Item {
             reset()
             enableSingleSelect(view);
             angleRelatedTableModel.callFetchData();
+            editMode.checked = false
             widget.isCheck = false
         }
     }
@@ -406,6 +429,7 @@ Item {
             angleRelatedTableModel.callWriteBack();
             enableSingleSelect(view);
             calculation.clear()
+            editMode.checked = false
             widget.isCheck = false
             header.currentIndex = -1
         }
@@ -460,6 +484,11 @@ Item {
             }
 
             PropertyChanges {
+                target: editMode
+                visible: true
+            }
+
+            PropertyChanges {
                 target: header
                 enabled: true
             }
@@ -495,6 +524,11 @@ Item {
                     property: "visible"
                     duration: 0
                 }
+                PropertyAnimation {
+                    target: editMode
+                    property: "visible"
+                    duration: 0
+                }
             }
             onRunningChanged: {
                 if(running === true)
@@ -512,6 +546,11 @@ Item {
             SequentialAnimation {
                 PropertyAnimation {
                     target: calculation
+                    property: "visible"
+                    duration: 0
+                }
+                PropertyAnimation {
+                    target: editMode
                     property: "visible"
                     duration: 0
                 }

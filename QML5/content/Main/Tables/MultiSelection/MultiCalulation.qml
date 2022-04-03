@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Effects 1.0
 
@@ -9,6 +9,10 @@ Item {
 
     signal addRequest(var n)
     signal minusRequest(var n)
+    signal setRequest(var n)
+
+    property alias addVisible: add.visible
+    property alias minusVisible: minus.visible
 
     TextField {
         id: textField
@@ -92,5 +96,14 @@ Item {
 
     function clear(){
         textField.text = "";
+    }
+
+    Connections{
+        target: textField
+        function onAccepted(){
+            //console.log("aaaaaaaaaaaaaaaaaa")
+            control.setRequest(textField.text)
+        }
+        enabled: editMode.checked
     }
 }

@@ -101,6 +101,8 @@ public slots:
 
     bool callAddToModel(double v, bool isAdd);
 
+    bool callSetToModel(double v);
+
     void callWriteBack();
 
     void callFetchData();
