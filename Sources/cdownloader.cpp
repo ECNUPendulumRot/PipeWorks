@@ -196,7 +196,6 @@ void Downloader::downloadFinished()
         qDebug()<<pReply->errorString();
         break;
     }
-
     file.close();
     qDebug()<<"finished"<<pReply->isFinished();
     pReply->deleteLater();
