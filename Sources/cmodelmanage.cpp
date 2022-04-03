@@ -169,6 +169,13 @@ QVector<QString> *ModelManager::getTableQuery()
     return this->pm->getConnectedTable()->getTableQuery();
 }
 
+QString ModelManager::getRowQuery(int row, int index)
+{
+    QString upData = "UPDATE " + indexToModel[index]->tableName() + " ";
+    upData += indexToModel[index]->getRowQuery(row);
+    return upData;
+}
+
 bool ModelManager::changePass(QString modelName){
     //mPool->setTable(modelName);
     //mPool->setEditStrategy(QSqlTableModel::OnManualSubmit);

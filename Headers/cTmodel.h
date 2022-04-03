@@ -46,7 +46,9 @@ public slots:
 
     bool callIsDirty();
 
-    QVector<QString>* getTableQuery();
+    QVector<QString>* getTableQuery(); // this is for angular table
+
+    QString getRowQuery(int index); // this is for fixed table
 
 signals:
 

@@ -65,6 +65,9 @@ public:
     //新添加
 
     QVector<QString>* getTableQuery();
+
+    QString getRowQuery(int row, int index);
+
 signals:
 
     void registerRequest(TModel*, QString);

@@ -91,7 +91,7 @@ public slots:
 
     void saveToFile(QUrl s, QUrl d);
 
-    bool pushSelectedTable();
+    bool pushSelectedTable(int i);
 
 private:
 

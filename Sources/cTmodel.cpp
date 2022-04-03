@@ -89,16 +89,19 @@ QVector<QString>* TModel::getTableQuery()
 {
     QVector<QString>* query = new QVector<QString>();
     QString tableName = this->tableName();
-    QString upDate = "UPDATE " + tableName;
-    query->push_back(upDate);
 
     for(int i = 0; i < this->rowCount(); i++){
-        QString tmp = rowQuery(i);
-        query->push_back(tmp);
-        qDebug() << tmp;
+        QString upDate = "UPDATE " + tableName + " ";
+        upDate += rowQuery(i);
+        query->push_back(upDate);
     }
 
     return query;
+}
+
+QString TModel::getRowQuery(int index)
+{
+    return rowQuery(index);
 }
 
 QString TModel::rowQuery(int index)
@@ -108,10 +111,12 @@ QString TModel::rowQuery(int index)
     QString result = "SET ";
 
     for(int i = 1; i < record.count(); i++){
-        QString tmp = record.fieldName(i) + " = " + record.value(i).toString() + (i == record.count() - 1 ? "": ",");
+        QString tmp = record.fieldName(i) + " = " + (record.fieldName(i) == "showName"? "'" + record.value(i).toString() + "'":record.value(i).toString())
+                                          + (i == record.count() - 1 ? "": ",");
         result += tmp;
     }
-    result += " WHERE " + record.fieldName(0) + " = " + record.value(0).toString();
+    result += " WHERE " + record.fieldName(0)
+                        + " = " + (record.fieldName(0) == "passName"? "'" + record.value(0).toString() + "'":record.value(0).toString()) + ";";
     return result;
 }
 
