@@ -7,7 +7,7 @@
 #include <QQmlApplicationEngine>
 #include <cuser.h>
 #include <cmodelmanage.h>
-
+#include <cdownloader.h>
 
 class Scheduler : public QObject
 {
@@ -90,6 +90,8 @@ public slots:
     bool callIsDirty();
 
     void saveToFile(QUrl s, QUrl d);
+
+    bool pushSelectedTable(int i, const QString &fileName);
 
 private:
 

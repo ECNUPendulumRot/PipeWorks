@@ -11,6 +11,7 @@ public:
 
     // Constructor
     Database();
+
     Database(QString filename, QString type, QString pw);
 
     // Destructor

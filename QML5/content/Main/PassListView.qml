@@ -12,6 +12,8 @@ Rectangle {
     signal passListRequestRefreshcombobx()
     signal passListRequestFixTableRefresh(int i)
 
+    property int currentIndex : -1
+
     Rectangle {
         id: seperateLine
         height: 1
@@ -301,8 +303,9 @@ Rectangle {
             scheduler.callPassSelected("Pass" + i + "Parameter")
 
             passListRequestRefreshcombobx()
-
             passListRequestFixTableRefresh(i);
+
+            currentIndex = i;
         }
     }
 
@@ -322,6 +325,7 @@ Rectangle {
         passEditBtn11.textItemText = ""
         passEditBtn30.textItemText = ""
         passEditBtn31.textItemText = ""
+        currentIndex = -1;
     }
 
     function getPassName(item){

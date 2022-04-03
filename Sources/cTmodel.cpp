@@ -18,7 +18,6 @@ TModel::TModel(QSqlDatabase &db):QSqlTableModel(nullptr, db)//truncate model,use
 
 TModel::~TModel()
 {
-    releaseSelection();
     emit modelDataChanged(QString(""));
 }
 
@@ -29,7 +28,6 @@ QHash<int, QByteArray> TModel::roleNames() const
     roles[ColumnRole] = "column";
     roles[RowRole] = "row";
     roles[DirtyRole] = "isDirty";
-    roles[SelectionRole] = "isSelect";
     return roles;
 }
 
@@ -47,8 +45,6 @@ QVariant TModel::data(const QModelIndex &index, int role) const
         return index.row();
     case DirtyRole:
         return this->isDirty(index);
-    case SelectionRole:
-        return this->selection[index.row()][index.column()];
     default:
         return QSqlTableModel::data(index, role);
     }
@@ -83,34 +79,45 @@ bool TModel::callIsDirty(unsigned int row, unsigned int col)
     return this->isDirty(i);
 }
 
-
 bool TModel::callIsDirty()
 {
 
     return this->isDirty();
 }
 
-
-QString TModel::callWebData()
+QVector<QString>* TModel::getTableQuery()
 {
-    QString s;
-    s += QString::number(this->columnCount()) + " ";
+    QVector<QString>* query = new QVector<QString>();
+    QString tableName = this->tableName();
 
-    QSqlRecord record = this->record();
-
-    for(int col = 1; col < this->columnCount(); col++){
-        s += record.fieldName(col) + " ";
+    for(int i = 0; i < this->rowCount(); i++){
+        QString upDate = "UPDATE " + tableName + " ";
+        upDate += rowQuery(i);
+        query->push_back(upDate);
     }
-    if(this->columnCount() < 3)
-        s += "null ";
 
-    for(int col = 1; col < this->columnCount(); col++){
-        for(int row = 0; row < this->rowCount(); row ++){
-            QModelIndex i = this->index(row, col, QModelIndex());
-            s += QString::number(this->data(i).toDouble()) + " ";
-        }
+    return query;
+}
+
+QString TModel::getRowQuery(int index)
+{
+    return rowQuery(index);
+}
+
+QString TModel::rowQuery(int index)
+{
+    QSqlRecord record = this->record(index);
+
+    QString result = "SET ";
+
+    for(int i = 1; i < record.count(); i++){
+        QString tmp = record.fieldName(i) + " = " + (record.fieldName(i) == "showName"? "'" + record.value(i).toString() + "'":record.value(i).toString())
+                                          + (i == record.count() - 1 ? "": ",");
+        result += tmp;
     }
-    return s;
+    result += " WHERE " + record.fieldName(0)
+                        + " = " + (record.fieldName(0) == "passName"? "'" + record.value(0).toString() + "'":record.value(0).toString()) + ";";
+    return result;
 }
 
 
@@ -133,38 +140,6 @@ QVariant TModel::callGetData(unsigned int i, unsigned int j)
 }
 
 
-QString TModel::getChn(QString s)
-{
-    return engToChn[s];
-}
 
 
-void TModel::initializeSelection()
-{
-    if(this->selection != nullptr)
-        releaseSelection();
-
-    this->selection = new bool*[this->rowCount()];
-    for(int i = 0; i < this->rowCount(); i++){
-        this->selection[i] = new bool[this->columnCount()];
-        for(int j = 0; j < this->columnCount(); j++){
-            this->selection[i][j] = false;
-        }
-    }
-}
-
-
-void TModel::releaseSelection()
-{
-    if(this->selection == nullptr)
-        return;
-
-    for(int i = 0; i < this->rowCount(); i++){
-        delete this->selection[i];
-        this->selection[i] = nullptr;
-    }
-
-    delete this->selection;
-    this->selection = nullptr;
-}
 

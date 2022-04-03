@@ -2,6 +2,7 @@
 #include <QCoreApplication>
 #include <QFile>
 #include <QDataStream>
+#include <QSqlError>
 
 Scheduler::Scheduler(QObject *parent): QObject{parent}
 {
@@ -154,6 +155,37 @@ void Scheduler::saveToFile(QUrl source ,QUrl dest)
 
     if(!QFile::copy(sourceString, destString))
         qDebug() << "copy failed";
+}
+
+bool Scheduler::pushSelectedTable(int index,const QString &DbName)
+{
+    if(!this->isPdbLoaded())
+        return false;
+
+    QVector<QString>* query = this->manager->getTableQuery();// ---
+    QString fixed = this->manager->getRowQuery(index, 0);
+
+    ParamDatabase target(QCoreApplication::applicationDirPath().append("/Database/"+ DbName));// this should be changed
+    //qDebug()<<"GG:"+QCoreApplication::applicationDirPath().append("/Database/"+ DbName);
+    QSqlDatabase &db = target.getdb();
+    qDebug() << db.tables();
+
+    db.transaction();
+    for(int i = 0; i < query->count(); i++){
+        qDebug() << query->at(i);
+        QSqlQuery s = db.exec(query->at(i));
+        qDebug() << s.lastError();
+    }
+
+    qDebug() << fixed;
+    QSqlQuery s = db.exec(fixed);
+    qDebug() << s.lastError();
+
+    db.commit();
+
+    delete query;// ---
+
+    return true;
 }
 
 

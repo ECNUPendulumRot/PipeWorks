@@ -19,7 +19,7 @@ void Downloader::setUserInfo(const QString &userName, const QString &password)
     pUrl.setPassword(password);
 }
 
-void Downloader::put(const QString &fileName, const QString &path)
+void Downloader::put(const QString &fileName, const QString &path, QString method)
 {
     QFile file(fileName);
     file.open(QIODevice::ReadOnly);
@@ -28,13 +28,20 @@ void Downloader::put(const QString &fileName, const QString &path)
 
     pUrl.setPath(path);
     pReply = manager.put(QNetworkRequest(pUrl), transfromData);
-    ReplyTimeout::set(pReply, 1000);//reply time out
-    connect(pReply, SIGNAL(uploadProgress(qint64, qint64)), this, SLOT(uploadProgress(qint64, qint64)));
-    connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleUploadError(QNetworkReply::NetworkError)));
-    connect(pReply, SIGNAL(finished()), this, SLOT(uploadFinished()));
+    ReplyTimeout::set(pReply, 1000);//reply time out    
+    if(method == "default"){
+        connect(pReply, SIGNAL(uploadProgress(qint64, qint64)), this, SLOT(uploadProgress(qint64, qint64)));
+        connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleUploadError(QNetworkReply::NetworkError)));
+        connect(pReply, SIGNAL(finished()), this, SLOT(uploadFinished()));
+    }
+    if(method == "singleTable"){
+        //connect(pReply, SIGNAL(uploadProgress(qint64, qint64)), this, SLOT(uploadProgress(qint64, qint64)));
+        connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleUploadError(QNetworkReply::NetworkError)));
+        connect(pReply, SIGNAL(finished()), this, SLOT(singleTable3Finished()));//ST = single table
+    }
 }
 
-void Downloader::get(const QString &path, const QString &fileName)
+void Downloader::get(const QString &path, const QString &fileName, QString method)
 {
 
     file.setFileName(fileName);
@@ -43,9 +50,17 @@ void Downloader::get(const QString &path, const QString &fileName)
     pUrl.setPath(path);
     pReply = manager.get(QNetworkRequest(pUrl));
     ReplyTimeout::set(pReply, 1000);//reply time out
-    connect(pReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
-    connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(downloadProgress(qint64, qint64)));
-    connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleDownloadError(QNetworkReply::NetworkError)));
+    //connect(pReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+    if(method == "default"){
+        connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(downloadProgress(qint64, qint64)));
+        connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleDownloadError(QNetworkReply::NetworkError)));
+        connect(pReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+    }
+    if(method == "singleTable"){
+        connect(pReply, SIGNAL(finished()), this, SLOT(singleTable1Finished()));
+        connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleDownloadError(QNetworkReply::NetworkError)));
+        //connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(downloadProgress(qint64, qint64)));
+    }
 }
 
 bool Downloader::checkIfExist(const QString &fileName)
@@ -173,18 +188,58 @@ void Downloader::downloadFinished()
 
     //QNetworkReply *pReply = qobject_cast<QNetworkReply *>(sender());
     switch (pReply->error()) {
-    case QNetworkReply::NoError : {
+    case QNetworkReply::NoError :
         file.write(pReply->readAll());
         file.flush();
+        break;
+    default:
+        qDebug()<<pReply->errorString();
+        break;
+    }
+    file.close();
+    qDebug()<<"finished"<<pReply->isFinished();
+    pReply->deleteLater();
+    //manager.clearAccessCache();
+}
+
+void Downloader::singleTable1Finished()
+{
+    //QNetworkReply *pReply = qobject_cast<QNetworkReply *>(sender());
+    switch (pReply->error()) {
+    case QNetworkReply::NoError :
+        file.write(pReply->readAll());
+        file.flush();
+        file.close();
+        pReply->deleteLater();
+        manager.clearAccessCache();
+        emit startSingleTableStep2and3();//只有正确下载了才会上传数据
+        break;
+    default:
+        qDebug()<<pReply->errorString();
+        file.flush();
+        file.close();
+        pReply->deleteLater();
+        manager.clearAccessCache();
+        break;
+    }
+
+
+
+}
+
+void Downloader::singleTable3Finished()
+{
+    switch (pReply->error()) {
+    case QNetworkReply::NoError : {
+
+        qDebug()<<"finished"<<pReply->isFinished();
+        emit singleTableAllFinished();
     }
         break;
     default:
         qDebug()<<pReply->errorString();
         break;
     }
-
-    file.close();
-    qDebug()<<"finished"<<pReply->isFinished();
     pReply->deleteLater();
     manager.clearAccessCache();
 }
@@ -192,10 +247,8 @@ void Downloader::downloadFinished()
 void Downloader::uploadFinished()
 {
     switch (pReply->error()) {
-    case QNetworkReply::NoError : {
-
+    case QNetworkReply::NoError :
         qDebug()<<"finished"<<pReply->isFinished();
-    }
         break;
     default:
         qDebug()<<pReply->errorString();
@@ -242,7 +295,7 @@ void Downloader::handleDownloadError(QNetworkReply::NetworkError error)
         break;
         // 其他错误处理ContentNotFoundError
     default:
-        qDebug()<<"error:";
+        qDebug()<<"Download error:";
         qDebug()<<error;
         emit sendErrorMsg("error");
         break;

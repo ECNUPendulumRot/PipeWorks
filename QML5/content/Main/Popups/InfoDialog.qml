@@ -12,7 +12,7 @@ Popup {
 
     property alias confirmBtn: confirmBtn
     property alias cancelBtn: cancelBtn
-
+    property alias completeBtn: completeBtn
 
     property alias imageSource : image.source
     property alias title: titleText.text
@@ -110,6 +110,8 @@ Popup {
                 Layout.preferredHeight: 80
                 Layout.leftMargin: 45
                 Layout.fillWidth: true
+
+                wrapMode: Text.Wrap
             }
 
             Item {
@@ -142,6 +144,20 @@ Popup {
                     pressRecColor: "#00101010"
                     textItemColor: "#f6f6f6"
                     buttonBackgroundColor: "#3b7ecc"
+                }
+
+                ConfirmBtn {
+                    id: completeBtn
+                    width: 70
+                    height: 24
+                    text: "完成"
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 10
+                    pressRecColor: "#00101010"
+                    textItemColor: "#f6f6f6"
+                    buttonBackgroundColor: "#3b7ecc"
+                    visible: false
                 }
             }
         }
