@@ -337,7 +337,9 @@ Item {
 
         visible: false
         enabled:  visible
-        anchors.horizontalCenter: widget.horizontalCenter
+        //anchors.horizontalCenter: widget.horizontalCenter
+        anchors.left: widget.left
+        anchors.leftMargin: 10
         anchors.bottom: multiselect.top
         anchors.bottomMargin: 10
 
@@ -352,17 +354,19 @@ Item {
         visible: false
         enabled:  visible
         anchors.left: calculation.right
+        anchors.leftMargin: 20
         anchors.verticalCenter: calculation.verticalCenter
 
         onCheckedChanged: {
             if(checked){
                 calculation.addVisible = false;
                 calculation.minusVisible = false;
-
+                calculation.changeVisible = true;
             }
             else{
                 calculation.addVisible = true;
                 calculation.minusVisible = true;
+                calculation.changeVisible = false;
             }
         }
     }

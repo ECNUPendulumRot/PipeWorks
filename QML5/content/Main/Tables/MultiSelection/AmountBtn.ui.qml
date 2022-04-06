@@ -21,18 +21,20 @@ Button {
         implicitHeight: 30
         opacity: enabled ? 1 : 0.3
         radius: 2
-        border.color: "#047eff"
-        border.width: 0
+        border.color: "#e8eaed"
+        border.width: 1
         anchors.fill: parent
     }
 
     contentItem: image
     Image {
         id: image
-        width: 25
-        height: 25
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.bottom: parent.bottom
+        //width: 25
+        //height: 25
+        anchors.fill: parent
+        anchors.margins: 2
+        //anchors.verticalCenter: parent.verticalCenter
+        //anchors.bottom: parent.bottom
         source: "qrc:/qtquickplugin/images/template_image.png"
         anchors.horizontalCenter: parent.horizontalCenter
         fillMode: Image.PreserveAspectFit

@@ -13,6 +13,7 @@ Item {
 
     property alias addVisible: add.visible
     property alias minusVisible: minus.visible
+    property alias changeVisible: change.visible
 
     TextField {
         id: textField
@@ -77,6 +78,20 @@ Item {
         imageSource: "../../../images/minus.png"
         onClicked: if(textField.text != "") control.minusRequest(textField.text)
     }
+
+    AmountBtn {
+        id: change
+        x: 0
+        width: 25
+        height: 25
+        anchors.verticalCenter: add.verticalCenter
+        anchors.left: add.left
+        anchors.leftMargin: 0
+        imageSource: "../../../images/check.png"
+        visible: false
+        onClicked: if(textField.text != "") control.setRequest(textField.text)
+    }
+
     states: [
         State {
             name: "unfocus"
@@ -89,7 +104,7 @@ Item {
             PropertyChanges {
                 target: texBg
                 color: "#f5f5f5"
-                border.width: 0
+                border.width: 1
             }
         }
     ]
@@ -98,12 +113,12 @@ Item {
         textField.text = "";
     }
 
-    Connections{
-        target: textField
-        function onAccepted(){
-            //console.log("aaaaaaaaaaaaaaaaaa")
-            control.setRequest(textField.text)
-        }
-        enabled: editMode.checked
-    }
+//    Connections{
+//        target: textField
+//        function onAccepted(){
+//            //console.log("aaaaaaaaaaaaaaaaaa")
+//            control.setRequest(textField.text)
+//        }
+//        enabled: editMode.checked
+//    }
 }
