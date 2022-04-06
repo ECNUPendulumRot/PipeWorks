@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>Database/Users.db</file>
+        <file>Database/ftpconfig.config</file>
     </qresource>
 </RCC>
