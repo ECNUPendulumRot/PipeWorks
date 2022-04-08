@@ -49,7 +49,7 @@ Rectangle {
             anchors.horizontalCenterOffset: 0
             anchors.horizontalCenter: parent.horizontalCenter
 
-            onClicked: refresh(col)
+            onClicked: switchPass(col)
         }
     }
 
@@ -273,6 +273,10 @@ Rectangle {
     function passListInitialize(){
         pass1View.currentItem.clicked();
         pass1View.currentItem.checked = true;
+        refreshPassList();
+    }
+
+    function refreshPassList(){
         if(scheduler.isPdbLoaded())
         {
             refreshPassName();
@@ -296,8 +300,8 @@ Rectangle {
         }
     }
 
-    function refresh(i){
-        console.log("Pass" + i + "Parameter")
+    function switchPass(i){
+        //console.log("Pass" + i + "Parameter")
         if(scheduler.isPdbLoaded()){
 
             scheduler.callPassSelected("Pass" + i + "Parameter")
