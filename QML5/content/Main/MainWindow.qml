@@ -16,11 +16,11 @@ Rectangle {
     border.width: 1
     width: 1366
     height: 768
-    property var errorMap: {"OperationCanceledError":"IP或端口错误",
-                           "AuthenticationRequiredError":"FTP账号密码错误",
+    property var errorMap: {"OperationCanceledError":"IP或端口错误，请检查FTP设置",
+                           "AuthenticationRequiredError":"FTP账号密码错误，请检查FTP设置",
                            "ContentNotFoundError" :"该文件在中控端不存在",
                             "otherError":"出现了预料之外的错误",
-                            "downloadConflict":"当前文件已存在且已打开，无法完成下载",
+                            "downloadConflict":"当前文件已存在且已打开，无法完成下载，请关闭当前文件后再执行下载",
                             "Saturday":"星期六",
                             "Sunday":"星期日"}
     //property var angleTableContainer : null
@@ -148,6 +148,12 @@ Rectangle {
             spread: 0.2
             //verticalOffset: -2
             horizontalOffset: 0
+        }
+        function getCurruntName(){
+            curFilename = "当前数据库文件:" + downloader.toLocal(fileDialog.curruntFileUrl)
+        }
+        function clearCurruntName(){
+             curFilename = "当前数据库文件:无"
         }
     }
 
@@ -475,18 +481,21 @@ Rectangle {
             //popupDb.fileUrl = fileUrl
             //console.log(popupDb.fileUrl)
             mainLoadDb(fileUrl)
+
         }
         function clear(){
             curruntFileUrl = ""
+
         }
     }
 
     FileDialog {
         id: downloadFile
-        selectFolder : true
+        //selectFolder : true
         nameFilters:["Datase files(*.db)"]
         folder: shortcuts.home
         onAccepted: downloadfile()
+        selectExisting: false
     }
 
     UploadDialog{
@@ -527,13 +536,13 @@ Rectangle {
         }
         completeBtn.onClicked: {
             downloadDialog.clear()
-            if(!scheduler.isPdbLoaded()){
-                var downloadFileUrl = downloadFile.fileUrl
-                var downloadFlieName = "/" + ftpDialog.downloadName
-                var totalUrl = downloadFileUrl+downloadFlieName
-                fileDialog.curruntFileUrl = totalUrl
-                mainLoadDb(totalUrl)
-            }
+//            if(!scheduler.isPdbLoaded()){
+//                var downloadFileUrl = downloadFile.fileUrl
+//                var downloadFlieName = "/" + ftpDialog.downloadName
+//                var totalUrl = downloadFileUrl+downloadFlieName
+//                fileDialog.curruntFileUrl = totalUrl
+//                mainLoadDb(totalUrl)
+//            }
 
         }
         function clear(){
@@ -645,34 +654,6 @@ Rectangle {
         }
     }
 
-    InfoDialog {
-        id: fileConflict
-
-        x: (parent.width - errorDialog.width)/2
-        y: (parent.height - errorDialog.height)/2
-
-        //text.text: "这个操作将不可被撤销，请确认是否撤销所有修改"
-        title: "出现了错误"
-        text.text: "该文件在该目录下已存在，是否覆盖？"
-        text.color: "#202020"
-        imageSource: "../images/information.png"
-        confirmBtn.text: "确定"
-        confirmBtn.onClicked: {
-            var downloadFileUrl = downloader.toLocal(downloadFile.fileUrl)   // "D:/datasave"
-            var downloadFlieName = "/" + ftpDialog.downloadName // "/wp.db"
-
-            var downName = downloadFileUrl+downloadFlieName
-//            var loadName = downloader.toLocal(fileDialog.curruntFileUrl)
-            fileConflict.close()
-            downloadDialog.open()
-            downloader.get(downloadFlieName, downName,"default")
-        }
-
-
-
-        cancelBtn.onClicked: fileConflict.close()
-
-    }
 
     Popup {
         id: pwPopup
@@ -805,6 +786,8 @@ Rectangle {
         passListView.passListInitialize();
 
         fixedPopupInitialize();
+
+        statusBar.getCurruntName()
     }
 
     function createAngleTable(){
@@ -836,6 +819,7 @@ Rectangle {
             ctrlPop.clear();
             motionPop.clear();
             fileDialog.clear();//clear curruntFileurl
+            statusBar.clearCurruntName()// clear statusBar's currunt fileName
         }
     }
 
@@ -874,22 +858,38 @@ Rectangle {
         downloader.put(uploadUrl, ftpDialog.uploadName,"default");
     }
 
-    function downloadfile(){
-        var downloadFileUrl = downloader.toLocal(downloadFile.fileUrl)   // "D:/datasave"
-        var downloadFlieName = "/" + ftpDialog.downloadName // "/wp.db"
+//    function downloadfile(){
+//        var downloadFileUrl = downloader.toLocal(downloadFile.fileUrl)   // "D:/datasave"
+//        var downloadFlieName = "/" + ftpDialog.downloadName // "/wp.db"
 
-        var downName = downloadFileUrl+downloadFlieName
+//        var downName = downloadFileUrl+downloadFlieName
+//        var loadName = downloader.toLocal(fileDialog.curruntFileUrl)
+//        if(downName === loadName && scheduler.isPdbLoaded() ){
+//            errorDialog.text.text = errorMap["downloadConflict"]
+//            errorDialog.open()
+//        }
+//        else if(!downloader.checkIfExist(downName)){
+//            downloadDialog.open()
+//            downloader.get(downloadFlieName,  downloadFileUrl+downloadFlieName, "default")
+//        }
+//            else
+//                fileConflict.open()
+//    }
+    function downloadfile(){
+        var downloadFileUrl = downloader.toLocal(downloadFile.fileUrl)   // eg: "D:/datasave/wp.db"
+        var downloadFlieName = "/" + ftpDialog.downloadName // "/wp.db"
+        //var downName = downloadFileUrl+downloadFlieName
         var loadName = downloader.toLocal(fileDialog.curruntFileUrl)
-        if(downName === loadName && scheduler.isPdbLoaded() ){
+        if(downloadFileUrl === loadName && scheduler.isPdbLoaded() ){
             errorDialog.text.text = errorMap["downloadConflict"]
             errorDialog.open()
         }
-        else if(!downloader.checkIfExist(downName)){
+        else {
             downloadDialog.open()
-            downloader.get(downloadFlieName,  downloadFileUrl+downloadFlieName, "default")
+            downloader.get(downloadFlieName, downloadFileUrl, "default")
         }
-            else
-                fileConflict.open()
+
+
     }
 
     function ftpConfig(ip, port, user, password){
