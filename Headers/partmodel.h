@@ -144,7 +144,7 @@ private:
     static inline QHash<unsigned int, Parameter> parameterCouple =
         QHash<unsigned int, Parameter>({//cmd <------> table column name
                                          {0,    Parameter("angle"          , QStringLiteral("角度"), false)},
-                                         {1,    Parameter("stayTime"       , QStringLiteral("边停时间"),true)},
+                                         {1,    Parameter("stayLeftTime"   , QStringLiteral("左边停时间"),true)},
                                          {2,    Parameter("oscWidth"       , QStringLiteral("摆宽"), true)},
                                          {3,    Parameter("oscFreq"        , QStringLiteral("摆动周期"), true)},
                                          {4,    Parameter("feedRate"       , QStringLiteral("送丝速度"), true)},
@@ -152,6 +152,7 @@ private:
                                          {6,    Parameter("carACC"         , QStringLiteral("小车加速度"), false)},
                                          {7,    Parameter("carSPEED"       , QStringLiteral("小车速度"), false)},
                                          {8,    Parameter("TargetCur"      , QStringLiteral("干伸高度值"), true)},
+                                         {9,    Parameter("stayRightTime"  , QStringLiteral("右边停时间"),true)},
                                      });
 };
 

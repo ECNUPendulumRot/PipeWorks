@@ -16,21 +16,23 @@ Item {
     property bool isCheck : false
 
     property var engToChn : {//cmd <------> table column name
-        "angle"         :"角度\n(度)",
-        "stayTime_Lead" :"前枪边停时间\n(秒)",
-        "oscWidth_Lead" :"前枪摆宽\n(毫米)",
-        "oscFreq_Lead"  :"前枪摆动频率\n(次/分钟)",   //？
-        "feedRate_Lead" :"前枪送丝速度\n(米/分钟)",
-        "Arc_Rate_Lead" :"前枪电弧修正\n(%)",
-        "Arc_Rate_Trail":"后枪电弧修正\n(%)",
-        "stayTime_Trail":"后枪边停时间\n(秒)",
-        "oscWidth_Trail":"后枪摆宽\n(米)",
-        "oscFreq_Trail" :"后枪摆动频率\n(次/分钟)",
-        "feedRate_Trail":"后枪送丝速度\n(米/分钟)",
-        "carACC"        :"小车加速度\n(毫米/秒²)",
-        "carSPEED"      :"小车速度\n(毫米/秒)",
-        "leadTargetCur" :"前枪干伸高度值\n(毫米)",
-        "trailTargetCur":"后枪干伸高度值\n(毫米)"
+        "angle"             :"角度\n(度)",
+        "stayLeftTime_Lead" :"前枪左边停时间\n(秒)",
+        "stayRightTime_Lead":"前枪右停时间\n(秒)",
+        "oscWidth_Lead"     :"前枪摆宽\n(毫米)",
+        "oscFreq_Lead"      :"前枪摆动频率\n(次/分钟)",   //？
+        "feedRate_Lead"     :"前枪送丝速度\n(米/分钟)",
+        "Arc_Rate_Lead"     :"前枪电弧修正\n(%)",
+        "Arc_Rate_Trail"    :"后枪电弧修正\n(%)",
+        "stayLeftTime_Trail":"后枪左边停时间\n(秒)",
+        "stayRightTime_Trail":"后枪右边停时间\n(秒)",
+        "oscWidth_Trail"    :"后枪摆宽\n(米)",
+        "oscFreq_Trail"     :"后枪摆动频率\n(次/分钟)",
+        "feedRate_Trail"    :"后枪送丝速度\n(米/分钟)",
+        "carACC"            :"小车加速度\n(毫米/秒²)",
+        "carSPEED"          :"小车速度\n(毫米/秒)",
+        "leadTargetCur"     :"前枪干伸高度值\n(毫米)",
+        "trailTargetCur"    :"后枪干伸高度值\n(毫米)"
     }
 
     ButtonGroup {
@@ -104,7 +106,13 @@ Item {
         delegate: Button {
             id: headerDelegate
 
-            implicitWidth: header.width/header.count
+            implicitWidth: {
+                var angle_width = 40
+                if(index === 0)
+                    return angle_width
+                else
+                    return (header.width - angle_width)/(header.count - 1)
+            }
             implicitHeight: 35
             background: delegateBg
             Rectangle {
@@ -150,17 +158,6 @@ Item {
 
                     visible: index === 0 ? false : true
                 }
-
-//                Rectangle {
-//                    id:hRightLine
-//                    anchors.right: parent.right
-//                    anchors.bottom: parent.bottom
-//                    anchors.top: parent.top
-//                    width: 1
-//                    color: index === 0 ? "#cecece" : widget.isCheck ? "#0D267B" : "#cecece";
-
-//                    visible: false//index === header.count - 1 ? false : true
-//                }
 
                 Text {
                     text: headerName
@@ -247,7 +244,14 @@ Item {
         anchors.bottomMargin: 0
         anchors.rightMargin: 0
 
-        columnWidthProvider: function (column) { return view.width/view.columns }
+        columnWidthProvider: function (column) {
+            var angle_width = 40
+
+            if(column === 0)
+                return angle_width
+            else
+                return (view.width - angle_width)/(view.columns - 1)
+        }
         //TODO : load model
 
         model: angleRelatedTableModel
@@ -643,40 +647,4 @@ Item {
                     angleRelatedTableModel.callSetSelect(i, j, false);
         }
     }
-
-//    function modelToCopy(){
-//        var copy = []
-//        for(var i = 0; i < view.rows; i++){
-//            var storeRow = []
-//            for(var j = 0; j < view.columns; j++)
-//                storeRow.push(angleRelatedTableModel.callGetData(i, j))
-//            copy.push(storeRow)
-//        }
-//        multiModeCopy =  copy;
-//    }
-
-
-//    function copyToModel(){
-//        console.log("write")
-//        if(multiModeCopy !== null){
-//            for(var i = 0; i < view.rows; i++){
-//                for(var j = 0; j < view.columns; j++){
-//                    if(multiModeCopy[i][j] !== angleRelatedTableModel.callGetData(i, j)){
-//                        angleRelatedTableModel.callSetData(i, j, multiModeCopy[i][j])
-//                        console.log("write")
-//                    }
-//                    console.log(multiModeCopy[i][j])
-//                }
-//            }
-//        }
-//    }
-
-//    function refreshAfterCancel(){
-//        angleRelatedTableModel.callRevert();
-//        copyToModel()
-//    }
-
-//    function restoreBeforeOp(){
-//        modelToCopy()
-//    }
 }

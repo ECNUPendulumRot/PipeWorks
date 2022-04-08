@@ -15,19 +15,20 @@ ComboBox {
     font.family: "Microsoft Yahei"
     currentIndex: -1
     displayText: if(!(currentIndex + 1)) "选择数据类型"
-    model: ["边停时间", "摆宽", "摆动频率", "送丝速度", "电弧修正", "小车速度", "干伸高度值"]
+    model: ["左边停时间", "右边停时间" , "摆宽", "摆动频率", "送丝速度", "电弧修正", "小车速度", "干伸高度值"]
 
 
     onCurrentIndexChanged: cmbBxCallSelect(indexMap[currentIndex])
 
     property var indexMap: {
         0:1,
-        1:2,
-        2:3,
-        3:4,
-        4:5,
-        5:7,
-        6:8
+        1:9,
+        2:2,
+        3:3,
+        4:4,
+        5:5,
+        6:7,
+        7:8
       }
 
     delegate: ItemDelegate {
