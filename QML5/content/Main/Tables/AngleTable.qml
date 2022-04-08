@@ -18,7 +18,7 @@ Item {
     property var engToChn : {//cmd <------> table column name
         "angle"             :"角度\n(度)",
         "stayLeftTime_Lead" :"前枪左边停时间\n(秒)",
-        "stayRightTime_Lead":"前枪右停时间\n(秒)",
+        "stayRightTime_Lead":"前枪右边停时间\n(秒)",
         "oscWidth_Lead"     :"前枪摆宽\n(毫米)",
         "oscFreq_Lead"      :"前枪摆动频率\n(次/分钟)",   //？
         "feedRate_Lead"     :"前枪送丝速度\n(米/分钟)",
