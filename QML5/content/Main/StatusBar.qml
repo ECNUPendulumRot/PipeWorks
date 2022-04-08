@@ -51,7 +51,7 @@ Rectangle {
         anchors.leftMargin: 208
         anchors.verticalCenter: parent.verticalCenter
         width: 300
-        elide: Text.ElideLeft
+        elide: Text.ElideMiddle
 
     }
 

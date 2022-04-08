@@ -6,7 +6,7 @@ Popup{
 
     id: control
     width:400
-    height:200
+    height:500
     property alias cancelBtn: cancelBtn
     property alias confirmBtn: confirmBtn
     property alias ip: ipaddress.text
@@ -15,7 +15,7 @@ Popup{
     property alias password: password.text
 
     property alias uploadName: uploadName.text
-    property alias downloadName: downloadName.text
+   // property alias downloadName: downloadName.text
 
     dim: true
     modal: true
@@ -30,7 +30,7 @@ Popup{
         ConfirmBtn {
             id: cancelBtn
 
-            x: 207
+            x: 295
 
             width: 70
             height: 24
@@ -43,8 +43,8 @@ Popup{
         ConfirmBtn {
             id: confirmBtn
 
-            x: 303
-            y: 169
+            x: 203
+            y: 451
 
             width: 70
             height: 24
@@ -55,9 +55,9 @@ Popup{
             textItemColor: "#f6f6f6"
             buttonBackgroundColor: "#3b7ecc"
 
-            anchors.rightMargin: 27
+            anchors.rightMargin: 127
 
-            anchors.bottomMargin: 7
+            anchors.bottomMargin: 25
         }
 
         Text {
@@ -76,8 +76,8 @@ Popup{
             text: ""
 
             x: 74
-            y: 51
-            width: 100
+            y: 69
+            width: 151
             height: 20
         }
 
@@ -86,8 +86,8 @@ Popup{
             text: ""
 
             x: 74
-            y: 90
-            width: 100
+            y: 116
+            width: 299
             height: 20
         }
 
@@ -95,9 +95,9 @@ Popup{
             id: port
             text: ""
 
-            x: 273
-            y: 47
-            width: 100
+            x: 287
+            y: 69
+            width: 86
             height: 20
         }
 
@@ -105,9 +105,9 @@ Popup{
             id: password
             text: ""
 
-            x: 273
-            y: 90
-            width: 100
+            x: 74
+            y: 163
+            width: 299
             height: 20
         }
 
@@ -115,16 +115,16 @@ Popup{
             id: text2
 
             x: 8
-            y: 55
+            y: 73
             text: qsTr("IP地址")
             font.pixelSize: 12
         }
 
         Text {
             id: text3
-            x: 207
+            x: 249
 
-            y: 53
+            y: 73
             text: qsTr("端口")
             font.pixelSize: 12
         }
@@ -133,16 +133,16 @@ Popup{
             id: text4
 
             x: 8
-            y: 94
+            y: 120
             text: qsTr("用户名")
             font.pixelSize: 12
         }
 
         Text {
             id: text5
-            x: 207
+            x: 8
 
-            y: 94
+            y: 167
             text: qsTr("用户密码")
             font.pixelSize: 12
         }
@@ -150,8 +150,8 @@ Popup{
         TextField {
             id: uploadName
             x: 74
-            y: 127
-            width: 100
+            y: 210
+            width: 299
             height: 20
             text: ""
         }
@@ -159,27 +159,12 @@ Popup{
         Text {
             id: text6
             x: 8
-            y: 131
-            text: qsTr("上传文件名")
+            y: 214
+            text: qsTr("文件名")
             font.pixelSize: 12
         }
 
-        TextField {
-            id: downloadName
-            x: 273
-            y: 127
-            width: 100
-            height: 20
-            text: ""
-        }
 
-        Text {
-            id: text7
-            x: 207
-            y: 131
-            text: qsTr("下载文件名")
-            font.pixelSize: 12
-        }
     }
 
     background:rectangle
@@ -214,3 +199,10 @@ Popup{
     }
 }
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:1.25}D{i:2}D{i:3}D{i:4}D{i:5}D{i:6}D{i:7}D{i:8}D{i:9}D{i:10}
+D{i:11}D{i:12}D{i:13}D{i:14}D{i:1}D{i:15}
+}
+##^##*/
