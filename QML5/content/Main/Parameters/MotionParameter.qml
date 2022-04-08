@@ -257,7 +257,7 @@ Item {
                 Rectangle {
                     id: motionelse
                     width: 560
-                    height: 500
+                    height: 440
                     color: "#ebebeb"
                     border.color: "#ffffff"
                     border.width: 0
@@ -426,8 +426,8 @@ Item {
 
                             MyEditLine4 {
                                 id: pipeDiameter
-                                x: 0
-                                y: 60
+                                x: 260
+                                y: 0
                                 width: 220
 
                                 textFieldAnchorsleftMargin: 90
@@ -442,8 +442,8 @@ Item {
                             //TODO
                             MyEditLine4 {
                                 id: feedPercent
-                                x: 0
-                                y: 90
+                                x: 260
+                                y: 30
                                 width: 220
 
 
@@ -519,7 +519,7 @@ Item {
                             x: 0
                             y: 0
                             width: 560
-                            height: 160
+                            height: 100
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "其他参数"
@@ -529,7 +529,7 @@ Item {
                     GroupItem {
                         id: groupItem1
                         x: 0
-                        y: 400
+                        y: 340
                         GroupItem {
                             id: group4
                             x: 40
@@ -2316,6 +2316,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75}
+    D{i:0;formeditorZoom:0.66}
 }
 ##^##*/
