@@ -3,10 +3,12 @@ import QtQuick.Controls 2.12
 import QtQuick.Studio.Effects 1.0
 
 Button {
+
     id: control
     width: 120
     height: 30
-
+    property alias btnText: textItem.text
+    property alias imgSrc: image.source
     implicitWidth: Math.max(
                        buttonBackground ? buttonBackground.implicitWidth : 0,
                        textItem.implicitWidth + leftPadding + rightPadding)
@@ -106,7 +108,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:10;height:40;width:100}D{i:1}D{i:3}D{i:4}
+    D{i:0;formeditorZoom:1.5;height:40;width:100}D{i:1}D{i:3}D{i:4}
 }
 ##^##*/
 

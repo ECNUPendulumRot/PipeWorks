@@ -245,12 +245,12 @@ Rectangle {
                 downloadFile.open();
             }
 
-            passBtn.onClicked:{
-                if(scheduler.isPdbLoaded()){
-                    popupDb.close();
-                    onePassDialog.open();
-                }
-            }
+//            passBtn.onClicked:{
+//                if(scheduler.isPdbLoaded()){
+//                    popupDb.close();
+//                    onePassDialog.open();
+//                }
+//            }
 
             ftpBtn.onClicked:{
                 popupDb.close();
@@ -298,10 +298,12 @@ Rectangle {
 
     CancelBtn {
         id: myButton2
+        y: 586
         //y: 681
         anchors.bottom: myButton3.top
+        anchors.horizontalCenterOffset: 0
         anchors.horizontalCenter: myButton3.horizontalCenter
-        anchors.bottomMargin: 20
+        anchors.bottomMargin: 62
         z: 3
 
         InfoDialog {
@@ -346,7 +348,7 @@ Rectangle {
           bottomMargin: 60
         }
         z: 3
-
+        imgSrc: "../images/SinglePass.png"
         InfoDialog {
             id: dbSubmitDialog
 
@@ -376,6 +378,27 @@ Rectangle {
         }
 
         onClicked: if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbSubmitDialog.open()
+    }
+
+    SubmitBtn {
+        id: singleTableSubmit
+        x: 1226
+        y: 631
+        btnText: "传单焊道"
+        anchors{
+          right: parent.right
+          bottom: parent.bottom
+          rightMargin: 20
+          bottomMargin: 105
+        }
+        z: 3
+
+        onClicked:{
+            if(scheduler.isPdbLoaded()){
+                popupDb.close();
+                onePassDialog.open();
+            }
+        }
     }
 
     ExitBtn {

@@ -65,4 +65,5 @@ DISTFILES += \
     QML5/content/Main/Popups/DownloadDialog.qml \
     QML5/content/Main/Popups/UploadDialog.qml \
     QML5/content/Main/Parameters/MotionParameterLite.qml \
-    QML5/content/images/DpLogoMain.png
+    QML5/content/images/DpLogoMain.png \
+    QML5/content/images/SinglePass.png
