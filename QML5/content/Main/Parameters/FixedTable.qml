@@ -41,7 +41,11 @@ Item {
         "arcTrailOTime":      21,
         "trimLeadMode":       22,
         "trimTrailMode":      23,
-        "flag":               24
+        "HRatioLead":         24,
+        "HRatioTrail":        25,
+        "startArcDistance":   26,
+        "endArcDistance":     27,
+        "flag":               28
 
     }
 
@@ -173,6 +177,20 @@ Item {
                         onDataChanged: (s, text) => writeToBackend(s, text)
                     }
                 }
+
+                MyEditLine {
+                    id: hRatioLead
+                    x: trimLeadMode.x
+                    y: trimLeadMode.y
+                    textFieldWidth: 40
+                    mapString: "HRatioLead"
+                    label1AnchorsleftMargin: 50
+                    label1Text: ""
+                    textFieldAnchorsleftMargin: 68
+                    labelText: "电流值/m"
+
+                    onDataChanged: (s, text) => writeToBackend(s, text)
+                }
             }
 
             GroupItem {
@@ -289,7 +307,7 @@ Item {
                 height: 132
                 antialiasing: true
                 rectangle9Color: "#fafafa"
-                rectangle9X: 30
+                rectangle9X: 150
                 label4Color: "#000000"
                 label4Text: "前焊枪"
             }
@@ -388,6 +406,20 @@ Item {
 
                         onDataChanged: (s, text) => writeToBackend(s, text)
                     }
+                }
+
+                MyEditLine {
+                    id: hRatioTrail
+                    x: trimLeadMode.x
+                    y: trimLeadMode.y
+                    textFieldWidth: 40
+                    label1Text: ""
+                    label1AnchorsleftMargin: 50
+                    mapString: "HRatioTrail"
+                    textFieldAnchorsleftMargin: 68
+                    labelText: "电流值/m"
+
+                    onDataChanged: (s, text) => writeToBackend(s, text)
                 }
             }
 
@@ -506,7 +538,7 @@ Item {
                 rectangle9Color: "#fafafa"
                 label4Text: "后焊枪"
                 label4Color: "#000000"
-                rectangle9X: 30
+                rectangle9X: 150
             }
 
             //            MyEditLine {
@@ -527,6 +559,7 @@ Item {
         }
 
         GroupItem {
+            id: groupItem2
             x: 748
             y: 0
 
@@ -534,11 +567,11 @@ Item {
                 id: myGroupTitle4
                 x: 0
                 y: myGroupTitle2.y
-                width: 165
+                width: 330
                 height: myGroupTitle2.height
                 rectangle9Color: "#fafafa"
                 label4Text: "其它"
-                rectangle9X: 15
+                rectangle9X: 140
                 label4Color: "#000000"
 
             }
@@ -606,6 +639,41 @@ Item {
                     textFieldWidth: 40
                     label6Text: "\u5ea6"
                     label5Text: "终止角"
+
+                    onDataChanged: (s, text) => writeToBackend(s, text)
+                }
+            }
+
+            ColumnLayout {
+                x: 165
+                y: 3
+                spacing: 0
+
+                MyEditLine3 {
+                    id: startArcDistance
+
+                    mapString : "startArcDistance"
+
+                    width: 145
+                    textFieldAnchorsleftMargin: 80
+                    label6AnchorsleftMargin: 50
+                    textFieldWidth: 40
+                    label6Text: "毫米"
+                    label5Text: "起弧距离"
+
+                    onDataChanged: (s, text) => writeToBackend(s, text)
+                }
+                MyEditLine3 {
+                    id: endArcDistance
+
+                    mapString : "endArcDistance"
+
+                    width: 145
+                    textFieldAnchorsleftMargin: 80
+                    label6AnchorsleftMargin: 50
+                    textFieldWidth: 40
+                    label6Text: "毫米"
+                    label5Text: "收弧距离"
 
                     onDataChanged: (s, text) => writeToBackend(s, text)
                 }
@@ -688,7 +756,7 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.66;height:160;width:1206}
+    D{i:0;formeditorZoom:0.5;height:160;width:1206}D{i:11}D{i:31}D{i:49}
 }
 ##^##*/
 
