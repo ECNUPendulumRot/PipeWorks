@@ -327,13 +327,13 @@ Rectangle {
                     ctrlPop.ctrlLoad();
                     motionPop.motionLoad();
 
-                    dbSubmitDialog.close()
+                    dbCancelDialog.close()
                 }
 
             }
         }
 
-        onClicked:if(scheduler.callIsDirty()) dbCancelDialog.open()
+        onClicked:if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbCancelDialog.open()
 
     }
 
@@ -376,7 +376,7 @@ Rectangle {
             }
         }
 
-        onClicked: if(scheduler.callIsDirty()) dbSubmitDialog.open()
+        onClicked: if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbSubmitDialog.open()
     }
 
     ExitBtn {
@@ -536,13 +536,6 @@ Rectangle {
         }
         completeBtn.onClicked: {
             downloadDialog.clear()
-//            if(!scheduler.isPdbLoaded()){
-//                var downloadFileUrl = downloadFile.fileUrl
-//                var downloadFlieName = "/" + ftpDialog.downloadName
-//                var totalUrl = downloadFileUrl+downloadFlieName
-//                fileDialog.curruntFileUrl = totalUrl
-//                mainLoadDb(totalUrl)
-//            }
 
         }
         function clear(){
