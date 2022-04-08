@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtWebEngine 1.10
 import QtWebChannel 1.15
@@ -59,7 +59,7 @@ Rectangle {
 
     function refreshWebTable(s){
         webobj.chartFresh(s)
-        console.log("refreshed!")
+        //console.log("refreshed!")
     }
 
     function callUpdatePoint(x,y,v){

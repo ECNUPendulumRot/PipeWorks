@@ -322,7 +322,7 @@ Rectangle {
                 if(scheduler.isPdbLoaded()){
                     scheduler.revertData();
                     fixedTable.fixedTableRefreshData();
-                    passListView.refreshPassFlag();
+                    passListView.refreshPassList();
                     commPop.commLoad();
                     ctrlPop.ctrlLoad();
                     motionPop.motionLoad();
@@ -334,7 +334,6 @@ Rectangle {
         }
 
         onClicked:if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbCancelDialog.open()
-
     }
 
     SubmitBtn {
@@ -366,7 +365,7 @@ Rectangle {
                 if(scheduler.isPdbLoaded()){
                     scheduler.submitData();
                     fixedTable.fixedTableRefreshData();
-                    passListView.refreshPassFlag();
+                    passListView.refreshPassList();
                     commPop.commLoad();
                     ctrlPop.ctrlLoad();
                     motionPop.motionLoad();
@@ -708,7 +707,7 @@ Rectangle {
     Connections {
         target: scheduler
         onModelDataReady: s => {
-            console.log(s)
+            //console.log(s)
             refreshAngleTable(s)}
     }
 
