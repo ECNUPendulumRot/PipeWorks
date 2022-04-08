@@ -30,7 +30,7 @@ Rectangle{
         width: parent.width/3
         text: qsTr("跟踪状态")
         color: Constants.tableFontColor
-        font.pixelSize: 14
+        font.pixelSize: 13
         font.family: "Microsoft Yahei"
         horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
@@ -219,6 +219,6 @@ Rectangle{
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.66;height:30;width:150}
+    D{i:0;formeditorZoom:1.33;height:30;width:200}
 }
 ##^##*/

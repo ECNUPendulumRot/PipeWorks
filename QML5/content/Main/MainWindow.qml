@@ -342,8 +342,8 @@ Rectangle {
         anchors{
           right: parent.right
           bottom: parent.bottom
-          rightMargin:40
-          bottomMargin: 50
+          rightMargin: 20
+          bottomMargin: 60
         }
         z: 3
 

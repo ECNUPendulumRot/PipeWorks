@@ -61,7 +61,7 @@ Item {
             GroupItem {
                 id: groupItem3
                 x: 0
-                y: -8
+                y: -6
                 width: 233
                 height: 132
 
@@ -90,34 +90,34 @@ Item {
                     textFormat: Text.RichText
                 }
 
-//                Label {
-//                    id: label1
-//                    x: 5
-//                    y: 41
-//                    width: 15
-//                    height: 18
-//                    color: "#ffffff"
-//                    text: "起"
-//                    //wrapMode: Text.WordWrap
-//                    font.pointSize: 12
-//                    //textFormat: Text.RichText
-//                }
-//                Label {
-//                    id: label2
-//                    //x: 5
-//                    anchors{
-//                      left: label1.left
-//                      top: label1.bottom
-//                      topMargin: 30
-//                    }
-//                    width: 15
-//                    height: 18
-//                    color: "#ffffff"
-//                    text: "弧"
-//                    //wrapMode: Text.WordWrap
-//                    font.pointSize: 12
-//                    //textFormat: Text.RichText
-//                }
+                //                Label {
+                //                    id: label1
+                //                    x: 5
+                //                    y: 41
+                //                    width: 15
+                //                    height: 18
+                //                    color: "#ffffff"
+                //                    text: "起"
+                //                    //wrapMode: Text.WordWrap
+                //                    font.pointSize: 12
+                //                    //textFormat: Text.RichText
+                //                }
+                //                Label {
+                //                    id: label2
+                //                    //x: 5
+                //                    anchors{
+                //                      left: label1.left
+                //                      top: label1.bottom
+                //                      topMargin: 30
+                //                    }
+                //                    width: 15
+                //                    height: 18
+                //                    color: "#ffffff"
+                //                    text: "弧"
+                //                    //wrapMode: Text.WordWrap
+                //                    font.pointSize: 12
+                //                    //textFormat: Text.RichText
+                //                }
 
                 ColumnLayout {
                     anchors.verticalCenter: rec1.verticalCenter
@@ -196,7 +196,7 @@ Item {
             GroupItem {
                 id: groupItem1
                 x: 175
-                y: -8
+                y: -6
                 width: 233
                 height: 132
 
@@ -302,9 +302,9 @@ Item {
             MyGroupTitle2 {
                 id: myGroupTitle2
                 x: 0
-                y: -7
+                y: -10
                 width: 363
-                height: 132
+                height: 144
                 antialiasing: true
                 rectangle9Color: "#fafafa"
                 rectangle9X: 150
@@ -319,7 +319,7 @@ Item {
             GroupItem {
                 id: groupItem4
                 x: 0
-                y: -8
+                y: -6
 
                 Rectangle {
                     id: rectangle2
@@ -426,7 +426,7 @@ Item {
             GroupItem {
                 id: groupItem5
                 x: 175
-                y: -8
+                y: -6
 
                 Rectangle {
                     id: rectangle3
@@ -567,21 +567,21 @@ Item {
                 id: myGroupTitle4
                 x: 0
                 y: myGroupTitle2.y
-                width: 330
+                width: 180
                 height: myGroupTitle2.height
                 rectangle9Color: "#fafafa"
                 label4Text: "其它"
-                rectangle9X: 140
+                rectangle9X: 68
                 label4Color: "#000000"
 
             }
 
             ColumnLayout {
-                x: 8
-                y: 3
+                x: 10
+                y: -5
                 width: 157
                 height: 120
-                spacing: 0
+                spacing: -8
 
 
 
@@ -642,12 +642,6 @@ Item {
 
                     onDataChanged: (s, text) => writeToBackend(s, text)
                 }
-            }
-
-            ColumnLayout {
-                x: 165
-                y: 3
-                spacing: 0
 
                 MyEditLine3 {
                     id: startArcDistance
@@ -663,6 +657,7 @@ Item {
 
                     onDataChanged: (s, text) => writeToBackend(s, text)
                 }
+
                 MyEditLine3 {
                     id: endArcDistance
 
@@ -756,7 +751,7 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.5;height:160;width:1206}D{i:11}D{i:31}D{i:49}
+    D{i:0;height:160;width:1206}
 }
 ##^##*/
 
