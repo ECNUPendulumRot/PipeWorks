@@ -2,6 +2,7 @@
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Effects 1.0
 import QtQuick.Timeline 1.0
+import QtQuick.Window 2.15
 
 Item {
     id: loginWindow
@@ -303,6 +304,8 @@ Item {
         window.flags = Qt.Window
         window.w = 1366
         window.h = 768
+        window.x = Screen.width / 2 - window.width / 2
+        window.y = Screen.height / 2 - window.height / 2
         window.visible = true
     }
 

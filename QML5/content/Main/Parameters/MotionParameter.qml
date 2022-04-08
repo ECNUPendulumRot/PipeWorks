@@ -61,12 +61,14 @@ Item {
         "TarilWelingInChangeness"   :49,
         "testOscFreq"               :50,
         "jogWeldFeedSpeedPercent"   :51,
-        "arcStartDistance"          :52,
-        "pipeDiameter"              :53,
-        "arcEndDistance"            :54,
-        "parameterInterval"         :55,
-        "facingStartDistance"       :56,
-        "facingEndDistance"         :57
+        "pipeDiameter"              :52,
+        "parameterInterval"         :53,
+//        "arcStartDistance"          :52,
+//        "pipeDiameter"              :53,
+//        "arcEndDistance"            :54,
+//        "parameterInterval"         :55,
+//        "facingStartDistance"       :56,
+//        "facingEndDistance"         :57
     }
 
     property var mapping2:{
@@ -129,12 +131,12 @@ Item {
         "TarilWelingInChangeness",
         "testOscFreq",
         "jogWeldFeedSpeedPercent",
-        "arcStartDistance",
+//        "arcStartDistance",
         "pipeDiameter",
-        "arcEndDistance",
+//        "arcEndDistance",
         "parameterInterval",
-        "facingStartDistance",
-        "facingEndDistance"
+//        "facingStartDistance",
+//        "facingEndDistance"
     ]
 
     property var parameterList2: [
@@ -456,60 +458,60 @@ Item {
                             x: 300
                             anchors.top: group3.top
                             anchors.topMargin: 0
-                            MyEditLine4 {
-                                id: arcStart
-                                x: 0
-                                y: 0
-                                width: 220
+//                            MyEditLine4 {
+//                                id: arcStart
+//                                x: 0
+//                                y: 0
+//                                width: 220
 
-                                textFieldAnchorsleftMargin: 90
-                                label12AnchorsleftMargin: 70
-                                label12Text: "毫米"
-                                label11Text: "填充起弧距离"
-                                textFieldWidth: 60
+//                                textFieldAnchorsleftMargin: 90
+//                                label12AnchorsleftMargin: 70
+//                                label12Text: "毫米"
+//                                label11Text: "填充起弧距离"
+//                                textFieldWidth: 60
 
-                            }
+//                            }
 
-                            MyEditLine4 {
-                                id: arcEnd
-                                x: 0
-                                y: 30
-                                width: 220
+//                            MyEditLine4 {
+//                                id: arcEnd
+//                                x: 0
+//                                y: 30
+//                                width: 220
 
-                                textFieldAnchorsleftMargin: 90
-                                label12AnchorsleftMargin: 70
-                                label12Text: "毫米"
-                                label11Text: "填充收弧距离"
-                                textFieldWidth: 60
+//                                textFieldAnchorsleftMargin: 90
+//                                label12AnchorsleftMargin: 70
+//                                label12Text: "毫米"
+//                                label11Text: "填充收弧距离"
+//                                textFieldWidth: 60
 
-                            }
+//                            }
 
-                            MyEditLine4 {
-                                id: facingStart
-                                x: 0
-                                y: 60
-                                width: 220
+//                            MyEditLine4 {
+//                                id: facingStart
+//                                x: 0
+//                                y: 60
+//                                width: 220
 
-                                textFieldAnchorsleftMargin: 90
-                                label12AnchorsleftMargin: 70
-                                label12Text: "毫米"
-                                label11Text: "盖面起弧距离"
-                                textFieldWidth: 60
+//                                textFieldAnchorsleftMargin: 90
+//                                label12AnchorsleftMargin: 70
+//                                label12Text: "毫米"
+//                                label11Text: "盖面起弧距离"
+//                                textFieldWidth: 60
 
-                            }
+//                            }
 
-                            MyEditLine4 {
-                                id: facingEnd
-                                x: 0
-                                y: 90
-                                width: 220
+//                            MyEditLine4 {
+//                                id: facingEnd
+//                                x: 0
+//                                y: 90
+//                                width: 220
 
-                                textFieldAnchorsleftMargin: 90
-                                label12AnchorsleftMargin: 70
-                                label12Text: "毫米"
-                                label11Text: "盖面收弧距离"
-                                textFieldWidth: 60
-                            }
+//                                textFieldAnchorsleftMargin: 90
+//                                label12AnchorsleftMargin: 70
+//                                label12Text: "毫米"
+//                                label11Text: "盖面收弧距离"
+//                                textFieldWidth: 60
+//                            }
                         }
 
                         MyGroupTitle2 {
@@ -2168,10 +2170,10 @@ Item {
         testOscFreq.permission           = "true"
         pipeDiameter.permission          = "true"
         feedPercent.permission           = "true"
-        arcStart.permission              = "true"
-        arcEnd.permission                = "true"
-        facingStart.permission           = "true"
-        facingEnd.permission             = "true"
+//        arcStart.permission              = "true"
+//        arcEnd.permission                = "true"
+//        facingStart.permission           = "true"
+//        facingEnd.permission             = "true"
 
         gunInverted.permission           = "true"
         travInverted.permission          = "true"
@@ -2239,14 +2241,16 @@ Item {
         carAcc.mapString                = parameterList[3]
         carStopAcc.mapString            = parameterList[5]
 
-        parameterInterval.mapString     = parameterList[55]
+        parameterInterval.mapString     = parameterList[53]
+//        parameterInterval.mapString     = parameterList[55]
         testOscFreq.mapString           = parameterList[50]
-        pipeDiameter.mapString          = parameterList[53]
+        pipeDiameter.mapString          = parameterList[52]
+//        pipeDiameter.mapString          = parameterList[53]
         feedPercent.mapString           = parameterList[51]
-        arcStart.mapString              = parameterList[52]
-        arcEnd.mapString                = parameterList[54]
-        facingStart.mapString           = parameterList[56]
-        facingEnd.mapString             = parameterList[57]
+//        arcStart.mapString              = parameterList[52]
+//        arcEnd.mapString                = parameterList[54]
+//        facingStart.mapString           = parameterList[56]
+//        facingEnd.mapString             = parameterList[57]
 
         gunInverted.mapString           = parameterList2[0]
         travInverted.mapString          = parameterList2[3]
