@@ -6,7 +6,7 @@ Rectangle {
     width: 1366
     height: 40
     color: "#ffffff"
-
+    property alias curFilename: curruntFileName.text
 
     Text {
         id: connectionStatusTitle
@@ -41,6 +41,20 @@ Rectangle {
 
     }
 
+    Text {
+        id: curruntFileName
+        color: "#000000"
+        font.pixelSize: 14
+        anchors.verticalCenterOffset: 0
+        text: qsTr("当前数据库文件:无")
+        anchors.left: connectionLight.right
+        anchors.leftMargin: 208
+        anchors.verticalCenter: parent.verticalCenter
+        width: 300
+        elide: Text.ElideLeft
+
+    }
+
     Rectangle {
         id: syncLight
         color: "#eee"
@@ -48,9 +62,9 @@ Rectangle {
         height: width
         radius: width/2
         anchors.left: connectionLight.right
-        anchors.leftMargin: 300
+        anchors.leftMargin: 546
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: 0
+        anchors.verticalCenterOffset: 2
     }
 
     Text {
@@ -134,6 +148,6 @@ Rectangle {
 /*##^##
 Designer {
     D{i:0;formeditorZoom:0.9;height:16;width:1366}D{i:1}D{i:2}D{i:3}D{i:4}D{i:5}D{i:6}
-D{i:7}D{i:8}D{i:9}
+D{i:7}D{i:8}D{i:9}D{i:10}
 }
 ##^##*/
