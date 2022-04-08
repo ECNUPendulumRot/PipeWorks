@@ -749,7 +749,7 @@ Rectangle {
         onStartSingleTableStep2and3: {
             var tempName = "temp.db"; //临时文件名称
             var tempFileUrl = appDir+"/Database/" + tempName;
-            var downloadFlieName = "/" + ftpDialog.downloadName; // "/wp.db"
+            var downloadFlieName = "/" + ftpDialog.uploadName; // "/wp.db"
             console.log(ftpDialog.uploadName);
             setFTPConfig()
             scheduler.pushSelectedTable(passListView.currentIndex, tempName);//write
@@ -869,7 +869,7 @@ Rectangle {
 //    }
     function downloadfile(){
         var downloadFileUrl = downloader.toLocal(downloadFile.fileUrl)   // eg: "D:/datasave/wp.db"
-        var downloadFlieName = "/" + ftpDialog.downloadName // "/wp.db"
+        var downloadFlieName = "/" + ftpDialog.uploadName // "/wp.db"
         //var downName = downloadFileUrl+downloadFlieName
         var loadName = downloader.toLocal(fileDialog.curruntFileUrl)
         if(downloadFileUrl === loadName && scheduler.isPdbLoaded() ){
@@ -896,7 +896,7 @@ Rectangle {
         ftpDialog.user = downloader.getUser()
         ftpDialog.password = downloader.getPassword()
         ftpDialog.uploadName = downloader.getUploadName();
-        ftpDialog.downloadName = downloader.getDownloadName();
+        //ftpDialog.downloadName = downloader.getDownloadName();
     }
 
     function setFTPConfig(){
@@ -905,7 +905,7 @@ Rectangle {
         downloader.setUser(ftpDialog.user)
         downloader.setPassword(ftpDialog.password)
         downloader.setUploadName(ftpDialog.uploadName)
-        downloader.setDownloadName(ftpDialog.downloadName)
+        //downloader.setDownloadName(ftpDialog.downloadName)
         downloader.writeConfig()
     }
 
@@ -914,7 +914,7 @@ Rectangle {
         var tempFileUrl = appDir+"/Database/" + tempName
 
         console.log("GG:"+tempFileUrl)
-        var downloadFlieName = "/" + ftpDialog.downloadName // "/wp.db"
+        var downloadFlieName = "/" + ftpDialog.uploadName // "/wp.db"
         downloader.get(downloadFlieName, tempFileUrl, "singleTable") //download temp.db to appDir
         //scheduler.pushSelectedTable(tableIndex, tempName);//write
         //downloader.put(tempFileUrl, ftpDialog.uploadName); //upload to remote
