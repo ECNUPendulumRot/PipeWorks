@@ -6,7 +6,7 @@ Popup{
 
     id: control
     width:400
-    height:500
+    height:300
     property alias cancelBtn: cancelBtn
     property alias confirmBtn: confirmBtn
     property alias ip: ipaddress.text
@@ -76,9 +76,10 @@ Popup{
             text: ""
 
             x: 74
-            y: 69
+            y: 64
             width: 151
             height: 20
+            font.pixelSize: 14
         }
 
         TextField {
@@ -86,9 +87,10 @@ Popup{
             text: ""
 
             x: 74
-            y: 116
+            y: 111
             width: 299
             height: 20
+            font.pixelSize: 14
         }
 
         TextField {
@@ -96,9 +98,10 @@ Popup{
             text: ""
 
             x: 287
-            y: 69
+            y: 64
             width: 86
             height: 20
+            font.pixelSize: 14
         }
 
         TextField {
@@ -106,62 +109,64 @@ Popup{
             text: ""
 
             x: 74
-            y: 163
+            y: 158
             width: 299
             height: 20
+            font.pixelSize: 14
         }
 
         Text {
             id: text2
 
             x: 8
-            y: 73
+            y: 68
             text: qsTr("IP地址")
-            font.pixelSize: 12
+            font.pixelSize: 14
         }
 
         Text {
             id: text3
             x: 249
 
-            y: 73
+            y: 68
             text: qsTr("端口")
-            font.pixelSize: 12
+            font.pixelSize: 14
         }
 
         Text {
             id: text4
 
             x: 8
-            y: 120
+            y: 115
             text: qsTr("用户名")
-            font.pixelSize: 12
+            font.pixelSize: 14
         }
 
         Text {
             id: text5
             x: 8
 
-            y: 167
+            y: 162
             text: qsTr("用户密码")
-            font.pixelSize: 12
+            font.pixelSize: 14
         }
 
         TextField {
             id: uploadName
             x: 74
-            y: 210
+            y: 205
             width: 299
             height: 20
             text: ""
+            font.pixelSize: 14
         }
 
         Text {
             id: text6
             x: 8
-            y: 214
+            y: 209
             text: qsTr("文件名")
-            font.pixelSize: 12
+            font.pixelSize: 14
         }
 
 

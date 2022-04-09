@@ -45,8 +45,7 @@ void Downloader::get(const QString &path, const QString &fileName, QString metho
 {
 
     file.setFileName(fileName);
-    file.remove();
-    file.open(QIODevice::WriteOnly | QIODevice::Append);
+
     pUrl.setPath(path);
     pReply = manager.get(QNetworkRequest(pUrl));
     ReplyTimeout::set(pReply, 1000);//reply time out
@@ -189,6 +188,8 @@ void Downloader::downloadFinished()
     //QNetworkReply *pReply = qobject_cast<QNetworkReply *>(sender());
     switch (pReply->error()) {
     case QNetworkReply::NoError :
+        file.remove();
+        file.open(QIODevice::WriteOnly | QIODevice::Append);
         file.write(pReply->readAll());
         file.flush();
         break;
