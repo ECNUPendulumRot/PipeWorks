@@ -15,6 +15,15 @@ Item {
         border.color: "#707070"
         border.width: 0
         anchors.fill: parent
+        layer.enabled: true
+        layer.effect: DropShadowEffect {
+            id: dropShadow2
+            color: "#c8707070"
+            radius: 8
+            verticalOffset: 0
+            horizontalOffset: 0
+            spread: 0.2
+        }
 
         Rectangle {
             id: rectangle
@@ -345,3 +354,11 @@ Item {
 
 
 
+
+
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:1.25}
+}
+##^##*/
