@@ -52,6 +52,24 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         width: 300
         elide: Text.ElideMiddle
+        MouseArea{
+                        property bool entered: false
+                        hoverEnabled: true
+                        anchors.fill: parent
+                        onEntered: {
+                            entered = true
+                        }
+
+                        onExited: {
+                            entered = false
+                        }
+
+                        ToolTip{
+                            visible: parent.entered
+                            text: curruntFileName.text
+                            delay: 1500
+                        }
+                    }
 
     }
 
@@ -147,7 +165,7 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.9;height:16;width:1366}D{i:1}D{i:2}D{i:3}D{i:4}D{i:5}D{i:6}
-D{i:7}D{i:8}D{i:9}D{i:10}
+    D{i:0;formeditorZoom:0.9;height:16;width:1366}D{i:1}D{i:2}D{i:3}D{i:6}D{i:5}D{i:4}
+D{i:7}D{i:8}D{i:9}D{i:10}D{i:11}D{i:12}
 }
 ##^##*/

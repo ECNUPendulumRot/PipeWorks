@@ -12,7 +12,6 @@ Item {
     property alias labelFontSize: name.font.pixelSize
     property alias inputFontSize: textArea.font.pixelSize
     property string title
-
     Text {
         id: name
         x: 0
