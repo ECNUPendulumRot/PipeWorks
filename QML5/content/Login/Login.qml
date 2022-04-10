@@ -333,13 +333,11 @@ Item {
                      InformationManagemet {
                         id : im
 
-                        x: 362
-                        y: 50
-
-
+                        x: content.x
+                        y: content.y
                      }
                      ',
-                    loginWindow)
+                    background)
         //check();
         window.w = 800
         window.h = 600
