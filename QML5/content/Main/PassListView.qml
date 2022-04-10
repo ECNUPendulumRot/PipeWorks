@@ -9,6 +9,10 @@ Rectangle {
     color: "#dcdcdc"
     border.color: "#ffffff"
 
+    property var mapping:{
+        "flag"      :28,
+    }
+
     signal passListRequestRefreshcombobx()
     signal passListRequestFixTableRefresh(int i)
 
@@ -30,13 +34,6 @@ Rectangle {
 
     ButtonGroup {
         id: exclusiveGroup
-        onCheckedButtonChanged: {
-            refreshEditBtn();
-        }
-    }
-
-    ButtonGroup {
-        id: exclusiveGroup2
     }
 
     Component {
@@ -44,12 +41,18 @@ Rectangle {
         PassListBtn {
             id: passListBtn
             col: i
+            passEditBtnVisible: v
             text: "焊道"
             ButtonGroup.group: exclusiveGroup
             anchors.horizontalCenterOffset: 0
             anchors.horizontalCenter: parent.horizontalCenter
 
             onClicked: switchPass(col)
+            onFlagChanged: {
+                if(scheduler.isPdbLoaded()){
+                    passFTableModel.callSetData(col, mapping["flag"], flag)
+                }
+            }
         }
     }
 
@@ -57,25 +60,33 @@ Rectangle {
         id: pass1Model
         ListElement {
             i: 0
+            v: true
         }
         ListElement {
             i: 1
+            v: true
         }
     }
     ListModel {
         id: pass2Model
-        ListElement {
-            i: 2
-        }
-
+//        ListElement {
+//            i: 2
+//            v: false
+//        }
     }
     ListModel {
         id: pass3Model
         ListElement {
             i: 8
+            v: true
         }
         ListElement {
             i: 9
+            v: true
+        }
+        ListElement {
+            i: 10
+            v: true
         }
     }
 
@@ -106,23 +117,23 @@ Rectangle {
         delegate: passDelegate
 
         onCountChanged: {
-            if(scheduler.isPdbLoaded()){
+            if(scheduler.isPdbLoaded())
+            {
                 refreshPassName();
                 refreshPassFlag();
             }
             var p = addBtn.pos
             refreshEditBtnPos();
-            refreshEditBtn();
-
-            if(pass2View.itemAtIndex(pass2Model.count - 1).haveRead){
+            if(pass1View.count !== 0 && pass1View.itemAtIndex(0).haveRead){
                 if(addBtn.pos > p){
                     pass2View.itemAtIndex(pass2Model.count - 1).flag = true
-                    passFTableModel.callSetData(addBtn.pos, 24, true)
+                    //passFTableModel.callSetData(addBtn.pos, mapping["flag"], true)
                 }
                 else if(addBtn.pos < p){
-                    passFTableModel.callSetData(p, 24, false)
+                    passFTableModel.callSetData(p, mapping["flag"], false)
                 }
             }
+            //console.log(p,addBtn.pos)
         }
     }
     ListView {
@@ -147,14 +158,13 @@ Rectangle {
         anchors.verticalCenter: pass3View.top
         anchors.verticalCenterOffset: pass3View.count * 30 + 13
 
-        ButtonGroup.group: exclusiveGroup2
         textItemText: "+"
         pos: pass2Model.count + pass1Model.count - 1
         onClicked: {
             if(pass2Model.count + pass1Model.count < pass3Model.get(0).i){
-                pass2Model.append({"i": pass2Model.count + pass1Model.count});
+                pass2Model.append({"i": pass2Model.count + pass1Model.count,
+                                   "v": false});
             }
-            refreshEditBtn()
         }
     }
 
@@ -167,148 +177,57 @@ Rectangle {
         anchors.rightMargin: addBtn.anchors.leftMargin
         pos: pass2Model.count + pass1Model.count - 1
         onClicked: {
-            if(pass2View.count > 1){
+            if(pass2Model.count > 0){
                 pass2Model.remove(pass2Model.count - 1);
-            }
-            refreshEditBtn()
-        }
-    }
-
-    PassEditBtn {
-        id: passEditBtn10
-        anchors.left: pass1View.left
-        anchors.leftMargin: 0
-        anchors.verticalCenter: pass1View.top
-        anchors.verticalCenterOffset: 0 * 30 + 13
-
-        ButtonGroup.group: exclusiveGroup2
-        textItemFontpixelSize: 15
-        textItemText: ""
-        pos: 0
-        onClicked: {
-            refreshEditBtn()
-            if(pass1View.itemAtIndex(0).haveRead){
-                pass1View.itemAtIndex(0).flag = !pass1View.itemAtIndex(0).flag
-                passFTableModel.callSetData(pass1View.itemAtIndex(0).col, 24, pass1View.itemAtIndex(0).flag)
-                if(pass1View.itemAtIndex(0).flag)
-                    textItemText = "√"
-                else
-                    textItemText = ""
-            }
-        }
-    }
-
-    PassEditBtn {
-        id: passEditBtn11
-        anchors.left: pass1View.left
-        anchors.leftMargin: 0
-        anchors.verticalCenter: pass1View.top
-        anchors.verticalCenterOffset: 1 * 30 + 13
-
-        ButtonGroup.group: exclusiveGroup2
-        textItemFontpixelSize: 15
-        textItemText: ""
-        pos: 1
-        onClicked: {
-            refreshEditBtn()
-            if(pass1View.itemAtIndex(1).haveRead){
-                pass1View.itemAtIndex(1).flag = !pass1View.itemAtIndex(1).flag
-                passFTableModel.callSetData(pass1View.itemAtIndex(1).col, 24, pass1View.itemAtIndex(1).flag)
-                if(pass1View.itemAtIndex(1).flag)
-                    textItemText = "√"
-                else
-                    textItemText = ""
-            }
-        }
-    }
-
-    PassEditBtn {
-        id: passEditBtn30
-        anchors.left: pass3View.left
-        anchors.leftMargin: 0
-        anchors.verticalCenter: pass3View.top
-        anchors.verticalCenterOffset: 0 * 30 + 13
-
-        ButtonGroup.group: exclusiveGroup2
-        textItemFontpixelSize: 15
-        textItemText: ""
-        pos: 8
-        onClicked: {
-            refreshEditBtn()
-            if(pass3View.itemAtIndex(0).haveRead){
-                pass3View.itemAtIndex(0).flag = !pass3View.itemAtIndex(0).flag
-                passFTableModel.callSetData(pass3View.itemAtIndex(0).col, 24, pass3View.itemAtIndex(0).flag)
-                if(pass3View.itemAtIndex(0).flag)
-                    textItemText = "√"
-                else
-                    textItemText = ""
-            }
-        }
-    }
-
-    PassEditBtn {
-        id: passEditBtn31
-        anchors.left: pass3View.left
-        anchors.leftMargin: 0
-        anchors.verticalCenter: pass3View.top
-        anchors.verticalCenterOffset: 1 * 30 + 13
-
-        ButtonGroup.group: exclusiveGroup2
-        textItemFontpixelSize: 15
-        textItemText: ""
-        pos: 9
-        onClicked: {
-            refreshEditBtn()
-            if(pass3View.itemAtIndex(1).haveRead){
-                pass3View.itemAtIndex(1).flag = !pass3View.itemAtIndex(1).flag
-                passFTableModel.callSetData(pass3View.itemAtIndex(1).col, 24, pass3View.itemAtIndex(1).flag)
-                if(pass3View.itemAtIndex(1).flag)
-                    textItemText = "√"
-                else
-                    textItemText = ""
             }
         }
     }
 
     function passListInitialize(){
-        pass1View.currentItem.clicked();
-        pass1View.currentItem.checked = true;
+        if(exclusiveGroup.checkedButton != null){
+            exclusiveGroup.checkedButton.clicked();
+            exclusiveGroup.checkedButton.checked = true;
+        }
+        else{
+            pass1View.currentItem.clicked();
+            pass1View.currentItem.checked = true;
+        }
+        pass2Model.clear();
         refreshPassList();
     }
 
     function refreshPassList(){
         if(scheduler.isPdbLoaded())
         {
+            refreshFillPassList();
             refreshPassName();
             refreshPassFlag();
-            if(pass1View.itemAtIndex(0).flag)
-                passEditBtn10.textItemText = "√"
-            else
-                passEditBtn10.textItemText = ""
-            if(pass1View.itemAtIndex(1).flag)
-                passEditBtn11.textItemText = "√"
-            else
-                passEditBtn11.textItemText = ""
-            if(pass3View.itemAtIndex(0).flag)
-                passEditBtn30.textItemText = "√"
-            else
-                passEditBtn30.textItemText = ""
-            if(pass3View.itemAtIndex(1).flag)
-                passEditBtn31.textItemText = "√"
-            else
-                passEditBtn31.textItemText = ""
+        }
+    }
+
+    function refreshFillPassList(){
+        var newCol = pass1View.itemAtIndex(pass1Model.count - 1).col + 1;
+        newCol += pass2Model.count;
+        if(passFTableModel.fixedTablePopData(newCol, "flag")){
+            while(passFTableModel.fixedTablePopData(newCol, "flag")){
+                addBtn.clicked();
+                newCol++;
+            }
+        }
+        else{
+            while(!passFTableModel.fixedTablePopData(newCol - 1, "flag")){
+                removeBtn.clicked();
+                newCol--;
+            }
         }
     }
 
     function switchPass(i){
         //console.log("Pass" + i + "Parameter")
         if(scheduler.isPdbLoaded()){
-
             scheduler.callPassSelected("Pass" + i + "Parameter")
-
             passListRequestRefreshcombobx()
             passListRequestFixTableRefresh(i);
-
             currentIndex = i;
         }
     }
@@ -316,33 +235,19 @@ Rectangle {
     function refreshPassName(){
         getPassName(rectangle);
     }
-
-    function refreshPassFlag(){
-        getPassFlag(rectangle);
-    }
-
-    function clear(){
-        resetPass(rectangle);
-        pass2Model.clear();
-        pass2Model.append({"i": 2});
-        passEditBtn10.textItemText = "";
-        passEditBtn11.textItemText = ""
-        passEditBtn30.textItemText = ""
-        passEditBtn31.textItemText = ""
-        currentIndex = -1;
-    }
-
     function getPassName(item){
         if(item.type === "listBtn"){
             item.text1Text = passFTableModel.fixedTablePopData(item.col, "showName");
             item.haveRead = true;
-            return
         }
         for(var i = 0; i < item.children.length; i++)
             getPassName(item.children[i]);
         return;
     }
 
+    function refreshPassFlag(){
+        getPassFlag(rectangle);
+    }
     function getPassFlag(item){
         if(item.type === "listBtn"){
             item.flag = passFTableModel.fixedTablePopData(item.col, "flag");
@@ -352,10 +257,15 @@ Rectangle {
         return;
     }
 
+    function clear(){
+        resetPass(rectangle);
+        pass2Model.clear();
+        currentIndex = -1;
+    }
     function resetPass(item){
         if(item.type === "listBtn"){
             item.text1Text = "";
-            item.flag = true;
+            item.flag = false;
             item.haveRead = false;
         }
         for(var i = 0; i < item.children.length; i++)
@@ -366,34 +276,6 @@ Rectangle {
     function refreshEditBtnPos(){
         addBtn.pos = pass2Model.count + pass1Model.count - 1;
         removeBtn.pos = pass2Model.count + pass1Model.count - 1;
-    }
-
-    function refreshEditBtn(){
-        if(exclusiveGroup.checkedButton != null){
-            switch(exclusiveGroup.checkedButton.col){
-            case addBtn.pos:
-                addBtn.checked = true;
-                break;
-            case passEditBtn10.pos:
-                passEditBtn10.checked = true;
-                break;
-            case passEditBtn11.pos:
-                passEditBtn11.checked = true;
-                break;
-            case passEditBtn30.pos:
-                passEditBtn30.checked = true;
-                break;
-            case passEditBtn31.pos:
-                passEditBtn31.checked = true;
-                break;
-            default:
-                exclusiveGroup2.checkState = Qt.Unchecked
-                break;
-            }
-        }
-        else{
-            exclusiveGroup2.checkState = Qt.Unchecked;
-        }
     }
 }
 

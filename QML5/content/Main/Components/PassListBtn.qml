@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.12
 
 Button {
@@ -7,7 +7,7 @@ Button {
     property string type: "listBtn"
     property int col: 0
     property bool haveRead: false
-    property bool flag: true
+    property bool flag: false
     width: 150
 
     implicitWidth: Math.max(
@@ -21,6 +21,7 @@ Button {
 
     text: "My Button"
     property alias text1Text: text1.text
+    property alias passEditBtnVisible: passEditBtn.visible
     state: ""
 
     autoExclusive: true
@@ -37,6 +38,21 @@ Button {
         radius: 2
         border.color: "#047eff"
         border.width: 0
+    }
+
+    PassEditBtn {
+        id: passEditBtn
+        x: 5
+        y: 5
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        textItemText: flag ? "√" : ""
+        textItemFontpixelSize: 15
+        anchors.leftMargin: 8
+        onClicked: {
+            if(haveRead)
+                flag = !flag
+        }
     }
 
     contentItem: textItem
@@ -71,17 +87,19 @@ Button {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: -1
     }
+
     states: [
         State {
             name: "normal"
+            when: !control.checked && !haveRead
         },
         State {
             name: "checked"
-            when: control.checked && !haveRead && flag
+            when: control.checked && !haveRead
         },
         State {
             name: "readin"
-            when: !control.checked && haveRead && flag
+            when: !control.checked && haveRead
 
             PropertyChanges {
                 target: textItem
@@ -93,27 +111,11 @@ Button {
                 target: buttonBackground
                 //opacity: 0.7
                 //color: "#c67171"
-            }
-        },
-        State {
-            name: "readinnoflag"
-            when: !control.checked && haveRead && !flag
-
-            PropertyChanges {
-                target: textItem
-                horizontalAlignment: Text.AlignLeft
-                anchors.leftMargin: 35
-            }
-
-            PropertyChanges {
-                target: buttonBackground
-                //opacity: 0.7
-                //color: "#6c81bd"
             }
         },
         State {
             name: "readinChecked"
-            when: control.checked && haveRead && flag
+            when: control.checked && haveRead
 
             PropertyChanges {
                 target: textItem
@@ -125,25 +127,6 @@ Button {
                 target: buttonBackground
                 //opacity: 0.7
                 //color: "#c67171"
-                border.color: "#045ba4"
-                border.width: 3
-            }
-        },
-        State {
-            name: "readinnoflagChecked"
-            when: control.checked && haveRead && !flag
-
-            PropertyChanges {
-                target: textItem
-                horizontalAlignment: Text.AlignLeft
-                anchors.leftMargin: 40
-            }
-
-            PropertyChanges {
-                target: buttonBackground
-                //opacity: 0.7
-                //color: "#6c81bd"
-                //border.width: 3
                 border.color: "#045ba4"
                 border.width: 3
             }
@@ -153,7 +136,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;height:27;width:130}
+    D{i:0;formeditorZoom:1.66;height:27;width:130}
 }
 ##^##*/
 
