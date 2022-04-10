@@ -46,7 +46,7 @@ Rectangle {
         color: "#000000"
         font.pixelSize: 14
         anchors.verticalCenterOffset: 0
-        text: qsTr("当前数据库文件:无")
+        text: qsTr("当前数据库文件:")
         anchors.left: connectionLight.right
         anchors.leftMargin: 208
         anchors.verticalCenter: parent.verticalCenter
@@ -57,7 +57,7 @@ Rectangle {
 
     Rectangle {
         id: syncLight
-        color: "#eee"
+        color: "#ff0000"
         width: syncText.height + 5
         height: width
         radius: width/2
@@ -71,7 +71,7 @@ Rectangle {
         id: syncText
         color: "#000000"
         font.pixelSize: 14
-        text: qsTr("未连接工艺数据库")
+        text: qsTr("未打开工艺文件")
 
         anchors.left: syncLight.right
         anchors.leftMargin: 10
@@ -123,7 +123,7 @@ Rectangle {
     function monitorSync(){
         var sync =  "#00ff00"
         var unsync =  "#f4f42f"
-        var unconnect =  "#eee"
+        var unconnect =  "#ff0000"
         if(scheduler.isPdbLoaded()){//db is load)
             if(scheduler.callIsDirty()){
                 syncLight.color = unsync
@@ -136,7 +136,7 @@ Rectangle {
         }
         else{
             syncLight.color = unconnect
-            syncText.text = "未连接工艺数据库"
+            syncText.text = "未打开工艺文件"
         }
 
     }

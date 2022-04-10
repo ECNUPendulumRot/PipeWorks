@@ -153,7 +153,7 @@ Rectangle {
             curFilename = "当前数据库文件:" + downloader.toLocal(fileDialog.curruntFileUrl)
         }
         function clearCurruntName(){
-             curFilename = "当前数据库文件:无"
+             curFilename = "当前数据库文件"
         }
     }
 
