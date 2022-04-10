@@ -343,6 +343,7 @@ Rectangle {
         anchors.horizontalCenter: myButton3.horizontalCenter
         anchors.bottomMargin: 62
         z: 3
+        onClicked:if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbCancelDialog.open()
 
         InfoDialog {
             id: dbCancelDialog
@@ -372,8 +373,6 @@ Rectangle {
 
             }
         }
-
-        onClicked:if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbCancelDialog.open()
     }
 
     SubmitBtn {
@@ -387,6 +386,9 @@ Rectangle {
         }
         z: 3
         imgSrc: "../images/SinglePass.png"
+
+        onClicked: if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbSubmitDialog.open()
+
         InfoDialog {
             id: dbSubmitDialog
 
@@ -414,8 +416,6 @@ Rectangle {
                 }
             }
         }
-
-        onClicked: if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbSubmitDialog.open()
     }
 
     SubmitBtn {
