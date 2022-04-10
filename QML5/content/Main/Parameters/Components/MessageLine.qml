@@ -44,8 +44,10 @@ Rectangle {
         property int row
         property int col
         property string value
-        onEditingFinished: rectangle6.dataAccepted(textField.text);
-
+        onEditingFinished: {
+            textField.focus = false;
+            rectangle6.dataAccepted(textField.text);
+        }
     }
     function clear(){
         textField.text=""
