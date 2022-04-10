@@ -86,38 +86,9 @@ Item {
                     color: Constants.tableFontColor
                     text: "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Microsoft YaHei UI'; font-size:12px; font-weight:400; font-style:normal;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">起</p>\n<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">弧</p></body></html>"
                     wrapMode: Text.WordWrap
-                    font.pointSize: 9
+                    font.pixelSize: 12
                     textFormat: Text.RichText
                 }
-
-                //                Label {
-                //                    id: label1
-                //                    x: 5
-                //                    y: 41
-                //                    width: 15
-                //                    height: 18
-                //                    color: "#ffffff"
-                //                    text: "起"
-                //                    //wrapMode: Text.WordWrap
-                //                    font.pointSize: 12
-                //                    //textFormat: Text.RichText
-                //                }
-                //                Label {
-                //                    id: label2
-                //                    //x: 5
-                //                    anchors{
-                //                      left: label1.left
-                //                      top: label1.bottom
-                //                      topMargin: 30
-                //                    }
-                //                    width: 15
-                //                    height: 18
-                //                    color: "#ffffff"
-                //                    text: "弧"
-                //                    //wrapMode: Text.WordWrap
-                //                    font.pointSize: 12
-                //                    //textFormat: Text.RichText
-                //                }
 
                 ColumnLayout {
                     anchors.verticalCenter: rec1.verticalCenter

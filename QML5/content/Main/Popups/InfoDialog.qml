@@ -76,13 +76,13 @@ Popup {
                 Image {
                     id: image
                     y: 0
-                    width: 30
+                    width: 34
                     anchors.left: parent.left
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     source: "qrc:/qtquickplugin/images/template_image.png"
                     anchors.leftMargin: 0
-                    anchors.bottomMargin: 5
+                    anchors.bottomMargin: 0
                     anchors.topMargin: 5
                     fillMode: Image.PreserveAspectFit
                 }
