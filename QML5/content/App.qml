@@ -41,6 +41,7 @@ ApplicationWindow {
     visible: true
     title: "PipeWorks"
     flags: Qt.FramelessWindowHint | Qt.Window
+    color: "transparent"
 
     property int w: 800
     property int h: 600

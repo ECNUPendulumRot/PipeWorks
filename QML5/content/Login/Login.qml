@@ -15,6 +15,10 @@ Item {
         border.color: "#707070"
         border.width: 0
         anchors.fill: parent
+        anchors.rightMargin: 5
+        anchors.leftMargin: 5
+        anchors.bottomMargin: 5
+        anchors.topMargin: 5
         layer.enabled: true
         layer.effect: DropShadowEffect {
             id: dropShadow2
@@ -30,7 +34,7 @@ Item {
             x: 0
             y: 0
             width: 320
-            height: 600
+            height: background.height
             opacity: 1
             color: "#0166bb"
             border.color: "#707070"
@@ -359,6 +363,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.25}
+    D{i:0;formeditorZoom:0.5}
 }
 ##^##*/
