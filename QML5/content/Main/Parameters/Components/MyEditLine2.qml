@@ -51,7 +51,7 @@ Rectangle {
 
         layer.enabled: true
 
-        onAccepted: {
+        onEditingFinished:  {
             textField.focus = false
             control.dataChanged(control.mapString, textField.text)
         }

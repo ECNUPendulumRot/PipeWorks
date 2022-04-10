@@ -54,7 +54,7 @@ Rectangle {
         rectangle1Color: "#ffffff"
         anchors.verticalCenterOffset: 0
 
-        onAccepted: {
+        onEditingFinished: {
             textField.focus = false
             control.dataChanged(control.mapString, textField.text);
         }

@@ -6,10 +6,10 @@ import QtQuick.Studio.Effects 1.0
 Popup {
     id: popup
     width: 100
-    height: 70
+    height: 40
 
     implicitWidth: 100
-    implicitHeight: 70
+    implicitHeight: 40
 
     rightPadding: 0
     leftPadding: 0
@@ -27,7 +27,6 @@ Popup {
 
     z:3
 
-    property alias closeBtn: close
     property alias logoutBtn: logout
 
     background:rectangle1
@@ -53,48 +52,14 @@ Popup {
     }
 
     DbBtn {
-        id: close
-        height: parent.height/2
-        text: "修改密码"
-        font.pixelSize: 12
+        id: logout
+        text: "切换用户"
+        font.pixelSize: 14
         font.family: "Microsoft Yahei"
         anchors{
             left: parent.left
             right: parent.right
             top: parent.top
-            topMargin: 2
-            leftMargin: 2
-            rightMargin:2
-            bottomMargin:1
-        }
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        anchors.top: parent.top
-        //font.pointSize: 12
-        //anchors.topMargin: 0
-        z: 1
-        //anchors.leftMargin: 4
-
-        Rectangle {
-            id: rectangle
-            height: 1
-            color: "#d2d2d2"
-            border.width: 0
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-        }
-    }
-
-    DbBtn {
-        id: logout
-        text: "切换用户"
-        font.pixelSize: 12
-        font.family: "Microsoft Yahei"
-        anchors{
-            left: parent.left
-            right: parent.right
-            top: close.bottom
             bottom: parent.bottom
             topMargin: 1
             leftMargin: 2
@@ -105,7 +70,6 @@ Popup {
 //        anchors.right: parent.right
 //        anchors.top: closeBtn.bottom
 //        anchors.bottom: parent.bottom
-        font.pointSize: 12
 //        anchors.bottomMargin: 0
         z: 1
         //anchors.leftMargin: 4
