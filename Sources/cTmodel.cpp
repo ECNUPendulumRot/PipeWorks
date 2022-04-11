@@ -110,7 +110,7 @@ QString TModel::rowQuery(int index)
 
     QString result = "SET ";
 
-    for(int i = 1; i < record.count(); i++){
+    for(int i = 1; i < record.count() - 1; i++){
         QString tmp = record.fieldName(i) + " = " + (record.fieldName(i) == "showName"? "'" + record.value(i).toString() + "'":record.value(i).toString())
                                           + (i == record.count() - 1 ? "": ",");
         result += tmp;
