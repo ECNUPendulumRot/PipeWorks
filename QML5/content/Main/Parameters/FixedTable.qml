@@ -58,17 +58,57 @@ Item {
             x: 0
             y: 0
 
+
+
+            MyGroupTitle2 {
+                id: myGroupTitle2
+                x: 0
+                y: -10
+                width: 363
+                height: 144
+                antialiasing: true
+                rectangle9Color: "#fafafa"
+                rectangle9X: 150
+                label4Color: "#000000"
+                label4Text: "前焊枪"
+            }
+
+            MyEditLine {
+                id: hRatioLead
+                x: 21
+                y: -7
+                textFieldWidth: 40
+                mapString: "HRatioLead"
+                label1AnchorsleftMargin: 50
+                label1Text: ""
+                textFieldAnchorsleftMargin: 72
+                labelText: "电流值/毫米"
+
+                onDataChanged: (s, text) => writeToBackend(s, text)
+            }
+
+            SelectComboBoxFix {
+                id: trimLeadMode
+                mapString: "trimLeadMode"
+                defaultString:""
+                x: 196
+                y: hRatioLead.y
+                controlWidth: 68
+                controlAnchorsleftMargin: 72
+                onDataChanged: (s, text) => writeToBackend(s, text)
+
+            }
             GroupItem {
                 id: groupItem3
-                x: 0
-                y: -6
-                width: 233
-                height: 132
+                x: hRatioLead.x
+                y: 26
+                width: start1.width
+                height: start1.height
 
                 Rectangle {
-                    id: rec1
-                    x: 21
-                    y: 27
+                    id: start1
+                    x: 0
+                    y: 0
                     width: 155
                     height: 98
                     color: "#00ffffff"
@@ -79,8 +119,8 @@ Item {
 
                 Label {
                     id: label
-                    x: 5
-                    y: 41
+                    x: -15
+                    y: 16
                     width: 14
                     height: 18
                     color: Constants.tableFontColor
@@ -91,8 +131,8 @@ Item {
                 }
 
                 ColumnLayout {
-                    anchors.verticalCenter: rec1.verticalCenter
-                    anchors.left: rec1.left
+                    anchors.verticalCenter: start1.verticalCenter
+                    anchors.left: start1.left
                     anchors.leftMargin: 0
                     spacing: -5
 
@@ -148,35 +188,20 @@ Item {
                         onDataChanged: (s, text) => writeToBackend(s, text)
                     }
                 }
-
-                MyEditLine {
-                    id: hRatioLead
-                    x: trimLeadMode.x
-                    y: trimLeadMode.y
-                    textFieldWidth: 40
-                    mapString: "HRatioLead"
-                    label1AnchorsleftMargin: 50
-                    label1Text: ""
-                    textFieldAnchorsleftMargin: 72
-                    labelText: "电流值/毫米"
-
-                    onDataChanged: (s, text) => writeToBackend(s, text)
-                }
             }
-
             GroupItem {
                 id: groupItem1
-                x: 175
-                y: -6
-                width: 233
-                height: 132
+                x: trimLeadMode.x
+                y: groupItem3.y
+                width: end1.width
+                height: end1.height
 
                 Rectangle {
-                    id: rectangle1
-                    x: rec1.x
-                    y: rec1.y
-                    width: rec1.width
-                    height: rec1.height
+                    id: end1
+                    x: start1.x
+                    y: start1.y
+                    width: start1.width
+                    height: start1.height
                     color: "#00ffffff"
                     border.color: "#808080"
                     border.width: 1
@@ -196,8 +221,8 @@ Item {
                 }
 
                 ColumnLayout {
-                    anchors.verticalCenter: rectangle1.verticalCenter
-                    anchors.left: rectangle1.left
+                    anchors.verticalCenter: end1.verticalCenter
+                    anchors.left: end1.left
                     anchors.leftMargin: 0
                     spacing: -5
 
@@ -256,48 +281,81 @@ Item {
                         onDataChanged: (s, text) => writeToBackend(s, text)
                     }
                 }
-
-                SelectComboBoxFix {
-                    id: trimLeadMode
-                    mapString: "trimLeadMode"
-                    defaultString:""
-                    x: 21
-                    y: 0
-                    controlWidth: 68
-                    controlAnchorsleftMargin: 72
-                    onDataChanged: (s, text) => writeToBackend(s, text)
-
-                }
-            }
-
-            MyGroupTitle2 {
-                id: myGroupTitle2
-                x: 0
-                y: -10
-                width: 363
-                height: 144
-                antialiasing: true
-                rectangle9Color: "#fafafa"
-                rectangle9X: 150
-                label4Color: "#000000"
-                label4Text: "前焊枪"
             }
         }
 
         GroupItem {
             x: 374
             y: 0
+
+
+            MyGroupTitle2 {
+                id: myGroupTitle3
+                x: myGroupTitle2.x
+                y: myGroupTitle2.y
+                width: myGroupTitle2.width
+                height: myGroupTitle2.height
+                antialiasing: true
+                rectangle9Color: "#fafafa"
+                label4Text: "后焊枪"
+                label4Color: "#000000"
+                rectangle9X: 150
+            }
+
+            MyEditLine {
+                id: hRatioTrail
+                x: hRatioLead.x
+                y: hRatioLead.y
+                textFieldWidth: 40
+                label1Text: ""
+                label1AnchorsleftMargin: 50
+                mapString: "HRatioTrail"
+                textFieldAnchorsleftMargin: 72
+                labelText: "电流值/毫米"
+
+                onDataChanged: (s, text) => writeToBackend(s, text)
+            }
+
+            SelectComboBoxFix {
+                id: trimTrailMode
+                x: trimLeadMode.x
+                y: trimLeadMode.y
+                controlWidth: 68
+                controlAnchorsleftMargin: 72
+                mapString: "trimTrailMode"
+                defaultString:""
+                onDataChanged: (s, text) => writeToBackend(s, text)
+
+            }
+
+            //            MyEditLine {
+            //                id: trimTrailMode
+            //                x: trimLeadMode.x
+            //                y: trimLeadMode.y
+
+            //                mapString : "trimTrailMode"
+
+            //                textFieldAnchorsleftMargin: 64
+            //                label1AnchorsleftMargin: 50
+            //                labelText: "跟踪状态"
+            //                textFieldWidth: 40
+            //                label1Text: ""
+
+            //                onDataChanged: (s, text) => writeToBackend(s, text)
+            //            }
             GroupItem {
                 id: groupItem4
-                x: 0
-                y: -6
+                x: hRatioTrail.x
+                y: groupItem3.y
+                width: start2.width
+                height: start2.height
 
                 Rectangle {
-                    id: rectangle2
-                    x: rec1.x
-                    y: rec1.y
-                    width: rec1.width
-                    height: rec1.height
+                    id: start2
+                    x: start1.x
+                    y: start1.y
+                    width: start1.width
+                    height: start1.height
                     color: "#00ffffff"
                     border.color: "#808080"
                     border.width: 1
@@ -317,8 +375,8 @@ Item {
                 }
 
                 ColumnLayout {
-                    anchors.verticalCenter: rectangle2.verticalCenter
-                    anchors.left: rectangle2.left
+                    anchors.verticalCenter: start2.verticalCenter
+                    anchors.left: start2.left
                     anchors.leftMargin: 0
                     spacing: -5
 
@@ -378,33 +436,20 @@ Item {
                         onDataChanged: (s, text) => writeToBackend(s, text)
                     }
                 }
-
-                MyEditLine {
-                    id: hRatioTrail
-                    x: trimLeadMode.x
-                    y: trimLeadMode.y
-                    textFieldWidth: 40
-                    label1Text: ""
-                    label1AnchorsleftMargin: 50
-                    mapString: "HRatioTrail"
-                    textFieldAnchorsleftMargin: 72
-                    labelText: "电流值/毫米"
-
-                    onDataChanged: (s, text) => writeToBackend(s, text)
-                }
             }
-
             GroupItem {
                 id: groupItem5
-                x: 175
-                y: -6
+                x: trimTrailMode.x
+                y: groupItem3.y
+                width: end2.width
+                height: end2.height
 
                 Rectangle {
-                    id: rectangle3
-                    x: rectangle1.x
-                    y: rectangle1.y
-                    width: rectangle1.width
-                    height: rectangle1.height
+                    id: end2
+                    x: end1.x
+                    y: end1.y
+                    width: end1.width
+                    height: end1.height
                     color: "#00ffffff"
                     border.color: "#808080"
                     border.width: 1
@@ -424,8 +469,8 @@ Item {
                 }
 
                 ColumnLayout {
-                    anchors.verticalCenter: rectangle3.verticalCenter
-                    anchors.left: rectangle3.left
+                    anchors.verticalCenter: end2.verticalCenter
+                    anchors.left: end2.left
                     anchors.leftMargin: 0
                     spacing: -5
 
@@ -485,48 +530,7 @@ Item {
                         onDataChanged: (s, text) => writeToBackend(s, text)
                     }
                 }
-
-                SelectComboBoxFix {
-                    id: trimTrailMode
-                    x: trimLeadMode.x
-                    y: trimLeadMode.y
-                    controlWidth: 68
-                    controlAnchorsleftMargin: 72
-                    mapString: "trimTrailMode"
-                    defaultString:""
-                    onDataChanged: (s, text) => writeToBackend(s, text)
-
-                }
             }
-
-            MyGroupTitle2 {
-                id: myGroupTitle3
-                x: myGroupTitle2.x
-                y: myGroupTitle2.y
-                width: myGroupTitle2.width
-                height: myGroupTitle2.height
-                antialiasing: true
-                rectangle9Color: "#fafafa"
-                label4Text: "后焊枪"
-                label4Color: "#000000"
-                rectangle9X: 150
-            }
-
-            //            MyEditLine {
-            //                id: trimTrailMode
-            //                x: trimLeadMode.x
-            //                y: trimLeadMode.y
-
-            //                mapString : "trimTrailMode"
-
-            //                textFieldAnchorsleftMargin: 64
-            //                label1AnchorsleftMargin: 50
-            //                labelText: "跟踪状态"
-            //                textFieldWidth: 40
-            //                label1Text: ""
-
-            //                onDataChanged: (s, text) => writeToBackend(s, text)
-            //            }
         }
 
         GroupItem {
@@ -722,7 +726,7 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;height:160;width:1206}
+    D{i:0;formeditorZoom:0.75;height:160;width:1206}
 }
 ##^##*/
 
