@@ -76,6 +76,14 @@ Button {
                 color: "#ebebeb"
                 border.color: "#00000000"
             }
+        },
+        State {
+            name: "hover"
+            when: (!control.pressed && control.hovered) || control.activeFocus
+            PropertyChanges {
+                target: buttonBackground
+                color: "#a1a1a1"
+            }
         }
     ]
 }

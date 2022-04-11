@@ -163,6 +163,7 @@ Item {
                 id: myTab
                 width: 100
                 text: "小车与其他"
+                activeFocusOnTab: false
                 onClicked: i = 0
                 checked: true
                 checkable: true
@@ -173,6 +174,7 @@ Item {
             MyTab {
                 id: myTab1
                 width: 100
+                activeFocusOnTab: false
                 onClicked: i = 1
                 checkable: true
                 textItemFontpixelSize: 12
@@ -183,6 +185,7 @@ Item {
                 id: myTab2
                 width: 100
                 text: "前焊枪竖直运动"
+                activeFocusOnTab: false
                 onClicked: i = 2
                 checkable: true
                 textItemFontpixelSize: 12
@@ -193,6 +196,7 @@ Item {
                 id: myTab3
                 width: 100
                 text: "后焊枪水平运动"
+                activeFocusOnTab: false
                 onClicked: i = 3
                 checkable: true
                 textItemFontpixelSize: 12
@@ -203,6 +207,7 @@ Item {
                 id: myTab4
                 width: 100
                 text: "后焊枪竖直运动"
+                activeFocusOnTab: false
                 onClicked: i = 4
                 checkable: true
                 textItemFontpixelSize: 12
@@ -621,6 +626,47 @@ Item {
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
+
+                    GroupItem {
+                        x: 0
+                        y: 0
+                        MyEditLine {
+                            id: lhwidthIncrement
+                            x: item1.x + 18
+                            y: 18
+
+                            label1AnchorsleftMargin: 70
+                            labelText: "单次增加量"
+                            label1Text: "毫米"
+                            textFieldWidth: 60
+
+                        }
+
+                        MyEditLine {
+                            id: lhwidthDecrement
+                            x: item2.x + 18
+                            y: 18
+
+                            label1AnchorsleftMargin: 70
+                            labelText: "单次减少量"
+                            label1Text: "毫米"
+                            textFieldWidth: 60
+
+                        }
+
+                        MyGroupTitle2 {
+                            id: myGroupTitle21
+                            x: 0
+                            y: 0
+                            width: 562
+                            height: 62
+                            label4FontpixelSize: 12
+                            label4Color: "#202020"
+                            label4Text: "摆宽参数"
+
+                    }
+                    }
+
                     GroupItem {
                         x: 0
                         y: 86
@@ -947,47 +993,6 @@ Item {
                             }
                         }
                     }
-
-                    GroupItem {
-                        x: 0
-                        y: 0
-                        MyEditLine {
-                            id: lhwidthIncrement
-                            x: item1.x + 18
-                            y: 18
-
-                            label1AnchorsleftMargin: 70
-                            labelText: "单次增加量"
-                            label1Text: "毫米"
-                            textFieldWidth: 60
-
-                        }
-
-                        MyEditLine {
-                            id: lhwidthDecrement
-                            x: item2.x + 18
-                            y: 18
-
-                            label1AnchorsleftMargin: 70
-                            labelText: "单次减少量"
-                            label1Text: "毫米"
-                            textFieldWidth: 60
-
-                        }
-
-                        MyGroupTitle2 {
-                            id: myGroupTitle21
-                            x: 0
-                            y: 0
-                            width: 562
-                            height: 62
-                            label4FontpixelSize: 12
-                            label4Color: "#202020"
-                            label4Text: "摆宽参数"
-
-                    }
-                }
-
                 }
             }
             Rectangle {
@@ -1005,6 +1010,43 @@ Item {
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
+
+                    GroupItem {
+                        x: 0
+                        y: 0
+                        MyEditLine {
+                            id: lvwidthIncrement
+                            x: item9.x + 18
+                            y: 18
+
+                            label1AnchorsleftMargin: 70
+                            labelText: "单次增加量"
+                            label1Text: "毫米"
+                            textFieldWidth: 60
+                        }
+
+                        MyEditLine {
+                            id: lvwidthDecrement
+                            x: item10.x + 18
+                            y: 18
+
+                            label1AnchorsleftMargin: 70
+                            labelText: "单次减少量"
+                            label1Text: "毫米"
+                            textFieldWidth: 60
+                        }
+
+                        MyGroupTitle2 {
+                            id: myGroupTitle23
+                            x: 0
+                            y: 0
+                            width: 562
+                            height: 62
+                            label4Color: "#202020"
+                            label4Text: "摆宽参数"
+                            label4FontpixelSize: 12
+                        }
+                    }
                     GroupItem {
                         x: 0
                         y: 86
@@ -1308,43 +1350,6 @@ Item {
                             label4FontpixelSize: 12
                         }
                     }
-
-                    GroupItem {
-                        x: 0
-                        y: 0
-                        MyEditLine {
-                            id: lvwidthIncrement
-                            x: item9.x + 18
-                            y: 18
-
-                            label1AnchorsleftMargin: 70
-                            labelText: "单次增加量"
-                            label1Text: "毫米"
-                            textFieldWidth: 60
-                        }
-
-                        MyEditLine {
-                            id: lvwidthDecrement
-                            x: item10.x + 18
-                            y: 18
-
-                            label1AnchorsleftMargin: 70
-                            labelText: "单次减少量"
-                            label1Text: "毫米"
-                            textFieldWidth: 60
-                        }
-
-                        MyGroupTitle2 {
-                            id: myGroupTitle23
-                            x: 0
-                            y: 0
-                            width: 562
-                            height: 62
-                            label4Color: "#202020"
-                            label4Text: "摆宽参数"
-                            label4FontpixelSize: 12
-                        }
-                    }
                 }
             }
             Rectangle {
@@ -1361,6 +1366,44 @@ Item {
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
+
+                    GroupItem {
+                        x: 0
+                        y: 0
+                        MyEditLine {
+                            id: thwidthIncrement
+                            x: item5.x + 18
+                            y: 18
+
+                            label1AnchorsleftMargin: 70
+                            labelText: "单次增加量"
+                            label1Text: "毫米"
+                            textFieldWidth: 60
+                        }
+
+                        MyEditLine {
+                            id: thwidthDecrement
+                            x: item6.x + 18
+                            y: 18
+
+                            label1AnchorsleftMargin: 70
+                            labelText: "单次减少量"
+                            label1Text: "毫米"
+                            textFieldWidth: 60
+                        }
+
+                        MyGroupTitle2 {
+                            id: myGroupTitle22
+                            x: 0
+                            y: 0
+
+                            width: 562
+                            height: 62
+                            label4FontpixelSize: 12
+                            label4Color: "#202020"
+                            label4Text: "摆宽参数"
+                        }
+                    }
                     GroupItem {
                         x: 0
                         y: 86
@@ -1668,44 +1711,6 @@ Item {
                             }
                         }
                     }
-
-                    GroupItem {
-                        x: 0
-                        y: 0
-                        MyEditLine {
-                            id: thwidthIncrement
-                            x: item5.x + 18
-                            y: 18
-
-                            label1AnchorsleftMargin: 70
-                            labelText: "单次增加量"
-                            label1Text: "毫米"
-                            textFieldWidth: 60
-                        }
-
-                        MyEditLine {
-                            id: thwidthDecrement
-                            x: item6.x + 18
-                            y: 18
-
-                            label1AnchorsleftMargin: 70
-                            labelText: "单次减少量"
-                            label1Text: "毫米"
-                            textFieldWidth: 60
-                        }
-
-                        MyGroupTitle2 {
-                            id: myGroupTitle22
-                            x: 0
-                            y: 0
-
-                            width: 562
-                            height: 62
-                            label4FontpixelSize: 12
-                            label4Color: "#202020"
-                            label4Text: "摆宽参数"
-                        }
-                    }
                 }
             }
             Rectangle {
@@ -1723,6 +1728,43 @@ Item {
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
+
+                    GroupItem {
+                        x: 0
+                        y: 0
+                        MyEditLine {
+                            id: tvwidthIncrement
+                            x: item13.x + 18
+                            y: 18
+
+                            label1AnchorsleftMargin: 70
+                            labelText: "单次增加量"
+                            label1Text: "毫米"
+                            textFieldWidth: 60
+                        }
+
+                        MyEditLine {
+                            id: tvwidthDecrement
+                            x: item14.x + 18
+                            y: 18
+
+                            label1AnchorsleftMargin: 70
+                            labelText: "单次减少量"
+                            label1Text: "毫米"
+                            textFieldWidth: 60
+                        }
+
+                        MyGroupTitle2 {
+                            id: myGroupTitle24
+                            x: 0
+                            y: 0
+                            width: 562
+                            height: 62
+                            label4Color: "#202020"
+                            label4Text: "摆宽参数"
+                            label4FontpixelSize: 12
+                        }
+                    }
                     GroupItem {
                         x: 0
                         y: 86
@@ -2020,43 +2062,6 @@ Item {
                             height: 406
                             label4Color: "#202020"
                             label4Text: "焊枪竖直抬压运动"
-                            label4FontpixelSize: 12
-                        }
-                    }
-
-                    GroupItem {
-                        x: 0
-                        y: 0
-                        MyEditLine {
-                            id: tvwidthIncrement
-                            x: item13.x + 18
-                            y: 18
-
-                            label1AnchorsleftMargin: 70
-                            labelText: "单次增加量"
-                            label1Text: "毫米"
-                            textFieldWidth: 60
-                        }
-
-                        MyEditLine {
-                            id: tvwidthDecrement
-                            x: item14.x + 18
-                            y: 18
-
-                            label1AnchorsleftMargin: 70
-                            labelText: "单次减少量"
-                            label1Text: "毫米"
-                            textFieldWidth: 60
-                        }
-
-                        MyGroupTitle2 {
-                            id: myGroupTitle24
-                            x: 0
-                            y: 0
-                            width: 562
-                            height: 62
-                            label4Color: "#202020"
-                            label4Text: "摆宽参数"
                             label4FontpixelSize: 12
                         }
                     }
