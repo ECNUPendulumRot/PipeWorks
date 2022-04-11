@@ -100,7 +100,7 @@ Item {
                         id: arcLeadSVPercent
                         mapString : "arcLeadSVPercent"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         labelText: "弧压百分比"
@@ -113,7 +113,7 @@ Item {
                         id: arcLeadSWSPercent
                         mapString : "arcLeadSWSPercent"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -126,7 +126,7 @@ Item {
                         id: arcLeadSOWPercent
                         mapString : "arcLeadSOWPercent"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -139,7 +139,7 @@ Item {
                         id: arcLeadSTime
                         mapString : "arcLeadSTime"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "\u79d2"
@@ -157,7 +157,7 @@ Item {
                     mapString: "HRatioLead"
                     label1AnchorsleftMargin: 50
                     label1Text: ""
-                    textFieldAnchorsleftMargin: 68
+                    textFieldAnchorsleftMargin: 72
                     labelText: "电流值/毫米"
 
                     onDataChanged: (s, text) => writeToBackend(s, text)
@@ -206,7 +206,7 @@ Item {
 
                         mapString : "arcLeadOVPercent"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -220,7 +220,7 @@ Item {
 
                         mapString: "arcLeadOWSPercent"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -234,7 +234,7 @@ Item {
 
                         mapString: "arcLeadOOWPercent"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -247,7 +247,7 @@ Item {
                         id: arcLeadOTime
 
                         mapString: "arcLeadOTime"
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "\u79d2"
@@ -264,7 +264,7 @@ Item {
                     x: 21
                     y: 0
                     controlWidth: 68
-                    controlAnchorsleftMargin: 67
+                    controlAnchorsleftMargin: 72
                     onDataChanged: (s, text) => writeToBackend(s, text)
 
                 }
@@ -327,7 +327,7 @@ Item {
 
                         mapString: "arcTrailSVPercent"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -341,7 +341,7 @@ Item {
 
                         mapString: "arcTrailSWSPercent"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -355,7 +355,7 @@ Item {
 
                         mapString: "arcTrailSOWPercent"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "%"
@@ -369,7 +369,7 @@ Item {
 
                         mapString : "arcTrailSTime"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         label1AnchorsleftMargin: 50
                         textFieldWidth: 40
                         label1Text: "\u79d2"
@@ -387,7 +387,7 @@ Item {
                     label1Text: ""
                     label1AnchorsleftMargin: 50
                     mapString: "HRatioTrail"
-                    textFieldAnchorsleftMargin: 68
+                    textFieldAnchorsleftMargin: 72
                     labelText: "电流值/毫米"
 
                     onDataChanged: (s, text) => writeToBackend(s, text)
@@ -434,7 +434,7 @@ Item {
 
                         mapString : "arcTrailOVPercent"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         textFieldWidth: 40
                         label1AnchorsleftMargin: 50
                         label1Text: "%"
@@ -448,7 +448,7 @@ Item {
 
                         mapString : "arcTrailOWSPercent"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         textFieldWidth: 40
                         label1AnchorsleftMargin: 50
                         label1Text: "%"
@@ -462,7 +462,7 @@ Item {
 
                         mapString : "arcTrailOOWPercent"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         textFieldWidth: 40
                         label1AnchorsleftMargin: 50
                         label1Text: "%"
@@ -476,7 +476,7 @@ Item {
 
                         mapString : "arcTrailOTime"
 
-                        textFieldAnchorsleftMargin: 68
+                        textFieldAnchorsleftMargin: 72
                         textFieldWidth: 40
                         label1AnchorsleftMargin: 50
                         label1Text: "\u79d2"
@@ -491,7 +491,7 @@ Item {
                     x: trimLeadMode.x
                     y: trimLeadMode.y
                     controlWidth: 68
-                    controlAnchorsleftMargin: 67
+                    controlAnchorsleftMargin: 72
                     mapString: "trimTrailMode"
                     defaultString:""
                     onDataChanged: (s, text) => writeToBackend(s, text)
