@@ -77,64 +77,10 @@ Item {
             GroupItem {
                 x: 26
                 y: 74
-                MyEditLine2 {
-                    id: lm4
 
-                    mapString: "M4_Lead"
-                    x: 0
-                    y: 90
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-                }
 
-                MyEditLine2 {
-                    id: lm3
-                    x: 0
-                    y: 60
 
-                    mapString: "M3_Lead"
 
-                    labelText: "M3值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-                }
-
-                MyEditLine2 {
-                    id: lm2
-                    x: 0
-                    y: 30
-
-                    mapString: "M2_Lead"
-                    labelText: "M2值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-                }
-
-                MyEditLine2 {
-                    id: lm1
-                    x: 0
-                    y: 0
-
-                    mapString: "M1_Lead"
-
-                    labelText: "M1值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-
-                }
-
-                MyEditLine2 {
-                    id: lm
-                    x: 0
-                    y: -35
-
-                    mapString: "detaM_Lead"
-
-                    labelText: "M值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-
-                }
 
                 MyEditLine2 {
                     id: lf
@@ -147,23 +93,102 @@ Item {
                     textFieldWidth: 60
                     textFieldAnchorsleftMargin: 40
                 }
+                MyEditLine2 {
+                    id: lm
+                    x: 0
+                    y: -35
+
+                    mapString: "detaM_Lead"
+
+                    labelText: "M值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+
+                }
+                MyEditLine2 {
+                    id: lm1
+                    x: 0
+                    y: 0
+
+                    mapString: "M1_Lead"
+
+                    labelText: "M1值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+
+                }
+                MyEditLine2 {
+                    id: lm2
+                    x: 0
+                    y: 30
+
+                    mapString: "M2_Lead"
+                    labelText: "M2值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+                }
+                MyEditLine2 {
+                    id: lm3
+                    x: 0
+                    y: 60
+
+                    mapString: "M3_Lead"
+
+                    labelText: "M3值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+                }
+                MyEditLine2 {
+                    id: lm4
+
+                    mapString: "M4_Lead"
+                    x: 0
+                    y: 90
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+                }
             }
 
             GroupItem {
                 x: 187
                 y: 74
+
+
+
+
                 MyEditLine2 {
-                    id: lk4
+                    id: lk
                     x: 0
-                    y: 90
+                    y: lm.y
 
-                    mapString: "k4_Lead"
+                    mapString: "detaK_Lead"
 
-                    labelText: "K4值"
+                    labelText: "K值"
                     textFieldWidth: 60
                     textFieldAnchorsleftMargin: 40
                 }
+                MyEditLine2 {
+                    id: lk1
+                    x: 0
+                    y: 0
 
+                    mapString: "k1_Lead"
+
+                    labelText: "K1值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+                }
+                MyEditLine2 {
+                    id: lk2
+                    x: 0
+                    y: 30
+
+                    mapString: "k2_Lead"
+
+                    labelText: "K2值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+                }
                 MyEditLine2 {
                     id: lk3
                     x: 0
@@ -176,39 +201,14 @@ Item {
                     textFieldAnchorsleftMargin: 40
 
                 }
-
                 MyEditLine2 {
-                    id: lk2
+                    id: lk4
                     x: 0
-                    y: 30
+                    y: 90
 
-                    mapString: "k2_Lead"
+                    mapString: "k4_Lead"
 
-                    labelText: "K2值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-                }
-
-                MyEditLine2 {
-                    id: lk1
-                    x: 0
-                    y: 0
-
-                    mapString: "k1_Lead"
-
-                    labelText: "K1值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-                }
-
-                MyEditLine2 {
-                    id: lk
-                    x: 0
-                    y: lm.y
-
-                    mapString: "detaK_Lead"
-
-                    labelText: "K值"
+                    labelText: "K4值"
                     textFieldWidth: 60
                     textFieldAnchorsleftMargin: 40
                 }
@@ -336,67 +336,10 @@ Item {
             GroupItem {
                 x: 26
                 y: 74
-                MyEditLine2 {
-                    id: tm4
-                    x: 0
-                    y: 90
 
-                    mapString: "M4_Trail"
 
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
 
-                }
 
-                MyEditLine2 {
-                    id: tm3
-                    x: 0
-                    y: 60
-
-                    mapString: "M3_Trail"
-
-                    labelText: "M3值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-                }
-
-                MyEditLine2 {
-                    id: tm2
-                    x: 0
-                    y: 30
-
-                    mapString: "M2_Trail"
-
-                    labelText: "M2值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-
-                }
-
-                MyEditLine2 {
-                    id: tm1
-                    x: 0
-                    y: 0
-
-                    mapString: "M1_Trail"
-
-                    labelText: "M1值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-
-                }
-
-                MyEditLine2 {
-                    id: tm
-                    x: 0
-                    y: -35
-
-                    mapString: "detaM_Trail"
-
-                    labelText: "M值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-                }
 
                 MyEditLine2 {
                     id: tf
@@ -410,59 +353,71 @@ Item {
                     textFieldAnchorsleftMargin: 40
 
                 }
+                MyEditLine2 {
+                    id: tm
+                    x: 0
+                    y: -35
+
+                    mapString: "detaM_Trail"
+
+                    labelText: "M值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+                }
+                MyEditLine2 {
+                    id: tm1
+                    x: 0
+                    y: 0
+
+                    mapString: "M1_Trail"
+
+                    labelText: "M1值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+
+                }
+                MyEditLine2 {
+                    id: tm2
+                    x: 0
+                    y: 30
+
+                    mapString: "M2_Trail"
+
+                    labelText: "M2值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+
+                }
+                MyEditLine2 {
+                    id: tm3
+                    x: 0
+                    y: 60
+
+                    mapString: "M3_Trail"
+
+                    labelText: "M3值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+                }
+                MyEditLine2 {
+                    id: tm4
+                    x: 0
+                    y: 90
+
+                    mapString: "M4_Trail"
+
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+
+                }
             }
 
             GroupItem {
                 x: 187
                 y: 74
-                MyEditLine2 {
-                    id: tk4
-                    x: 0
-                    y: 90
 
-                    mapString: "k4_Trail"
 
-                    labelText: "K4值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-                }
 
-                MyEditLine2 {
-                    id: tk3
-                    x: 0
-                    y: 60
-
-                    mapString: "k3_Trail"
-
-                    labelText: "K3值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-                }
-
-                MyEditLine2 {
-                    id: tk2
-                    x: 0
-                    y: 30
-
-                    mapString: "k2_Trail"
-
-                    labelText: "K2值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-
-                }
-
-                MyEditLine2 {
-                    id: tk1
-                    x: 0
-                    y: 0
-
-                    mapString: "k1_Trail"
-
-                    labelText: "K1值"
-                    textFieldWidth: 60
-                    textFieldAnchorsleftMargin: 40
-                }
 
                 MyEditLine2 {
                     id: tk
@@ -475,6 +430,51 @@ Item {
                     textFieldWidth: 60
                     textFieldAnchorsleftMargin: 40
 
+                }
+                MyEditLine2 {
+                    id: tk1
+                    x: 0
+                    y: 0
+
+                    mapString: "k1_Trail"
+
+                    labelText: "K1值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+                }
+                MyEditLine2 {
+                    id: tk2
+                    x: 0
+                    y: 30
+
+                    mapString: "k2_Trail"
+
+                    labelText: "K2值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+
+                }
+                MyEditLine2 {
+                    id: tk3
+                    x: 0
+                    y: 60
+
+                    mapString: "k3_Trail"
+
+                    labelText: "K3值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
+                }
+                MyEditLine2 {
+                    id: tk4
+                    x: 0
+                    y: 90
+
+                    mapString: "k4_Trail"
+
+                    labelText: "K4值"
+                    textFieldWidth: 60
+                    textFieldAnchorsleftMargin: 40
                 }
             }
 
@@ -687,3 +687,9 @@ Item {
 }
 
 
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.5;height:410;width:794}
+}
+##^##*/
