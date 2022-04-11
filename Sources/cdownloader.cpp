@@ -58,7 +58,7 @@ void Downloader::get(const QString &path, const QString &fileName, QString metho
     if(method == "singleTable"){
         connect(pReply, SIGNAL(finished()), this, SLOT(singleTable1Finished()));
         connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleDownloadError(QNetworkReply::NetworkError)));
-        //connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(downloadProgress(qint64, qint64)));
+       // connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(downloadProgress(qint64, qint64)));
     }
 }
 
@@ -200,7 +200,7 @@ void Downloader::downloadFinished()
     file.close();
     qDebug()<<"finished"<<pReply->isFinished();
     pReply->deleteLater();
-    //manager.clearAccessCache();
+    manager.clearAccessCache();
 }
 
 void Downloader::singleTable1Finished()
@@ -208,6 +208,8 @@ void Downloader::singleTable1Finished()
     //QNetworkReply *pReply = qobject_cast<QNetworkReply *>(sender());
     switch (pReply->error()) {
     case QNetworkReply::NoError :
+        file.remove();
+        file.open(QIODevice::WriteOnly | QIODevice::Append);
         file.write(pReply->readAll());
         file.flush();
         file.close();

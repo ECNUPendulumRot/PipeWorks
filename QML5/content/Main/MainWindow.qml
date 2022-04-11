@@ -766,7 +766,7 @@ Rectangle {
             var downloadFlieName = "/" + ftpDialog.uploadName; // "/wp.db"
             console.log(ftpDialog.uploadName);
             setFTPConfig()
-            //scheduler.pushSelectedTable(passListView.currentIndex, tempName);//write
+            scheduler.pushSelectedTable(passListView.currentIndex, tempName);//write
             downloader.put(tempFileUrl, ftpDialog.uploadName, "singleTable"); //upload to remote
             }
     }
