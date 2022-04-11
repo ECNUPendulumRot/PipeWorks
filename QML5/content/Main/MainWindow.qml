@@ -18,7 +18,7 @@ Rectangle {
     height: 768
     property var errorMap: {"OperationCanceledError":"IP或端口错误，请检查FTP设置",
                            "AuthenticationRequiredError":"FTP账号密码错误，请检查FTP设置",
-                           "ContentNotFoundError" :"该文件在中控端不存在",
+                           "ContentNotFoundError" :"工艺文件在中控端不存在，请检查FTP设置",
                             "otherError":"出现了预料之外的错误",
                             "downloadConflict":"当前文件已存在且已打开，无法完成下载，请关闭当前文件后再执行下载",
                             "Saturday":"星期六",
@@ -150,10 +150,10 @@ Rectangle {
             horizontalOffset: 0
         }
         function getCurruntName(){
-            curFilename = "当前数据库文件:" + downloader.toLocal(fileDialog.curruntFileUrl)
+            curFilename = "当前工艺文件:" + downloader.toLocal(fileDialog.curruntFileUrl)
         }
         function clearCurruntName(){
-             curFilename = "当前数据库文件"
+             curFilename = "当前工艺文件:无"
         }
     }
 
@@ -553,7 +553,7 @@ Rectangle {
         id: downloadFile
         //selectFolder : true
         nameFilters:["Datase files(*.db)"]
-        folder: shortcuts.home
+        //folder: shortcuts.home
         onAccepted: downloadfile()
         selectExisting: false
     }

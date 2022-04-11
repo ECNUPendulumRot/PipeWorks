@@ -46,7 +46,7 @@ Rectangle {
         color: "#000000"
         font.pixelSize: 14
         anchors.verticalCenterOffset: 0
-        text: qsTr("当前数据库文件:")
+        text: qsTr("当前工艺文件:")
         anchors.left: connectionLight.right
         anchors.leftMargin: 208
         anchors.verticalCenter: parent.verticalCenter
