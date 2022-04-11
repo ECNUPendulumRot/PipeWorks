@@ -83,7 +83,7 @@ function(channel){
                 chart.options.plugins.dragData.dragY = false;
             else
                 chart.options.plugins.dragData.dragY = true;
-            chart.update();
+            chart.update();//两张数据一样的表的切换bug处理
         }
         else{
             //webobj.angleDatas = someText;
@@ -95,6 +95,7 @@ function(channel){
 
             updataCharts(chart, datasetsEle, configure);
             chart.options.animation = true;
+            chart.update();
         }
 
     });
@@ -243,7 +244,7 @@ function loadingData(singleNum, configure, isLock){
 function createEmptyChart(){
     var chartSetting = {
         type: 'scatter',
-//        data: {
+//        data: {},
 //        "datasets": datasetsEle
 //        },
         options: {

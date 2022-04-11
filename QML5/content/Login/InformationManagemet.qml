@@ -53,7 +53,6 @@ Rectangle {
         title: "用户名"
         //inputText.echoMode: TextInput.Password
         inputText.onAccepted: userVerify()
-
         inputText.focus: true
         KeyNavigation.tab: inputOldPw.inputText
     }

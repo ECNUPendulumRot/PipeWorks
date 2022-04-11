@@ -12,7 +12,6 @@ Item {
     property alias labelFontSize: name.font.pixelSize
     property alias inputFontSize: textArea.font.pixelSize
     property string title
-
     Text {
         id: name
         x: 0
@@ -133,7 +132,7 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;height:75;width:350}D{i:11;transitionDuration:2000}
+    D{i:0;height:75;width:350}D{i:1}D{i:3}D{i:2}D{i:11;transitionDuration:2000}
 }
 ##^##*/
 

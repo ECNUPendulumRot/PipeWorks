@@ -422,7 +422,7 @@ Rectangle {
         id: singleTableSubmit
         x: 1226
         y: 631
-        btnText: "传单焊道"
+        btnText: "上传显示焊道"
         anchors{
           right: parent.right
           bottom: parent.bottom
