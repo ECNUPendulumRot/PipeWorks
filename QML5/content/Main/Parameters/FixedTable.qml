@@ -158,7 +158,7 @@ Item {
                     label1AnchorsleftMargin: 50
                     label1Text: ""
                     textFieldAnchorsleftMargin: 68
-                    labelText: "电流值/m"
+                    labelText: "电流值/毫米"
 
                     onDataChanged: (s, text) => writeToBackend(s, text)
                 }
@@ -388,7 +388,7 @@ Item {
                     label1AnchorsleftMargin: 50
                     mapString: "HRatioTrail"
                     textFieldAnchorsleftMargin: 68
-                    labelText: "电流值/m"
+                    labelText: "电流值/毫米"
 
                     onDataChanged: (s, text) => writeToBackend(s, text)
                 }
