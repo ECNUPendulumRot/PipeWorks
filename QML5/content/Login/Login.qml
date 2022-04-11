@@ -130,7 +130,7 @@ Item {
                 }
                 opacity: enabled ? 1.0 : 0.3
                 color: "#ffffff"
-                text: qsTr("2022 (v1.2) Windows7/10")
+                text: qsTr("2022 (v1.3) Windows7/10")
                 font.pixelSize: 14
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
