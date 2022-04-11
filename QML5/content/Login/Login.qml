@@ -282,6 +282,12 @@ Item {
     property var objectMainWindow : null
     property var objectIM : null
 
+    onObjectIMChanged: {
+        if(objectIM === null){
+            inputID.inputText.forceActiveFocus()
+        }
+    }
+
     function userLogin(){
         if(inputID.inputText.text === "")
             errorMsg.text = "你还没有输入用户名"
@@ -322,6 +328,8 @@ Item {
         window.visible = true
     }
 
+
+
     function createInformationManagement(){
         objectIM = Qt.createQmlObject(
                    'import QtQuick 2.15
@@ -333,16 +341,23 @@ Item {
                      InformationManagemet {
                         id : im
 
+
+                   
+
                         x: content.x
                         y: content.y
+                    Component.onCompleted: inputID.inputText.forceActiveFocus();
                      }
+
                      ',
+
                     background)
         //check();
         window.w = 800
         window.h = 600
         window.visible = true
     }
+
 
     function check(){
         if(scheduler.getAuthority() === 1){

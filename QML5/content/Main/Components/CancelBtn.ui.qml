@@ -4,7 +4,7 @@ import QtQuick.Studio.Effects 1.0
 
 Button {
     id: control
-    width: 120
+    width: 140
     height: 30
 
     leftPadding: 4

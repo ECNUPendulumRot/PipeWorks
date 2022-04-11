@@ -106,6 +106,8 @@ Item {
             anchors.left: text1.right
             anchors.top: text1.top
             anchors.leftMargin: 20
+            input.focus: true
+
         }
 
         MessageLine {
@@ -386,3 +388,11 @@ Item {
 
 
 
+
+/*##^##
+Designer {
+    D{i:0;height:195;width:530}D{i:1}D{i:3}D{i:4}D{i:5}D{i:6}D{i:7}D{i:8}D{i:9}D{i:10}
+D{i:11}D{i:12}D{i:13}D{i:14}D{i:15}D{i:16}D{i:17}D{i:18}D{i:19}D{i:20}D{i:21}D{i:22}
+D{i:2}
+}
+##^##*/

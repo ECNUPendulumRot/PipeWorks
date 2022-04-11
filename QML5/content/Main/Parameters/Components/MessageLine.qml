@@ -13,7 +13,7 @@ Rectangle {
     property alias inputColor: textField.color
     property alias inputText: textField.text
     property alias text7Text: text7.text
-
+    property alias input: textField
     property string permission : "true"
 
     property alias row : textField.row
