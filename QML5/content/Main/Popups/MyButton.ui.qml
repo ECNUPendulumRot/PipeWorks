@@ -23,7 +23,7 @@ Button {
     property alias buttonBackgroundColor: buttonBackground.color
 
     state: ""
-
+    activeFocusOnTab: false
     background: buttonBackground
     Rectangle {
         id: buttonBackground
@@ -67,7 +67,7 @@ Button {
     states: [
         State {
             name: "hover"
-            when: (!control.pressed && control.hovered) || control.activeFocus
+            when: !control.pressed && control.hovered
 
             PropertyChanges {
                 target: cover
@@ -88,7 +88,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.5}D{i:3}D{i:1}D{i:4}
+    D{i:0;formeditorZoom:1.5;height:30;width:100}
 }
 ##^##*/
 
