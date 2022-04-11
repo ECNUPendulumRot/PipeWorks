@@ -62,7 +62,7 @@ Button {
     states: [
         State {
             name: "pressed"
-            when: control.pressed
+            when: control.pressed || control.activeFocus
 
             PropertyChanges {
                 target: pressRec
