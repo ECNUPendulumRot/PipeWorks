@@ -68,6 +68,15 @@ Button {
                 target: pressRec
                 color: "#7a959595"
             }
+        },
+        State {
+            name: "hover"
+            when: control.hovered && !control.pressed
+
+            PropertyChanges {
+                target: pressRec
+                color: "#3a959595"
+            }
         }
     ]
 }
