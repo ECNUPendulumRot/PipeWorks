@@ -83,17 +83,6 @@ Popup{
         }
 
         TextField {
-            id: user
-            text: ""
-
-            x: 74
-            y: 111
-            width: 299
-            height: 20
-            font.pixelSize: 14
-        }
-
-        TextField {
             id: port
             text: ""
 
@@ -105,6 +94,19 @@ Popup{
         }
 
         TextField {
+            id: user
+            text: ""
+
+            x: 74
+            y: 111
+            width: 299
+            height: 20
+            font.pixelSize: 14
+        }
+
+
+
+        TextField {
             id: password
             text: ""
 
@@ -112,6 +114,16 @@ Popup{
             y: 158
             width: 299
             height: 20
+            font.pixelSize: 14
+        }
+
+        TextField {
+            id: uploadName
+            x: 74
+            y: 205
+            width: 299
+            height: 20
+            text: ""
             font.pixelSize: 14
         }
 
@@ -151,15 +163,7 @@ Popup{
             font.pixelSize: 14
         }
 
-        TextField {
-            id: uploadName
-            x: 74
-            y: 205
-            width: 299
-            height: 20
-            text: ""
-            font.pixelSize: 14
-        }
+
 
         Text {
             id: text6

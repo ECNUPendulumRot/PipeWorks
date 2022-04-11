@@ -71,3 +71,10 @@ Button {
         }
     ]
 }
+
+/*##^##
+Designer {
+    D{i:0;height:24;width:70}D{i:3}D{i:1}D{i:4}
+}
+##^##*/
+
