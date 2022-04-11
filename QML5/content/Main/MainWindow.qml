@@ -242,7 +242,11 @@ Rectangle {
                 confirmBtn.text: "确定"
                 cancelBtn.onClicked: disconnectDialog.close()
 
-                confirmBtn.onClicked: disconnect();
+                confirmBtn.onClicked: {
+                    disconnect();
+                    disconnectDialog.close()
+
+                }
             }
 
             uploadBtn.onClicked: {
@@ -275,7 +279,10 @@ Rectangle {
                 confirmBtn.text: "确定"
                 cancelBtn.onClicked: saveAsDialog.close()
 
-                confirmBtn.onClicked: saveDialog.open();
+                confirmBtn.onClicked: {
+                    saveDialog.open();
+                    saveAsDialog.close();
+                }
             }
 
             downloadBtn.onClicked: {
@@ -370,7 +377,6 @@ Rectangle {
 
                     dbCancelDialog.close()
                 }
-
             }
         }
     }
