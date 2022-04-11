@@ -646,6 +646,11 @@ Item {
                     label5Text: "收弧距离"
 
                     onDataChanged: (s, text) => writeToBackend(s, text)
+
+                    textField.onActiveFocusChanged: {
+                        if(!textField.activeFocus)
+                            hRatioLead.textField.focus = true;
+                    }
                 }
             }
         }
