@@ -98,7 +98,7 @@ Item {
         }
 
         MessageLine {
-            id: qcode
+            id: qrCode
             x: 105
             y: 21
             width: 140
@@ -114,8 +114,8 @@ Item {
             id: angles
             x: 105
             y: 51
-            anchors.left: qcode.left
-            anchors.top: qcode.bottom
+            anchors.left: qrCode.left
+            anchors.top: qrCode.bottom
         }
 
         MessageLine {
@@ -144,11 +144,11 @@ Item {
         }
 
         MessageLine {
-            id: qcode1
+            id: qrCode1
             x: 245
             y: 21
-            anchors.left: qcode.right
-            anchors.top: qcode.top
+            anchors.left: qrCode.right
+            anchors.top: qrCode.top
             anchors.topMargin: 0
             text7Text: "波特率"
         }
@@ -157,8 +157,8 @@ Item {
             id: angles1
             x: 245
             y: 51
-            anchors.left: qcode1.left
-            anchors.top: qcode1.bottom
+            anchors.left: qrCode1.left
+            anchors.top: qrCode1.bottom
             anchors.topMargin: 0
             text7Text: "波特率"
         }
@@ -193,11 +193,11 @@ Item {
         }
 
         MessageLine {
-            id: qcode2
+            id: qrCode2
             x: 385
             y: 21
-            anchors.left: qcode1.right
-            anchors.top: qcode1.top
+            anchors.left: qrCode1.right
+            anchors.top: qrCode1.top
             text7Text: "频率"
         }
 
@@ -205,8 +205,8 @@ Item {
             id: angles2
             x: 385
             y: 51
-            anchors.left: qcode2.left
-            anchors.top: qcode2.bottom
+            anchors.left: qrCode2.left
+            anchors.top: qrCode2.bottom
             anchors.topMargin: 0
             text7Text: "频率"
         }
@@ -280,15 +280,15 @@ Item {
         motion2.inputText =  comFTableModel.fixedTablePopData(3, "ComFreq");
 
 
-        qcode.inputText =  comFTableModel.fixedTablePopData(4, "ComAdress").toUpperCase();
-        qcode1.inputText =   comFTableModel.fixedTablePopData(4, "ComBaudrate");
-        qcode2.inputText = comFTableModel.fixedTablePopData(4, "ComFreq");
+        qrCode.inputText =  comFTableModel.fixedTablePopData(4, "ComAdress").toUpperCase();
+        qrCode1.inputText =   comFTableModel.fixedTablePopData(4, "ComBaudrate");
+        qrCode2.inputText = comFTableModel.fixedTablePopData(4, "ComFreq");
     }
 
     function  writeInData(){
-        comFTableModel.callSetData(4,2,qcode.inputText);
-        comFTableModel.callSetData(4,3,qcode1.inputText);
-        comFTableModel.callSetData(4,4,qcode2.inputText);
+        comFTableModel.callSetData(4,2,qrCode.inputText);
+        comFTableModel.callSetData(4,3,qrCode1.inputText);
+        comFTableModel.callSetData(4,4,qrCode2.inputText);
 
         comFTableModel.callSetData(0,2,angles.inputText);
         comFTableModel.callSetData(0,3,angles1.inputText);
@@ -326,16 +326,16 @@ Item {
         motion2.inputText       = "";
 
 
-        qcode.inputText         = "";
-        qcode1.inputText        = "";
-        qcode2.inputText        = "";
+        qrCode.inputText         = "";
+        qrCode1.inputText        = "";
+        qrCode2.inputText        = "";
 
     }
 
     function getColor(){
-        qcode.inputColor = comFTableModel.callIsDirty(4,2)?"#cc5555":"#0d0d0d";
-        qcode1.inputColor = comFTableModel.callIsDirty(4,3)?"#cc5555":"#0d0d0d";
-        qcode2.inputColor = comFTableModel.callIsDirty(4,4)?"#cc5555":"#0d0d0d";
+        qrCode.inputColor = comFTableModel.callIsDirty(4,2)?"#cc5555":"#0d0d0d";
+        qrCode1.inputColor = comFTableModel.callIsDirty(4,3)?"#cc5555":"#0d0d0d";
+        qrCode2.inputColor = comFTableModel.callIsDirty(4,4)?"#cc5555":"#0d0d0d";
 
         angles.inputColor = comFTableModel.callIsDirty(0,2)?"#cc5555":"#0d0d0d";
         angles1.inputColor = comFTableModel.callIsDirty(0,3)?"#cc5555":"#0d0d0d";
@@ -372,9 +372,9 @@ Item {
         motion2.permission       =  "false";
 
 
-        qcode.permission         =  "false";
-        qcode1.permission        =  "false";
-        qcode2.permission        =  "false";
+        qrCode.permission         =  "false";
+        qrCode1.permission        =  "false";
+        qrCode2.permission        =  "false";
     }
 }
 

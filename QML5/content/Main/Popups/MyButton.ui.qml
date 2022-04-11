@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.12
 import QtQuick.Studio.Effects 1.0
 
@@ -67,7 +67,7 @@ Button {
     states: [
         State {
             name: "hover"
-            when: !control.pressed && control.hovered
+            when: (!control.pressed && control.hovered) || control.activeFocus
 
             PropertyChanges {
                 target: cover

@@ -1,9 +1,9 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "../Parameters"
 
 Popup {
-    id: motionPop
+    id: commPop
     width: backgroundRec.width
     height: backgroundRec.height
 
@@ -47,21 +47,23 @@ Popup {
         anchors.topMargin: 15
         anchors.rightMargin: 0
 
+
+
         MyButton {
-            id: confirm
-            text: "取消"
+            id: apply
+            x: 20
+            text: "保存"
             anchors.verticalCenter: parent.verticalCenter
-            anchors.right: parent.right
-            buttonBackgroundColor: "#9c9c9c"
+            anchors.right: cancel.left
+            anchors.rightMargin: 15
+            buttonBackgroundColor: "#4870ca"
             textItemColor: "#e5e5e5"
-            buttonBackgroundBordercolor: "#c7c7c7"
-            z: -1
 
             onClicked: {
-                            close();
-                    }
+                if(scheduler.isPdbLoaded())
+                    write()
+            }
         }
-
         MyButton {
             id: cancel
             text: "撤销"
@@ -78,20 +80,18 @@ Popup {
                 }
             }
         }
-
         MyButton {
-            id: apply
-            x: 20
-            text: "保存"
+            id: confirm
+            text: "取消"
             anchors.verticalCenter: parent.verticalCenter
-            anchors.right: cancel.left
-            anchors.rightMargin: 15
-            buttonBackgroundColor: "#4870ca"
+            anchors.right: parent.right
+            buttonBackgroundColor: "#9c9c9c"
             textItemColor: "#e5e5e5"
+            buttonBackgroundBordercolor: "#c7c7c7"
+            z: -1
 
             onClicked: {
-                if(scheduler.isPdbLoaded())
-                    write()
+                close();
             }
         }
     }

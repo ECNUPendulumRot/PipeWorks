@@ -13,7 +13,7 @@ Scheduler::Scheduler(QObject *parent): QObject{parent}
     engine  = nullptr;
     status  = false;
 
-    qDebug()<<QCoreApplication::applicationDirPath();
+    //qDebug()<<QCoreApplication::applicationDirPath();
 }
 
 

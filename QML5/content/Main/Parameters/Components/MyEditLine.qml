@@ -14,6 +14,7 @@ Rectangle {
     color: "#00202020"
     border.color: "#ffffff"
     border.width: 0
+    property alias textField: textField
     property alias textFieldRectangle1Color: textField.rectangle1Color
     property alias textFieldAnchorsleftMargin: textField.anchors.leftMargin
     property alias textFieldWidth: textField.width
@@ -54,7 +55,7 @@ Rectangle {
         rectangle1Color: "#ffffff"
         anchors.verticalCenterOffset: 0
 
-        onAccepted: {
+        onEditingFinished: {
             textField.focus = false
             control.dataChanged(control.mapString, textField.text);
         }
@@ -97,6 +98,6 @@ Rectangle {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.9;height:30;width:260}
+    D{i:0;height:30;width:260}
 }
 ##^##*/

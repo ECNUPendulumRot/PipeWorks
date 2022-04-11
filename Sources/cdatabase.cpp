@@ -35,7 +35,7 @@ bool Database::createConnection(QString filename, QString type, QString pw)
     this->status = db.open();
 
     if (this->status){
-        qDebug() << "connected";
+        //qDebug() << "connected";
         return true;
     }
     else
@@ -57,7 +57,7 @@ bool Database::closeDatabase()
 {
     if(this->db.isOpen()){
         this->db.close();
-        qDebug() << "closed";
+        //qDebug() << "closed";
         return true;
     }else{
         return false;

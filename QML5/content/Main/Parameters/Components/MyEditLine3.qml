@@ -10,6 +10,7 @@ Rectangle {
     color: "#00ffffff"
     border.color: "#ffffff"
     border.width: 0
+    property alias textField: textField
     property alias textFieldText: textField.text
     property alias textFieldColor: textField.color
 
@@ -52,7 +53,7 @@ Rectangle {
 
         anchors.verticalCenterOffset: 0
 
-        onAccepted: {
+        onEditingFinished:  {
             textField.focus = false
             control.dataChanged(control.mapString, textField.text);
         }

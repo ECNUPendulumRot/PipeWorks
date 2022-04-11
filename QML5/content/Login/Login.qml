@@ -15,13 +15,26 @@ Item {
         border.color: "#707070"
         border.width: 0
         anchors.fill: parent
+        anchors.rightMargin: 5
+        anchors.leftMargin: 5
+        anchors.bottomMargin: 5
+        anchors.topMargin: 5
+        layer.enabled: true
+        layer.effect: DropShadowEffect {
+            id: dropShadow2
+            color: "#c8707070"
+            radius: 8
+            verticalOffset: 0
+            horizontalOffset: 0
+            spread: 0.2
+        }
 
         Rectangle {
             id: rectangle
             x: 0
             y: 0
             width: 320
-            height: 600
+            height: background.height
             opacity: 1
             color: "#0166bb"
             border.color: "#707070"
@@ -328,14 +341,17 @@ Item {
                      InformationManagemet {
                         id : im
 
-                        x: 362
-                        y: 50
+
+                   
+
+                        x: content.x
+                        y: content.y
                     Component.onCompleted: inputID.inputText.forceActiveFocus();
                      }
 
                      ',
-                    loginWindow)
-        //inputID.inputText.forceActiveFocus();
+
+                    background)
         //check();
         window.w = 800
         window.h = 600
@@ -355,3 +371,11 @@ Item {
 
 
 
+
+
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.5}
+}
+##^##*/

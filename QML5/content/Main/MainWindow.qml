@@ -221,7 +221,28 @@ Rectangle {
 
             disconnectBtn.onClicked:{
                 popupDb.close();
-                disconnect();
+
+                if(scheduler.isPdbLoaded())
+                    disconnectDialog.open();
+            }
+
+            InfoDialog {
+                id: disconnectDialog
+
+                parent: Overlay.overlay
+                x: (parent.width - disconnectDialog.width)/2
+                y: (parent.height - disconnectDialog.height)/2
+                title: "您确定要关闭吗"
+                text.text: "未保存的修改将会失效，您确定要继续吗"
+                text.color: "#202020"
+
+                imageSource: "../images/caution.png"
+
+                cancelBtn.text: "取消"
+                confirmBtn.text: "确定"
+                cancelBtn.onClicked: disconnectDialog.close()
+
+                confirmBtn.onClicked: disconnect();
             }
 
             uploadBtn.onClicked: {
@@ -234,10 +255,27 @@ Rectangle {
             }
 
             saveAsBtn.onClicked: {
-                if(scheduler.isPdbLoaded()){
-                    popupDb.close();
-                    saveDialog.open();
-                }
+                popupDb.close();
+                if(scheduler.isPdbLoaded())
+                    saveAsDialog.open();
+            }
+            InfoDialog {
+                id: saveAsDialog
+
+                parent: Overlay.overlay
+                x: (parent.width - saveAsDialog.width)/2
+                y: (parent.height - saveAsDialog.height)/2
+                title: "您确定要保存吗"
+                text.text: "保存的副本将不会包含未提交的修改，您确定要继续吗"
+                text.color: "#202020"
+
+                imageSource: "../images/caution.png"
+
+                cancelBtn.text: "取消"
+                confirmBtn.text: "确定"
+                cancelBtn.onClicked: saveAsDialog.close()
+
+                confirmBtn.onClicked: saveDialog.open();
             }
 
             downloadBtn.onClicked: {
@@ -305,6 +343,7 @@ Rectangle {
         anchors.horizontalCenter: myButton3.horizontalCenter
         anchors.bottomMargin: 62
         z: 3
+        onClicked:if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbCancelDialog.open()
 
         InfoDialog {
             id: dbCancelDialog
@@ -334,8 +373,6 @@ Rectangle {
 
             }
         }
-
-        onClicked:if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbCancelDialog.open()
     }
 
     SubmitBtn {
@@ -349,6 +386,9 @@ Rectangle {
         }
         z: 3
         imgSrc: "../images/SinglePass.png"
+
+        onClicked: if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbSubmitDialog.open()
+
         InfoDialog {
             id: dbSubmitDialog
 
@@ -376,8 +416,6 @@ Rectangle {
                 }
             }
         }
-
-        onClicked: if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbSubmitDialog.open()
     }
 
     SubmitBtn {
@@ -426,12 +464,6 @@ Rectangle {
             z:3
 
             closePolicy: Popup.CloseOnReleaseOutsideParent
-
-            closeBtn.onClicked: {
-                logoutPopup.close();
-                pwPopup.open();
-
-            }
 
             logoutBtn.onClicked:{
                 logoutPopup.close();
@@ -666,53 +698,6 @@ Rectangle {
         function clear(){
             title =  "正在上传中..."
             completeBtn.visible = false
-        }
-    }
-
-
-    Popup {
-        id: pwPopup
-
-        x: (root.width - pwPopup.width)/2
-        y: (root.height - pwPopup.height)/2
-
-        width: 400
-        height: 500
-
-        modal: true
-
-        closePolicy: Popup.NoAutoClose
-
-        Overlay.modal: Rectangle {
-            color: "#c0515151"
-        }
-
-        background: bg
-        Rectangle {
-            id:bg
-            anchors.fill: parent
-            color: "transparent"
-            border.width: 0
-        }
-
-        InformationManagemet {
-            id: im
-            anchors.centerIn: parent
-            radius: 8
-            z: 1
-            back.onClicked: pwPopup.close();
-            confirm.onClicked:{
-                if(userVerify()){
-                    if(pwVerify()){
-                        if(pwUpdate(inputID.inputText.text,inputOldPw.inputText.text,inputNewPw.inputText.text)){
-                            errorMsg.text = "密码修改成功！";
-                            pwPopup.close();
-                        }
-                        else
-                            errorMsg.text = "密码修改失败，请检查是否符合规范";
-                    }
-                }
-            }
         }
     }
 
