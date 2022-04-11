@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
     QDir dir(QCoreApplication::applicationDirPath().append("/Database"));
     if(!dir.exists())
         dir.mkpath(".");
-    qDebug()<<QFile::copy(":/Database/Users.db", QCoreApplication::applicationDirPath().append("/Database/Users.db"));
-    qDebug()<<QFile::copy(":/Database/ftpconfig.config", QCoreApplication::applicationDirPath().append("/Database/ftpconfig.config"));
+    QFile::copy(":/Database/Users.db", QCoreApplication::applicationDirPath().append("/Database/Users.db"));
+    QFile::copy(":/Database/ftpconfig.config", QCoreApplication::applicationDirPath().append("/Database/ftpconfig.config"));
 
     Scheduler s;
 
