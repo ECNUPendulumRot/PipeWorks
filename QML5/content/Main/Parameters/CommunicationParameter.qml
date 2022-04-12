@@ -111,39 +111,6 @@ Item {
         }
 
         MessageLine {
-            id: angles
-            x: 105
-            y: 51
-            anchors.left: qrCode.left
-            anchors.top: qrCode.bottom
-        }
-
-        MessageLine {
-            id: captureCard
-            x: 105
-            y: 81
-            anchors.left: angles.left
-            anchors.top: angles.bottom
-        }
-
-        MessageLine {
-            id: box
-            x: 105
-            y: 111
-            anchors.left: captureCard.left
-            anchors.top: captureCard.bottom
-        }
-
-        MessageLine {
-            id: motion
-            x: 105
-            y: 141
-            anchors.left: box.left
-            anchors.top: box.bottom
-            anchors.topMargin: 0
-        }
-
-        MessageLine {
             id: qrCode1
             x: 245
             y: 21
@@ -151,6 +118,23 @@ Item {
             anchors.top: qrCode.top
             anchors.topMargin: 0
             text7Text: "波特率"
+        }
+
+        MessageLine {
+            id: qrCode2
+            x: 385
+            y: 21
+            anchors.left: qrCode1.right
+            anchors.top: qrCode1.top
+            text7Text: "频率"
+        }
+
+        MessageLine {
+            id: angles
+            x: 105
+            y: 51
+            anchors.left: qrCode.left
+            anchors.top: qrCode.bottom
         }
 
         MessageLine {
@@ -164,44 +148,6 @@ Item {
         }
 
         MessageLine {
-            id: captureCard1
-            x: 245
-            y: 81
-            anchors.left: angles1.left
-            anchors.top: angles1.bottom
-            text7Text: "波特率"
-        }
-
-        MessageLine {
-            id: box1
-            x: 245
-            y: 111
-            anchors.left: captureCard1.left
-            anchors.top: captureCard1.bottom
-            text7Text: "波特率"
-            anchors.topMargin: 0
-        }
-
-        MessageLine {
-            id: motion1
-            x: 245
-            y: 141
-            anchors.left: box1.left
-            anchors.top: box1.bottom
-            text7Text: "波特率"
-            anchors.topMargin: 0
-        }
-
-        MessageLine {
-            id: qrCode2
-            x: 385
-            y: 21
-            anchors.left: qrCode1.right
-            anchors.top: qrCode1.top
-            text7Text: "频率"
-        }
-
-        MessageLine {
             id: angles2
             x: 385
             y: 51
@@ -209,6 +155,23 @@ Item {
             anchors.top: qrCode2.bottom
             anchors.topMargin: 0
             text7Text: "频率"
+        }
+
+        MessageLine {
+            id: captureCard
+            x: 105
+            y: 81
+            anchors.left: angles.left
+            anchors.top: angles.bottom
+        }
+
+        MessageLine {
+            id: captureCard1
+            x: 245
+            y: 81
+            anchors.left: angles1.left
+            anchors.top: angles1.bottom
+            text7Text: "波特率"
         }
 
         MessageLine {
@@ -222,6 +185,24 @@ Item {
         }
 
         MessageLine {
+            id: box
+            x: 105
+            y: 111
+            anchors.left: captureCard.left
+            anchors.top: captureCard.bottom
+        }
+
+        MessageLine {
+            id: box1
+            x: 245
+            y: 111
+            anchors.left: captureCard1.left
+            anchors.top: captureCard1.bottom
+            text7Text: "波特率"
+            anchors.topMargin: 0
+        }
+
+        MessageLine {
             id: box2
             x: 385
             y: 111
@@ -230,6 +211,33 @@ Item {
             anchors.topMargin: 0
             text7Text: "频率"
         }
+
+        MessageLine {
+            id: motion
+            x: 105
+            y: 141
+            anchors.left: box.left
+            anchors.top: box.bottom
+            anchors.topMargin: 0
+        }
+
+
+
+
+
+        MessageLine {
+            id: motion1
+            x: 245
+            y: 141
+            anchors.left: box1.left
+            anchors.top: box1.bottom
+            text7Text: "波特率"
+            anchors.topMargin: 0
+        }
+
+
+
+
 
         MessageLine {
             id: motion2
@@ -391,8 +399,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;height:195;width:530}D{i:1}D{i:3}D{i:4}D{i:5}D{i:6}D{i:7}D{i:8}D{i:9}D{i:10}
-D{i:11}D{i:12}D{i:13}D{i:14}D{i:15}D{i:16}D{i:17}D{i:18}D{i:19}D{i:20}D{i:21}D{i:22}
-D{i:2}
+    D{i:0;formeditorZoom:0.66;height:195;width:530}
 }
 ##^##*/
