@@ -152,8 +152,8 @@ Rectangle{
             implicitWidth: control.width
             implicitHeight: control.height
             color: control.pressed ? "#D3D3D3" : "#ffffff"
-            border.color: "#D3D3D3"
-            border.width: control.visualFocus ? 2 : 1
+            border.color: control.activeFocus ? "#1c76c2" : "#D3D3D3"
+            border.width: 1
             radius: 4
             layer.enabled: true
         }
