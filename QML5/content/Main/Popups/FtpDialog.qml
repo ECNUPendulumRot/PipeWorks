@@ -5,8 +5,8 @@ import QtQuick.Controls 2.15
 Popup{
 
     id: control
-    width:400
-    height:350
+    width:420
+    height:380
     property alias cancelBtn: cancelBtn
     property alias confirmBtn: confirmBtn
     property alias ip: ipaddress.text
@@ -31,8 +31,8 @@ Popup{
         ConfirmBtn {
             id: confirmBtn
 
-            x: 202
-            y: 305
+            x: 223
+            y: 316
 
             width: 70
             height: 24
@@ -43,9 +43,9 @@ Popup{
             textItemColor: "#f6f6f6"
             buttonBackgroundColor: "#3b7ecc"
 
-            anchors.rightMargin: 128
+            anchors.rightMargin: 127
 
-            anchors.bottomMargin: 21
+            anchors.bottomMargin: 40
         }
 
         ConfirmBtn {
@@ -217,6 +217,6 @@ Popup{
 /*##^##
 Designer {
     D{i:0;formeditorZoom:1.25}D{i:2}D{i:3}D{i:4}D{i:5}D{i:6}D{i:7}D{i:8}D{i:9}D{i:10}
-D{i:11}D{i:12}D{i:13}D{i:1}D{i:14}
+D{i:11}D{i:12}D{i:13}D{i:14}D{i:1}D{i:15}
 }
 ##^##*/
