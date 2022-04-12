@@ -11,7 +11,7 @@ Rectangle {
     Text {
         id: connectionStatusTitle
         color: "#000000"
-        text: qsTr("工艺数据连接状态:")
+        text: qsTr("工艺文件打开状态:")
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 15
@@ -34,7 +34,7 @@ Rectangle {
         id: statusText
         color: "#000000"
         font.pixelSize: 14
-        text: qsTr("未连接")
+        text: qsTr("未打开")
         anchors.left: connectionLight.right
         anchors.leftMargin: 10
         anchors.verticalCenter: parent.verticalCenter
@@ -79,6 +79,9 @@ Rectangle {
         width: syncText.height + 5
         height: width
         radius: width/2
+
+        visible: false
+
         anchors.left: connectionLight.right
         anchors.leftMargin: 546
         anchors.verticalCenter: parent.verticalCenter
@@ -90,6 +93,8 @@ Rectangle {
         color: "#000000"
         font.pixelSize: 14
         text: qsTr("未打开工艺文件")
+
+        visible: false
 
         anchors.left: syncLight.right
         anchors.leftMargin: 10
@@ -130,11 +135,11 @@ Rectangle {
     function monitorDb(){
         if(scheduler.isPdbLoaded()){
             connectionLight.color = "#00ff00"
-            statusText.text= "连接成功"
+            statusText.text= "打开成功"
         }
         else{
             connectionLight.color = "#ff0000"
-            statusText.text= "未连接"
+            statusText.text= "未打开"
         }
     }
 
@@ -143,6 +148,8 @@ Rectangle {
         var unsync =  "#f4f42f"
         var unconnect =  "#ff0000"
         if(scheduler.isPdbLoaded()){//db is load)
+            syncLight.visible = true;
+            syncText.visible = true;
             if(scheduler.callIsDirty()){
                 syncLight.color = unsync
                 syncText.text = "修改后的数据未提交"
@@ -153,8 +160,10 @@ Rectangle {
             }
         }
         else{
-            syncLight.color = unconnect
-            syncText.text = "未打开工艺文件"
+            syncLight.visible = false;
+            syncText.visible = false;
+//            syncLight.color = unconnect
+//            syncText.text = "未打开工艺文件"
         }
 
     }

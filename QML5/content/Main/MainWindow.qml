@@ -17,14 +17,13 @@ Rectangle {
     border.width: 1
     width: 1366
     height: 768
-    property var errorMap: {"OperationCanceledError":"IP或端口错误，请检查FTP设置",
-                           "AuthenticationRequiredError":"FTP账号密码错误，请检查FTP设置",
-                           "ContentNotFoundError" :"工艺文件在中控端不存在，请检查FTP设置",
-                            "otherError":"出现了预料之外的错误",
-                            "downloadConflict":"当前文件已存在且已打开，无法完成下载，请关闭当前文件后再执行下载",
-                            "Saturday":"星期六",
-                            "Sunday":"星期日"}
-    //property var angleTableContainer : null
+    property var errorMap: { "OperationCanceledError":"IP或端口错误，请检查FTP设置",
+                             "AuthenticationRequiredError":"FTP账号密码错误，请检查FTP设置",
+                             "ContentNotFoundError" :"工艺文件在中控端不存在，请检查FTP设置",
+                             "otherError":"出现了预料之外的错误",
+                             "downloadConflict":"当前文件已存在且已打开，无法完成下载，请关闭当前文件后再执行下载",
+                             "Saturday":"星期六",
+                             "Sunday":"星期日"}
 
     Rectangle {
         id: webEngineWrapper
@@ -130,7 +129,6 @@ Rectangle {
         onPassListRequestRefreshcombobx: selectCombobx.cmbBxParameterSelect()
 
         onPassListRequestFixTableRefresh: i => fixedTable.fixedTableRefreshData(i)
-
     }
 
     StatusBar {
@@ -154,7 +152,7 @@ Rectangle {
             curFilename = "当前工艺文件:" + downloader.toLocal(fileDialog.curruntFileUrl)
         }
         function clearCurruntName(){
-             curFilename = "当前工艺文件:无"
+             curFilename = "当前工艺文件:"
         }
     }
 
@@ -271,7 +269,7 @@ Rectangle {
                 x: (parent.width - saveAsDialog.width)/2
                 y: (parent.height - saveAsDialog.height)/2
                 title: "您确定要保存吗"
-                text.text: "保存的副本将不会包含未提交的修改，您确定要继续吗"
+                text.text: "如果还有未提交的修改，那么保存的副本将不包含未提交的修改，您确定要继续吗?"
                 text.color: "#202020"
 
                 imageSource: "../images/caution.png"
@@ -474,7 +472,10 @@ Rectangle {
 
             logoutBtn.onClicked:{
                 logoutPopup.close();
-                userLogout()
+                if(scheduler.isPdbLoaded() && scheduler.callIsDirty())
+                    logoutDialog.open();
+                else
+                    userLogout();
             }
         }
 
@@ -483,6 +484,25 @@ Rectangle {
                 logoutPopup.close();
             else
                 logoutPopup.open();
+        }
+
+        InfoDialog {
+            id: logoutDialog
+
+            parent: Overlay.overlay
+            x: (parent.width - logoutDialog.width)/2
+            y: (parent.height - logoutDialog.height)/2
+
+            text.text: "有未保存的修改。未保存的修改将会丢失，您确定要登出并切换用户吗？"
+            title: "您确定要切换用户吗"
+            text.color: "#202020"
+            imageSource: "../images/caution.png"
+
+            cancelBtn.onClicked: logoutDialog.close()
+
+            confirmBtn.onClicked:{
+                userLogout();
+            }
         }
     }
 

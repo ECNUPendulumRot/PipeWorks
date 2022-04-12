@@ -96,8 +96,8 @@ Popup {
                     anchors.right: parent.right
                     font.pixelSize: 21
                     verticalAlignment: Text.AlignVCenter
-                    font.bold: true
                     font.weight: Font.Medium
+                    font.family: "Microsoft Yahei"
                     anchors.leftMargin: 10
                 }
             }
@@ -106,6 +106,9 @@ Popup {
                 id: textContent
                 text: qsTr("Text")
                 font.pixelSize: 14
+
+                font.family:"Microsoft Yahei"
+
                 Layout.rightMargin: 10
                 Layout.preferredHeight: 80
                 Layout.leftMargin: 45

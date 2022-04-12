@@ -31,6 +31,7 @@ Button {
             id: dropShadow
             color: "#3c000000"
             radius: 8
+            samples: 17
             spread: 0.2
             verticalOffset: 0
             horizontalOffset: 0
@@ -122,7 +123,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;formeditorZoom:1.25;height:480;width:640}D{i:1}D{i:4}D{i:5}D{i:3}
+    D{i:0;formeditorZoom:1.25}
 }
 ##^##*/
 
