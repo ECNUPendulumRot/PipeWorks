@@ -2,6 +2,7 @@
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Effects 1.0
 import QtQuick.Dialogs 1.3
+import QtQuick.Window 2.15
 import "Components"
 import "Tables"
 import "Popups"
@@ -843,6 +844,8 @@ Rectangle {
         window.flags = Qt.FramelessWindowHint | Qt.Window
         window.w = 800
         window.h = 600
+        window.x = Screen.width / 2 - window.width / 2
+        window.y = Screen.height / 2 - window.height / 2
 
     }
 
