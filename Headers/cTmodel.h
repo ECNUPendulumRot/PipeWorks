@@ -73,6 +73,8 @@ signals:
 private:
 
     QString rowQuery(int i);
+
+    QString rowQueryFix(int i);
 };
 
 #endif // CDBMODEL_H

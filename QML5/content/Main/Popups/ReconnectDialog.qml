@@ -21,8 +21,6 @@ Popup{
         anchors.fill: parent
         z: 1
 
-
-
         ConfirmBtn {
             id: confirmBtn
             y: 119
@@ -77,7 +75,7 @@ Popup{
             anchors.verticalCenter: caution.verticalCenter
             font.pixelSize: 18
             anchors.verticalCenterOffset: -1
-            font.family: "Courier"
+            font.family:"Microsoft Yahei"
             font.bold: true
         }
 
@@ -87,32 +85,36 @@ Popup{
             y: 58
             text: "您可以选择:"
             font.pixelSize: 14
-            font.family: "Courier"
+            font.family:"Microsoft Yahei"
         }
 
         Text {
             id: text4
-            x: 81
+            x: 70
             y: 84
             text: qsTr(" 1. 直接关闭：不保存当前数据库并打开新的数据库")
-            font.pixelSize: 12
+            font.pixelSize: 14
+            font.family:"Microsoft Yahei"
         }
 
         Text {
             id: text5
-            x: 80
             y: 105
-            height: 15
+            width: 238
+            height: 20
             text: qsTr(" 2. 继续编辑：继续编辑当前数据库")
-            font.pixelSize: 12
+            anchors.left: text4.left
+            font.pixelSize: 14
+            font.family:"Microsoft Yahei"
         }
 
         Text {
             id: text6
-            x: 83
             y: 126
-            text: qsTr("3. 更新并打开：应用更改并打开新的数据库")
-            font.pixelSize: 12
+            text: qsTr(" 3. 更新并打开：应用更改并打开新的数据库")
+            anchors.left: text5.left
+            font.pixelSize: 14
+            font.family:"Microsoft Yahei"
         }
     }
 

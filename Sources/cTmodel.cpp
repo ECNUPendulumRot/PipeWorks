@@ -101,7 +101,11 @@ QVector<QString>* TModel::getTableQuery()
 
 QString TModel::getRowQuery(int index)
 {
-    return rowQuery(index);
+    if(this->tableName() == "pass")
+        return rowQueryFix(index);
+
+    else
+        return rowQuery(index);
 }
 
 QString TModel::rowQuery(int index)
@@ -111,6 +115,23 @@ QString TModel::rowQuery(int index)
     QString result = "SET ";
 
     for(int i = 1; i < record.count(); i++){
+        QString tmp = record.fieldName(i) + " = " + (record.fieldName(i) == "showName"? "'" + record.value(i).toString() + "'":record.value(i).toString())
+                                          + (i == record.count() - 1 ? "": ",");
+        result += tmp;
+    }
+    result += " WHERE " + record.fieldName(0)
+                        + " = " + (record.fieldName(0) == "passName"? "'" + record.value(0).toString() + "'":record.value(0).toString()) + ";";
+    return result;
+}
+
+
+QString TModel::rowQueryFix(int index)
+{
+    QSqlRecord record = this->record(index);
+
+    QString result = "SET ";
+
+    for(int i = 1; i < record.count() - 1; i++){
         QString tmp = record.fieldName(i) + " = " + (record.fieldName(i) == "showName"? "'" + record.value(i).toString() + "'":record.value(i).toString())
                                           + (i == record.count() - 1 ? "": ",");
         result += tmp;
