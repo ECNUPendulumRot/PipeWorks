@@ -32,13 +32,14 @@ Popup{
             id: confirmBtn
 
             x: 223
+            y: 316
 
             width: 70
             height: 24
             text: "确定"
-            anchors.right: uploadName.right
-            anchors.top: uploadName.bottom
-            anchors.topMargin: 20
+            anchors.verticalCenter: cancelBtn.verticalCenter
+            anchors.right: cancelBtn.left
+            anchors.rightMargin: 20
             pressRecColor: "#00101010"
             textItemColor: "#f6f6f6"
             buttonBackgroundColor: "#3b7ecc"
@@ -54,10 +55,9 @@ Popup{
             width: 70
             height: 24
             text: "取消"
-            anchors.verticalCenter: confirmBtn.verticalCenter
-            anchors.right: confirmBtn.left
-            anchors.rightMargin: 20
-            anchors.verticalCenterOffset: 0
+            anchors.right: uploadName.right
+            anchors.top: uploadName.bottom
+            anchors.topMargin: 20
         }
 
 
