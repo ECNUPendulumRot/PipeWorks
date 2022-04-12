@@ -669,6 +669,7 @@ Rectangle {
         confirmBtn.text: "确定"
         confirmBtn.onClicked: {
             errorDialog.close()
+            closeDialog()
                         }
 
         cancelBtn.visible: false
@@ -957,6 +958,18 @@ Rectangle {
         //downloader.put(tempFileUrl, ftpDialog.uploadName); //upload to remote
     }
 
+    function closeDialog(){//执行一遍所有下载有关的cancelbtn做的事
+        uploadDialog.cvisibleProgress = false
+        uploadDialog.progressBarValue = 0.0
+        uploadDialog.completeBtn.cvisible = false;
+        uploadDialog.confirmBtn.cvisible = true;
+        uploadDialog.title = "您是否要将当前文件上传到中控？"
+        uploadDialog.close()
+
+        downloadDialog.clear()
+
+        onePassComplete.close();
+    }
 
 }
 
