@@ -16,6 +16,8 @@ Button {
     property alias buttonBackgroundColor: buttonBackground.color
     property alias cvisible: control.visible
 
+    activeFocusOnTab: false
+
     background: buttonBackground
     Rectangle {
         id: buttonBackground
@@ -31,7 +33,8 @@ Button {
         layer.effect: DropShadowEffect {
             id: dropShadow
             color: "#29000000"
-            radius: 16
+            radius: 8
+            samples: 17
             verticalOffset: 0
             horizontalOffset: 0
             spread: 0.1
@@ -53,16 +56,19 @@ Button {
 
         opacity: enabled ? 1.0 : 0.3
         color: "#202020"
+
+        font.family:"Microsoft Yahei"
+
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         anchors.horizontalCenter: parent.horizontalCenter
-        font.weight: Font.Medium
-        font.family: "Courier"
+
     }
+
     states: [
         State {
             name: "pressed"
-            when: control.pressed || control.activeFocus
+            when: control.pressed
 
             PropertyChanges {
                 target: pressRec

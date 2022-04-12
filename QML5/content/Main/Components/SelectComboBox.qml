@@ -33,7 +33,7 @@ ComboBox {
 
     delegate: ItemDelegate {
         id: element
-        width: control.width - 20
+        width: control.width
         height: control.height
         padding: 0
         highlighted: control.highlightedIndex === index
@@ -57,7 +57,11 @@ ComboBox {
                 color: "#202020"
                 //font: control.font
                 elide: Text.ElideRight
-                font.pixelSize: 12
+                font.pixelSize: 14
+                font.family: "Microsoft Yahei"
+
+                leftPadding: 10
+
                 anchors.verticalCenter: parent.verticalCenter
             }
         }
@@ -146,7 +150,7 @@ ComboBox {
 
         contentItem: ListView {
             topMargin: 1
-            leftMargin: 10
+
             clip: true
             implicitWidth: contentWidth
             implicitHeight: contentHeight
