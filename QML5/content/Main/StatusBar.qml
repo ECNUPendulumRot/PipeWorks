@@ -12,6 +12,7 @@ Rectangle {
         id: connectionStatusTitle
         color: "#000000"
         text: qsTr("工艺文件打开状态:")
+        font.family: "Microsoft Yahei"
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 15
@@ -35,6 +36,7 @@ Rectangle {
         color: "#000000"
         font.pixelSize: 14
         text: qsTr("未打开")
+        font.family: "Microsoft Yahei"
         anchors.left: connectionLight.right
         anchors.leftMargin: 10
         anchors.verticalCenter: parent.verticalCenter
@@ -47,6 +49,7 @@ Rectangle {
         font.pixelSize: 14
         anchors.verticalCenterOffset: 0
         text: qsTr("当前工艺文件:")
+        font.family: "Microsoft Yahei"
         anchors.left: connectionLight.right
         anchors.leftMargin: 208
         anchors.verticalCenter: parent.verticalCenter
@@ -93,7 +96,7 @@ Rectangle {
         color: "#000000"
         font.pixelSize: 14
         text: qsTr("未打开工艺文件")
-
+        font.family: "Microsoft Yahei"
         visible: false
 
         anchors.left: syncLight.right
@@ -106,6 +109,7 @@ Rectangle {
         id: datetimeText
         font.pixelSize: 14
         //x: 1236
+        font.family: "Microsoft Yahei"
         anchors.right: parent.right
         anchors.rightMargin: 20
         anchors.verticalCenter: parent.verticalCenter

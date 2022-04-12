@@ -66,7 +66,6 @@ Button {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         font.pixelSize: 14
-
         Text {
             id: text1
             color: "#000000"

@@ -18,11 +18,11 @@ Rectangle {
     signal webCallBack(int series, int index, double data);
 
     WebEngineView {
-            anchors.fill: parent
-            //C:/testAlg/webQmlTest/qmlWeb/jschart.html
-            url: "qrc:/JavaScript/jschart.html"
-            webChannel: webChannel
-        }
+        anchors.fill: parent
+        //C:/testAlg/webQmlTest/qmlWeb/jschart.html
+        url: "qrc:/JavaScript/jschart.html"
+        webChannel: webChannel
+    }
 
     WebChannel{
         id: webChannel

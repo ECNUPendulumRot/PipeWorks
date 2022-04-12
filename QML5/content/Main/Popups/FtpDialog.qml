@@ -69,7 +69,7 @@ Popup{
             text: "文件传输设置"
             font.pixelSize: 20
             anchors.verticalCenterOffset: -1
-            font.family: "Courier"
+            font.family: "Microsoft Yahei"
             font.bold: true
         }
 
@@ -136,6 +136,7 @@ Popup{
             y: 85
             text: qsTr("IP地址")
             font.pixelSize: 18
+            font.family: "Microsoft Yahei"
         }
 
         Text {
@@ -145,6 +146,7 @@ Popup{
             text: qsTr("端口")
             anchors.verticalCenter: text2.verticalCenter
             font.pixelSize: 18
+            font.family: "Microsoft Yahei"
         }
 
         Text {
@@ -155,6 +157,7 @@ Popup{
             anchors.top: text2.bottom
             font.pixelSize: 18
             anchors.topMargin: 40
+            font.family: "Microsoft Yahei"
         }
 
         Text {
@@ -165,6 +168,7 @@ Popup{
             anchors.top: text4.bottom
             font.pixelSize: 18
             anchors.topMargin: 40
+            font.family: "Microsoft Yahei"
         }
 
 
@@ -176,8 +180,8 @@ Popup{
             anchors.top: text5.bottom
             font.pixelSize: 18
             anchors.topMargin: 40
+            font.family: "Microsoft Yahei"
         }
-
 
     }
 
