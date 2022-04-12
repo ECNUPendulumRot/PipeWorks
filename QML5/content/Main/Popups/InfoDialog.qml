@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.11
 
@@ -131,8 +131,8 @@ Popup {
                     height: 24
                     text: "继续编辑"
                     anchors.verticalCenter: confirmBtn.verticalCenter
-                    anchors.right: confirmBtn.left
-                    anchors.rightMargin: 15
+                    anchors.right: parent.right
+
                 }
 
                 ConfirmBtn {
@@ -141,7 +141,8 @@ Popup {
                     width: 70
                     height: 24
                     text: "应用"
-                    anchors.right: parent.right
+                    anchors.right: cancelBtn.left
+                    anchors.rightMargin: 15
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 10
                     pressRecColor: "#00101010"
@@ -154,7 +155,8 @@ Popup {
                     width: 70
                     height: 24
                     text: "完成"
-                    anchors.right: parent.right
+                    anchors.right: cancelBtn.left
+                    anchors.rightMargin: 15
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 10
                     pressRecColor: "#00101010"

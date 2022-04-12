@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 
@@ -27,12 +27,12 @@ Popup{
             width: 70
             height: 24
             text: "更新并打开"
-            anchors.right: parent.right
+            anchors.right: editBtn.left
+            anchors.rightMargin: 15
             anchors.bottom: parent.bottom
             pressRecColor: "#00101010"
             textItemColor: "#f6f6f6"
             buttonBackgroundColor: "#3b7ecc"
-            anchors.rightMargin: 17
             anchors.bottomMargin: 7
         }
 
@@ -43,8 +43,8 @@ Popup{
             height: 24
             text: "直接关闭"
             anchors.verticalCenter: confirmBtn.verticalCenter
-            anchors.right: editBtn.left
-            anchors.rightMargin: 15
+            anchors.right: parent.right
+            anchors.rightMargin: 17
         }
 
         ConfirmBtn {
@@ -54,7 +54,7 @@ Popup{
             height: 24
             text: "继续编辑"
             anchors.verticalCenter: confirmBtn.verticalCenter
-            anchors.right: confirmBtn.left
+            anchors.right: cancelBtn.left
             anchors.rightMargin: 15
         }
 
@@ -92,7 +92,7 @@ Popup{
             id: text4
             x: 70
             y: 84
-            text: qsTr(" 1. 直接关闭：不保存当前数据库并打开新的数据库")
+            text: qsTr(" 1. 更新并打开：应用更改并打开新的数据库")
             font.pixelSize: 14
             font.family:"Microsoft Yahei"
         }
@@ -111,7 +111,7 @@ Popup{
         Text {
             id: text6
             y: 126
-            text: qsTr(" 3. 更新并打开：应用更改并打开新的数据库")
+            text: qsTr(" 3. 直接关闭：不保存当前数据库并打开新的数据库")
             anchors.left: text5.left
             font.pixelSize: 14
             font.family:"Microsoft Yahei"
