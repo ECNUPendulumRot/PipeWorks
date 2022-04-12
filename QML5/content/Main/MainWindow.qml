@@ -268,7 +268,7 @@ Rectangle {
                 x: (parent.width - saveAsDialog.width)/2
                 y: (parent.height - saveAsDialog.height)/2
                 title: "您确定要保存吗"
-                text.text: "保存的副本将不会包含未提交的修改，您确定要继续吗"
+                text.text: "如果还有未提交的修改，那么保存的副本将不包含未提交的修改，您确定要继续吗?"
                 text.color: "#202020"
 
                 imageSource: "../images/caution.png"
