@@ -138,11 +138,10 @@ Popup {
 
                 ConfirmBtn {
                     id: confirmBtn
-                    font.family: "Microsoft Yahei"
-                    font.pixelSize: 14
-                    width: 100
-                    height: 40
-                    text: "确定"
+
+                    width: 70
+                    height: 24
+                    text: "应用"
                     anchors.right: cancelBtn.left
                     anchors.rightMargin: 15
                     anchors.bottom: parent.bottom

@@ -35,7 +35,6 @@ Popup{
             pressRecColor: "#00101010"
             textItemColor: "#f6f6f6"
             buttonBackgroundColor: "#3b7ecc"
-        }
 
         ConfirmBtn {
             id: editBtn
@@ -97,6 +96,7 @@ Popup{
             x: 70
             y: 84
             text: qsTr(" 1. 保存后打开：保存更改并打开新的工艺文件")
+
             font.pixelSize: 14
             font.family:"Microsoft Yahei"
         }
@@ -115,7 +115,9 @@ Popup{
         Text {
             id: text6
             y: 126
+
             text: qsTr(" 3. 不保存：放弃当前修改，打开新的工艺文件")
+
             anchors.left: text5.left
             font.pixelSize: 14
             font.family:"Microsoft Yahei"
