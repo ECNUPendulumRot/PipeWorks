@@ -35,7 +35,7 @@ Popup{
             pressRecColor: "#00101010"
             textItemColor: "#f6f6f6"
             buttonBackgroundColor: "#3b7ecc"
-
+        }
         ConfirmBtn {
             id: editBtn
             x: 155
