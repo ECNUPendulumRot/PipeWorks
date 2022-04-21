@@ -60,13 +60,13 @@ Button {
 
         Text {
             id: text1
-            y: 46
+            y: 21
             width: 50
-            height: 16
+            height: 24
             text: control.text
             anchors {
                 bottom: parent.bottom
-                bottomMargin: 8
+                bottomMargin: 0
                 horizontalCenter: parent.horizontalCenter
             }
             font.pixelSize: 14

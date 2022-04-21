@@ -5,7 +5,7 @@ import QtQuick.Studio.Effects 1.0
 Button {
     id: control
     width: 140
-    height: 30
+    height: 35
 
     leftPadding: 4
     rightPadding: 4
@@ -48,15 +48,18 @@ Button {
 
     Image {
         id: image
-        y: 15
-        width: 18
-        height: 18
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
+        //y: 15
+        width: 20
+        height: 20
+        anchors{
+            verticalCenter: parent.verticalCenter
+            left: parent.left
+            leftMargin: 10
+        }
         source: "../../images/Reset.png"
-        anchors.leftMargin: 10
-        antialiasing: true
-        mipmap: true
+
+        antialiasing: false
+        mipmap: false
         fillMode: Image.PreserveAspectFit
     }
 

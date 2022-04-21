@@ -6,7 +6,7 @@ Button {
 
     id: control
     width: 140
-    height: 30
+    height: 35
     property alias btnText: textItem.text
     property alias imgSrc: image.source
     implicitWidth: Math.max(
@@ -56,15 +56,18 @@ Button {
 
     Image {
         id: image
-        width: 22
-        height: 17
-        anchors.verticalCenter: textItem.verticalCenter
-        anchors.left: parent.left
-        source: "../../images/Submit.png"
-        antialiasing: true
-        mipmap: true
-        anchors.leftMargin: 10
-        anchors.verticalCenterOffset: 0
+        width: 25
+        height: 25
+        anchors{
+            left: parent.left
+            leftMargin: 10
+            verticalCenterOffset: 0
+            verticalCenter: textItem.verticalCenter
+        }
+        //source: "../../images/Submit.png"
+        antialiasing: false
+        mipmap: false
+
         fillMode: Image.PreserveAspectFit
     }
 

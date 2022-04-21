@@ -6,7 +6,7 @@ Popup{
 
     id: control
     width:400
-    height:200
+    height:250
     property alias cancelBtn: cancelBtn
     property alias editBtn: editBtn
     property alias confirmBtn: confirmBtn
@@ -23,40 +23,43 @@ Popup{
 
         ConfirmBtn {
             id: confirmBtn
-            y: 119
-            width: 70
-            height: 24
-            text: "更新并打开"
+            //y: 119
+            width: 80
+            height: 25
+            text: "保存后打开"
             anchors.right: editBtn.left
             anchors.rightMargin: 15
-            anchors.bottom: parent.bottom
+            //anchors.bottom: parent.bottom
+            anchors.verticalCenter: cancelBtn.verticalCenter
+            //anchors.bottomMargin: 10
             pressRecColor: "#00101010"
             textItemColor: "#f6f6f6"
             buttonBackgroundColor: "#3b7ecc"
-            anchors.bottomMargin: 7
         }
-
-        ConfirmBtn {
-            id: cancelBtn
-            x: 68
-            width: 70
-            height: 24
-            text: "直接关闭"
-            anchors.verticalCenter: confirmBtn.verticalCenter
-            anchors.right: parent.right
-            anchors.rightMargin: 17
-        }
-
         ConfirmBtn {
             id: editBtn
             x: 155
-            width: 70
-            height: 24
+            width: 80
+            height: 25
             text: "继续编辑"
             anchors.verticalCenter: confirmBtn.verticalCenter
             anchors.right: cancelBtn.left
             anchors.rightMargin: 15
         }
+
+        ConfirmBtn {
+            id: cancelBtn
+            x: 68
+            width: 80
+            height: 25
+            text: "不保存"
+            anchors.right: parent.right
+            anchors.rightMargin: 20
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 10
+        }
+
+
 
         Image {
             id: caution
@@ -71,7 +74,7 @@ Popup{
         Text {
             id: text1
             x: 64
-            text: "一个数据库已经打开"
+            text: "一个工艺文件已经打开"
             anchors.verticalCenter: caution.verticalCenter
             font.pixelSize: 18
             anchors.verticalCenterOffset: -1
@@ -83,7 +86,7 @@ Popup{
             id: text3
             x: 64
             y: 58
-            text: "您可以选择:"
+            text: "你可以选择:"
             font.pixelSize: 14
             font.family:"Microsoft Yahei"
         }
@@ -92,7 +95,8 @@ Popup{
             id: text4
             x: 70
             y: 84
-            text: qsTr(" 1. 更新并打开：应用更改并打开新的数据库")
+            text: qsTr(" 1. 保存后打开：保存更改并打开新的工艺文件")
+
             font.pixelSize: 14
             font.family:"Microsoft Yahei"
         }
@@ -102,7 +106,7 @@ Popup{
             y: 105
             width: 238
             height: 20
-            text: qsTr(" 2. 继续编辑：继续编辑当前数据库")
+            text: qsTr(" 2. 继续编辑：继续编辑当前工艺文件")
             anchors.left: text4.left
             font.pixelSize: 14
             font.family:"Microsoft Yahei"
@@ -111,7 +115,9 @@ Popup{
         Text {
             id: text6
             y: 126
-            text: qsTr(" 3. 直接关闭：不保存当前数据库并打开新的数据库")
+
+            text: qsTr(" 3. 不保存：放弃当前修改，打开新的工艺文件")
+
             anchors.left: text5.left
             font.pixelSize: 14
             font.family:"Microsoft Yahei"

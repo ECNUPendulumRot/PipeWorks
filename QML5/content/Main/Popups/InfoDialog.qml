@@ -94,7 +94,7 @@ Popup {
                     anchors.verticalCenter: image.verticalCenter
                     anchors.left: image.right
                     anchors.right: parent.right
-                    font.pixelSize: 21
+                    font.pixelSize: 20
                     verticalAlignment: Text.AlignVCenter
                     font.weight: Font.Medium
                     font.family: "Microsoft Yahei"
@@ -126,10 +126,11 @@ Popup {
 
                 ConfirmBtn {
                     id: cancelBtn
-
-                    width: 70
-                    height: 24
-                    text: "继续编辑"
+                    font.family: "Microsoft Yahei"
+                    font.pixelSize: 14
+                    width: 100
+                    height: 40
+                    text: "取消"
                     anchors.verticalCenter: confirmBtn.verticalCenter
                     anchors.right: parent.right
 
@@ -152,8 +153,10 @@ Popup {
 
                 ConfirmBtn {
                     id: completeBtn
-                    width: 70
-                    height: 24
+                    font.family: "Microsoft Yahei"
+                    font.pixelSize: 14
+                    width: 80
+                    height: 35
                     text: "完成"
                     anchors.right: cancelBtn.left
                     anchors.rightMargin: 15

@@ -34,8 +34,8 @@ Popup{
             x: 223
             y: 316
 
-            width: 70
-            height: 24
+            width: 80
+            height: 25
             text: "确定"
             anchors.verticalCenter: cancelBtn.verticalCenter
             anchors.right: cancelBtn.left
@@ -52,24 +52,30 @@ Popup{
 
             x: 311
 
-            width: 70
-            height: 24
+            width: 80
+            height: 25
             text: "取消"
             anchors.right: uploadName.right
+            anchors.rightMargin: 20
             anchors.top: uploadName.bottom
-            anchors.topMargin: 20
+            anchors.topMargin: 30
         }
 
 
         Text {
             id: text1
-            x: 129
-            y: 17
-            text: "文件传输设置"
-            font.pixelSize: 20
-            anchors.verticalCenterOffset: -1
+            x: 50
+            y: 20
+            text: "文件传输服务器（FTP）设置"
             font.family: "Microsoft Yahei"
-            font.bold: true
+            font.pixelSize: 20
+//            anchors{
+//              top:  control.top
+//              topMargin: 20
+//              fill: parent
+//              //horizontalCenter: parent.horizontalCenter
+//            }
+
         }
 
         TextField {
@@ -80,7 +86,7 @@ Popup{
             x: 93
             width: 140
             height: 30
-            font.pixelSize: 18
+            font.pixelSize: 16
         }
 
         TextField {
@@ -91,7 +97,7 @@ Popup{
             x: 295
             width: 86
             height: 30
-            font.pixelSize: 18
+            font.pixelSize: 16
         }
 
         TextField {
@@ -102,7 +108,7 @@ Popup{
             x: 93
             width: 288
             height: 30
-            font.pixelSize: 18
+            font.pixelSize: 16
         }
 
 
@@ -115,7 +121,7 @@ Popup{
             x: 94
             width: 287
             height: 30
-            font.pixelSize: 18
+            font.pixelSize: 16
         }
 
         TextField {
@@ -125,7 +131,7 @@ Popup{
             height: 30
             text: ""
             anchors.verticalCenter: text6.verticalCenter
-            font.pixelSize: 18
+            font.pixelSize: 16
         }
 
         Text {
@@ -134,7 +140,7 @@ Popup{
             x: 16
             y: 85
             text: qsTr("IP地址")
-            font.pixelSize: 18
+            font.pixelSize: 14
             font.family: "Microsoft Yahei"
         }
 
@@ -144,7 +150,7 @@ Popup{
 
             text: qsTr("端口")
             anchors.verticalCenter: text2.verticalCenter
-            font.pixelSize: 18
+            font.pixelSize: 14
             font.family: "Microsoft Yahei"
         }
 
@@ -154,7 +160,7 @@ Popup{
             x: 16
             text: qsTr("用户名")
             anchors.top: text2.bottom
-            font.pixelSize: 18
+            font.pixelSize: 14
             anchors.topMargin: 40
             font.family: "Microsoft Yahei"
         }
@@ -165,7 +171,7 @@ Popup{
 
             text: qsTr("用户密码")
             anchors.top: text4.bottom
-            font.pixelSize: 18
+            font.pixelSize: 14
             anchors.topMargin: 40
             font.family: "Microsoft Yahei"
         }
@@ -177,7 +183,7 @@ Popup{
             x: 16
             text: qsTr("文件名")
             anchors.top: text5.bottom
-            font.pixelSize: 18
+            font.pixelSize: 14
             anchors.topMargin: 40
             font.family: "Microsoft Yahei"
         }

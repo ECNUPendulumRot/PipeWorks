@@ -52,7 +52,7 @@ Button {
         id: textItem
         text: control.text
         anchors.verticalCenter: parent.verticalCenter
-        font.pixelSize: 11
+        font.pixelSize: 14
 
         opacity: enabled ? 1.0 : 0.3
         color: "#202020"
@@ -86,6 +86,8 @@ Button {
         }
     ]
 }
+
+
 
 /*##^##
 Designer {

@@ -18,7 +18,7 @@ Rectangle {
     width: 1366
     height: 768
     property var errorMap: { "OperationCanceledError":"IP或端口错误，请检查FTP设置",
-                             "AuthenticationRequiredError":"FTP账号密码错误，请检查FTP设置",
+                             "AuthenticationRequiredError":"FTP账号或密码错误，请检查FTP设置",
                              "ContentNotFoundError" :"工艺文件在中控端不存在，请检查FTP设置",
                              "otherError":"出现了预料之外的错误",
                              "downloadConflict":"当前文件已存在且已打开，无法完成下载，请关闭当前文件后再执行下载",
@@ -149,10 +149,10 @@ Rectangle {
             horizontalOffset: 0
         }
         function getCurruntName(){
-            curFilename = "当前工艺文件:" + downloader.toLocal(fileDialog.curruntFileUrl)
+            curFilename = "工艺文件名:" + downloader.toLocal(fileDialog.curruntFileUrl)
         }
         function clearCurruntName(){
-             curFilename = "当前工艺文件:"
+             curFilename = "工艺文件名:"
         }
     }
 
@@ -231,8 +231,8 @@ Rectangle {
                 parent: Overlay.overlay
                 x: (parent.width - disconnectDialog.width)/2
                 y: (parent.height - disconnectDialog.height)/2
-                title: "您确定要关闭吗"
-                text.text: "未保存的修改将会失效，您确定要继续吗"
+                title: "确定要关闭工艺文件吗?"
+                text.text: "未保存的修改将会被放弃，确定要继续吗？"
                 text.color: "#202020"
 
                 imageSource: "../images/caution.png"
@@ -268,8 +268,8 @@ Rectangle {
                 parent: Overlay.overlay
                 x: (parent.width - saveAsDialog.width)/2
                 y: (parent.height - saveAsDialog.height)/2
-                title: "您确定要保存吗"
-                text.text: "如果还有未提交的修改，那么保存的副本将不包含未提交的修改，您确定要继续吗?"
+                title: "你确定要保存吗？"
+                text.text: "如果还有未提交的修改，保存的副本将不包含未提交的修改，你确定要继续吗?"
                 text.color: "#202020"
 
                 imageSource: "../images/caution.png"
@@ -341,13 +341,17 @@ Rectangle {
 
 
     CancelBtn {
-        id: myButton2
-        y: 586
-        //y: 681
-        anchors.bottom: myButton3.top
-        anchors.horizontalCenterOffset: 0
-        anchors.horizontalCenter: myButton3.horizontalCenter
-        anchors.bottomMargin: 62
+        id: revokeButton
+
+        anchors{
+          right: submitSingleButton.right
+          bottom: submitSingleButton.top
+          bottomMargin: 10
+        }
+        //anchors.bottom: submitButton.top
+        //anchors.horizontalCenterOffset: 0
+        //anchors.horizontalCenter: submitButton.horizontalCenter
+        //anchors.bottomMargin: 62
         z: 3
         onClicked:if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbCancelDialog.open()
 
@@ -358,8 +362,8 @@ Rectangle {
             x: (parent.width - dbCancelDialog.width)/2
             y: (parent.height - dbCancelDialog.height)/2
 
-            text.text: "这个操作将不可被撤销，请确认是否撤销所有修改"
-            title: "您确定要撤销所有修改吗"
+            text.text: "所有已经修改但还未提交的数据将被丢弃，确定要撤销所有修改吗？"
+            title: "放弃未提交的数据修改？"
             text.color: "#202020"
             imageSource: "../images/information.png"
 
@@ -380,61 +384,18 @@ Rectangle {
         }
     }
 
-    SubmitBtn {
-        id: myButton3
 
-        anchors{
-          right: parent.right
-          bottom: parent.bottom
-          rightMargin: 20
-          bottomMargin: 60
-        }
-        z: 3
-        imgSrc: "../images/SinglePass.png"
-
-        onClicked: if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbSubmitDialog.open()
-
-        InfoDialog {
-            id: dbSubmitDialog
-
-            parent: Overlay.overlay
-            x: (parent.width - dbSubmitDialog.width)/2
-            y: (parent.height - dbSubmitDialog.height)/2
-
-            text.text: "这个操作将不可被撤销，请确认是否提交修改"
-            title: "您确定要提交吗"
-            text.color: "#202020"
-            imageSource: "../images/information.png"
-
-            cancelBtn.onClicked: dbSubmitDialog.close()
-
-            confirmBtn.onClicked:{
-                if(scheduler.isPdbLoaded()){
-                    scheduler.submitData();
-                    fixedTable.fixedTableRefreshData();
-                    passListView.refreshPassList();
-                    commPop.commLoad();
-                    ctrlPop.ctrlLoad();
-                    motionPop.motionLoad();
-
-                    dbSubmitDialog.close()
-                }
-            }
-        }
-    }
 
     SubmitBtn {
-        id: singleTableSubmit
-        x: 1226
-        y: 631
-        btnText: "上传显示焊道"
+        id: submitSingleButton
+        btnText: "上传选中焊道"
         anchors{
-          right: parent.right
-          bottom: parent.bottom
-          rightMargin: 20
-          bottomMargin: 105
+          right: submitButton.right
+          bottom: submitButton.top
+          bottomMargin: 10
         }
         z: 3
+        imgSrc: "../images/SubmitOne.png"
 
         onClicked:{
             if(scheduler.isPdbLoaded()){
@@ -446,14 +407,15 @@ Rectangle {
 
     ExitBtn {
         id: exitBtn
-        x: 1316
+        //x: 1316
         //x: 1317
         //y: 8
         width: 42
         height: 37
-        anchors.rightMargin: 8
+
         anchors{
           right: mainBar.right
+          rightMargin: 8
           verticalCenter: mainBar.verticalCenter
         }
         //anchors.right: mainBar.right
@@ -493,15 +455,61 @@ Rectangle {
             x: (parent.width - logoutDialog.width)/2
             y: (parent.height - logoutDialog.height)/2
 
-            text.text: "有未保存的修改。未保存的修改将会丢失，您确定要登出并切换用户吗？"
-            title: "您确定要切换用户吗"
+            text.text: "未提交的数据将会丢失，确定要切换用户吗？"
+            title: "你的修改未提交保存！"
             text.color: "#202020"
             imageSource: "../images/caution.png"
 
             cancelBtn.onClicked: logoutDialog.close()
 
+            cancelBtn.text:"取消"
+            confirmBtn.text:"确定"
             confirmBtn.onClicked:{
                 userLogout();
+            }
+        }
+    }
+
+    SubmitBtn {
+        id: submitButton
+        btnText: "提交数据"
+
+        anchors{
+          right: parent.right
+          bottom: parent.bottom
+          rightMargin: 30
+          bottomMargin: 60
+        }
+        z: 3
+        imgSrc: "../images/SubmitThree.png"
+
+        onClicked: if(scheduler.isPdbLoaded() && scheduler.callIsDirty()) dbSubmitDialog.open()
+
+        InfoDialog {
+            id: dbSubmitDialog
+
+            parent: Overlay.overlay
+            x: (parent.width - dbSubmitDialog.width)/2
+            y: (parent.height - dbSubmitDialog.height)/2
+
+            text.text: "一旦提交修改，操作不可撤销，请确认是否提交数据？"
+            title: "确定要提交数据吗？"
+            text.color: "#202020"
+            imageSource: "../images/information.png"
+
+            cancelBtn.onClicked: dbSubmitDialog.close()
+
+            confirmBtn.onClicked:{
+                if(scheduler.isPdbLoaded()){
+                    scheduler.submitData();
+                    fixedTable.fixedTableRefreshData();
+                    passListView.refreshPassList();
+                    commPop.commLoad();
+                    ctrlPop.ctrlLoad();
+                    motionPop.motionLoad();
+
+                    dbSubmitDialog.close()
+                }
             }
         }
     }
@@ -523,12 +531,12 @@ Rectangle {
             reconnectDialog.close()
         }
 
-        confirmBtn.onClicked: {
-            scheduler.submitData()
-            disconnect();
-            reconnectDialog.close()
-            fileDialog.open();
-        }
+//        confirmBtn.onClicked: {
+//            scheduler.submitData()
+//            disconnect();
+//            reconnectDialog.close()
+//            fileDialog.open();
+//        }
     }
 
 
@@ -589,7 +597,7 @@ Rectangle {
             progressBarValue = 0.0
             completeBtn.cvisible = false;
             confirmBtn.cvisible = true;
-            title = "您是否要将当前文件上传到中控？"
+            title = "你是否要将当前文件上传到中控？"
             uploadDialog.close()}
 
         confirmBtn.onClicked: {
@@ -602,7 +610,7 @@ Rectangle {
             progressBarValue = 0.0
             completeBtn.cvisible = false;
             confirmBtn.cvisible = true;
-            title = "您是否要将当前文件上传到中控？"
+            title = "你是否要将当前文件上传到中控？"
             uploadDialog.close()
         }
     }
@@ -662,7 +670,7 @@ Rectangle {
         x: (parent.width - errorDialog.width)/2
         y: (parent.height - errorDialog.height)/2
 
-        //text.text: "这个操作将不可被撤销，请确认是否撤销所有修改"
+        //text.text: "本操作将不可被撤销，请确认是否撤销所有修改"
         title: "出现了错误"
         text.color: "#202020"
         imageSource: "../images/information.png"
@@ -682,8 +690,8 @@ Rectangle {
         x: (parent.width - onePassDialog.width)/2
         y: (parent.height - onePassDialog.height)/2
 
-        text.text: "这将会把本焊道数据上传至中控，并且操作将不可被撤销，请确认是否上传数据"
-        title: "您是否要上传显示的焊道数据？"
+        text.text: "把当前选中焊道数据上传至中控，且该操作不可撤销，请确认是否上传数据？"
+        title: "你是否要上传当前选中的焊道数据？"
         text.color: "#202020"
         imageSource: "../images/information.png"
         confirmBtn.text: "确定"
@@ -963,7 +971,7 @@ Rectangle {
         uploadDialog.progressBarValue = 0.0
         uploadDialog.completeBtn.cvisible = false;
         uploadDialog.confirmBtn.cvisible = true;
-        uploadDialog.title = "您是否要将当前文件上传到中控？"
+        uploadDialog.title = "你是否要将当前文件上传到中控？"
         uploadDialog.close()
 
         downloadDialog.clear()
