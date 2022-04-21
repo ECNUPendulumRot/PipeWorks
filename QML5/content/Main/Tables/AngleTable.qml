@@ -26,13 +26,13 @@ Item {
         "Arc_Rate_Trail"    :"后枪电弧修正\n(%)",
         "stayLeftTime_Trail":"后枪左边停时间\n(秒)",
         "stayRightTime_Trail":"后枪右边停时间\n(秒)",
-        "oscWidth_Trail"    :"后枪摆宽\n(米)",
+        "oscWidth_Trail"    :"后枪摆宽\n(毫米)",
         "oscFreq_Trail"     :"后枪摆动频率\n(次/分钟)",
         "feedRate_Trail"    :"后枪送丝速度\n(米/分钟)",
         "carACC"            :"小车加速度\n(毫米/秒²)",
-        "carSPEED"          :"小车速度\n(毫米/秒)",
-        "leadTargetCur"     :"前枪干伸高度值\n(毫米)",
-        "trailTargetCur"    :"后枪干伸高度值\n(毫米)"
+        "carSPEED"          :"小车速度\n(毫米/分钟)",
+        "leadTargetCur"     :"前枪干伸高度值\n",
+        "trailTargetCur"    :"后枪干伸高度值\n"
     }
 
     ButtonGroup {
