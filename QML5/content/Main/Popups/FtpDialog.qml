@@ -34,7 +34,7 @@ Popup{
             x: 223
             y: 316
 
-            width: 80
+            width: 70
             height: 25
             text: "确定"
             anchors.verticalCenter: cancelBtn.verticalCenter
@@ -52,11 +52,11 @@ Popup{
 
             x: 311
 
-            width: 80
+            width: 70
             height: 25
             text: "取消"
             anchors.right: uploadName.right
-            anchors.rightMargin: 20
+            anchors.rightMargin: 0
             anchors.top: uploadName.bottom
             anchors.topMargin: 30
         }
@@ -225,6 +225,7 @@ Popup{
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:1.25}D{i:2}
+    D{i:0;formeditorZoom:1.25}D{i:2}D{i:3}D{i:4}D{i:5}D{i:6}D{i:7}D{i:8}D{i:9}D{i:10}
+D{i:11}D{i:12}D{i:13}D{i:14}D{i:1}D{i:15}
 }
 ##^##*/

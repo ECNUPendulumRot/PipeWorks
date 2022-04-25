@@ -28,7 +28,7 @@ Popup{
             x: 311
             y: 157
             width: 70
-            height: 24
+            height: 25
             text: "取消"
             anchors.rightMargin: 15
         }
@@ -38,7 +38,7 @@ Popup{
             x: 215
             y: 157
             width: 70
-            height: 24
+            height: 25
             text: "上传"
             pressRecColor: "#00101010"
             textItemColor: "#f6f6f6"
@@ -49,7 +49,7 @@ Popup{
             x: 215
             y: 157
             width: 70
-            height: 24
+            height: 25
             text: "完成"
             cvisible: false
             pressRecColor: "#00101010"

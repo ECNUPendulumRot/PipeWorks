@@ -128,8 +128,8 @@ Popup {
                     id: cancelBtn
                     font.family: "Microsoft Yahei"
                     font.pixelSize: 14
-                    width: 100
-                    height: 40
+                    width: 70
+                    height: 25
                     text: "取消"
                     anchors.verticalCenter: confirmBtn.verticalCenter
                     anchors.right: parent.right
@@ -140,7 +140,7 @@ Popup {
                     id: confirmBtn
 
                     width: 70
-                    height: 24
+                    height: 25
                     text: "应用"
                     anchors.right: cancelBtn.left
                     anchors.rightMargin: 15
@@ -155,8 +155,8 @@ Popup {
                     id: completeBtn
                     font.family: "Microsoft Yahei"
                     font.pixelSize: 14
-                    width: 80
-                    height: 35
+                    width: 70
+                    height: 25
                     text: "完成"
                     anchors.right: cancelBtn.left
                     anchors.rightMargin: 15

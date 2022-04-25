@@ -26,7 +26,7 @@ Popup{
             x: 311
             y: 157
             width: 70
-            height: 24
+            height: 25
             text: "取消"
             anchors.rightMargin: 15
         }
@@ -36,7 +36,7 @@ Popup{
             x: 215
             y: 157
             width: 70
-            height: 24
+            height: 25
             text: "完成"
             cvisible: false
             pressRecColor: "#00101010"

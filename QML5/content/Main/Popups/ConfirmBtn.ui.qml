@@ -4,8 +4,8 @@ import QtQuick.Studio.Effects 1.0
 
 Button {
     id: control
-    width: 60
-    height: 20
+    width: 80
+    height: 25
 
     leftPadding: 4
     rightPadding: 4
@@ -57,12 +57,11 @@ Button {
         opacity: enabled ? 1.0 : 0.3
         color: "#202020"
 
-        font.family:"Microsoft Yahei"
+        font.family: "Microsoft Yahei"
 
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         anchors.horizontalCenter: parent.horizontalCenter
-
     }
 
     states: [
@@ -87,11 +86,9 @@ Button {
     ]
 }
 
-
-
 /*##^##
 Designer {
-    D{i:0;height:24;width:70}D{i:3}D{i:1}D{i:4}
+    D{i:0;height:40;width:100}D{i:3}D{i:1}D{i:4}
 }
 ##^##*/
 
