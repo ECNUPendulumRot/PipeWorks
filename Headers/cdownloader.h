@@ -70,8 +70,8 @@ private slots:
     void singleTable1Finished();
     void singleTable3Finished();
     void uploadFinished();
-    void handleUploadError(QNetworkReply::NetworkError error);
-    void handleDownloadError(QNetworkReply::NetworkError error);
+    //void handleUploadError(QNetworkReply::NetworkError error);
+    void handleError(QNetworkReply::NetworkError error);
 
 
 private:

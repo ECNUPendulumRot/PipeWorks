@@ -17,13 +17,16 @@ Rectangle {
     border.width: 1
     width: 1366
     height: 768
-    property var errorMap: { "OperationCanceledError":"IP或端口错误，请检查FTP设置",
+    property var errorMap: { "OperationCanceledError":"连接超时，请确保网络通常与连接正确",
                              "AuthenticationRequiredError":"FTP账号或密码错误，请检查FTP设置",
                              "ContentNotFoundError" :"工艺文件在中控端不存在，请检查FTP设置",
                              "otherError":"出现了预料之外的错误",
                              "downloadConflict":"当前文件已存在且已打开，无法完成下载，请关闭当前文件后再执行下载",
-                             "Saturday":"星期六",
-                             "Sunday":"星期日"}
+                             "ContentOperationNotPermittedError":"远程端不允许这个操作，请检查本地与中控的FTP设置",
+                             "ConnectionRefusedError":"远程端拒绝连接，请检查中控端设定",
+                             "HostNotFoundError":"Host没有找到，请检查FTP设置",
+                             "TimeoutError" : "连接超时,请检查网络连接"
+    }
 
     Rectangle {
         id: webEngineWrapper

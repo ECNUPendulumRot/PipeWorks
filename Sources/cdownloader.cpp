@@ -28,15 +28,15 @@ void Downloader::put(const QString &fileName, const QString &path, QString metho
 
     pUrl.setPath(path);
     pReply = manager.put(QNetworkRequest(pUrl), transfromData);
-    ReplyTimeout::set(pReply, 1000);//reply time out    
+    ReplyTimeout::set(pReply, 10000);//reply time out
     if(method == "default"){
         connect(pReply, SIGNAL(uploadProgress(qint64, qint64)), this, SLOT(uploadProgress(qint64, qint64)));
-        connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleUploadError(QNetworkReply::NetworkError)));
+        connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleError(QNetworkReply::NetworkError)));
         connect(pReply, SIGNAL(finished()), this, SLOT(uploadFinished()));
     }
     if(method == "singleTable"){
         //connect(pReply, SIGNAL(uploadProgress(qint64, qint64)), this, SLOT(uploadProgress(qint64, qint64)));
-        connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleUploadError(QNetworkReply::NetworkError)));
+        connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleError(QNetworkReply::NetworkError)));
         connect(pReply, SIGNAL(finished()), this, SLOT(singleTable3Finished()));//ST = single table
     }
 }
@@ -48,16 +48,16 @@ void Downloader::get(const QString &path, const QString &fileName, QString metho
 
     pUrl.setPath(path);
     pReply = manager.get(QNetworkRequest(pUrl));
-    ReplyTimeout::set(pReply, 1000);//reply time out
+    ReplyTimeout::set(pReply, 10000);//reply time out
     //connect(pReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
     if(method == "default"){
         connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(downloadProgress(qint64, qint64)));
-        connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleDownloadError(QNetworkReply::NetworkError)));
+        connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleError(QNetworkReply::NetworkError)));
         connect(pReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
     }
     if(method == "singleTable"){
         connect(pReply, SIGNAL(finished()), this, SLOT(singleTable1Finished()));
-        connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleDownloadError(QNetworkReply::NetworkError)));
+        connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleError(QNetworkReply::NetworkError)));
        // connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(downloadProgress(qint64, qint64)));
     }
 }
@@ -261,32 +261,39 @@ void Downloader::uploadFinished()
     manager.clearAccessCache();
 }
 
-void Downloader::handleUploadError(QNetworkReply::NetworkError error)
-{
-    switch (error) {
-    case QNetworkReply::OperationCanceledError :
-        qDebug()<<QString::fromLocal8Bit("IP or port error ");
-        emit sendErrorMsg("OperationCanceledError");
-        break;
-    case QNetworkReply::AuthenticationRequiredError :
-        qDebug()<<QString::fromLocal8Bit("FTP账号密码错误");
-        emit sendErrorMsg("AuthenticationRequiredError");
-        break;
-        // 其他错误处理
-    default:
-        qDebug()<<"error:";
-        qDebug()<<error;
-        emit sendErrorMsg("error");
-        break;
-    }
-}
+//void Downloader::handleUploadError(QNetworkReply::NetworkError error)
+//{
+//    switch (error) {
+//    case QNetworkReply::OperationCanceledError :
+//        qDebug()<<QString::fromLocal8Bit("IP or port error ");
+//        emit sendErrorMsg("OperationCanceledError");
+//        break;
+//    case QNetworkReply::AuthenticationRequiredError :
+//        qDebug()<<QString::fromLocal8Bit("FTP账号密码错误");
+//        emit sendErrorMsg("AuthenticationRequiredError");
+//        break;
+//        // 其他错误处理
+//    default:
+//        qDebug()<<"error:";
+//        qDebug()<<error;
+//        emit sendErrorMsg("error");
+//        break;
+//    }
+//}
 
-void Downloader::handleDownloadError(QNetworkReply::NetworkError error)
+void Downloader::handleError(QNetworkReply::NetworkError error)
 {
     switch (error) {
+    case QNetworkReply::HostNotFoundError :
+        emit sendErrorMsg("HostNotFoundError");
+        break;
     case QNetworkReply::OperationCanceledError :
-        qDebug()<<QString::fromLocal8Bit("IP or port error ");
+        qDebug()<<QString::fromLocal8Bit("reply timeout ");
         emit sendErrorMsg("OperationCanceledError");
+        break;
+    case QNetworkReply::ContentOperationNotPermittedError :
+        qDebug()<<QString::fromLocal8Bit("IP or port error ");
+        emit sendErrorMsg("ContentOperationNotPermittedError");
         break;
     case QNetworkReply::AuthenticationRequiredError :
         qDebug()<<QString::fromLocal8Bit("FTP账号密码错误");
@@ -296,7 +303,15 @@ void Downloader::handleDownloadError(QNetworkReply::NetworkError error)
         qDebug()<<QString::fromLocal8Bit("要下载的文件不存在");
         emit sendErrorMsg("ContentNotFoundError");
         break;
-        // 其他错误处理ContentNotFoundError
+    case QNetworkReply::ConnectionRefusedError :
+        qDebug()<<QString::fromLocal8Bit("远程服务器拒绝连接");
+        emit sendErrorMsg("ConnectionRefusedError");
+        break;
+    case QNetworkReply::TimeoutError :
+        qDebug()<<QString::fromLocal8Bit("超时");
+        emit sendErrorMsg("TimeoutError");
+        break;
+        // 其他错误处理ContentNotFoundError ConnectionRefusedError
     default:
         qDebug()<<"Download error:";
         qDebug()<<error;
