@@ -69,10 +69,10 @@ Rectangle {
     }
     ListModel {
         id: pass2Model
-        ListElement {
-            i: 2
-            v: false
-        }
+//        ListElement {
+//            i: 2
+//            v: false
+//        }
     }
     ListModel {
         id: pass3Model
@@ -162,9 +162,11 @@ Rectangle {
         textItemText: "+"
         pos: pass2Model.count + pass1Model.count - 1
         onClicked: {
-            if(pass2Model.count + pass1Model.count < pass3Model.get(0).i){
-                pass2Model.append({"i": pass2Model.count + pass1Model.count,
-                                   "v": false});
+            if(scheduler.isPdbLoaded()){
+                if(pass2Model.count + pass1Model.count < pass3Model.get(0).i){
+                    pass2Model.append({"i": pass2Model.count + pass1Model.count,
+                                       "v": false});
+                }
             }
         }
     }
@@ -181,8 +183,10 @@ Rectangle {
 //            if(pass2Model.count > 0){
 //                pass2Model.remove(pass2Model.count - 1);
 //            }
-            if(pass2Model.count > 1){
-                pass2Model.remove(pass2Model.count - 1);
+            if(scheduler.isPdbLoaded()){
+                if(pass2Model.count > 1){
+                    pass2Model.remove(pass2Model.count - 1);
+                }
             }
         }
     }
@@ -266,7 +270,6 @@ Rectangle {
     function clear(){
         resetPass(rectangle);
         pass2Model.clear();
-        addBtn.clicked();
         currentIndex = -1;
     }
     function resetPass(item){
