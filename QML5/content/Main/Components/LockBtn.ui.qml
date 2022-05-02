@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.12
 
 Button {
@@ -36,8 +36,8 @@ Button {
         height: 18
         opacity: 0
         source: "../../images/unlock.png"
-        antialiasing: true
-        mipmap: true
+        antialiasing: false
+        mipmap: false
         fillMode: Image.Stretch
     }
 
@@ -48,8 +48,8 @@ Button {
         visible: true
         anchors.verticalCenter: parent.verticalCenter
         source: "../../images/lock.png"
-        antialiasing: true
-        mipmap: true
+        antialiasing: false
+        mipmap: false
         anchors.horizontalCenter: parent.horizontalCenter
         fillMode: Image.PreserveAspectFit
     }

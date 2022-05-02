@@ -66,7 +66,7 @@ Item {
                 y: -10
                 width: 363
                 height: 144
-                antialiasing: true
+                antialiasing: false
                 rectangle9Color: "#fafafa"
                 rectangle9X: 150
                 label4Color: "#000000"
@@ -114,7 +114,7 @@ Item {
                     color: "#00ffffff"
                     border.color: "#808080"
                     border.width: 1
-                    antialiasing: true
+                    antialiasing: false
                 }
 
                 Label {
@@ -205,7 +205,7 @@ Item {
                     color: "#00ffffff"
                     border.color: "#808080"
                     border.width: 1
-                    antialiasing: true
+                    antialiasing: false
                 }
 
                 Label {
@@ -295,7 +295,7 @@ Item {
                 y: myGroupTitle2.y
                 width: myGroupTitle2.width
                 height: myGroupTitle2.height
-                antialiasing: true
+                antialiasing: false
                 rectangle9Color: "#fafafa"
                 label4Text: "后焊枪"
                 label4Color: "#000000"
@@ -359,7 +359,7 @@ Item {
                     color: "#00ffffff"
                     border.color: "#808080"
                     border.width: 1
-                    antialiasing: true
+                    antialiasing: false
                 }
 
                 Label {
@@ -453,7 +453,7 @@ Item {
                     color: "#00ffffff"
                     border.color: "#808080"
                     border.width: 1
-                    antialiasing: true
+                    antialiasing: false
                 }
 
                 Label {

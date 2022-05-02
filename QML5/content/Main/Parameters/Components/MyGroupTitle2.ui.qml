@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 //import MotionControl
 import QtQuick.Studio.Components 1.0
@@ -12,7 +12,7 @@ Rectangle {
     border.color: "#808080"
     border.width: 1
     property alias label4FontpixelSize: label4.font.pixelSize
-    antialiasing: true
+    antialiasing: false
     property alias rectangle9Color: rectangle9.color
     property alias label4Color: label4.color
     property alias rectangle9X: rectangle9.x

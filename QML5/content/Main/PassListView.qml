@@ -69,10 +69,10 @@ Rectangle {
     }
     ListModel {
         id: pass2Model
-//        ListElement {
-//            i: 2
-//            v: false
-//        }
+        ListElement {
+            i: 2
+            v: false
+        }
     }
     ListModel {
         id: pass3Model
@@ -84,10 +84,10 @@ Rectangle {
             i: 9
             v: true
         }
-        ListElement {
-            i: 10
-            v: true
-        }
+//        ListElement {
+//            i: 10
+//            v: true
+//        }
     }
 
     ListView {
@@ -117,6 +117,7 @@ Rectangle {
         delegate: passDelegate
 
         onCountChanged: {
+            //console.log(pass2Model.count,pass2View.count)
             if(scheduler.isPdbLoaded())
             {
                 refreshPassName();
@@ -177,13 +178,18 @@ Rectangle {
         anchors.rightMargin: addBtn.anchors.leftMargin
         pos: pass2Model.count + pass1Model.count - 1
         onClicked: {
-            if(pass2Model.count > 0){
+//            if(pass2Model.count > 0){
+//                pass2Model.remove(pass2Model.count - 1);
+//            }
+            if(pass2Model.count > 1){
                 pass2Model.remove(pass2Model.count - 1);
             }
         }
     }
 
     function passListInitialize(){
+        pass2Model.clear();
+        refreshPassList();
         if(exclusiveGroup.checkedButton != null){
             exclusiveGroup.checkedButton.clicked();
             exclusiveGroup.checkedButton.checked = true;
@@ -192,8 +198,6 @@ Rectangle {
             pass1View.currentItem.clicked();
             pass1View.currentItem.checked = true;
         }
-        pass2Model.clear();
-        refreshPassList();
     }
 
     function refreshPassList(){
@@ -210,7 +214,9 @@ Rectangle {
         newCol += pass2Model.count;
         if(passFTableModel.fixedTablePopData(newCol, "flag")){
             while(passFTableModel.fixedTablePopData(newCol, "flag")){
+                //console.log("1:",pass2Model.count,pass2View.count)
                 addBtn.clicked();
+                //console.log("2:",pass2Model.count,pass2View.count)
                 newCol++;
             }
         }
@@ -260,6 +266,7 @@ Rectangle {
     function clear(){
         resetPass(rectangle);
         pass2Model.clear();
+        addBtn.clicked();
         currentIndex = -1;
     }
     function resetPass(item){
