@@ -93,7 +93,10 @@ bool Scheduler::setParamDb(QString s)
     if(this->pdb != nullptr)
         delete this->pdb;
     this->pdb = new ParamDatabase(s);
-    return true;
+    if(!pdb->isConnected())
+        return false;
+    else
+        return true;
 }
 
 
@@ -101,17 +104,19 @@ bool Scheduler::callParamDb(QUrl url)
 {
     QString file = url.toLocalFile();
 
-    setParamDb(file);
-
-    if(manager != nullptr){
-        manager->setModel(pdb);
+    if(setParamDb(file) && manager != nullptr){
+        if(!manager->setModel(pdb)){
+            qDebug()<<"can not read model, maybe file has errors!";
+            return false;
+        }
         manager->callFixedTablesInitialize();
         manager->callAngleTableInitialize();
         this->status = true;
+        return true;
     }
-    else
+    else{
         return false;
-    return true;
+    }
 }
 
 bool Scheduler::callUserDb()

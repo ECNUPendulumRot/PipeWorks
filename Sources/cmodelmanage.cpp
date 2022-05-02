@@ -1,4 +1,4 @@
-#include "cmodelmanage.h"
+﻿#include "cmodelmanage.h"
 
 #include <QDebug>
 
@@ -36,7 +36,7 @@ ModelManager::ModelManager(QString role)
 }
 
 
-void ModelManager::setModel(ParamDatabase* pdb)
+bool ModelManager::setModel(ParamDatabase* pdb)
 {
     if(pm != nullptr){
         pm->clear();
@@ -57,8 +57,10 @@ void ModelManager::setModel(ParamDatabase* pdb)
             delete indexToModel[i];
         indexToModel[i] = new TModel(mdb);
         indexToModel[i]->setTable(tableNames[i]);
-        indexToModel[i]->select();
+        if(!indexToModel[i]->select())
+            return false;
     }
+    return true;
 }
 
 
