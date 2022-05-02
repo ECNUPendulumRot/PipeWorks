@@ -46,7 +46,7 @@ Item {
         font.pixelSize: 18
         font.family: "Microsoft YaHei"
         verticalAlignment: Text.AlignVCenter
-        antialiasing: true
+        antialiasing: false
         placeholderTextColor: "#c1c1c1"
         leftPadding: 5
 

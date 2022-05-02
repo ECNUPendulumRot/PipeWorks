@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.12
 
 Button {
@@ -34,8 +34,8 @@ Button {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         source: "../../images/user.png"
-        antialiasing: true
-        mipmap: true
+        antialiasing: false
+        mipmap: false
         sourceSize.height: 256
         sourceSize.width: 256
         anchors.rightMargin: 5

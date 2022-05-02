@@ -424,7 +424,7 @@ Rectangle {
         //anchors.right: mainBar.right
         //anchors.top: mainBar.top
         //anchors.bottom: mainBar.bottom
-        antialiasing: true
+        antialiasing: false
         z: 4
 
         LogoutPopup{

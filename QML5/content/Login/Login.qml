@@ -52,9 +52,9 @@ Item {
                 }
                 source: "../images/DPLogin.png"
                 fillMode: Image.PreserveAspectFit
-                mipmap: true
+                mipmap: false
                 asynchronous: false
-                antialiasing: true
+                antialiasing: false
 
 
 
