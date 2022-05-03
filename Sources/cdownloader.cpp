@@ -28,7 +28,7 @@ void Downloader::put(const QString &fileName, const QString &path, QString metho
 
     pUrl.setPath(path);
     pReply = manager.put(QNetworkRequest(pUrl), transfromData);
-    ReplyTimeout::set(pReply, 10000);//reply time out
+    //ReplyTimeout::set(pReply, 10000);//reply time out
     if(method == "default"){
         connect(pReply, SIGNAL(uploadProgress(qint64, qint64)), this, SLOT(uploadProgress(qint64, qint64)));
         connect(pReply, SIGNAL(errorOccurred(QNetworkReply::NetworkError)), this, SLOT(handleError(QNetworkReply::NetworkError)));
@@ -48,7 +48,7 @@ void Downloader::get(const QString &path, const QString &fileName, QString metho
 
     pUrl.setPath(path);
     pReply = manager.get(QNetworkRequest(pUrl));
-    ReplyTimeout::set(pReply, 10000);//reply time out
+    //ReplyTimeout::set(pReply, 10000);//reply time out
     //connect(pReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
     if(method == "default"){
         connect(pReply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(downloadProgress(qint64, qint64)));
@@ -292,7 +292,7 @@ void Downloader::handleError(QNetworkReply::NetworkError error)
         emit sendErrorMsg("OperationCanceledError");
         break;
     case QNetworkReply::ContentOperationNotPermittedError :
-        qDebug()<<QString::fromLocal8Bit("IP or port error ");
+        qDebug()<<QString::fromLocal8Bit("不允许对远程内容请求的操作 ");
         emit sendErrorMsg("ContentOperationNotPermittedError");
         break;
     case QNetworkReply::AuthenticationRequiredError :
@@ -311,7 +311,31 @@ void Downloader::handleError(QNetworkReply::NetworkError error)
         qDebug()<<QString::fromLocal8Bit("超时");
         emit sendErrorMsg("TimeoutError");
         break;
-        // 其他错误处理ContentNotFoundError ConnectionRefusedError
+    case QNetworkReply::RemoteHostClosedError :
+        qDebug()<<QString::fromLocal8Bit("远程服务器在接收和处理整个回复之前提前关闭了连接");
+        emit sendErrorMsg("RemoteHostClosedError");
+        break;
+    case QNetworkReply::TemporaryNetworkFailureError :
+        qDebug()<<QString::fromLocal8Bit("由于与网络断开连接，连接中断，但系统已开始漫游到另一个接入点。应重新提交请求，并在重新建立连接后立即处理。");
+        emit sendErrorMsg("TemporaryNetworkFailureError");
+        break;
+    case QNetworkReply::ContentAccessDenied :
+        qDebug()<<QString::fromLocal8Bit("对远程内容的访问被拒绝（类似于 HTTP 错误 403）");
+        emit sendErrorMsg("ContentAccessDenied");
+        break;
+    case QNetworkReply::ContentConflictError :
+        qDebug()<<QString::fromLocal8Bit("the request could not be completed due to a conflict with the current state of the resource.");
+        emit sendErrorMsg("ContentConflictError");
+        break;
+    case QNetworkReply::ProtocolUnknownError :
+        qDebug()<<QString::fromLocal8Bit("the Network Access API cannot honor the request because the protocol is not known");
+        emit sendErrorMsg("ContentConflictError");
+        break;
+    case QNetworkReply::UnknownContentError :
+        qDebug()<<QString::fromLocal8Bit("an unknown error related to the remote content was detected");
+        emit sendErrorMsg("ContentConflictError");
+        break;
+        // 其他错误处理ContentConflictError
     default:
         qDebug()<<"Download error:";
         qDebug()<<error;
