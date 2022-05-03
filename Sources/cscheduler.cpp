@@ -115,6 +115,7 @@ bool Scheduler::callParamDb(QUrl url)
         return true;
     }
     else{
+        qDebug()<<"can not open file, maybe file has errors!";
         return false;
     }
 }
