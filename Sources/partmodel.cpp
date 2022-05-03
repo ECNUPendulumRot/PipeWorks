@@ -95,7 +95,7 @@ bool PartModel::setData(const QModelIndex &index, const QVariant &value, int rol
             if(this->flags(index) == (Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled)){
                 this->selection[index.row()][index.column()] = value.toBool();
                 emit dataChanged(index, index, QVector<int>({SelectionRole}));
-                emit partSelectChanged(index.row(), index.column(), value.toBool());
+                // emit partSelectChanged(index.row(), index.column(), value.toBool());
             }
             return true;
 
@@ -136,10 +136,11 @@ bool PartModel::changeSelectIndex(int index)
     else
         header.push_back(parameterCouple[index].name);
 
-    pullArray();
+    this->pullArray();
 
-    QString forWeb = this->webData();
-    emit this->dataReady(forWeb);
+    //QString forWeb = this->webData();
+
+    // TODO: change the method to emit the data
 
     return true;
 }
@@ -169,12 +170,17 @@ bool PartModel::pullArray()
         for(int k = 0; k < r.count(); k++){
             if( j < header.size() && r.fieldName(k) == header[j]){
                 this->array[i][j] = MapData(i, k, r.value(k));
-                emit partDataChanged(i, j, r.value(k));
+                // emit partDataChanged(i, j, r.value(k));
                 emit dataChanged(this->index(i, j), this->index(i, j), QVector<int>({Qt::DisplayRole, ChangeRole, DirtyRole}));
                 j++;
             }
         }
     }
+
+    QVariantList modelList = this->xyModel();
+    QVariantList legendList = this->legendModel();
+    emit this->dataReady(modelList, legendList);
+
     return true;
 }
 
@@ -229,8 +235,9 @@ void PartModel::createArray(unsigned int row, unsigned int col)
 
 void PartModel::deleteArray()
 {
+    emit dataDeleted();
     if(this->array == nullptr)
-        return;
+        return;+
     for(unsigned int i = 0; i < this->r; i++){
         delete [] this->array[i];
     }
@@ -326,6 +333,7 @@ void PartModel::callWriteBack()
     this->pushArray();
 }
 
+
 void PartModel::callFetchData()
 {
     this->pullArray();
@@ -337,7 +345,8 @@ void PartModel::clear()
     this->header.clear();
     this->deleteArray();
     this->releaseSelection();
-    emit dataReady("");
+
+    emit dataDeleted();
 }
 
 bool PartModel::isReady()
@@ -385,6 +394,30 @@ void PartModel::releaseSelection()
 
     delete this->selection;
     this->selection = nullptr;
+}
+
+
+QVariantList PartModel::xyModel()
+{
+    QVariantList list;
+
+    for(int i = 1; i < this->columnCount(); i++){
+        QVariantList l;
+        for(int j = 0; j < this->rowCount(); j ++)
+            l.append(this->array[j][i].v);
+        list.append(QVariant(l));
+    }
+
+    return list;
+}
+
+
+QVariantList PartModel::legendModel()
+{
+    QVariantList list;
+    for(int i = 1; i < this->header.size(); i++)
+        list.append(QVariant(this->header[i]));
+    return list;
 }
 
 

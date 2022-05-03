@@ -7,6 +7,7 @@ import "Components"
 import "Tables"
 import "Popups"
 import "Parameters"
+import "DraggableChartView"
 import "../Login"
 //import ModelCraft 1.0
 
@@ -39,15 +40,24 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.topMargin: 0
 
-        WebChart {
+//        WebChart {
+//            id: angleWebContainer
+//            anchors.fill:parent
+
+//            lock: lockBtn.checked
+//            onWebCallBack: (row, col, value) => refreshModelData(row, col,value)
+//        }
+        DraggableChart {
             id: angleWebContainer
-            anchors.fill:parent
 
-            lock: lockBtn.checked
-            onWebCallBack: (row, col, value) => refreshModelData(row, col,value)
+            anchors.fill: parent
+
+            locked: lockBtn.checked
+
+
         }
-    }
 
+    }
 
     Rectangle {
         id: angleTableWrapper
@@ -751,12 +761,12 @@ Rectangle {
     /// signals and functions
     ///
 
-    Connections {
-        target: scheduler
-        onModelDataReady: s => {
-            //console.log(s)
-            refreshAngleTable(s)}
-    }
+//    Connections {
+//        target: scheduler
+//        onModelDataReady: s => {
+//            //console.log(s)
+//            refreshAngleTable(s)}
+//    }
 
     Connections {
         target: downloader
@@ -766,8 +776,8 @@ Rectangle {
                 uploadDialog.completeBtn.cvisible = true;
                 uploadDialog.confirmBtn.cvisible = false;
                 uploadDialog.title = "传输完成"
-                          }
             }
+        }
     }
 
     Connections {
