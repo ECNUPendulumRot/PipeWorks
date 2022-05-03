@@ -25,8 +25,9 @@ Database::~Database()
 
 bool Database::createConnection(QString filename, QString type, QString pw)
 {
-    if(QSqlDatabase::isDriverAvailable(type))
+    if(QSqlDatabase::isDriverAvailable(type)){
         db = QSqlDatabase::addDatabase(type, filename);
+    }
 
     db.setDatabaseName(filename);
     db.setPassword(pw);

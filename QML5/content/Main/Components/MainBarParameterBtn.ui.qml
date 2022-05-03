@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.12
 import QtQuick.Studio.Effects 1.0
 
@@ -51,8 +51,8 @@ Button {
             height: 18
             anchors.top: parent.top
             source: "../../images/arrow.png"
-            antialiasing: true
-            mipmap: true
+            antialiasing: false
+            mipmap: false
             anchors.topMargin: 3
             anchors.horizontalCenter: parent.horizontalCenter
             fillMode: Image.PreserveAspectFit

@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.12
 import QtQuick.Studio.Effects 1.0
 
@@ -46,8 +46,8 @@ Button {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             source: "../../images/data.png"
-            antialiasing: true
-            mipmap: true
+            antialiasing: false
+            mipmap: false
             anchors.leftMargin: 8
             fillMode: Image.PreserveAspectFit
         }
@@ -61,8 +61,8 @@ Button {
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
             source: "../../images/arrow.png"
-            antialiasing: true
-            mipmap: true
+            antialiasing: false
+            mipmap: false
             anchors.rightMargin: 6
             fillMode: Image.PreserveAspectFit
         }

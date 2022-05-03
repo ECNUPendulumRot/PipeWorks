@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.12
 
 Button {
@@ -30,8 +30,8 @@ Button {
         height: 22
         anchors.verticalCenter: parent.verticalCenter
         source: "../../images/DpLogoMain.png"
-        antialiasing: true
-        mipmap: true
+        antialiasing: false
+        mipmap: false
         anchors.horizontalCenter: parent.horizontalCenter
         fillMode: Image.PreserveAspectFit
     }

@@ -1,4 +1,4 @@
-#ifndef CMODELMANAGE_H
+﻿#ifndef CMODELMANAGE_H
 #define CMODELMANAGE_H
 
 #include <QSqlTableModel>
@@ -25,7 +25,7 @@ public:
     /// \brief setModel
     /// \param db : database used to initialize model
     ///
-    void setModel(ParamDatabase *pdb);
+    bool setModel(ParamDatabase *pdb);
 
     void deleteModels();
 
