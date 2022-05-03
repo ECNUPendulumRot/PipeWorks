@@ -73,7 +73,7 @@ Button {
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#ebebeb"
+                color: "#fafafa"
                 border.color: "#00000000"
             }
         },

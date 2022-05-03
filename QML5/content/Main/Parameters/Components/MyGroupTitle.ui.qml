@@ -11,6 +11,7 @@ Rectangle {
     color: "#00ffffff"
     border.color: "#808080"
     border.width: 1
+    property alias rectangle1Color: rectangle1.color
     property alias labelFontpixelSize: label.font.pixelSize
     property alias labelColor: label.color
     property alias labelText: label.text
@@ -35,3 +36,9 @@ Rectangle {
         }
     }
 }
+
+/*##^##
+Designer {
+    D{i:0;height:360;width:352}
+}
+##^##*/

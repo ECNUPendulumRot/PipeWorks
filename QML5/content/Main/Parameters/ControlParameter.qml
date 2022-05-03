@@ -62,6 +62,7 @@ Item {
             y: 0
             width: 794
             height: 410
+            rectangle9Color: "#fafafa"
             label4FontpixelSize: 14
             label4Color: "#202020"
             label4Text: "控制参数配置"
@@ -217,6 +218,7 @@ Item {
             MyGroupTitle {
                 id: myGroupTitle
                 anchors.fill: parent
+                rectangle1Color: "#fafafa"
                 labelText: "前焊枪"
                 labelColor: "#202020"
             }
@@ -267,6 +269,7 @@ Item {
                 MyGroupTitle {
                     id: myGroupTitle1
                     anchors.fill: parent
+                    rectangle1Color: "#fafafa"
                     labelColor: "#202020"
                     labelText: "横向PID"
                 }
@@ -320,6 +323,7 @@ Item {
                 MyGroupTitle {
                     id: myGroupTitle3
                     anchors.fill: parent
+                    rectangle1Color: "#fafafa"
                     labelColor: "#202020"
                     labelText: "纵向PID"
                 }
@@ -481,6 +485,7 @@ Item {
             MyGroupTitle {
                 id: myGroupTitle4
                 anchors.fill: parent
+                rectangle1Color: "#fafafa"
                 labelText: "后焊枪"
                 labelColor: "#202020"
             }
@@ -532,6 +537,7 @@ Item {
                 MyGroupTitle {
                     id: myGroupTitle5
                     anchors.fill: parent
+                    rectangle1Color: "#fafafa"
                     labelColor: "#202020"
                     labelText: "横向PID"
                 }
@@ -585,6 +591,7 @@ Item {
                 MyGroupTitle {
                     id: myGroupTitle6
                     anchors.fill: parent
+                    rectangle1Color: "#fafafa"
                     labelColor: "#202020"
                     labelText: "纵向PID"
                 }
@@ -690,6 +697,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.5;height:410;width:794}
+    D{i:0;formeditorZoom:0.66;height:410;width:794}
 }
 ##^##*/

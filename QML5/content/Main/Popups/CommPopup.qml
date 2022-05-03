@@ -22,7 +22,7 @@ Popup {
         y: 0
         width: 581
         height: 290
-        color: "#ebebeb"
+        color: "#fafafa"
         border.width: 0
 
         MouseArea {
@@ -116,3 +116,9 @@ Popup {
     }
 
 }
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.66}
+}
+##^##*/

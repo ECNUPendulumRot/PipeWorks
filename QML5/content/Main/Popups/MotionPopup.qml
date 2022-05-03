@@ -20,7 +20,7 @@ Popup {
         id: backgroundRec
         width: 787
         height: 670
-        color: "#ebebeb"
+        color: "#fafafa"
         border.width: 0
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
@@ -150,6 +150,6 @@ Popup {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.25}
+    D{i:0;formeditorZoom:0.5}
 }
 ##^##*/

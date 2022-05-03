@@ -255,7 +255,7 @@ Item {
             Rectangle {
                 id: rectangle3
 
-                color: "#ebebeb"
+                color: "#fafafa"
                 border.width: 0
 
 
@@ -263,7 +263,7 @@ Item {
                     id: motionelse
                     width: 560
                     height: 440
-                    color: "#ebebeb"
+                    color: "transparent"
                     border.color: "#ffffff"
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
@@ -281,7 +281,7 @@ Item {
                             height: 180
                             label4FontpixelSize: 12
                             label4Color: "#202020"
-
+                            rectangle9Color: "#fafafa"
                         }
 
                         MyGroupTitle {
@@ -293,6 +293,7 @@ Item {
                             radius: 4
                             labelColor: "#202020"
                             labelText: "起弧前"
+                            rectangle1Color: "#fafafa"
                         }
 
                         ColumnLayout {
@@ -347,6 +348,7 @@ Item {
                             radius: 4
                             labelColor: "#202020"
                             labelText: "起弧后"
+                            rectangle1Color: "#fafafa"
                         }
 
                         ColumnLayout {
@@ -528,6 +530,7 @@ Item {
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "其他参数"
+                            rectangle9Color: "#fafafa"
                         }
                     }
 
@@ -608,6 +611,7 @@ Item {
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "机头切换"
+                            rectangle9Color: "#fafafa"
                         }
                     }
                 }
@@ -615,14 +619,14 @@ Item {
             Rectangle {
                 id: rectangle14
 
-                color: "#ebebeb"
+                color: "#fafafa"
                 border.width: 0
 
                 Rectangle {
                     id: motionleadH
                     width: 562
                     height: 491
-                    color: "#ebebeb"
+                    color: "#00000000"
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -663,7 +667,7 @@ Item {
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
-
+                            rectangle9Color: "#fafafa"
                     }
                     }
 
@@ -680,6 +684,7 @@ Item {
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "焊枪水平伸缩运动"
+                            rectangle9Color: "#fafafa"
                         }
 
                         GroupItem {
@@ -702,7 +707,7 @@ Item {
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#ebebeb"
+                                color: "#fafafa"
                                 border.color: "#00000000"
                                 Label {
                                     id: label
@@ -732,6 +737,7 @@ Item {
                                     anchors.fill: parent
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -788,6 +794,7 @@ Item {
                                     labelText: "向内缩枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -850,7 +857,7 @@ Item {
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#ebebeb"
+                                color: "#fafafa"
                                 border.color: "#00000000"
                                 Label {
                                     id: label2
@@ -880,6 +887,7 @@ Item {
                                     anchors.fill: parent
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -945,6 +953,7 @@ Item {
                                     labelText: "向内缩枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -998,14 +1007,14 @@ Item {
             Rectangle {
                 id: rectangle34
 
-                color: "#ebebeb"
+                color: "#fafafa"
                 border.width: 0
 
                 Rectangle {
                     id: motionleadV
                     width: 562
                     height: 491
-                    color: "#ebebeb"
+                    color: "#00000000"
                     border.color: "#000000"
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
@@ -1045,6 +1054,7 @@ Item {
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
                             label4FontpixelSize: 12
+                            rectangle9Color: "#fafafa"
                         }
                     }
                     GroupItem {
@@ -1070,7 +1080,7 @@ Item {
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#ebebeb"
+                                color: "#fafafa"
                                 border.color: "#00000000"
                                 Label {
                                     id: label4
@@ -1101,6 +1111,7 @@ Item {
                                     labelText: "向上抬枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -1154,6 +1165,7 @@ Item {
                                     labelText: "向下压枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -1212,7 +1224,7 @@ Item {
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#ebebeb"
+                                color: "#fafafa"
                                 border.color: "#00000000"
                                 Label {
                                     id: label5
@@ -1243,6 +1255,7 @@ Item {
                                     labelText: "向上抬枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -1297,6 +1310,7 @@ Item {
                                     labelText: "向下压枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -1348,6 +1362,7 @@ Item {
                             label4Color: "#202020"
                             label4Text: "焊枪竖直抬压运动"
                             label4FontpixelSize: 12
+                            rectangle9Color: "#fafafa"
                         }
                     }
                 }
@@ -1355,14 +1370,14 @@ Item {
             Rectangle {
                 id: rectangle24
 
-                color: "#ebebeb"
+                color: "#fafafa"
                 border.width: 0
 
                 Rectangle {
                     id: motiontrailH
                     width: 562
                     height: 491
-                    color: "#ebebeb"
+                    color: "#00000000"
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -1402,6 +1417,7 @@ Item {
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
+                            rectangle9Color: "#fafafa"
                         }
                     }
                     GroupItem {
@@ -1417,6 +1433,7 @@ Item {
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "焊枪水平伸缩运动"
+                            rectangle9Color: "#fafafa"
                         }
 
                         GroupItem {
@@ -1439,7 +1456,7 @@ Item {
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#ebebeb"
+                                color: "#fafafa"
                                 border.color: "#00000000"
                                 Label {
                                     id: label1
@@ -1469,6 +1486,7 @@ Item {
                                     anchors.fill: parent
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -1519,6 +1537,7 @@ Item {
                                     labelText: "向内缩枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -1577,7 +1596,7 @@ Item {
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#ebebeb"
+                                color: "#fafafa"
                                 border.color: "#00000000"
                                 Label {
                                     id: label3
@@ -1607,6 +1626,7 @@ Item {
                                     anchors.fill: parent
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -1667,6 +1687,7 @@ Item {
                                     labelText: "向内缩枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -1716,14 +1737,14 @@ Item {
             Rectangle {
                 id: rectangle44
 
-                color: "#ebebeb"
+                color: "#fafafa"
                 border.width: 0
 
                 Rectangle {
                     id: motiontrailV
                     width: 562
                     height: 491
-                    color: "#ebebeb"
+                    color: "#00000000"
                     border.color: "#000000"
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
@@ -1763,6 +1784,7 @@ Item {
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
                             label4FontpixelSize: 12
+                            rectangle9Color: "#fafafa"
                         }
                     }
                     GroupItem {
@@ -1788,7 +1810,7 @@ Item {
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#ebebeb"
+                                color: "#fafafa"
                                 border.color: "#00000000"
                                 Label {
                                     id: label6
@@ -1819,6 +1841,7 @@ Item {
                                     labelText: "向上抬枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -1869,6 +1892,7 @@ Item {
                                     labelText: "向下压枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -1927,7 +1951,7 @@ Item {
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#ebebeb"
+                                color: "#fafafa"
                                 border.color: "#00000000"
                                 Label {
                                     id: label7
@@ -1958,6 +1982,7 @@ Item {
                                     labelText: "向上抬枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -2012,6 +2037,7 @@ Item {
                                     labelText: "向下压枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
+                                    rectangle1Color: "#fafafa"
                                 }
 
                                 MyEditLine {
@@ -2063,6 +2089,7 @@ Item {
                             label4Color: "#202020"
                             label4Text: "焊枪竖直抬压运动"
                             label4FontpixelSize: 12
+                            rectangle9Color: "#fafafa"
                         }
                     }
                 }
@@ -2093,6 +2120,7 @@ Item {
             label4FontpixelSize: 14
             label4Color: "#202020"
             label4Text: "运动参数配置"
+            rectangle9Color: "#fafafa"
         }
 
     }
@@ -2321,6 +2349,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.66}
+    D{i:0;formeditorZoom:0.66;height:570;width:712}
 }
 ##^##*/

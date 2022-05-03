@@ -17,7 +17,7 @@ Popup {
     background: backgroundRec
     Rectangle {
         id: backgroundRec
-        color: "#ebebeb"
+        color: "#fafafa"
         border.width: 0
         anchors.fill: parent
 
