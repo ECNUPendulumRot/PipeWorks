@@ -40,8 +40,6 @@ int PartModel::columnCount(const QModelIndex &parent) const
 QHash<int, QByteArray> PartModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
-    roles[RowRole] = "row";
-    roles[ColumnRole] = "column";
     roles[DirtyRole] = "isDirty";
     roles[ChangeRole] = "isChanged";
     roles[SelectionRole] = "isSelect";
@@ -58,10 +56,6 @@ QVariant PartModel::data(const QModelIndex &index, int role) const
     if (!index.isValid())
         return QVariant();
     switch(role){
-    case ColumnRole:
-        return index.column();
-    case RowRole:
-        return index.row();
     case ChangeRole:
         return !(this->connectedTable->data(this->connectedTable->index(m.map_r,m.map_c)).toString() == m.v.toString());
     case DirtyRole:
@@ -86,11 +80,11 @@ bool PartModel::setData(const QModelIndex &index, const QVariant &value, int rol
             emit dataChanged(index, index, QVector<int>({Qt::DisplayRole, ChangeRole, DirtyRole}));
             emit partDataChanged(index.row(), index.column(), value);
             return true;
-        case Qt::DisplayRole:
-            this->array[index.row()][index.column()].v = value;
-            emit dataChanged(index, index, QVector<int>({Qt::DisplayRole, ChangeRole}));
-            emit partDataChanged(index.row(), index.column(), value);
-            return true;
+//        case Qt::DisplayRole:
+//            this->array[index.row()][index.column()].v = value;
+//            emit dataChanged(index, index, QVector<int>({Qt::DisplayRole, ChangeRole}));
+//            emit partDataChanged(index.row(), index.column(), value);
+//            return true;
         case SelectionRole:
             if(this->flags(index) == (Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled)){
                 this->selection[index.row()][index.column()] = value.toBool();

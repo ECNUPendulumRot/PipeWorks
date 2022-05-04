@@ -31,7 +31,7 @@ Rectangle {
 
     Rectangle {
         id: webEngineWrapper
-        color: "#858585"
+        color: "#DBDBDB"
         border.width: 0
         anchors.left: passListView.right
         anchors.right: angleTableWrapper.left
@@ -53,7 +53,8 @@ Rectangle {
             anchors.fill: parent
 
             locked: lockBtn.checked
-
+            backgroundColor: webEngineWrapper.color
+            // plotRec: Qt.rect(webEngineWrapper.x, webEngineWrapper.y, webEngineWrapper.x + webEngineWrapper.width, webEngineWrapper.y + webEngineWrapper.height)
 
         }
 
@@ -755,13 +756,6 @@ Rectangle {
     /// signals and functions
     ///
 
-//    Connections {
-//        target: scheduler
-//        onModelDataReady: s => {
-//            //console.log(s)
-//            refreshAngleTable(s)}
-//    }
-
     Connections {
         target: downloader
         onUpProgress: (bytesSent, bytesTotal)=> {
@@ -820,6 +814,8 @@ Rectangle {
 
         scheduler.callParamDb(file);
 
+        angleRelatedTableModel.onDataReady.connect((m, l) => { refreshAngleTable() })
+
         fixedTable.establishConnection()
 
         angleWebContainer.connectToModel();
@@ -840,14 +836,14 @@ Rectangle {
     }
 
     /// refresh angletable and webview
-    function refreshAngleTable(s){
+    function refreshAngleTable(){
         if(angleTableContainer.source !== ""){
             destroyAngleTable();
             console.log(angleTableContainer.source)
         }
         createAngleTable();
 
-        angleWebContainer.refreshWebTable(s)
+        // angleWebContainer.refreshWebTable()
     }
 
     function disconnect(){

@@ -25,23 +25,24 @@ Rectangle {
         id: dragArea
         anchors.fill: parent
 
-        drag.target: control
-        drag.axis: Drag.YAxis
+        preventStealing: true
+        propagateComposedEvents: false
+
+        drag{
+            target: control
+            axis: Drag.YAxis
+        }
 
         onClicked: {
             console.log(control.x + control.width/2, control.y + control.width/2)
         }
 
-        // onPressAndHold: dragged()
-        //onPressed: dragged
-
     }
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////  signals and functions  ////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // signal dragged()
+    signal dragged(real x, real y)
 
     function setDragMinMax(min, max){
         dragArea.drag.minimumY = min

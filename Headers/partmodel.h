@@ -38,9 +38,7 @@ public:
     // Basic functionality:
 
     enum TableRoles{
-        ColumnRole = Qt::UserRole + 1,
-        RowRole,
-        DirtyRole,
+        DirtyRole = Qt::UserRole + 1,
         ChangeRole,
         SelectionRole
     };

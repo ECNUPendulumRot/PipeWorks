@@ -10,8 +10,26 @@ Item {
     ///
 
     property bool locked: false
-
+    property alias backgroundColor: chart.backgroundColor
     property int seriesCount: 0
+
+    readonly property var eng2Chn : {    "angle":                "角度",
+                                         "stayLeftTime_Lead":    "前枪左边停时间",
+                                         "stayRightTime_Lead":   "前枪右边停时间",
+                                         "stayLeftTime_Trail":   "后枪左边停时间",
+                                         "stayRightTime_Trail":  "后枪右边停时间",
+                                         "oscWidth_Lead":        "前枪摆宽",
+                                         "oscWidth_Trail":       "后枪摆宽",
+                                         "oscFreq_Lead":         "前枪摆动频率",
+                                         "oscFreq_Trail":        "后枪摆动频率",
+                                         "feedRate_Lead":        "前枪送丝速度",
+                                         "feedRate_Trail":       "后枪送丝速度",
+                                         "Arc_Rate_Lead":        "前枪电弧修正",
+                                         "Arc_Rate_Trail":       "后枪电弧修正",
+                                         "leadTargetCur":        "前枪干伸高度值",
+                                         "trailTargetCur":       "后枪干伸高度值",
+                                         "carACC":               "小车加速度",
+                                         "carSPEED":             "小车速度"}
 
     Component {
         id: modelC
@@ -27,7 +45,10 @@ Item {
 
             required property LineSeries chartSeries
 
+            required property int chartSeriesIndex
+
             required property color enabledColor
+
 
             // required property color disabledColor
 
@@ -35,6 +56,7 @@ Item {
 
             Dragger {
                 property real chartWidth: chart.width
+
                 property real chartHeight: chart.height
 
                 property bool adjustEnabled: false
@@ -49,14 +71,28 @@ Item {
                 onChartHeightChanged: adjustToPoint(this, repeaterC.chartSeries, index)
 
                 onYChanged:{
-                    if(this.active || this.adjustEnabled){
+                    if(active || adjustEnabled){
                         adjustToDragger(this, repeaterC.chartSeries, index)
                     }
                 }
+
+                // onActiveChanged: if(active === false) dragged(control.x, control.y)
+
+                // TODO: finish return
+                onActiveChanged: {
+                    if(active === false){
+                        let point = repeaterC.chartSeries.at(index)
+                        let p = chart.mapToPosition(point, repeaterC.chartSeries)
+                        p.y = y + height/2
+                        let p_dragged = chart.mapToValue(p, repeaterC.chartSeries)
+                        console.log("dragger index: " + index + " series index: " + repeaterC.chartSeriesIndex + " changed value: " + p_dragged.y)
+                        angleRelatedTableModel.callSetData(index, repeaterC.chartSeriesIndex + 1, (Math.round(p_dragged.y * 100) / 100).toFixed(2))
+                    }
+               }
             }
 
             Component.onCompleted: {
-                console.log(chart.mapToPosition(repeaterC.chartSeries.at(1), repeaterC.chartSeries))
+                //console.log(chart.mapToPosition(repeaterC.chartSeries.at(1), repeaterC.chartSeries))
             }
         }
     }
@@ -64,6 +100,8 @@ Item {
     DynamicChart {
         id: chart
         anchors.fill: parent
+
+        margins.top: 40
     }
 
     ListModel {
@@ -95,6 +133,7 @@ Item {
 
             onToggled: {
                 model.l_series.visible = !cLegend.checked
+                model.d_series.enabled = !cLegend.checked
             }
 
             Component.onCompleted: {
@@ -112,18 +151,20 @@ Item {
 
     // TODO: use dragger to adjust the point
     function connectToModel(){
-        //angleRelatedTableModel.modelDataChanged.connect(refreshWebTable)
         angleRelatedTableModel.partDataChanged.connect((r, c, v) => {
-                                                           let d_series = seriesList.get(c - 1).d_series
-                                                           let item = d_series.itemAt(r)
-                                                           let l_series = d_series.chartSeries
+                                                            console.log("column:" + c)
+                                                            console.log((seriesList.get(c - 1)).name)
+                                                            let d_series = seriesList.get(c - 1).d_series
+                                                            let item = d_series.itemAt(r)
+                                                             console.log("row:" + r)
+                                                            let l_series = d_series.chartSeries
 
-                                                           item.adjustEnabled = true
-                                                           let point = l_series.at(r)
-                                                           point.y = v
-                                                           let p = chart.mapToPosition(point, l_series)
-                                                           item.y = p.y - item.height/2
-                                                           item.adjustEnabled = false
+                                                            item.adjustEnabled = true
+                                                            let point = l_series.at(r)
+                                                            point.y = v
+                                                            let p = chart.mapToPosition(point, l_series)
+                                                            item.y = p.y - item.height/2
+                                                            item.adjustEnabled = false
                                                        })
         angleRelatedTableModel.dataDeleted.connect(deleteDraggableSeries)
         angleRelatedTableModel.dataReady.connect(createDraggableSeries)
@@ -161,7 +202,7 @@ Item {
         series.replace(series.at(index).x, series.at(index).y,  // old position
                        series.at(index).x, value)               // new position
 
-        // adjustAxis()
+        adjustAxis()
     }
 
     function adjustAxis(){
@@ -176,10 +217,17 @@ Item {
         }
 
         let mma = minMaxAvg(model)
-        let y_min = mma[0] - mma[2] - 1, y_max = mma[1] + mma[2] + 1
+        let y_min = mma[0] - mma[2]/2 - 1, y_max = mma[1] + mma[2]/2 + 1
         chart.adjustAxis({"miny": Math.floor(y_min),
                           "maxy": Math.ceil(y_max),})
     }
+
+
+    // TODO: callback
+    function callBack(row, col, value){
+        //view.webCallBack(row, col, value);
+    }
+
 
 /////////////////////////////////////////////////  Dynamic  //////////////////////////////////////////////////
 
@@ -195,7 +243,8 @@ Item {
         modelList.shift()
         let x_min = x_series[0], x_max = x_series[x_series.length - 1]
         let mma = minMaxAvg(modelList)
-        let y_min = mma[0] - mma[2] - 1, y_max = mma[1] + mma[2] + 1
+        let y_min = mma[0] - mma[2]/10 - 1, y_max = mma[1] + mma[2]/10 + 1
+        console.log("y_min:" + y_min + "  y_max: " + y_max)
         chart.adjustAxis({"minx": x_min,
                           "maxx": x_max,
                           "miny": Math.floor(y_min),
@@ -205,11 +254,11 @@ Item {
         for(let i = 0; i < seriesCount; i++){
             let model  = createModel(x_series, modelList[i])
             let series = createSeries(model, legendList[i])
-            let d_series = createDragSeries(series, model)
-            series.onPointReplaced.connect((index) => {
-                adjustToPoint(d_series.itemAt(index), series, index)
-            })
-            seriesList.append({"name": legendList[i], "color": String(series.color), "l_series": series, "d_series": d_series})
+            let d_series = createDragSeries(series, model, i)
+//            series.onPointReplaced.connect((index) => {
+//                adjustToPoint(d_series.itemAt(index), series, index)
+//            })
+            seriesList.append({"name": eng2Chn[legendList[i]], "color": String(series.color), "l_series": series, "d_series": d_series})
         }
     }
 
@@ -221,6 +270,7 @@ Item {
             chart.removeSeries(seriesList.get(i).l_series)
         }
         seriesList.clear()
+        legendView.width = 0
         control.seriesCount = 0
     }
 
@@ -240,8 +290,8 @@ Item {
     }
 
     // create a dragSeries
-    function createDragSeries(series, model){
-        var d_series = dragC.createObject(chart, {chartSeries: series, enabledColor: series.color, enabled: control.locked})
+    function createDragSeries(series, model, index){
+        var d_series = dragC.createObject(chart, {chartSeries: series, chartSeriesIndex:index, enabledColor: series.color, enabled: control.locked})
         return d_series
     }
 
@@ -252,7 +302,7 @@ Item {
     function minMaxAvg(modelList){
         var min = modelList[0][0], max = modelList[0][0], avg = 0
 
-        for(let i = 1; i < modelList.length; i++){
+        for(let i = 0; i < modelList.length; i++){
             let tmp_min = extreme(modelList[i], false),
                 tmp_max = extreme(modelList[i], true),
                 tmp_avg = average(modelList[i])

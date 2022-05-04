@@ -7,7 +7,6 @@ ChartView {
     legend.visible: false
 
     animationOptions: ChartView.SeriesAnimations
-
     antialiasing: true
 
     property bool axisReady: false
@@ -18,12 +17,17 @@ ChartView {
         min: 0
         max: 10
         tickCount: 10
+        gridLineColor: "#8f8f8f"
+        color: "#8f8f8f"
+        labelFormat: "%d"
     }
 
     ValueAxis {
         id: axisy
         min: 0
         max: 10
+        gridLineColor: axisx.gridLineColor
+        color: axisx.color
         tickCount: 10
     }
 
