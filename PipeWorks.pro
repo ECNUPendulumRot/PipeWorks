@@ -48,8 +48,6 @@ mac {
 RESOURCES += Resources.qrc\
              $$files(QML5/*)
 
-QTQUICK_COMPILER_SKIPPED_RESOURCES += bundle_only.qrc
-
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
