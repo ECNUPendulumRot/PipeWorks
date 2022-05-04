@@ -254,7 +254,6 @@ Item {
             else
                 return (view.width - angle_width)/(view.columns - 1)
         }
-        //TODO : load model
 
         model: angleRelatedTableModel
 

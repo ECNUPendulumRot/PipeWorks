@@ -121,7 +121,6 @@ bool PartModel::changeSelectIndex(int index)
         return false;
 
     this->header.clear();
-    //QList<QString> l;
     header.push_back("angle");
     if(parameterCouple[index].isCouple){
         header.push_back((index == 8 ? "lead"  : "") + parameterCouple[index].name + (index == 8 ? ""  : "_Lead"));
@@ -131,10 +130,6 @@ bool PartModel::changeSelectIndex(int index)
         header.push_back(parameterCouple[index].name);
 
     this->pullArray();
-
-    //QString forWeb = this->webData();
-
-    // TODO: change the method to emit the data
 
     return true;
 }

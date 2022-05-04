@@ -76,9 +76,6 @@ Item {
                     }
                 }
 
-                // onActiveChanged: if(active === false) dragged(control.x, control.y)
-
-                // TODO: finish return
                 onActiveChanged: {
                     if(active === false){
                         let point = repeaterC.chartSeries.at(index)
@@ -149,7 +146,6 @@ Item {
 
 ///////////////////////////////////////////////  Initialization  //////////////////////////////////////////////
 
-    // TODO: use dragger to adjust the point
     function connectToModel(){
         angleRelatedTableModel.partDataChanged.connect((r, c, v) => {
                                                             console.log("column:" + c)

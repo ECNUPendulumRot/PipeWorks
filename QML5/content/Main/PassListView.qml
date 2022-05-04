@@ -45,6 +45,7 @@ Rectangle {
             text: "焊道"
             ButtonGroup.group: exclusiveGroup
             anchors.horizontalCenterOffset: 0
+
             anchors.horizontalCenter: parent.horizontalCenter
 
             onClicked: switchPass(col)
