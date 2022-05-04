@@ -1,4 +1,4 @@
-QT       += core gui sql qml quick webchannel quickcontrols2 widgets
+QT       += core gui sql qml quick quickcontrols2 widgets
 
 CONFIG += qtquickcompiler c++17
 
@@ -46,8 +46,7 @@ mac {
 }
 
 RESOURCES += Resources.qrc\
-             $$files(QML5/*) \
-             bundle_only.qrc
+             $$files(QML5/*)
 
 QTQUICK_COMPILER_SKIPPED_RESOURCES += bundle_only.qrc
 
