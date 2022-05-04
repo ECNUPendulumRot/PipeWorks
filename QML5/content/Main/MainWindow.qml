@@ -195,7 +195,6 @@ Rectangle {
 
     }
 
-
     DbConnectBtn {
         id: dbConnectBtn
         width: 120
@@ -352,7 +351,6 @@ Rectangle {
         }
     }
 
-
     CancelBtn {
         id: revokeButton
 
@@ -396,8 +394,6 @@ Rectangle {
             }
         }
     }
-
-
 
     SubmitBtn {
         id: submitSingleButton
@@ -552,7 +548,6 @@ Rectangle {
 //        }
     }
 
-
     CommPopup {
         id: commPop
 
@@ -647,7 +642,6 @@ Rectangle {
             downloadDialog.close()
         }
     }
-
 
     FtpDialog {
         id:ftpDialog
@@ -821,8 +815,6 @@ Rectangle {
                 onePassComplete.completeBtn.visible =true;
             }
     }
-
-
 
     function mainLoadDb(file){
 

@@ -11,7 +11,6 @@ Item {
 
     property bool locked: false
 
-
     property int seriesCount: 0
 
     Component {
@@ -38,6 +37,8 @@ Item {
                 property real chartWidth: chart.width
                 property real chartHeight: chart.height
 
+                property bool adjustEnabled: false
+
                 enabled: repeaterC.enabled  // control whether user can drag
 
                 visible: repeaterC.chartSeries.visible
@@ -48,7 +49,7 @@ Item {
                 onChartHeightChanged: adjustToPoint(this, repeaterC.chartSeries, index)
 
                 onYChanged:{
-                    if(this.active){
+                    if(this.active || this.adjustEnabled){
                         adjustToDragger(this, repeaterC.chartSeries, index)
                     }
                 }
@@ -62,7 +63,6 @@ Item {
 
     DynamicChart {
         id: chart
-
         anchors.fill: parent
     }
 
@@ -110,12 +110,24 @@ Item {
 
 ///////////////////////////////////////////////  Initialization  //////////////////////////////////////////////
 
+    // TODO: use dragger to adjust the point
     function connectToModel(){
         //angleRelatedTableModel.modelDataChanged.connect(refreshWebTable)
-        angleRelatedTableModel.partDataChanged.connect((r, c, v) => {adjustSeries(c - 1, r, v)
-                                                       })
-    }
+        angleRelatedTableModel.partDataChanged.connect((r, c, v) => {
+                                                           let d_series = seriesList.get(c - 1).d_series
+                                                           let item = d_series.itemAt(r)
+                                                           let l_series = d_series.chartSeries
 
+                                                           item.adjustEnabled = true
+                                                           let point = l_series.at(r)
+                                                           point.y = v
+                                                           let p = chart.mapToPosition(point, l_series)
+                                                           item.y = p.y - item.height/2
+                                                           item.adjustEnabled = false
+                                                       })
+        angleRelatedTableModel.dataDeleted.connect(deleteDraggableSeries)
+        angleRelatedTableModel.dataReady.connect(createDraggableSeries)
+    }
 
 ///////////////////////////////////////////////////  Adjust  //////////////////////////////////////////////////
 
@@ -174,6 +186,8 @@ Item {
     // this will alse create the axis for the modelList, with policy of max + avg + 1 and min - avg - 1
     function createDraggableSeries(modelList, legendList){
 
+        console.log(modelList)
+        console.log(legendList)
         seriesCount = modelList.length - 1
 
         // create series

@@ -214,7 +214,6 @@ bool PartModel::refresh()
 
 
 // array create and destroy
-// these two must call as pair
 void PartModel::createArray(unsigned int row, unsigned int col)
 {
     beginResetModel();
@@ -237,7 +236,7 @@ void PartModel::deleteArray()
 {
     emit dataDeleted();
     if(this->array == nullptr)
-        return;+
+        return;
     for(unsigned int i = 0; i < this->r; i++){
         delete [] this->array[i];
     }
@@ -401,7 +400,7 @@ QVariantList PartModel::xyModel()
 {
     QVariantList list;
 
-    for(int i = 1; i < this->columnCount(); i++){
+    for(int i = 0; i < this->columnCount(); i++){
         QVariantList l;
         for(int j = 0; j < this->rowCount(); j ++)
             l.append(this->array[j][i].v);
@@ -433,7 +432,7 @@ QString PartModel::webData()
     if(this->columnCount() < 3)
         s += "null ";
 
-    for(int i = 1; i < this->columnCount(); i++){
+    for(int i = 0; i < this->columnCount(); i++){
         for(int j = 0; j < this->rowCount(); j ++)
             s += this->array[j][i].v.toString() + " ";
     }

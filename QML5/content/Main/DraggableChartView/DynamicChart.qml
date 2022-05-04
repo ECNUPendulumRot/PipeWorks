@@ -6,7 +6,7 @@ ChartView {
 
     legend.visible: false
 
-    animationOptions: ChartView.AllAnimations
+    animationOptions: ChartView.SeriesAnimations
 
     antialiasing: true
 
