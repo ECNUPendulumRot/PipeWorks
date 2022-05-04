@@ -236,8 +236,8 @@ bool Scheduler::registerPartModel(PartModel *m, QString s)
 {
     if(engine !=  nullptr){
         engine->rootContext()->setContextProperty(s, m);
-        QObject::connect(m, &PartModel::dataReady,
-                         this,  &Scheduler::modelDataReady);
+//        QObject::connect(m, &PartModel::dataReady,
+//                         this,  &Scheduler::modelDataReady);
         return true;
     }
     else

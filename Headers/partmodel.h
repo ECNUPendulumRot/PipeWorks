@@ -38,9 +38,7 @@ public:
     // Basic functionality:
 
     enum TableRoles{
-        ColumnRole = Qt::UserRole + 1,
-        RowRole,
-        DirtyRole,
+        DirtyRole = Qt::UserRole + 1,
         ChangeRole,
         SelectionRole
     };
@@ -91,7 +89,7 @@ public:
 
     bool isReady();
 
-    QString webData();
+
 
 public slots:
 
@@ -111,13 +109,20 @@ public slots:
 
 signals:
 
-    void dataReady(QString s);
+    void dataReady(QVariantList modelList, QVariantList legendList);
 
     void partDataChanged(int r, int c, QVariant v);
 
-    void partSelectChanged(int r, int c, bool b);
+    void dataDeleted();
+    // void partSelectChanged(int r, int c, bool b);
 
 private:
+
+    QVariantList xyModel();
+
+    QVariantList legendModel();
+
+    QString webData();
 
     // selection related operation
     bool **selection = nullptr;

@@ -29,7 +29,7 @@ Rectangle {
         //x: 8
         width: 35
         height: 30
-        anchors{
+        anchors {
          verticalCenter: parent.verticalCenter
          left: parent.left
          leftMargin: 8

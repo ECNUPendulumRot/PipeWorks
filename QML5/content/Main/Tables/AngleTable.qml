@@ -237,12 +237,14 @@ Item {
 
         width: parent.width
 
-        anchors.left: checkboxView.right
-        anchors.right: parent.right
-        anchors.top: header.bottom
-        anchors.bottom: calculation.bottom
-        anchors.bottomMargin: 0
-        anchors.rightMargin: 0
+        anchors {
+            left: checkboxView.right
+            right: parent.right
+            top: header.bottom
+            bottom: calculation.bottom
+            bottomMargin: 0
+            rightMargin: 0
+        }
 
         columnWidthProvider: function (column) {
             var angle_width = 40
@@ -252,9 +254,9 @@ Item {
             else
                 return (view.width - angle_width)/(view.columns - 1)
         }
-        //TODO : load model
 
         model: angleRelatedTableModel
+
         flickableDirection: Flickable.VerticalFlick
         clip: true
         reuseItems: true

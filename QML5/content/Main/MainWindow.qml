@@ -7,6 +7,7 @@ import "Components"
 import "Tables"
 import "Popups"
 import "Parameters"
+import "DraggableChartView"
 import "../Login"
 //import ModelCraft 1.0
 
@@ -30,7 +31,7 @@ Rectangle {
 
     Rectangle {
         id: webEngineWrapper
-        color: "#858585"
+        color: "#DBDBDB"
         border.width: 0
         anchors.left: passListView.right
         anchors.right: angleTableWrapper.left
@@ -39,15 +40,25 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.topMargin: 0
 
-        WebChart {
+//        WebChart {
+//            id: angleWebContainer
+//            anchors.fill:parent
+
+//            lock: lockBtn.checked
+//            onWebCallBack: (row, col, value) => refreshModelData(row, col,value)
+//        }
+        DraggableChart {
             id: angleWebContainer
-            anchors.fill:parent
 
-            lock: lockBtn.checked
-            onWebCallBack: (row, col, value) => refreshModelData(row, col,value)
+            anchors.fill: parent
+
+            locked: lockBtn.checked
+            backgroundColor: webEngineWrapper.color
+            // plotRec: Qt.rect(webEngineWrapper.x, webEngineWrapper.y, webEngineWrapper.x + webEngineWrapper.width, webEngineWrapper.y + webEngineWrapper.height)
+
         }
-    }
 
+    }
 
     Rectangle {
         id: angleTableWrapper
@@ -184,7 +195,6 @@ Rectangle {
         commParamBtn.onClicked: commPop.open();
 
     }
-
 
     DbConnectBtn {
         id: dbConnectBtn
@@ -342,7 +352,6 @@ Rectangle {
         }
     }
 
-
     CancelBtn {
         id: revokeButton
 
@@ -386,8 +395,6 @@ Rectangle {
             }
         }
     }
-
-
 
     SubmitBtn {
         id: submitSingleButton
@@ -542,7 +549,6 @@ Rectangle {
 //        }
     }
 
-
     CommPopup {
         id: commPop
 
@@ -637,7 +643,6 @@ Rectangle {
             downloadDialog.close()
         }
     }
-
 
     FtpDialog {
         id:ftpDialog
@@ -752,13 +757,6 @@ Rectangle {
     ///
 
     Connections {
-        target: scheduler
-        onModelDataReady: s => {
-            //console.log(s)
-            refreshAngleTable(s)}
-    }
-
-    Connections {
         target: downloader
         onUpProgress: (bytesSent, bytesTotal)=> {
             uploadDialog.progressBarValue = bytesSent/bytesTotal
@@ -766,8 +764,8 @@ Rectangle {
                 uploadDialog.completeBtn.cvisible = true;
                 uploadDialog.confirmBtn.cvisible = false;
                 uploadDialog.title = "传输完成"
-                          }
             }
+        }
     }
 
     Connections {
@@ -812,11 +810,11 @@ Rectangle {
             }
     }
 
-
-
     function mainLoadDb(file){
 
         scheduler.callParamDb(file);
+
+        angleRelatedTableModel.onDataReady.connect((m, l) => { refreshAngleTable() })
 
         fixedTable.establishConnection()
 
@@ -838,14 +836,14 @@ Rectangle {
     }
 
     /// refresh angletable and webview
-    function refreshAngleTable(s){
+    function refreshAngleTable(){
         if(angleTableContainer.source !== ""){
             destroyAngleTable();
             console.log(angleTableContainer.source)
         }
         createAngleTable();
 
-        angleWebContainer.refreshWebTable(s)
+        // angleWebContainer.refreshWebTable()
     }
 
     function disconnect(){
