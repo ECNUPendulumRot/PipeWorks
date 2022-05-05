@@ -74,14 +74,15 @@ ComboBox {
             radius: 4
 
 
-            layer.enabled: true
-            layer.effect: DropShadowEffect {
-                color: "#3f000000"
-                radius: 12
-                spread: 0.1
-                verticalOffset: 1.5
-                horizontalOffset: 0
-            }
+//            layer.enabled: true
+//            layer.effect: DropShadowEffect {
+//                color: "#3f000000"
+//                radius: 8
+//                samples: 17
+//                spread: 0
+//                verticalOffset: 0
+//                horizontalOffset: 0
+//            }
         }
     }
 
@@ -133,8 +134,9 @@ ComboBox {
         layer.effect: DropShadowEffect {
             id: dropShadow
             color: "#3f000000"
-            radius: 12
-            spread: 0.2
+            radius: 8
+            samples: 17
+            spread: 0
             verticalOffset: 1.5
             horizontalOffset: 0
         }

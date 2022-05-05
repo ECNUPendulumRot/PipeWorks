@@ -5,11 +5,14 @@ TextField {
     id: textField
     width: 60
     height: 30
+
+    property alias backgroundColor: bg.color
+
     color: "#0d0d0d"
     font.pixelSize: 12
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
-    font.family: "Courier"
+    font.family: "Microsoft YaHei"
     font.weight: Font.Medium
     placeholderText: "0.00"
 

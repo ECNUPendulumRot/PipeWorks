@@ -23,10 +23,12 @@ Button {
         layer.effect: DropShadowEffect {
             id: dropShadow
             radius: 8
+            spread: 0
+            samples: 17
             verticalOffset: 0
             horizontalOffset: 0
             color: "#3c000000"
-            spread: 0.2
+
         }
     }
 
