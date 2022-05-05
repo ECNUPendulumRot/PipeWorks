@@ -31,7 +31,7 @@ Rectangle {
 
     Rectangle {
         id: webEngineWrapper
-        color: "#DBDBDB"
+        color: "#f9f9f9"
         border.width: 0
         anchors.left: passListView.right
         anchors.right: angleTableWrapper.left
@@ -41,14 +41,14 @@ Rectangle {
         anchors.topMargin: 0
 
 //        WebChart {
-//            id: angleWebContainer
+//            id: angleChart
 //            anchors.fill:parent
 
 //            lock: lockBtn.checked
 //            onWebCallBack: (row, col, value) => refreshModelData(row, col,value)
 //        }
         DraggableChart {
-            id: angleWebContainer
+            id: angleChart
 
             anchors.fill: parent
 
@@ -57,14 +57,13 @@ Rectangle {
             // plotRec: Qt.rect(webEngineWrapper.x, webEngineWrapper.y, webEngineWrapper.x + webEngineWrapper.width, webEngineWrapper.y + webEngineWrapper.height)
 
         }
-
     }
 
     Rectangle {
         id: angleTableWrapper
         //x: 1062
         width: 300
-        color: "#fafafa"
+        color: "#dbdbdb"
         border.width: 0
         anchors.right: parent.right
         anchors.top: mainBar.bottom
@@ -96,7 +95,7 @@ Rectangle {
         x: 241
         y: -110
         height: 160
-        color: "#fafafa"
+        color: "#cbcbcb"
         anchors.left: passListView.right
         anchors.right: parent.right
         anchors.bottom: statusBar.top
@@ -113,6 +112,9 @@ Rectangle {
             id: fixedTable
             x: 0
             y: 0
+
+            color: "#cbcbcb"
+
             width: 1206
             height: 160
         }
@@ -122,7 +124,7 @@ Rectangle {
         id: passListView
         width: 160
 
-        color: "#fafafa"
+        color: "#dcdcdc"
         border.width: 0
         anchors.left: parent.left
         anchors.top: mainBar.bottom
@@ -152,6 +154,8 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.rightMargin: 0
         anchors.leftMargin: 0
+
+        color: "#d4d4d4"
         z: 3
         layer.enabled: true
         layer.effect: DropShadowEffect {
@@ -172,7 +176,9 @@ Rectangle {
 
     MainBar {
         id: mainBar
-        height: 60
+        height: 50
+        color: "#CBCBCB"
+
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
@@ -206,10 +212,13 @@ Rectangle {
             id: dropShadow1
             visible: true
             color: "#52000000"
-            radius: 25
+            radius: 8
+            spread: 0
+            samples: 17
             horizontalOffset: 0
             verticalOffset: 0
-            spread: 0.3
+
+
         }
         z: 2
 
@@ -327,8 +336,11 @@ Rectangle {
 
     SelectComboBox {
         id: selectCombobx
-        x: 190
-        y: 72
+        anchors.left: passListView.right
+        anchors.leftMargin: 15
+        anchors.top: mainBar.bottom
+        anchors.topMargin: 15
+
         width: 170
         z: 3
     }
@@ -345,11 +357,13 @@ Rectangle {
         layer.effect: DropShadowEffect {
             id: dropShadow5
             color: "#2d000000"
-            radius: 16
-            spread: 0.3
+            radius: 8
+            samples: 17
+            spread: 0
             verticalOffset: 0
             horizontalOffset: 0
         }
+        onToggled: {console.log("lock changed!"); angleChart.locked = checked}
     }
 
     CancelBtn {
@@ -818,7 +832,7 @@ Rectangle {
 
         fixedTable.establishConnection()
 
-        angleWebContainer.connectToModel();
+        angleChart.connectToModel();
 
         passListView.passListInitialize();
 
@@ -843,7 +857,7 @@ Rectangle {
         }
         createAngleTable();
 
-        // angleWebContainer.refreshWebTable()
+        // angleChart.refreshWebTable()
     }
 
     function disconnect(){

@@ -4,12 +4,11 @@ import QtCharts 2.15
 Item {
     id: control
 
-
     ///
     /// user visible property
     ///
 
-    property bool locked: false
+    property bool locked: true
     property alias backgroundColor: chart.backgroundColor
     property int seriesCount: 0
 
@@ -31,6 +30,9 @@ Item {
                                          "carACC":               "小车加速度",
                                          "carSPEED":             "小车速度"}
 
+
+    readonly property var seriesColor: ["#fe6637", "#237bff"]
+
     Component {
         id: modelC
         ListModel {
@@ -49,7 +51,6 @@ Item {
 
             required property color enabledColor
 
-
             // required property color disabledColor
 
             model: chartSeries.count
@@ -61,12 +62,15 @@ Item {
 
                 property bool adjustEnabled: false
 
-                enabled: repeaterC.enabled  // control whether user can drag
+                enabled: !control.locked  // control whether user can drag
+
+                radius: enabled ? 5 : 0
 
                 visible: repeaterC.chartSeries.visible
 
                 color: enabledColor
 
+                onHeightChanged: adjustToPoint(this, repeaterC.chartSeries, index)
                 onChartWidthChanged: adjustToPoint(this, repeaterC.chartSeries, index)
                 onChartHeightChanged: adjustToPoint(this, repeaterC.chartSeries, index)
 
@@ -249,7 +253,7 @@ Item {
 
         for(let i = 0; i < seriesCount; i++){
             let model  = createModel(x_series, modelList[i])
-            let series = createSeries(model, legendList[i])
+            let series = createSeries(model, legendList[i], i)
             let d_series = createDragSeries(series, model, i)
 //            series.onPointReplaced.connect((index) => {
 //                adjustToPoint(d_series.itemAt(index), series, index)
@@ -271,8 +275,11 @@ Item {
     }
 
     // modelList must contain one x series, may contain several y series, use legend as the series name
-    function createSeries(model, legend){
+    function createSeries(model, legend, index){
         var series = chart.createLineSeries(model, legend)
+        console.log(control.seriesColor)
+        series.color = seriesColor[index]
+        series.width = 3
         return series
     }
 
@@ -287,7 +294,7 @@ Item {
 
     // create a dragSeries
     function createDragSeries(series, model, index){
-        var d_series = dragC.createObject(chart, {chartSeries: series, chartSeriesIndex:index, enabledColor: series.color, enabled: control.locked})
+        var d_series = dragC.createObject(chart, {chartSeries: series, chartSeriesIndex:index, enabledColor: series.color})
         return d_series
     }
 

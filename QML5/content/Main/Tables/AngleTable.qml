@@ -80,7 +80,7 @@ Item {
         anchors.right: view.right
         anchors.top: parent.top
         anchors.topMargin: 0
-        implicitHeight: 35
+        implicitHeight: 40
         orientation: ListView.Horizontal
 
         interactive: false
@@ -100,7 +100,8 @@ Item {
         highlightFollowsCurrentItem: true
         highlight: Rectangle {
             width: header.width/header.count; height: 35
-            color: "lightsteelblue"; radius: 5
+            color: "#85B6FF"
+            radius: 5
         }
 
         delegate: Button {
@@ -143,7 +144,7 @@ Item {
                     anchors.right: parent.right
                     anchors.top: parent.top
                     height: 1
-                    color: index === 0 ? "#cecece" : widget.isCheck ? "#0D267B" : "#cecece";
+                    color: index === 0 ? "#cecece" : widget.isCheck ? "#85B6FF" : "#cecece";
                     visible: false
                 }
 
@@ -154,7 +155,7 @@ Item {
                     anchors.top: parent.top
                     width: 1
 
-                    color: index === 0 ? "#cecece" : widget.isCheck ? "#0D267B" : "#cecece";
+                    color: index === 0 ? "#cecece" : widget.isCheck ? "#85B6FF" : "#cecece";
 
                     visible: index === 0 ? false : true
                 }
@@ -162,7 +163,7 @@ Item {
                 Text {
                     text: headerName
                     anchors.centerIn: parent
-
+                    font.family: "Microsoft YaHei"
                     font.pixelSize: 12
                 }
             }
@@ -268,32 +269,18 @@ Item {
             implicitHeight: 35
 
 
-            Rectangle {
+            Item {
                 id: delegateWrapper
 
                 anchors.fill: parent
 
-                border.width: 0;
-                color: {
-                    if(column === 0)
-                        return "transparent"
-                    else {
-                        if(!widget.isCheck)
-                            return "transparent"
-                        else{
-                            if(model.isSelect)    return "#0D267B"
-                            else            return "transparent"
-                        }
-                    }
-                }
-
                 Rectangle {
-
                     id:bottomLine
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.bottom: parent.bottom
                     height: 1
+                    z:2
                     color: "#cecece"
                 }
 
@@ -303,6 +290,7 @@ Item {
                     anchors.right: parent.right
                     anchors.top: parent.top
                     height: 1
+                    z:2
                     color: "#cecece"
 
                     visible: row === 0 ? true:false
@@ -314,6 +302,7 @@ Item {
                     anchors.bottom: parent.bottom
                     anchors.top: parent.top
                     width: 1
+                    z:2
                     color: index === 0 ? "#cecece" : widget.isCheck ? "#0D267B" : "#cecece";
 
                     visible: column === 0 ? false : true
@@ -322,6 +311,20 @@ Item {
                 AngleTextField {
                     id:textField
                     text: model.display
+
+                    backgroundColor: {
+                        if(column === 0)
+                            return (row % 2) === 0 ? "transparent" : "#e3e3e3"
+                        else {
+                            if(!widget.isCheck)
+                                return (row % 2) === 0 ? "transparent" : "#e3e3e3"
+                            else{
+                                if(model.isSelect)    return "#85B6FF"
+                                else    return (row % 2) === 0 ? "transparent" : "#e3e3e3"
+                            }
+                        }
+                    }
+
                     color: widget.isCheck ? (model.isSelect? "#ffffff" : model.isChanged ? "#0D267B" : model.isDirty ? "#cc5555":"#0d0d0d")
                                           : (model.isDirty ? "#cc5555":"#0d0d0d")
                     readOnly: column === 0 ? true: false

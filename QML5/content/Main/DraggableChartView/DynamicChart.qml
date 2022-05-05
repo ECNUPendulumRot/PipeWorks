@@ -17,9 +17,10 @@ ChartView {
         min: 0
         max: 10
         tickCount: 10
-        gridLineColor: "#8f8f8f"
+        gridLineColor: "#c2c2c2"
         color: "#8f8f8f"
         labelFormat: "%d"
+        labelsFont.family: "Microsoft YaHei"
     }
 
     ValueAxis {
@@ -28,6 +29,7 @@ ChartView {
         max: 10
         gridLineColor: axisx.gridLineColor
         color: axisx.color
+        labelsFont:axisx.labelsFont
         tickCount: 10
     }
 

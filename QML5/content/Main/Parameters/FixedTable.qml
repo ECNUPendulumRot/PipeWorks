@@ -11,8 +11,9 @@ Item {
 
     id: control
 
-    property int passLine: -1
+    property color color: "#cbcbcb"
 
+    property int passLine: -1
 
     // todo : behaviour before the database is loaded
 
@@ -67,7 +68,7 @@ Item {
                 width: 363
                 height: 144
                 antialiasing: false
-                rectangle9Color: "#fafafa"
+                rectangle9Color: control.color
                 rectangle9X: 150
                 label4Color: "#000000"
                 label4Text: "前焊枪"
@@ -296,7 +297,7 @@ Item {
                 width: myGroupTitle2.width
                 height: myGroupTitle2.height
                 antialiasing: false
-                rectangle9Color: "#fafafa"
+                rectangle9Color: control.color
                 label4Text: "后焊枪"
                 label4Color: "#000000"
                 rectangle9X: 150
@@ -544,7 +545,7 @@ Item {
                 y: myGroupTitle2.y
                 width: 180
                 height: myGroupTitle2.height
-                rectangle9Color: "#fafafa"
+                rectangle9Color: control.color
                 label4Text: "其它"
                 rectangle9X: 68
                 label4Color: "#000000"
