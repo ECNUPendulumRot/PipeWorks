@@ -13,6 +13,7 @@ Popup{
     property alias progressBarValue: progressBar.value
     property alias cvisibleProgress: progressBar.visible
     property alias title: title.text
+    property alias progressBar: progressBar
     dim: true
     modal: true
 
@@ -77,6 +78,7 @@ Popup{
             width: 365
             height: 19
             visible: false
+            indeterminate:true
         }
     }
 

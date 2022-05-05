@@ -11,6 +11,7 @@ Popup{
     property alias completeBtn: completeBtn
     property alias progressBarValue: progressBar.value
     property alias title: title.text
+    property alias progressBar: progressBar
     dim: true
     modal: true
 
@@ -63,6 +64,7 @@ Popup{
             y: 91
             width: 365
             height: 19
+            indeterminate: true
         }
     }
 

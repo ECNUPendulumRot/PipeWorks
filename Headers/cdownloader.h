@@ -61,6 +61,10 @@ signals:
 
     void singleTableAllFinished();
 
+    void finishUpload();
+
+    void finishDownload();
+
 private slots:
 
     void uploadProgress(qint64 bytesSent, qint64 bytesTotal);

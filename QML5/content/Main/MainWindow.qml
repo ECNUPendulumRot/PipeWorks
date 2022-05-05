@@ -19,15 +19,21 @@ Rectangle {
     width: 1366
     height: 768
     property var errorMap: { "OperationCanceledError":"连接超时，请确保网络通常与连接正确",
-                             "AuthenticationRequiredError":"FTP账号或密码错误，请检查FTP设置",
-                             "ContentNotFoundError" :"工艺文件在中控端不存在，请检查FTP设置",
-                             "otherError":"出现了预料之外的错误",
-                             "downloadConflict":"当前文件已存在且已打开，无法完成下载，请关闭当前文件后再执行下载",
-                             "ContentOperationNotPermittedError":"远程端不允许这个操作，请检查本地与中控的FTP设置",
-                             "ConnectionRefusedError":"远程端拒绝连接，请检查中控端设定",
-                             "HostNotFoundError":"Host没有找到，请检查FTP设置",
-                             "TimeoutError" : "连接超时,请检查网络连接"
-    }
+                                "AuthenticationRequiredError":"FTP用户信息错误，请检查FTP设置",
+                                "ContentNotFoundError" :"工艺文件在中控端没有找到，请检查FTP设置",
+                                "otherError":"出现了预料之外的错误",
+                                "downloadConflict":"当前文件已存在且已打开，无法完成下载，请关闭当前文件后再执行下载",
+                                "ContentOperationNotPermittedError":"远程端不允许这个操作，请检查本地与中控的FTP设置",
+                                "ConnectionRefusedError":"远程端拒绝连接，请检查中控端设定",
+                                "HostNotFoundError":"Host没有找到，请检查FTP设置",
+                                "TimeoutError" : "连接超时,请检查网络连接",
+                                "TemporaryNetworkFailureError" : "由于与网络断开连接，连接中断，但系统已开始漫游到另一个接入点。请重新提交请求，并在重新建立连接后立即处理。",
+                                "RemoteHostClosedError" : "远程服务器在接收和处理整个回复之前提前关闭了连接，请重新尝试",
+                                "ContentAccessDenied" :  "对远程内容的访问被拒绝，确认中控端下该文件的读写权限，或者可能是远程端提前终止了用户连接",
+                                "ContentConflictError" : "由于与资源的当前状态冲突，请求无法完成",
+                                "ProtocolUnknownError" : "网络访问 API 无法接受请求，因为协议未知，请检查协议",
+                                "UnknownContentError" :  "检测到与远程内容相关的未知错误"
+       }
 
     Rectangle {
         id: webEngineWrapper
@@ -602,19 +608,22 @@ Rectangle {
         y: (root.height - uploadDialog.height)/2
 
         cancelBtn.onClicked: {
-            cvisibleProgress = false
-            progressBarValue = 0.0
-            completeBtn.cvisible = false;
-            confirmBtn.cvisible = true;
-            title = "你是否要将当前文件上传到中控？"
-            uploadDialog.close()}
+            uploadDialog.clear()
+           }
 
         confirmBtn.onClicked: {
+            uploadDialog.cvisibleProgress = true;
             uploadFile()
             title = "正在传输中..."
+            confirmBtn.visible = false
         }
 
         completeBtn.onClicked: {
+            uploadDialog.clear()
+
+        }
+        function clear(){
+            uploadDialog.progressBar.indeterminate = true;
             cvisibleProgress = false
             progressBarValue = 0.0
             completeBtn.cvisible = false;
@@ -637,6 +646,7 @@ Rectangle {
 
         }
         function clear(){
+            downloadDialog.progressBar.indeterminate = true;
             progressBarValue = 0.0
             completeBtn.cvisible = false;
             title = "正在下载文件中..."
@@ -756,28 +766,51 @@ Rectangle {
     /// signals and functions
     ///
 
+//    Connections {
+//        target: downloader
+//        onUpProgress: (bytesSent, bytesTotal)=> {
+//            uploadDialog.progressBarValue = bytesSent/bytesTotal
+//            if(bytesSent/bytesTotal === 1.0){
+//                uploadDialog.completeBtn.cvisible = true;
+//                uploadDialog.confirmBtn.cvisible = false;
+//                uploadDialog.title = "传输完成"
+//            }
+//        }
+//    }
+
     Connections {
         target: downloader
-        onUpProgress: (bytesSent, bytesTotal)=> {
-            uploadDialog.progressBarValue = bytesSent/bytesTotal
-            if(bytesSent/bytesTotal === 1.0){
-                uploadDialog.completeBtn.cvisible = true;
-                uploadDialog.confirmBtn.cvisible = false;
-                uploadDialog.title = "传输完成"
-            }
+        onFinishUpload:  {
+            uploadDialog.progressBar.indeterminate = false;
+            uploadDialog.progressBarValue = 1.0
+            uploadDialog.completeBtn.cvisible = true;
+            uploadDialog.confirmBtn.cvisible = false;
+            uploadDialog.title = "传输完成"
+
         }
     }
 
+//    Connections {
+//        target: downloader
+//        onDownProgress: (bytesSent, bytesTotal)=> {
+//            downloadDialog.progressBarValue = bytesSent/bytesTotal
+//            if(bytesSent/bytesTotal === 1.0){
+
+//                downloadDialog.completeBtn.cvisible = true;
+//                downloadDialog.title = "传输完成"
+//                          }
+//            }
+//    }
+
     Connections {
         target: downloader
-        onDownProgress: (bytesSent, bytesTotal)=> {
-            downloadDialog.progressBarValue = bytesSent/bytesTotal
-            if(bytesSent/bytesTotal === 1.0){
-
-                downloadDialog.completeBtn.cvisible = true;
-                downloadDialog.title = "传输完成"
+        onFinishDownload:  {
+            downloadDialog.progressBar.indeterminate = false;
+            downloadDialog.progressBarValue = 1.0
+            downloadDialog.completeBtn.cvisible = true;
+            downloadDialog.title = "传输完成"
                           }
-            }
+
     }
 
     Connections {
@@ -892,7 +925,7 @@ Rectangle {
     }
 
     function uploadFile(){
-        uploadDialog.cvisibleProgress = true;
+
         var uploadUrl = downloader.toLocal(fileDialog.curruntFileUrl)
         downloader.put(uploadUrl, ftpDialog.uploadName,"default");
     }
@@ -968,12 +1001,8 @@ Rectangle {
     }
 
     function closeDialog(){//执行一遍所有下载有关的cancelbtn做的事
-        uploadDialog.cvisibleProgress = false
-        uploadDialog.progressBarValue = 0.0
-        uploadDialog.completeBtn.cvisible = false;
-        uploadDialog.confirmBtn.cvisible = true;
-        uploadDialog.title = "你是否要将当前文件上传到中控？"
-        uploadDialog.close()
+
+        uploadDialog.clear()
 
         downloadDialog.clear()
 
