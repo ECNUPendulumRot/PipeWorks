@@ -246,6 +246,28 @@ Rectangle {
                     fileDialog.open();
             }
 
+            InfoDialog {
+                id: openErrorDialog
+
+                parent: Overlay.overlay
+                x: (parent.width - openErrorDialog.width)/2
+                y: (parent.height - openErrorDialog.height)/2
+                title: "文件错误"
+                text.text: "打开的文件存在格式错误，请选择正确的文件打开"
+                text.color: "#202020"
+
+                imageSource: "../images/caution.png"
+
+                cancelBtn.visible: false
+                confirmBtn.text: "确定"
+                confirmBtn.anchors.right: cancelBtn.right
+
+                confirmBtn.onClicked: {
+                    disconnect();
+                    openErrorDialog.close()
+                }
+            }
+
             disconnectBtn.onClicked:{
                 popupDb.close();
 
@@ -859,19 +881,22 @@ Rectangle {
 
     function mainLoadDb(file){
 
-        scheduler.callParamDb(file);
+        if(scheduler.callParamDb(file)){
+            angleRelatedTableModel.onDataReady.connect((m, l) => { refreshAngleTable() })
 
-        angleRelatedTableModel.onDataReady.connect((m, l) => { refreshAngleTable() })
+            fixedTable.establishConnection()
 
-        fixedTable.establishConnection()
+            angleChart.connectToModel();
 
-        angleChart.connectToModel();
+            passListView.passListInitialize();
 
-        passListView.passListInitialize();
+            fixedPopupInitialize();
 
-        fixedPopupInitialize();
-
-        statusBar.getCurruntName()
+            statusBar.getCurruntName()
+        }
+        else{
+            openErrorDialog.open();
+        }
     }
 
     function createAngleTable(){
