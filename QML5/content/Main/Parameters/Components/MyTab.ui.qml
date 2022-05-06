@@ -20,7 +20,7 @@ Button {
     background: buttonBackground
     Rectangle {
         id: buttonBackground
-        color: "#c1c1c1"
+        color: "#bcbcbc"
         implicitWidth: 100
         implicitHeight: 40
         opacity: enabled ? 1 : 0.3
@@ -73,7 +73,7 @@ Button {
 
             PropertyChanges {
                 target: buttonBackground
-                color: "#fafafa"
+                color: "#d0d0d0"
                 border.color: "#00000000"
             }
         },

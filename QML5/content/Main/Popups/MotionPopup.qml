@@ -19,7 +19,7 @@ Popup {
     Rectangle {
         id: backgroundRec
         width: 787
-        height: 670
+        height: 640
         color: "#d0d0d0"
         radius: 5
         border.width: 0
@@ -133,10 +133,10 @@ Popup {
                      ',
                     motionParameter)
         backgroundRec.width = 695
-        backgroundRec.height = 450
+        backgroundRec.height = 430
         motionParameter.y = 8
         motionParameter.width = 620
-        motionParameter.height = 350
+        motionParameter.height = 320
         groupItem.anchors.topMargin = 40
 
         //motionParameter.disableInput(motionParameter)

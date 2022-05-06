@@ -145,14 +145,13 @@ Item {
         "horInverted",
         "travInverted"
     ]
-    width: content.width
-    height: content.height
+    width: 712
+    height: 540
 
     GroupItem {
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
 
         id: content
+        anchors.fill: parent
         Column {
             id: bar
             x: 0
@@ -220,7 +219,7 @@ Item {
             x: 0
             y: 230
             width: 100
-            height: 340
+            height: stack.height-200
             radius: 0
             drawLeft: false
             drawTop: true
@@ -249,7 +248,7 @@ Item {
             x: 100
             y: 30
             width: 612
-            height: 540
+            height: 510
             currentIndex: rectangle.i
 
             Rectangle {
@@ -723,7 +722,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -875,7 +874,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -1101,7 +1100,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -1247,7 +1246,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -1484,7 +1483,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -1626,7 +1625,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -1843,7 +1842,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -1986,7 +1985,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -2128,7 +2127,7 @@ Item {
             x: 100
             y: 30
             width: 612
-            height: 540
+            height: stack.height
             radius: 0
             drawLeft: false
             drawTop: true
@@ -2142,7 +2141,7 @@ Item {
             x: 0
             y: 0
             width: 712
-            height: 570
+            height: 540
             color: "#00ebebeb"
             radius: 5
             label4FontpixelSize: 14
@@ -2377,6 +2376,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.75;height:570;width:712}
+    D{i:0;formeditorZoom:0.66}D{i:1}
 }
 ##^##*/

@@ -164,7 +164,7 @@ Item {
             height: content.height
             color: "#00ebebeb"
             radius: 5
-            rectangle9Color: "#fafafa"
+            rectangle9Color: "#d0d0d0"
             label4FontpixelSize: 14
             label4Color: "#202020"
             label4Text: "运动参数配置"
