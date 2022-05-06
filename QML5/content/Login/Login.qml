@@ -314,6 +314,10 @@ Item {
                      MainWindow {
                         id : mWindow
                         anchors.fill: parent
+                    Component.onCompleted:{
+                        getFTPConfig();
+                        ftpConfig(ftpDialog.ip, ftpDialog.port,ftpDialog.user,ftpDialog.password)
+                                            setFTPConfig()}
                      }
                      ',
                     window)

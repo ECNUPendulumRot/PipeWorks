@@ -22,7 +22,7 @@ Rectangle {
     Rectangle {
         id: connectionLight
         color: "#ff0000"
-        width: statusText.height + 5
+        width: statusText.height + 3
         height: width
         radius: width/2
         anchors.left: connectionStatusTitle.right
@@ -51,9 +51,10 @@ Rectangle {
         text: qsTr("当前工艺文件:")
         font.family: "Microsoft Yahei"
         anchors.left: connectionLight.right
-        anchors.leftMargin: 208
+        anchors.leftMargin: 160
         anchors.verticalCenter: parent.verticalCenter
-        width: 300
+        width: 360
+        height: 19
         elide: Text.ElideMiddle
         MouseArea{
                         property bool entered: false
@@ -79,14 +80,14 @@ Rectangle {
     Rectangle {
         id: syncLight
         color: "#ff0000"
-        width: syncText.height + 5
+        width: syncText.height + 3
         height: width
         radius: width/2
 
         visible: false
 
         anchors.left: connectionLight.right
-        anchors.leftMargin: 546
+        anchors.leftMargin: 620
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: 2
     }
