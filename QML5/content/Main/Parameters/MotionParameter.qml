@@ -628,7 +628,7 @@ Item {
                 Rectangle {
                     id: motionleadH
                     width: 562
-                    height: 491
+                    height: 461
                     color: "#00000000"
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
@@ -667,6 +667,7 @@ Item {
                             y: 0
                             width: 562
                             height: 62
+                            radius: myGroupTitle2.radius
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
@@ -682,7 +683,8 @@ Item {
                             x: 0
                             y: 0
                             width: 562
-                            height: 406
+                            height: 376
+                            radius: myGroupTitle2.radius
                             rectangle9X: 41
                             label4FontpixelSize: 12
                             label4Color: "#202020"
@@ -692,21 +694,23 @@ Item {
 
                         GroupItem {
                             x: 8
-                            y: 17
+                            y: 7
                             Rectangle {
                                 id: rectangle4
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle5
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
@@ -736,7 +740,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle6
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
@@ -792,7 +796,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle7
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向内缩枪"
                                     labelFontpixelSize: 12
@@ -842,21 +846,23 @@ Item {
 
                         GroupItem {
                             x: 8
-                            y: 210
+                            y: 180
                             Rectangle {
                                 id: rectangle10
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle11
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
@@ -886,7 +892,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle12
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
@@ -951,7 +957,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle13
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向内缩枪"
                                     labelFontpixelSize: 12
@@ -1016,7 +1022,7 @@ Item {
                 Rectangle {
                     id: motionleadV
                     width: 562
-                    height: 491
+                    height: 461
                     color: "#00000000"
                     border.color: "#000000"
                     border.width: 0
@@ -1054,6 +1060,7 @@ Item {
                             y: 0
                             width: 562
                             height: 62
+                            radius: myGroupTitle2.radius
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
                             label4FontpixelSize: 12
@@ -1065,21 +1072,23 @@ Item {
                         y: 86
                         GroupItem {
                             x: 8
-                            y: 17
+                            y: 7
                             Rectangle {
                                 id: rectangle26
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle27
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
@@ -1109,7 +1118,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle28
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向上抬枪"
                                     labelFontpixelSize: 12
@@ -1163,7 +1172,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle29
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向下压枪"
                                     labelFontpixelSize: 12
@@ -1209,21 +1218,23 @@ Item {
 
                         GroupItem {
                             x: 8
-                            y: 210
+                            y: 180
                             Rectangle {
                                 id: rectangle30
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle31
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
@@ -1253,7 +1264,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle32
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向上抬枪"
                                     labelFontpixelSize: 12
@@ -1308,7 +1319,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle33
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向下压枪"
                                     labelFontpixelSize: 12
@@ -1361,7 +1372,8 @@ Item {
                             x: 0
                             y: 0
                             width: 562
-                            height: 406
+                            height: 376
+                            radius: myGroupTitle2.radius
                             label4Color: "#202020"
                             label4Text: "焊枪竖直抬压运动"
                             label4FontpixelSize: 12
@@ -1379,7 +1391,7 @@ Item {
                 Rectangle {
                     id: motiontrailH
                     width: 562
-                    height: 491
+                    height: 461
                     color: "#00000000"
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
@@ -1417,6 +1429,7 @@ Item {
 
                             width: 562
                             height: 62
+                            radius: myGroupTitle2.radius
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
@@ -1431,7 +1444,8 @@ Item {
                             x: 0
                             y: 0
                             width: 562
-                            height: 406
+                            height: 376
+                            radius: myGroupTitle2.radius
                             rectangle9X: 41
                             label4FontpixelSize: 12
                             label4Color: "#202020"
@@ -1441,21 +1455,23 @@ Item {
 
                         GroupItem {
                             x: 8
-                            y: 17
+                            y: 7
                             Rectangle {
                                 id: rectangle16
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle17
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
@@ -1485,7 +1501,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle18
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
@@ -1535,7 +1551,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle19
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向内缩枪"
                                     labelFontpixelSize: 12
@@ -1581,21 +1597,23 @@ Item {
 
                         GroupItem {
                             x: 8
-                            y: 210
+                            y: 180
                             Rectangle {
                                 id: rectangle20
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle21
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
@@ -1625,7 +1643,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle22
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
@@ -1685,7 +1703,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle23
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向内缩枪"
                                     labelFontpixelSize: 12
@@ -1746,7 +1764,7 @@ Item {
                 Rectangle {
                     id: motiontrailV
                     width: 562
-                    height: 491
+                    height: 461
                     color: "#00000000"
                     border.color: "#000000"
                     border.width: 0
@@ -1784,6 +1802,7 @@ Item {
                             y: 0
                             width: 562
                             height: 62
+                            radius: myGroupTitle2.radius
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
                             label4FontpixelSize: 12
@@ -1795,21 +1814,23 @@ Item {
                         y: 86
                         GroupItem {
                             x: 8
-                            y: 17
+                            y: 7
                             Rectangle {
                                 id: rectangle36
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle37
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
@@ -1839,7 +1860,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle38
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向上抬枪"
                                     labelFontpixelSize: 12
@@ -1890,7 +1911,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle39
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向下压枪"
                                     labelFontpixelSize: 12
@@ -1936,21 +1957,23 @@ Item {
 
                         GroupItem {
                             x: 8
-                            y: 210
+                            y: 180
                             Rectangle {
                                 id: rectangle40
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle41
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
@@ -1980,7 +2003,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle42
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向上抬枪"
                                     labelFontpixelSize: 12
@@ -2035,7 +2058,7 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle43
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向下压枪"
                                     labelFontpixelSize: 12
@@ -2088,7 +2111,8 @@ Item {
                             x: 0
                             y: 0
                             width: 562
-                            height: 406
+                            height: 376
+                            radius: myGroupTitle2.radius
                             label4Color: "#202020"
                             label4Text: "焊枪竖直抬压运动"
                             label4FontpixelSize: 12
@@ -2353,6 +2377,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.66;height:570;width:712}
+    D{i:0;formeditorZoom:0.75;height:570;width:712}
 }
 ##^##*/

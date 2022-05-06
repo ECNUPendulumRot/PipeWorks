@@ -52,8 +52,9 @@ Popup {
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: cancel.left
             anchors.rightMargin: 15
-            buttonBackgroundColor: "#4870ca"
-            textItemColor: "#e5e5e5"
+            buttonBackgroundColor: "#3b7ecc"
+            textItemColor: "#f6f6f6"
+            coverColor: "#00101010"
 
             onClicked: {
                 if(scheduler.isPdbLoaded())
@@ -67,9 +68,6 @@ Popup {
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: confirm.left
             anchors.rightMargin: 15
-            buttonBackgroundColor: "#9c9c9c"
-            textItemColor: "#e5e5e5"
-            buttonBackgroundBordercolor: "#c7c7c7"
 
             onClicked: {
                         if(scheduler.isPdbLoaded()){
@@ -84,9 +82,6 @@ Popup {
             text: "取消"
             anchors.verticalCenter: parent.verticalCenter
             anchors.right: parent.right
-            buttonBackgroundColor: "#9c9c9c"
-            textItemColor: "#e5e5e5"
-            buttonBackgroundBordercolor: "#c7c7c7"
             z: -1
 
             onClicked: {

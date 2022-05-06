@@ -18,6 +18,8 @@ Button {
 
     text: "My Button"
     font.pixelSize: 14
+
+    property alias coverColor: cover.color
     property alias textItemColor: textItem.color
     property alias buttonBackgroundBordercolor: buttonBackground.border.color
     property alias buttonBackgroundColor: buttonBackground.color
@@ -30,15 +32,16 @@ Button {
         implicitWidth: 100
         implicitHeight: 40
         opacity: enabled ? 1 : 0.3
-        color: "#808080"
-        radius: 8
-        border.color: "#acacac"
+        color: "#e7e7e7"
+        radius: 4
+        border.color: "#000000"
+        border.width: 0
         layer.enabled: true
         layer.effect: DropShadowEffect {
             id: dropShadow
-            color: "#2e623030"
-            radius: 4
-            anchors.fill: parent
+            color: "#29000000"
+            radius: 8
+            samples: 17
             verticalOffset: 0
             horizontalOffset: 0
             spread: 0.1
@@ -58,8 +61,9 @@ Button {
         id: textItem
 
         opacity: enabled ? 1.0 : 0.3
-        color: "#e1e1e1"
+        color: "#202020"
         text: control.text
+        font.family: "Microsoft Yahei"
         font.pixelSize: 13
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -71,7 +75,7 @@ Button {
 
             PropertyChanges {
                 target: cover
-                color: "#42dedede"
+                color: "#3a959595"
             }
         },
         State {
@@ -80,7 +84,7 @@ Button {
 
             PropertyChanges {
                 target: cover
-                color: "#702a2a2a"
+                color: "#7a959595"
             }
         }
     ]
