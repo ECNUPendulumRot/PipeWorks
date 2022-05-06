@@ -1,4 +1,4 @@
-﻿#include "partmodel.h"
+﻿#include <partmodel.h>
 #include <QSqlRecord>
 #include <utility.h>
 
@@ -168,7 +168,7 @@ bool PartModel::pullArray()
 
     QVariantList modelList = this->xyModel();
     QVariantList legendList = this->legendModel();
-    emit this->dataReady(modelList, legendList);
+    emit dataReady(modelList, legendList);
 
     return true;
 }
