@@ -279,6 +279,7 @@ Item {
                             y: 0
                             width: 560
                             height: 180
+                            radius: myGroupTitle2.radius
                             rectangle9Color: myGroupTitle2.rectangle9Color
                             label4FontpixelSize: 12
                             label4Color: "#202020"
@@ -290,7 +291,7 @@ Item {
                             y: 25
                             width: 220
                             height: 130
-                            radius: 4
+                            radius: myGroupTitle2.radius
                             rectangle1Color: myGroupTitle2.rectangle9Color
                             labelColor: "#202020"
                             labelText: "起弧前"
@@ -345,7 +346,7 @@ Item {
                             y: rectangle1.y
                             width: rectangle1.width
                             height: rectangle1.height
-                            radius: 4
+                            radius: myGroupTitle2.radius
                             rectangle1Color: myGroupTitle2.rectangle9Color
                             labelColor: "#202020"
                             labelText: "起弧后"
@@ -527,6 +528,7 @@ Item {
                             y: 0
                             width: 560
                             height: 100
+                            radius: myGroupTitle2.radius
                             rectangle9Color: myGroupTitle2.rectangle9Color
                             label4FontpixelSize: 12
                             label4Color: "#202020"
@@ -608,6 +610,7 @@ Item {
                             y: 0
                             width: 560
                             height: 100
+                            radius: myGroupTitle2.radius
                             rectangle9Color: myGroupTitle2.rectangle9Color
                             label4FontpixelSize: 12
                             label4Color: "#202020"
@@ -2117,6 +2120,7 @@ Item {
             width: 712
             height: 570
             color: "#00ebebeb"
+            radius: 5
             label4FontpixelSize: 14
             label4Color: "#202020"
             label4Text: "运动参数配置"

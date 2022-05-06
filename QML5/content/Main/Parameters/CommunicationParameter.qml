@@ -13,6 +13,7 @@ Item {
         id: myGroupTitle2
         width: 530
         height: 195
+        radius: 5
         anchors.verticalCenter: parent.verticalCenter
         rectangle9Color: "#d0d0d0"
         anchors.horizontalCenterOffset: 0
@@ -400,6 +401,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;height:195;width:530}
+    D{i:0;formeditorZoom:0.9;height:195;width:530}
 }
 ##^##*/

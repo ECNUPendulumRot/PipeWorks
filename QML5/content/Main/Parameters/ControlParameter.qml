@@ -62,6 +62,7 @@ Item {
             y: 0
             width: 794
             height: 410
+            radius: 5
             rectangle9Color: "#d0d0d0"
             label4FontpixelSize: 14
             label4Color: "#202020"
@@ -217,6 +218,7 @@ Item {
 
             MyGroupTitle {
                 id: myGroupTitle
+                radius: myGroupTitle2.radius
                 anchors.fill: parent
                 rectangle1Color: myGroupTitle2.rectangle9Color
                 labelText: "前焊枪"
@@ -268,6 +270,7 @@ Item {
 
                 MyGroupTitle {
                     id: myGroupTitle1
+                    radius: myGroupTitle2.radius
                     anchors.fill: parent
                     rectangle1Color: myGroupTitle2.rectangle9Color
                     labelColor: "#202020"
@@ -322,6 +325,7 @@ Item {
 
                 MyGroupTitle {
                     id: myGroupTitle3
+                    radius: myGroupTitle2.radius
                     anchors.fill: parent
                     rectangle1Color: myGroupTitle2.rectangle9Color
                     labelColor: "#202020"
@@ -484,6 +488,7 @@ Item {
 
             MyGroupTitle {
                 id: myGroupTitle4
+                radius: myGroupTitle2.radius
                 anchors.fill: parent
                 rectangle1Color: myGroupTitle2.rectangle9Color
                 labelText: "后焊枪"
@@ -536,6 +541,7 @@ Item {
 
                 MyGroupTitle {
                     id: myGroupTitle5
+                    radius: myGroupTitle2.radius
                     anchors.fill: parent
                     rectangle1Color: myGroupTitle2.rectangle9Color
                     labelColor: "#202020"
@@ -590,6 +596,7 @@ Item {
 
                 MyGroupTitle {
                     id: myGroupTitle6
+                    radius: myGroupTitle2.radius
                     anchors.fill: parent
                     rectangle1Color: myGroupTitle2.rectangle9Color
                     labelColor: "#202020"
