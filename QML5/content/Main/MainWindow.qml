@@ -702,7 +702,6 @@ Rectangle {
             setFTPConfig()
             ftpDialog.close()
         }
-
     }
 
     FileDialog {
@@ -714,7 +713,6 @@ Rectangle {
         onAccepted: {
             console.log(fileUrl)
             scheduler.saveToFile(fileDialog.fileUrl, saveDialog.fileUrl);
-
         }
     }
 
@@ -732,7 +730,7 @@ Rectangle {
         confirmBtn.onClicked: {
             errorDialog.close()
             closeDialog()
-                        }
+        }
 
         cancelBtn.visible: false
 
@@ -797,7 +795,6 @@ Rectangle {
         onClicked: forceActiveFocus()
     }
 
-
     ///
     /// signals and functions
     ///
@@ -856,7 +853,6 @@ Rectangle {
             errorDialog.open()
             }
     }
-//singleTableStep1Finished
 
     Connections {
         target: downloader

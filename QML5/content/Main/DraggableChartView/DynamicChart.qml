@@ -10,7 +10,8 @@ ChartView {
     antialiasing: true
 
     property bool axisReady: false
-
+    property alias anchorMin: anchorMin
+    property alias anchorMax: anchorMax
 
     ValueAxis {
         id: axisx
@@ -34,14 +35,31 @@ ChartView {
     }
 
     // an empty series for initial visualization
+    // anchors
     LineSeries {
+
+        id: anchor
         axisX: axisx
         axisY: axisy
+
+        visible: false
+
+        XYPoint {
+            id: anchorMin
+            x: axisx.min
+            y: axisy.min
+        }
+
+        XYPoint {
+            id:anchorMax
+            x: axisx.min
+            y: axisy.max
+        }
     }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////  signals and functions  ////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////  signals  ///////////////////////////////////////////////////
+
+/////////////////////////////////////////////////  adjust  ///////////////////////////////////////////////////
 
     function adjustAxis(dict){
         if(dict["minx"]) axisx.min = dict["minx"]
@@ -49,15 +67,15 @@ ChartView {
         if(dict["miny"]) axisy.min = dict["miny"]
         if(dict["maxy"]) axisy.max = dict["maxy"]
         if(dict["tick"]) axisx.tickCount = dict["tick"]
+        return [view.mapToPosition(Qt.point(anchorMin.x, anchorMin.y), anchor).y, view.mapToPosition(Qt.point(anchorMax.x, anchorMax.y), anchor).y]
     }
 
+/////////////////////////////////////////////////  create  ///////////////////////////////////////////////////
 
     // create a series with specified x series, y series and lits legend name
     function createLineSeries(model, seriesName){
-
         var series = view.createSeries(ChartView.SeriesTypeLine, seriesName, axisx, axisy)
         series.useOpenGL = true
-        // series.onClicked.connect(function(point){console.log(view.mapToPosition(point, series))})
         for(let i = 0; i < model.count; i++){
             series.append(model.get(i).xx, model.get(i).yy)
         }

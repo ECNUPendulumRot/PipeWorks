@@ -75,12 +75,12 @@ Item {
         id: header
 
         implicitWidth: parent.width
-        height: 35
+        implicitHeight: 45
         anchors.left: view.left
         anchors.right: view.right
         anchors.top: parent.top
         anchors.topMargin: 0
-        implicitHeight: 40
+
         orientation: ListView.Horizontal
 
         interactive: false
@@ -90,7 +90,6 @@ Item {
 
         model: ListModel{
             id:listModel
-
             Component.onCompleted: {
                 for (var i = 0; i < view.columns; i++ )
                     listModel.append({"headerName": engToChn[angleRelatedTableModel.headerNameEng(i)]})
@@ -100,21 +99,21 @@ Item {
         highlightFollowsCurrentItem: true
         highlight: Rectangle {
             width: header.width/header.count; height: 35
-            color: "#85B6FF"
-            radius: 5
+            color: "#1c76c2"
         }
 
         delegate: Button {
             id: headerDelegate
 
             implicitWidth: {
-                var angle_width = 40
+                let angle_width = 40
                 if(index === 0)
                     return angle_width
                 else
                     return (header.width - angle_width)/(header.count - 1)
             }
-            implicitHeight: 35
+
+            implicitHeight: header.implicitHeight
             background: delegateBg
             Rectangle {
                 id: delegateBg
@@ -144,7 +143,7 @@ Item {
                     anchors.right: parent.right
                     anchors.top: parent.top
                     height: 1
-                    color: index === 0 ? "#cecece" : widget.isCheck ? "#85B6FF" : "#cecece";
+                    color: index === 0 ? "#cecece" : widget.isCheck ? "#1c76c2" : "#cecece";
                     visible: false
                 }
 
@@ -155,7 +154,7 @@ Item {
                     anchors.top: parent.top
                     width: 1
 
-                    color: index === 0 ? "#cecece" : widget.isCheck ? "#85B6FF" : "#cecece";
+                    color: index === 0 ? "#cecece" : widget.isCheck ? "#1c76c2" : "#cecece";
 
                     visible: index === 0 ? false : true
                 }
@@ -303,7 +302,7 @@ Item {
                     anchors.top: parent.top
                     width: 1
                     z:2
-                    color: index === 0 ? "#cecece" : widget.isCheck ? "#0D267B" : "#cecece";
+                    color: index === 0 ? "#cecece" : widget.isCheck ? "#1c76c2" : "#cecece";
 
                     visible: column === 0 ? false : true
                 }
@@ -319,7 +318,7 @@ Item {
                             if(!widget.isCheck)
                                 return (row % 2) === 0 ? "transparent" : "#e3e3e3"
                             else{
-                                if(model.isSelect)    return "#85B6FF"
+                                if(model.isSelect)    return "#1c76c2"
                                 else    return (row % 2) === 0 ? "transparent" : "#e3e3e3"
                             }
                         }

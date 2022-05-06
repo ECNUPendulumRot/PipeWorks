@@ -80,11 +80,11 @@ bool PartModel::setData(const QModelIndex &index, const QVariant &value, int rol
             emit dataChanged(index, index, QVector<int>({Qt::DisplayRole, ChangeRole, DirtyRole}));
             emit partDataChanged(index.row(), index.column(), value);
             return true;
-//        case Qt::DisplayRole:
-//            this->array[index.row()][index.column()].v = value;
-//            emit dataChanged(index, index, QVector<int>({Qt::DisplayRole, ChangeRole}));
-//            emit partDataChanged(index.row(), index.column(), value);
-//            return true;
+        case Qt::DisplayRole:
+            this->array[index.row()][index.column()].v = value;
+            emit dataChanged(index, index, QVector<int>({Qt::DisplayRole, ChangeRole}));
+            emit partDataChanged(index.row(), index.column(), value);
+            return true;
         case SelectionRole:
             if(this->flags(index) == (Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled)){
                 this->selection[index.row()][index.column()] = value.toBool();
