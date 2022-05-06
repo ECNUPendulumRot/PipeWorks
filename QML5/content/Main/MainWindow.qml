@@ -391,7 +391,7 @@ Rectangle {
             verticalOffset: 0
             horizontalOffset: 0
         }
-        onToggled: {console.log("lock changed!"); angleChart.locked = checked}
+        onToggled: angleChart.locked = checked
     }
 
     CancelBtn {
