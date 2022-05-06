@@ -64,3 +64,5 @@ DISTFILES += \
     QML5/content/Main/Parameters/MotionParameterLite.qml \
     QML5/content/images/DpLogoMain.png \
     QML5/content/images/SinglePass.png
+
+RC_ICONS = Icon/icon.ico
