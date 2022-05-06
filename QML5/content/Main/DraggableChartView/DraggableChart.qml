@@ -70,7 +70,6 @@ Item {
                 onChartHeightChanged: adjustToPoint(this, repeaterC.chartSeries, index)
 
                 onYChanged:{
-
                     if(active || adjustEnabled){
                         adjustToDragger(this, repeaterC.chartSeries, index)
                     }
@@ -130,9 +129,7 @@ Item {
         }
     }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////  signals and functions  ////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////  functions  //////////////////////////////////////////////////
 
 ///////////////////////////////////////////////  Initialization  //////////////////////////////////////////////
 
@@ -203,7 +200,6 @@ Item {
     // this will alse create the axis for the modelList, with policy of max + avg + 1 and min - avg - 1
     function createDraggableSeries(modelList, legendList){
         seriesCount = modelList.length - 1
-
         let x_series = modelList[0]
         modelList.shift()
         let x_min = x_series[0], x_max = x_series[x_series.length - 1]
@@ -214,7 +210,6 @@ Item {
                           "miny": Math.floor(y_min),
                           "maxy": Math.ceil(y_max),
                           "tick": x_series.length})
-        console.log(y_min, y_max)
         for(let i = 0; i < seriesCount; i++){
             let model  = createModel(x_series, modelList[i])
             let series = createSeries(model, legendList[i], i)
@@ -250,7 +245,6 @@ Item {
 
     // create a series and push it into pointModelList, return it
     function createModel(x_series, y_series){
-        console.log(y_series)
         var model = modelC.createObject(chart)
         for(let i = 0; i < x_series.length; i++){
             model.append({"xx": x_series[i], "yy": Number(y_series[i])})
