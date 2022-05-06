@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Studio.Components 1.0
 import "Components"
@@ -62,7 +62,7 @@ Item {
             y: 0
             width: 794
             height: 410
-            rectangle9Color: "#fafafa"
+            rectangle9Color: "#d0d0d0"
             label4FontpixelSize: 14
             label4Color: "#202020"
             label4Text: "控制参数配置"
@@ -218,7 +218,7 @@ Item {
             MyGroupTitle {
                 id: myGroupTitle
                 anchors.fill: parent
-                rectangle1Color: "#fafafa"
+                rectangle1Color: myGroupTitle2.rectangle9Color
                 labelText: "前焊枪"
                 labelColor: "#202020"
             }
@@ -269,7 +269,7 @@ Item {
                 MyGroupTitle {
                     id: myGroupTitle1
                     anchors.fill: parent
-                    rectangle1Color: "#fafafa"
+                    rectangle1Color: myGroupTitle2.rectangle9Color
                     labelColor: "#202020"
                     labelText: "横向PID"
                 }
@@ -323,7 +323,7 @@ Item {
                 MyGroupTitle {
                     id: myGroupTitle3
                     anchors.fill: parent
-                    rectangle1Color: "#fafafa"
+                    rectangle1Color: myGroupTitle2.rectangle9Color
                     labelColor: "#202020"
                     labelText: "纵向PID"
                 }
@@ -485,7 +485,7 @@ Item {
             MyGroupTitle {
                 id: myGroupTitle4
                 anchors.fill: parent
-                rectangle1Color: "#fafafa"
+                rectangle1Color: myGroupTitle2.rectangle9Color
                 labelText: "后焊枪"
                 labelColor: "#202020"
             }
@@ -537,7 +537,7 @@ Item {
                 MyGroupTitle {
                     id: myGroupTitle5
                     anchors.fill: parent
-                    rectangle1Color: "#fafafa"
+                    rectangle1Color: myGroupTitle2.rectangle9Color
                     labelColor: "#202020"
                     labelText: "横向PID"
                 }
@@ -591,7 +591,7 @@ Item {
                 MyGroupTitle {
                     id: myGroupTitle6
                     anchors.fill: parent
-                    rectangle1Color: "#fafafa"
+                    rectangle1Color: myGroupTitle2.rectangle9Color
                     labelColor: "#202020"
                     labelText: "纵向PID"
                 }

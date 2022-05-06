@@ -14,7 +14,7 @@ Item {
         width: 530
         height: 195
         anchors.verticalCenter: parent.verticalCenter
-        rectangle9Color: "#fafafa"
+        rectangle9Color: "#d0d0d0"
         anchors.horizontalCenterOffset: 0
         anchors.horizontalCenter: parent.horizontalCenter
         label4FontpixelSize: 14
@@ -400,6 +400,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.9;height:195;width:530}
+    D{i:0;height:195;width:530}
 }
 ##^##*/

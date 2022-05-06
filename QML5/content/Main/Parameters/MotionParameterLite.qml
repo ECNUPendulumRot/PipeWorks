@@ -303,7 +303,7 @@ Item {
                 y: 0
                 width: 560
                 height: 100
-                rectangle9Color: "#fafafa"
+                rectangle9Color: myGroupTitle2.rectangle9Color
                 label4FontpixelSize: 12
                 label4Color: "#202020"
                 label4Text: "其他参数"
@@ -385,7 +385,7 @@ Item {
                 y: 0
                 width: 560
                 height: 100
-                rectangle9Color: "#fafafa"
+                rectangle9Color: myGroupTitle2.rectangle9Color
                 label4FontpixelSize: 12
                 label4Color: "#202020"
                 label4Text: "机头切换"

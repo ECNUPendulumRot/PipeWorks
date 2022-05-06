@@ -22,7 +22,8 @@ Popup {
         y: 0
         width: 581
         height: 290
-        color: "#fafafa"
+        color: "#d0d0d0"
+        radius: 5
         border.width: 0
 
         MouseArea {

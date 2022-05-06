@@ -1,4 +1,4 @@
-import QtQuick 2.15
+﻿import QtQuick 2.15
 import QtQuick.Controls 2.15
 import "../Parameters"
 
@@ -17,7 +17,8 @@ Popup {
     background: backgroundRec
     Rectangle {
         id: backgroundRec
-        color: "#fafafa"
+        color: "#d0d0d0"
+        radius: 5
         border.width: 0
         anchors.fill: parent
 
