@@ -51,7 +51,7 @@ Item {
 
             required property color enabledColor
 
-            z: chartSeriesIndex === 0 ? 2: -1
+
             model: chartSeries.count
 
             Dragger {
@@ -62,7 +62,7 @@ Item {
                 enabled: !control.locked  // control whether user can drag
                 radius: enabled ? 5 : 3
                 visible: repeaterC.chartSeries.visible
-
+                z: repeaterC.chartSeriesIndex
                 color: enabledColor
 
                 onHeightChanged: adjustToPoint(this, repeaterC.chartSeries, index)
@@ -88,7 +88,6 @@ Item {
     DynamicChart {
         id: chart
         anchors.fill: parent
-
         margins.top: 40
     }
 
@@ -185,7 +184,7 @@ Item {
             model.push(m)
         }
         let mma = minMaxAvg(model)
-        let y_min = mma[0] - mma[2]/2 - 1, y_max = mma[1] + mma[2]/2 + 1
+        let y_min = mma[0] - mma[2]/10 - 1, y_max = mma[1] + mma[2]/10 + 1
         return chart.adjustAxis({"miny": Math.floor(y_min), "maxy": Math.ceil(y_max)})
     }
 
@@ -261,7 +260,7 @@ Item {
 
     // create a dragSeries
     function createDragSeries(series, model, minMax, index){
-        var d_series = dragC.createObject(chart, {chartSeries: series, chartSeriesIndex:index, enabledColor: series.color})
+        var d_series = dragC.createObject(control, {chartSeries: series, chartSeriesIndex:index, enabledColor: series.color})
         adjustAxisChanged(d_series, minMax[1], minMax[0])
         return d_series
     }
@@ -271,7 +270,7 @@ Item {
 
     // calculate min, max and average of several modelList
     function minMaxAvg(modelList){
-        var min = modelList[0][0], max = modelList[0][0], avg = 0
+        var min = Number(modelList[0][0]), max = Number(modelList[0][0]), avg = 0
 
         for(let i = 0; i < modelList.length; i++){
             let tmp_min = extreme(modelList[i], false),

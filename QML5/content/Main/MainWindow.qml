@@ -53,7 +53,7 @@ Rectangle {
             anchors.fill: parent
 
             locked: lockBtn.checked
-            backgroundColor: webEngineWrapper.color
+            backgroundColor: "transparent"//webEngineWrapper.color
             // plotRec: Qt.rect(webEngineWrapper.x, webEngineWrapper.y, webEngineWrapper.x + webEngineWrapper.width, webEngineWrapper.y + webEngineWrapper.height)
 
         }
