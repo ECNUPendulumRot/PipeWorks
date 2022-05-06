@@ -145,14 +145,13 @@ Item {
         "horInverted",
         "travInverted"
     ]
-    width: content.width
-    height: content.height
+    width: 712
+    height: 540
 
     GroupItem {
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
 
         id: content
+        anchors.fill: parent
         Column {
             id: bar
             x: 0
@@ -220,7 +219,7 @@ Item {
             x: 0
             y: 230
             width: 100
-            height: 340
+            height: stack.height-200
             radius: 0
             drawLeft: false
             drawTop: true
@@ -249,13 +248,13 @@ Item {
             x: 100
             y: 30
             width: 612
-            height: 540
+            height: 510
             currentIndex: rectangle.i
 
             Rectangle {
                 id: rectangle3
 
-                color: "#fafafa"
+                color: "#00000000"
                 border.width: 0
 
 
@@ -279,9 +278,10 @@ Item {
                             y: 0
                             width: 560
                             height: 180
+                            radius: myGroupTitle2.radius
+                            rectangle9Color: myGroupTitle2.rectangle9Color
                             label4FontpixelSize: 12
                             label4Color: "#202020"
-                            rectangle9Color: "#fafafa"
                         }
 
                         MyGroupTitle {
@@ -290,10 +290,10 @@ Item {
                             y: 25
                             width: 220
                             height: 130
-                            radius: 4
+                            radius: myGroupTitle2.radius
+                            rectangle1Color: myGroupTitle2.rectangle9Color
                             labelColor: "#202020"
                             labelText: "起弧前"
-                            rectangle1Color: "#fafafa"
                         }
 
                         ColumnLayout {
@@ -345,10 +345,10 @@ Item {
                             y: rectangle1.y
                             width: rectangle1.width
                             height: rectangle1.height
-                            radius: 4
+                            radius: myGroupTitle2.radius
+                            rectangle1Color: myGroupTitle2.rectangle9Color
                             labelColor: "#202020"
                             labelText: "起弧后"
-                            rectangle1Color: "#fafafa"
                         }
 
                         ColumnLayout {
@@ -527,10 +527,11 @@ Item {
                             y: 0
                             width: 560
                             height: 100
+                            radius: myGroupTitle2.radius
+                            rectangle9Color: myGroupTitle2.rectangle9Color
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "其他参数"
-                            rectangle9Color: "#fafafa"
                         }
                     }
 
@@ -608,10 +609,11 @@ Item {
                             y: 0
                             width: 560
                             height: 100
+                            radius: myGroupTitle2.radius
+                            rectangle9Color: myGroupTitle2.rectangle9Color
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "机头切换"
-                            rectangle9Color: "#fafafa"
                         }
                     }
                 }
@@ -619,13 +621,13 @@ Item {
             Rectangle {
                 id: rectangle14
 
-                color: "#fafafa"
+                color: "#00000000"
                 border.width: 0
 
                 Rectangle {
                     id: motionleadH
                     width: 562
-                    height: 491
+                    height: 461
                     color: "#00000000"
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
@@ -664,10 +666,11 @@ Item {
                             y: 0
                             width: 562
                             height: 62
+                            radius: myGroupTitle2.radius
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
-                            rectangle9Color: "#fafafa"
+                            rectangle9Color: myGroupTitle2.rectangle9Color
                     }
                     }
 
@@ -679,35 +682,38 @@ Item {
                             x: 0
                             y: 0
                             width: 562
-                            height: 406
+                            height: 376
+                            radius: myGroupTitle2.radius
                             rectangle9X: 41
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "焊枪水平伸缩运动"
-                            rectangle9Color: "#fafafa"
+                            rectangle9Color: myGroupTitle2.rectangle9Color
                         }
 
                         GroupItem {
                             x: 8
-                            y: 17
+                            y: 7
                             Rectangle {
                                 id: rectangle4
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle5
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#fafafa"
+                                color: myGroupTitle2.rectangle9Color
                                 border.color: "#00000000"
                                 Label {
                                     id: label
@@ -716,7 +722,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -733,11 +739,11 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle6
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -789,12 +795,12 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle7
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向内缩枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -839,25 +845,27 @@ Item {
 
                         GroupItem {
                             x: 8
-                            y: 210
+                            y: 180
                             Rectangle {
                                 id: rectangle10
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle11
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#fafafa"
+                                color: myGroupTitle2.rectangle9Color
                                 border.color: "#00000000"
                                 Label {
                                     id: label2
@@ -866,7 +874,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -883,11 +891,11 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle12
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -948,12 +956,12 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle13
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向内缩枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -1007,13 +1015,13 @@ Item {
             Rectangle {
                 id: rectangle34
 
-                color: "#fafafa"
+                color: "#00000000"
                 border.width: 0
 
                 Rectangle {
                     id: motionleadV
                     width: 562
-                    height: 491
+                    height: 461
                     color: "#00000000"
                     border.color: "#000000"
                     border.width: 0
@@ -1051,10 +1059,11 @@ Item {
                             y: 0
                             width: 562
                             height: 62
+                            radius: myGroupTitle2.radius
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
                             label4FontpixelSize: 12
-                            rectangle9Color: "#fafafa"
+                            rectangle9Color: myGroupTitle2.rectangle9Color
                         }
                     }
                     GroupItem {
@@ -1062,25 +1071,27 @@ Item {
                         y: 86
                         GroupItem {
                             x: 8
-                            y: 17
+                            y: 7
                             Rectangle {
                                 id: rectangle26
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle27
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#fafafa"
+                                color: myGroupTitle2.rectangle9Color
                                 border.color: "#00000000"
                                 Label {
                                     id: label4
@@ -1089,7 +1100,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -1106,12 +1117,12 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle28
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向上抬枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -1160,12 +1171,12 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle29
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向下压枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -1206,25 +1217,27 @@ Item {
 
                         GroupItem {
                             x: 8
-                            y: 210
+                            y: 180
                             Rectangle {
                                 id: rectangle30
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle31
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#fafafa"
+                                color: myGroupTitle2.rectangle9Color
                                 border.color: "#00000000"
                                 Label {
                                     id: label5
@@ -1233,7 +1246,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -1250,12 +1263,12 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle32
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向上抬枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -1305,12 +1318,12 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle33
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向下压枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -1358,11 +1371,12 @@ Item {
                             x: 0
                             y: 0
                             width: 562
-                            height: 406
+                            height: 376
+                            radius: myGroupTitle2.radius
                             label4Color: "#202020"
                             label4Text: "焊枪竖直抬压运动"
                             label4FontpixelSize: 12
-                            rectangle9Color: "#fafafa"
+                            rectangle9Color: myGroupTitle2.rectangle9Color
                         }
                     }
                 }
@@ -1370,13 +1384,13 @@ Item {
             Rectangle {
                 id: rectangle24
 
-                color: "#fafafa"
+                color: "#00000000"
                 border.width: 0
 
                 Rectangle {
                     id: motiontrailH
                     width: 562
-                    height: 491
+                    height: 461
                     color: "#00000000"
                     border.width: 0
                     anchors.verticalCenter: parent.verticalCenter
@@ -1414,10 +1428,11 @@ Item {
 
                             width: 562
                             height: 62
+                            radius: myGroupTitle2.radius
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
-                            rectangle9Color: "#fafafa"
+                            rectangle9Color: myGroupTitle2.rectangle9Color
                         }
                     }
                     GroupItem {
@@ -1428,35 +1443,38 @@ Item {
                             x: 0
                             y: 0
                             width: 562
-                            height: 406
+                            height: 376
+                            radius: myGroupTitle2.radius
                             rectangle9X: 41
                             label4FontpixelSize: 12
                             label4Color: "#202020"
                             label4Text: "焊枪水平伸缩运动"
-                            rectangle9Color: "#fafafa"
+                            rectangle9Color: myGroupTitle2.rectangle9Color
                         }
 
                         GroupItem {
                             x: 8
-                            y: 17
+                            y: 7
                             Rectangle {
                                 id: rectangle16
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle17
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#fafafa"
+                                color: myGroupTitle2.rectangle9Color
                                 border.color: "#00000000"
                                 Label {
                                     id: label1
@@ -1465,7 +1483,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -1482,11 +1500,11 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle18
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -1532,12 +1550,12 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle19
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向内缩枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -1578,25 +1596,27 @@ Item {
 
                         GroupItem {
                             x: 8
-                            y: 210
+                            y: 180
                             Rectangle {
                                 id: rectangle20
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle21
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#fafafa"
+                                color: myGroupTitle2.rectangle9Color
                                 border.color: "#00000000"
                                 Label {
                                     id: label3
@@ -1605,7 +1625,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -1622,11 +1642,11 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle22
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -1682,12 +1702,12 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle23
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向内缩枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -1737,13 +1757,13 @@ Item {
             Rectangle {
                 id: rectangle44
 
-                color: "#fafafa"
+                color: "#00000000"
                 border.width: 0
 
                 Rectangle {
                     id: motiontrailV
                     width: 562
-                    height: 491
+                    height: 461
                     color: "#00000000"
                     border.color: "#000000"
                     border.width: 0
@@ -1781,10 +1801,11 @@ Item {
                             y: 0
                             width: 562
                             height: 62
+                            radius: myGroupTitle2.radius
                             label4Color: "#202020"
                             label4Text: "摆宽参数"
                             label4FontpixelSize: 12
-                            rectangle9Color: "#fafafa"
+                            rectangle9Color: myGroupTitle2.rectangle9Color
                         }
                     }
                     GroupItem {
@@ -1792,25 +1813,27 @@ Item {
                         y: 86
                         GroupItem {
                             x: 8
-                            y: 17
+                            y: 7
                             Rectangle {
                                 id: rectangle36
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle37
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#fafafa"
+                                color: myGroupTitle2.rectangle9Color
                                 border.color: "#00000000"
                                 Label {
                                     id: label6
@@ -1819,7 +1842,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧前")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -1836,12 +1859,12 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle38
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向上抬枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -1887,12 +1910,12 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle39
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向下压枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -1933,25 +1956,27 @@ Item {
 
                         GroupItem {
                             x: 8
-                            y: 210
+                            y: 180
                             Rectangle {
                                 id: rectangle40
                                 x: 32
                                 y: 8
                                 width: 500
                                 height: 168
+                                visible: false
                                 color: "#00ffffff"
+                                radius: myGroupTitle2.radius
                                 border.color: "#808080"
                                 border.width: 1
                             }
 
                             Rectangle {
                                 id: rectangle41
-                                x: 0
+                                x: 8
                                 y: 64
                                 width: 26
                                 height: 60
-                                color: "#fafafa"
+                                color: myGroupTitle2.rectangle9Color
                                 border.color: "#00000000"
                                 Label {
                                     id: label7
@@ -1960,7 +1985,7 @@ Item {
                                     color: "#202020"
                                     text: qsTr("起弧后")
                                     anchors.verticalCenter: parent.verticalCenter
-                                    font.pixelSize: 12
+                                    font.pixelSize: 13
                                     font.family: "Microsoft Yahei"
                                     wrapMode: Text.WordWrap
                                     anchors.verticalCenterOffset: -19
@@ -1977,12 +2002,12 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle42
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向上抬枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -2032,12 +2057,12 @@ Item {
                                 height: 130
                                 MyGroupTitle {
                                     id: rectangle43
-                                    radius: 4
+                                    radius: myGroupTitle2.radius
                                     anchors.fill: parent
                                     labelText: "向下压枪"
                                     labelFontpixelSize: 12
                                     labelColor: "#202020"
-                                    rectangle1Color: "#fafafa"
+                                    rectangle1Color: myGroupTitle2.rectangle9Color
                                 }
 
                                 MyEditLine {
@@ -2085,11 +2110,12 @@ Item {
                             x: 0
                             y: 0
                             width: 562
-                            height: 406
+                            height: 376
+                            radius: myGroupTitle2.radius
                             label4Color: "#202020"
                             label4Text: "焊枪竖直抬压运动"
                             label4FontpixelSize: 12
-                            rectangle9Color: "#fafafa"
+                            rectangle9Color: myGroupTitle2.rectangle9Color
                         }
                     }
                 }
@@ -2101,7 +2127,7 @@ Item {
             x: 100
             y: 30
             width: 612
-            height: 540
+            height: stack.height
             radius: 0
             drawLeft: false
             drawTop: true
@@ -2115,12 +2141,13 @@ Item {
             x: 0
             y: 0
             width: 712
-            height: 570
+            height: 540
             color: "#00ebebeb"
+            radius: 5
             label4FontpixelSize: 14
             label4Color: "#202020"
             label4Text: "运动参数配置"
-            rectangle9Color: "#fafafa"
+            rectangle9Color: "#d0d0d0"
         }
 
     }
@@ -2349,6 +2376,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.66;height:570;width:712}
+    D{i:0;formeditorZoom:0.66}D{i:1}
 }
 ##^##*/

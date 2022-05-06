@@ -13,8 +13,9 @@ Item {
         id: myGroupTitle2
         width: 530
         height: 195
+        radius: 5
         anchors.verticalCenter: parent.verticalCenter
-        rectangle9Color: "#fafafa"
+        rectangle9Color: "#d0d0d0"
         anchors.horizontalCenterOffset: 0
         anchors.horizontalCenter: parent.horizontalCenter
         label4FontpixelSize: 14

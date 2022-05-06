@@ -163,7 +163,8 @@ Item {
             width: content.width
             height: content.height
             color: "#00ebebeb"
-            rectangle9Color: "#fafafa"
+            radius: 5
+            rectangle9Color: "#d0d0d0"
             label4FontpixelSize: 14
             label4Color: "#202020"
             label4Text: "运动参数配置"
@@ -303,7 +304,8 @@ Item {
                 y: 0
                 width: 560
                 height: 100
-                rectangle9Color: "#fafafa"
+                radius: myGroupTitle2.radius
+                rectangle9Color: myGroupTitle2.rectangle9Color
                 label4FontpixelSize: 12
                 label4Color: "#202020"
                 label4Text: "其他参数"
@@ -385,7 +387,8 @@ Item {
                 y: 0
                 width: 560
                 height: 100
-                rectangle9Color: "#fafafa"
+                radius: myGroupTitle2.radius
+                rectangle9Color: myGroupTitle2.rectangle9Color
                 label4FontpixelSize: 12
                 label4Color: "#202020"
                 label4Text: "机头切换"
@@ -499,6 +502,6 @@ Item {
 
 /*##^##
 Designer {
-    D{i:0;formeditorZoom:0.9}
+    D{i:0;formeditorZoom:0.75}
 }
 ##^##*/
