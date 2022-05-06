@@ -12,6 +12,7 @@ import "../Login"
 //import ModelCraft 1.0
 
 Rectangle {
+    property alias ftpDialog: ftpDialog
     id: root
     color: "#ffffff"
     border.color: "#ffffff"
@@ -614,7 +615,7 @@ Rectangle {
 
     FileDialog {
         id: fileDialog
-        nameFilters:["Datase files(*.db)"]
+        nameFilters:["工艺文件(*.db)"]
         property var curruntFileUrl
         onAccepted: {
             fileDialog.curruntFileUrl = fileUrl
@@ -632,7 +633,7 @@ Rectangle {
     FileDialog {
         id: downloadFile
         //selectFolder : true
-        nameFilters:["Datase files(*.db)"]
+        nameFilters:["工艺文件(*.db)"]
         //folder: shortcuts.home
         onAccepted: downloadfile()
         selectExisting: false
@@ -650,7 +651,7 @@ Rectangle {
         confirmBtn.onClicked: {
             uploadDialog.cvisibleProgress = true;
             uploadFile()
-            title = "正在传输中..."
+            title = "正在传输..."
             confirmBtn.visible = false
         }
 
@@ -685,7 +686,7 @@ Rectangle {
             downloadDialog.progressBar.indeterminate = true;
             progressBarValue = 0.0
             completeBtn.cvisible = false;
-            title = "正在下载文件中..."
+            title = "正在下载文件..."
             downloadDialog.close()
         }
     }
@@ -761,31 +762,28 @@ Rectangle {
         }
     }
 
-    InfoDialog {
+    DownloadDialog {
         id: onePassComplete
 
         x: (parent.width - onePassDialog.width)/2
         y: (parent.height - onePassDialog.height)/2
 
-        text.text: ""
-        title: "正在上传中..."
-        text.color: "#202020"
-        imageSource: "../images/information.png"
+        title: "正在上传..."
         cancelBtn.text: "取消"
         cancelBtn.onClicked: {
-            onePassComplete.close()
             onePassComplete.clear()
         }
 
         completeBtn.onClicked: {
-            onePassComplete.close()
+
             onePassComplete.clear()
         }
-        confirmBtn.visible: false
         completeBtn.text: "完成"
         function clear(){
-            title =  "正在上传中..."
+            progressBar.indeterminate = true;
+            title =  "正在上传..."
             completeBtn.visible = false
+            onePassComplete.close()
         }
     }
 
@@ -870,10 +868,14 @@ Rectangle {
     Connections {
         target: downloader
         onSingleTableAllFinished: {
+                onePassComplete.progressBar.indeterminate = false;
+                onePassComplete.progressBarValue = 1.0
                 onePassComplete.title = "传输完成"
                 onePassComplete.completeBtn.visible =true;
             }
     }
+
+
 
     function mainLoadDb(file){
 
@@ -1049,8 +1051,8 @@ Rectangle {
 /*##^##
 Designer {
     D{i:0;formeditorZoom:0.66}D{i:2}D{i:1}D{i:5}D{i:3}D{i:8}D{i:6}D{i:9}D{i:11}D{i:13}
-D{i:17}D{i:15}D{i:20}D{i:21}D{i:24}D{i:23}D{i:26}D{i:25}D{i:27}D{i:29}D{i:28}D{i:30}
-D{i:31}D{i:32}D{i:33}D{i:34}D{i:35}D{i:36}D{i:37}D{i:38}D{i:39}D{i:40}D{i:41}D{i:42}
-D{i:43}D{i:44}D{i:45}D{i:46}D{i:47}D{i:48}D{i:49}
+D{i:17}D{i:15}D{i:21}D{i:22}D{i:25}D{i:24}D{i:26}D{i:28}D{i:29}D{i:27}D{i:31}D{i:30}
+D{i:32}D{i:33}D{i:34}D{i:35}D{i:36}D{i:37}D{i:38}D{i:39}D{i:40}D{i:41}D{i:42}D{i:43}
+D{i:44}D{i:45}D{i:46}D{i:47}D{i:48}D{i:49}D{i:50}
 }
 ##^##*/

@@ -49,7 +49,7 @@ Popup{
             id: title
             x: 118
             y: 25
-            text: "正在下载文件中..."
+            text: "正在下载文件..."
             font.pixelSize: 18
             anchors.verticalCenterOffset: -1
             font.family: "Courier"
