@@ -81,5 +81,4 @@ ChartView {
         }
         return series
     }
-
 }

@@ -51,6 +51,7 @@ Item {
 
             required property color enabledColor
 
+            z: chartSeriesIndex === 0 ? 2: -1
             model: chartSeries.count
 
             Dragger {
@@ -78,8 +79,7 @@ Item {
                 onActiveChanged: {
                     if(active === false){
                         let point = repeaterC.chartSeries.at(index)
-                        angleRelatedTableModel.callSetData(index, repeaterC.chartSeriesIndex + 1, (Math.round(point.y * 100) / 100).toFixed(2))
-                    }
+                        angleRelatedTableModel.callSetData(index, repeaterC.chartSeriesIndex + 1, (Math.round(point.y * 100) / 100).toFixed(2))}
                }
             }
         }
@@ -215,6 +215,7 @@ Item {
                           "miny": Math.floor(y_min),
                           "maxy": Math.ceil(y_max),
                           "tick": x_series.length})
+        console.log(y_min, y_max)
         for(let i = 0; i < seriesCount; i++){
             let model  = createModel(x_series, modelList[i])
             let series = createSeries(model, legendList[i], i)
@@ -250,9 +251,10 @@ Item {
 
     // create a series and push it into pointModelList, return it
     function createModel(x_series, y_series){
+        console.log(y_series)
         var model = modelC.createObject(chart)
         for(let i = 0; i < x_series.length; i++){
-            model.append({"xx": x_series[i], "yy": y_series[i]})
+            model.append({"xx": x_series[i], "yy": Number(y_series[i])})
         }
         return model
     }
@@ -290,7 +292,7 @@ Item {
 
         var avg = 0
         for(let i = 0; i < list.length; i++)
-            avg += list[i]
+            avg += Number(list[i])
 
         return (avg + 0.0)/list.length
     }
@@ -302,10 +304,10 @@ Item {
         if(list.length === 0)
             return null
 
-        var ext = list[0]
+        var ext = Number(list[0])
         for(let i = 1; i < list.length; i++){
-            if((flag === true && ext < list[i]) || (flag === false && ext > list[i]))
-                ext = list[i]
+            if((flag === true && ext < Number(list[i])) || (flag === false && ext > Number(list[i])))
+                ext = Number(list[i])
         }
         return ext;
     }
