@@ -309,6 +309,7 @@ Item {
 
                 AngleTextField {
                     id:textField
+
                     text: model.display
 
                     backgroundColor: {
