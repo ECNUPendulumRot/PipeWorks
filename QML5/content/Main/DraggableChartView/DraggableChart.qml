@@ -87,6 +87,10 @@ Item {
         id: chart
         anchors.fill: parent
         margins.top: 40
+
+        onSeriesAdded: {
+            console.log(series.name + " with color :" + series.color)
+        }
     }
 
     ListModel {
@@ -163,9 +167,11 @@ Item {
                        series.at(index).x, value)               // new position
     }
 
-    function adjustAxis(){
+    // adjust draggers to new drag areas
+    function adjustAxis(y_min, y_max){
+        chart.adjustAxis({"miny": y_min, "maxy": y_max})
         let mm = chart.getMinMaxPosition()
-        for(let i = 0; i < seriesList.count; i++){
+        for(let i = 0; i < seriesCount; i++){
             let d_series = seriesList.get(i).d_series
             adjustDragArea(d_series, mm[1], mm[0])
         }
@@ -178,7 +184,7 @@ Item {
             let mm  = chart.getMinMaxValue()
             let y_min = mma[0] - (mma[0] - mm[0])/2 , y_max = mma[1] + (mm[1] - mma[1])/2
             chart.adjustAxis({"miny": Math.floor(y_min), "maxy": Math.ceil(y_max)})
-            adjustAxis()
+            adjustAxis(Math.floor(y_min), Math.ceil(y_max))
         }
     }
 
@@ -187,7 +193,7 @@ Item {
             let mm  = chart.getMinMaxValue()
             let y_min = mm[0] - (mm[1] - mm[0])/5 , y_max = mm[1] + (mm[1] - mm[0])/5
             chart.adjustAxis({"miny": Math.floor(y_min), "maxy": Math.ceil(y_max)})
-            adjustAxis()
+            adjustAxis(Math.floor(y_min), Math.ceil(y_max))
         }
     }
 
