@@ -52,53 +52,6 @@ TextField {
             when: !textField.activeFocus
         }
     ]
-    transitions: [
-        Transition {
-            id: selectChange
-            ParallelAnimation {
-                SequentialAnimation {
-                    PauseAnimation {
-                        duration: 50
-                    }
-
-                    PropertyAnimation {
-                        target: bg
-                        property: "border.color"
-                        easing.bezierCurve: [0.755,0.05,0.855,0.06,1,1]
-                        duration: 150
-                    }
-                }
-
-                SequentialAnimation {
-                    PauseAnimation {
-                        duration: 50
-                    }
-
-                    PropertyAnimation {
-                        target: bg
-                        property: "border.width"
-                        easing.bezierCurve: [0.755,0.05,0.855,0.06,1,1]
-                        duration: 150
-                    }
-                }
-
-                SequentialAnimation {
-                    PauseAnimation {
-                        duration: 50
-                    }
-
-                    PropertyAnimation {
-                        target: bg
-                        property: "color"
-                        easing.bezierCurve: [0.755,0.05,0.855,0.06,1,1]
-                        duration: 150
-                    }
-                }
-            }
-            to: "selected,normal"
-            from: "selected,normal"
-        }
-    ]
 
     function disable(){
         textField.activeFocusOnPress = false;

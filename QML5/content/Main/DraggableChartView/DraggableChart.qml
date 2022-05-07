@@ -87,10 +87,6 @@ Item {
         id: chart
         anchors.fill: parent
         margins.top: 40
-
-        onSeriesAdded: {
-            console.log(series.name + " with color :" + series.color)
-        }
     }
 
     ListModel {
