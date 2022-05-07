@@ -244,7 +244,7 @@ Rectangle {
                 x: (parent.width - openErrorDialog.width)/2
                 y: (parent.height - openErrorDialog.height)/2
                 title: "文件错误"
-                text.text: "打开的文件存在格式错误，请选择正确的文件打开"
+                text.text: "打开的文件存在格式错误，请选择正确的工艺文件"
                 text.color: "#202020"
 
                 imageSource: "../images/caution.png"

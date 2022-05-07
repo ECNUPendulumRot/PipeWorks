@@ -27,6 +27,16 @@ Button {
         radius: 0
         border.color: "#00000000"
         border.width: 0
+
+        Rectangle {
+            id: rectangle
+            width: 4
+            height: 40
+            color: "#00ffffff"
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+        }
     }
 
     contentItem: textItem
@@ -76,6 +86,11 @@ Button {
                 color: "#d0d0d0"
                 border.color: "#00000000"
             }
+
+            PropertyChanges {
+                target: rectangle
+                color: "#a1a1a1"
+            }
         },
         State {
             name: "hover"
@@ -90,7 +105,7 @@ Button {
 
 /*##^##
 Designer {
-    D{i:0;height:40;width:100}
+    D{i:0;formeditorZoom:1.25;height:40;width:100}D{i:2}
 }
 ##^##*/
 
