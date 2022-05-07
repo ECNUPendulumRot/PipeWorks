@@ -6,7 +6,9 @@ ChartView {
 
     legend.visible: false
 
-    animationOptions: ChartView.SeriesAnimations
+    //animationOptionsChartView.SeriesAnimations
+    animationEasingCurve.bezierCurve: [0.863,0.00579,0.138,0.999,1,1]
+    animationDuration: 100
     antialiasing: true
 
     property bool axisReady: false
@@ -85,7 +87,6 @@ ChartView {
     // create a series with specified x series, y series and lits legend name
     function createLineSeries(model, seriesName){
         var series = view.createSeries(ChartView.SeriesTypeLine, seriesName, axisx, axisy)
-        series.useOpenGL = true
         for(let i = 0; i < model.count; i++){
             series.append(model.get(i).xx, model.get(i).yy)
         }

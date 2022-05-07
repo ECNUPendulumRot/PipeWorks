@@ -54,19 +54,28 @@ Item {
             model: chartSeries.count
 
             Dragger {
+                id: draggerC
                 property real chartWidth: chart.width
                 property real chartHeight: chart.height
-                property bool adjustEnabled: false
-
+                property bool adjustEnabled: true
+                property alias animation: animation
                 enabled: !control.locked  // control whether user can drag
-                radius: enabled ? 5 : 3
+                radius: enabled ? 6 : 4
                 visible: repeaterC.chartSeries.visible
-                z: repeaterC.chartSeriesIndex
+                z:  repeaterC.chartSeriesIndex
                 color: enabledColor
 
                 onHeightChanged: adjustToPoint(this, repeaterC.chartSeries, index)
                 onChartWidthChanged: adjustToPoint(this, repeaterC.chartSeries, index)
                 onChartHeightChanged: adjustToPoint(this, repeaterC.chartSeries, index)
+
+                NumberAnimation on y {
+                    id: animation
+                    easing.bezierCurve: [0.863,0.00579,0.138,0.999,1,1]
+                    duration: 100
+
+                    onFinished: draggerC.adjustEnabled = false
+                }
 
                 onYChanged:{
                     if(active || adjustEnabled){
@@ -87,6 +96,10 @@ Item {
         id: chart
         anchors.fill: parent
         margins.top: 40
+
+        onSeriesAdded: {
+
+        }
     }
 
     ListModel {
@@ -159,13 +172,19 @@ Item {
 
     function adjustSeries(seriesIndex, index, value){
         let series = seriesList.get(seriesIndex).l_series
-        series.replace(series.at(index).x, series.at(index).y,  // old position
-                       series.at(index).x, value)               // new position
+        let point = chart.mapToPosition(Qt.point(series.at(index).x, value), series)
+        let item = seriesList.get(seriesIndex).d_series.itemAt(index)
+        item.adjustEnabled = true
+        item.animation.from = item.y
+        item.animation.to = point.y - item.height/2
+        item.animation.start()
     }
 
-    function adjustAxis(){
+    // adjust draggers to new drag areas
+    function adjustAxis(y_min, y_max){
+        chart.adjustAxis({"miny": y_min, "maxy": y_max})
         let mm = chart.getMinMaxPosition()
-        for(let i = 0; i < seriesList.count; i++){
+        for(let i = 0; i < seriesCount; i++){
             let d_series = seriesList.get(i).d_series
             adjustDragArea(d_series, mm[1], mm[0])
         }
@@ -178,7 +197,7 @@ Item {
             let mm  = chart.getMinMaxValue()
             let y_min = mma[0] - (mma[0] - mm[0])/2 , y_max = mma[1] + (mm[1] - mma[1])/2
             chart.adjustAxis({"miny": Math.floor(y_min), "maxy": Math.ceil(y_max)})
-            adjustAxis()
+            adjustAxis(Math.floor(y_min), Math.ceil(y_max))
         }
     }
 
@@ -187,7 +206,7 @@ Item {
             let mm  = chart.getMinMaxValue()
             let y_min = mm[0] - (mm[1] - mm[0])/5 , y_max = mm[1] + (mm[1] - mm[0])/5
             chart.adjustAxis({"miny": Math.floor(y_min), "maxy": Math.ceil(y_max)})
-            adjustAxis()
+            adjustAxis(Math.floor(y_min), Math.ceil(y_max))
         }
     }
 
@@ -217,8 +236,7 @@ Item {
     // this will alse create the axis for the modelList, with policy of max + avg + 1 and min - avg - 1
     function createDraggableSeries(modelList, legendList){
         seriesCount = modelList.length - 1
-        let x_series = modelList[0]
-        modelList.shift()
+        let x_series = modelList.shift()
         let x_min = x_series[0], x_max = x_series[x_series.length - 1]
         let mma = minMaxAvg(modelList)
         let y_min = mma[0] - mma[2]/10 - 1, y_max = mma[1] + mma[2]/10 + 1
@@ -271,7 +289,7 @@ Item {
 
     // create a dragSeries
     function createDragSeries(series, model, minMax, index){
-        var d_series = dragC.createObject(control, {chartSeries: series, chartSeriesIndex:index, enabledColor: series.color})
+        var d_series = dragC.createObject(chart, {chartSeries: series, chartSeriesIndex:index, enabledColor: series.color})
         adjustDragArea(d_series, minMax[1], minMax[0])
         return d_series
     }

@@ -1000,8 +1000,6 @@ Rectangle {
             downloadDialog.open()
             downloader.get(downloadFlieName, downloadFileUrl, "default")
         }
-
-
     }
 
     function ftpConfig(ip, port, user, password){
