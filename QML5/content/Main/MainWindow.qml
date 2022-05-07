@@ -853,7 +853,6 @@ Rectangle {
     function refreshAngleTable(){
         if(angleTableContainer.source !== ""){
             destroyAngleTable();
-            console.log(angleTableContainer.source)
         }
         createAngleTable();
 

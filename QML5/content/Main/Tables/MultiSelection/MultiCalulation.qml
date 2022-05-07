@@ -112,13 +112,4 @@ Item {
     function clear(){
         textField.text = "";
     }
-
-//    Connections{
-//        target: textField
-//        function onAccepted(){
-//            //console.log("aaaaaaaaaaaaaaaaaa")
-//            control.setRequest(textField.text)
-//        }
-//        enabled: editMode.checked
-//    }
 }

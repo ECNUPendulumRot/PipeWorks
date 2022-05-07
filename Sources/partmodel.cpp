@@ -278,9 +278,7 @@ bool PartModel::callAddToModel(double v, bool isAdd)
             if(this->selection[i][j] == true){
                 QVariant oldData = this->data(this->index(i,j));
                 double newData = isAdd? (oldData.toDouble() + v) : (oldData.toDouble() - v);
-                //qDebug() << newData;
                 int round = digitsAfterDecimal(newData);
-                //qDebug() << round;
                 if(round == 0)
                     this->setData(this->index(i,j), QVariant(int(newData)));
                 else{
@@ -300,9 +298,7 @@ bool PartModel::callSetToModel(double v)
             if(this->selection[i][j] == true){
                 QVariant oldData = this->data(this->index(i,j));
                 double newData = v;
-                //qDebug() << newData;
                 int round = digitsAfterDecimal(newData);
-                //qDebug() << round;
                 if(round == 0)
                     this->setData(this->index(i,j), QVariant(int(newData)));
                 else{
