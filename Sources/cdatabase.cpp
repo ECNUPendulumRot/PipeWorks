@@ -35,10 +35,10 @@ bool Database::createConnection(QString filename, QString type, QString pw)
         db.setConnectOptions("QSQLITE_USE_CIPHER=sqlcipher");
     this->status = db.open();
 
-    qDebug()<<db.open()<<db.isOpen()<<db.isOpenError();
+    // qDebug()<<db.open()<<db.isOpen()<<db.isOpenError();
 
     if (this->status){
-        //qDebug() << "connected";
+        // qDebug() << "connected";
         return true;
     }
     else

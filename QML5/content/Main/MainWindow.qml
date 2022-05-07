@@ -47,22 +47,12 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.topMargin: 0
 
-//        WebChart {
-//            id: angleChart
-//            anchors.fill:parent
-
-//            lock: lockBtn.checked
-//            onWebCallBack: (row, col, value) => refreshModelData(row, col,value)
-//        }
         DraggableChart {
             id: angleChart
 
             anchors.fill: parent
 
             locked: lockBtn.checked
-            backgroundColor: "transparent"//webEngineWrapper.color
-            // plotRec: Qt.rect(webEngineWrapper.x, webEngineWrapper.y, webEngineWrapper.x + webEngineWrapper.width, webEngineWrapper.y + webEngineWrapper.height)
-
         }
     }
 
@@ -381,18 +371,32 @@ Rectangle {
         anchors.right: webEngineWrapper.right
         anchors.rightMargin: 35
         z: 3
-
-        layer.enabled: true
-        layer.effect: DropShadowEffect {
-            id: dropShadow5
-            color: "#2d000000"
-            radius: 8
-            samples: 17
-            spread: 0
-            verticalOffset: 0
-            horizontalOffset: 0
-        }
         onToggled: angleChart.locked = checked
+    }
+
+
+    ResizeBtn {
+        id: zoomIn
+        iconSource: "../images/zoomIn.png"
+
+        anchors.right: lockBtn.left
+        anchors.rightMargin: 10
+        anchors.verticalCenter: lockBtn.verticalCenter
+        z: 3
+
+        onClicked: angleChart.zoomIn()
+    }
+
+    ResizeBtn {
+        id: zoomOut
+        iconSource: "../images/zoomOut.png"
+
+        anchors.right: zoomIn.left
+        anchors.rightMargin: 10
+        anchors.verticalCenter: lockBtn.verticalCenter
+        z: 3
+
+        onClicked: angleChart.zoomOut()
     }
 
     CancelBtn {
@@ -909,7 +913,6 @@ Rectangle {
     function refreshAngleTable(){
         if(angleTableContainer.source !== ""){
             destroyAngleTable();
-            console.log(angleTableContainer.source)
         }
         createAngleTable();
 
