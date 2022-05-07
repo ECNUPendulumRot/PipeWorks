@@ -40,22 +40,12 @@ Rectangle {
         anchors.leftMargin: 0
         anchors.topMargin: 0
 
-//        WebChart {
-//            id: angleChart
-//            anchors.fill:parent
-
-//            lock: lockBtn.checked
-//            onWebCallBack: (row, col, value) => refreshModelData(row, col,value)
-//        }
         DraggableChart {
             id: angleChart
 
             anchors.fill: parent
 
             locked: lockBtn.checked
-            backgroundColor: "transparent"//webEngineWrapper.color
-            // plotRec: Qt.rect(webEngineWrapper.x, webEngineWrapper.y, webEngineWrapper.x + webEngineWrapper.width, webEngineWrapper.y + webEngineWrapper.height)
-
         }
     }
 
@@ -364,6 +354,45 @@ Rectangle {
             horizontalOffset: 0
         }
         onToggled: angleChart.locked = checked
+    }
+
+
+    ResizeBtn {
+        id: zoomIn
+        iconSource: "../images/zoomIn.png"
+        layer.enabled: true
+        layer.effect: DropShadowEffect {
+            color: "#2d000000"
+            radius: 8
+            samples: 17
+            spread: 0
+            verticalOffset: 0
+            horizontalOffset: 0
+        }
+        anchors.right: lockBtn.left
+        anchors.rightMargin: 10
+        anchors.verticalCenter: lockBtn.verticalCenter
+        z: 3
+    }
+
+    ResizeBtn {
+        id: zoomOut
+        iconSource: "../images/zoomOut.png"
+
+        layer.enabled: true
+        layer.effect: DropShadowEffect {
+            color: "#2d000000"
+            radius: 8
+            samples: 17
+            spread: 0
+            verticalOffset: 0
+            horizontalOffset: 0
+        }
+
+        anchors.right: zoomIn.left
+        anchors.rightMargin: 10
+        anchors.verticalCenter: lockBtn.verticalCenter
+        z: 3
     }
 
     CancelBtn {

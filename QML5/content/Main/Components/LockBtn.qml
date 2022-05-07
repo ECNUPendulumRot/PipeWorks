@@ -9,8 +9,7 @@ Button {
     leftPadding: 4
     rightPadding: 4
 
-    text: ""
-    autoRepeat: true
+    hoverEnabled: true
     checked: true
     checkable: true
     display: AbstractButton.IconOnly
@@ -21,7 +20,6 @@ Button {
         color: "#e7e7e7"
         implicitWidth: 66
         implicitHeight: 28
-        opacity: enabled ? 1 : 0.3
         radius: 4
         border.color: "#d3d3d3"
         border.width: 1
@@ -90,71 +88,11 @@ Button {
             PropertyChanges {
                 target: control
                 checked: false
-                checkable: true
             }
         },
         State {
-            name: "lockeHover"
-            when: control.hovered && control.pressed && control.checked
-            PropertyChanges {
-                target: lock
-                opacity: 1
-            }
-
-            PropertyChanges {
-                target: unlock
-                opacity: 0
-            }
-
-            PropertyChanges {
-                target: buttonBackground
-                color: "#f2f2f2"
-            }
-
-            PropertyChanges {
-                target: control
-                checked: true
-            }
-        },
-        State {
-            name: "lockPress"
-            when: control.pressed && control.checked
-            PropertyChanges {
-                target: lock
-                opacity: 1
-            }
-
-            PropertyChanges {
-                target: unlock
-                opacity: 0
-            }
-
-            PropertyChanges {
-                target: buttonBackground
-                color: "#d2d2d2"
-            }
-
-            PropertyChanges {
-                target: control
-                checked: true
-            }
-        },
-        State {
-            name: "unlockedHover"
-            PropertyChanges {
-                target: lock
-                opacity: 0
-            }
-
-            PropertyChanges {
-                target: unlock
-                opacity: 1
-            }
-
-            PropertyChanges {
-                target: control
-                checkable: true
-            }
+            name: "hover"
+            when: control.hovered && !control.pressed
 
             PropertyChanges {
                 target: buttonBackground
@@ -162,22 +100,8 @@ Button {
             }
         },
         State {
-            name: "unlockedPress"
-            when: control.pressed && !control.checked
-            PropertyChanges {
-                target: lock
-                opacity: 0
-            }
-
-            PropertyChanges {
-                target: unlock
-                opacity: 1
-            }
-
-            PropertyChanges {
-                target: control
-                checkable: true
-            }
+            name: "press"
+            when: control.pressed
 
             PropertyChanges {
                 target: buttonBackground
