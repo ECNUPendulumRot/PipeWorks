@@ -12,6 +12,7 @@ ChartView {
     property bool axisReady: false
     property alias anchorMin: anchorMin
     property alias anchorMax: anchorMax
+    backgroundColor: "transparent"
 
     ValueAxis {
         id: axisx
@@ -67,6 +68,15 @@ ChartView {
         if(dict["miny"]) axisy.min = dict["miny"]
         if(dict["maxy"]) axisy.max = dict["maxy"]
         if(dict["tick"]) axisx.tickCount = dict["tick"]
+        return getMinMaxPosition()
+    }
+
+
+    function getMinMaxValue(){
+        return [axisy.min, axisy.max]
+    }
+
+    function getMinMaxPosition(){
         return [view.mapToPosition(Qt.point(anchorMin.x, anchorMin.y), anchor).y, view.mapToPosition(Qt.point(anchorMax.x, anchorMax.y), anchor).y]
     }
 

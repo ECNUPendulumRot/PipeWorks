@@ -342,17 +342,6 @@ Rectangle {
         anchors.right: webEngineWrapper.right
         anchors.rightMargin: 35
         z: 3
-
-        layer.enabled: true
-        layer.effect: DropShadowEffect {
-            id: dropShadow5
-            color: "#2d000000"
-            radius: 8
-            samples: 17
-            spread: 0
-            verticalOffset: 0
-            horizontalOffset: 0
-        }
         onToggled: angleChart.locked = checked
     }
 
@@ -360,39 +349,25 @@ Rectangle {
     ResizeBtn {
         id: zoomIn
         iconSource: "../images/zoomIn.png"
-        layer.enabled: true
-        layer.effect: DropShadowEffect {
-            color: "#2d000000"
-            radius: 8
-            samples: 17
-            spread: 0
-            verticalOffset: 0
-            horizontalOffset: 0
-        }
+
         anchors.right: lockBtn.left
         anchors.rightMargin: 10
         anchors.verticalCenter: lockBtn.verticalCenter
         z: 3
+
+        onClicked: angleChart.zoomIn()
     }
 
     ResizeBtn {
         id: zoomOut
         iconSource: "../images/zoomOut.png"
 
-        layer.enabled: true
-        layer.effect: DropShadowEffect {
-            color: "#2d000000"
-            radius: 8
-            samples: 17
-            spread: 0
-            verticalOffset: 0
-            horizontalOffset: 0
-        }
-
         anchors.right: zoomIn.left
         anchors.rightMargin: 10
         anchors.verticalCenter: lockBtn.verticalCenter
         z: 3
+
+        onClicked: angleChart.zoomOut()
     }
 
     CancelBtn {

@@ -9,7 +9,6 @@ Item {
     ///
 
     property bool locked: true
-    property alias backgroundColor: chart.backgroundColor
     property int seriesCount: 0
 
     readonly property var eng2Chn : {    "angle":                "角度",
@@ -162,15 +161,37 @@ Item {
         let series = seriesList.get(seriesIndex).l_series
         series.replace(series.at(index).x, series.at(index).y,  // old position
                        series.at(index).x, value)               // new position
-        let mm = adjustAxis()
+    }
+
+    function adjustAxis(){
+        let mm = chart.getMinMaxPosition()
         for(let i = 0; i < seriesList.count; i++){
             let d_series = seriesList.get(i).d_series
-            adjustAxisChanged(d_series, mm[1], mm[0])
+            adjustDragArea(d_series, mm[1], mm[0])
         }
     }
 
-    // adjust the axis according to the changed series
-    function adjustAxis(){
+    function zoomIn(){
+        if(seriesCount !== 0){
+            let model = getSeriesModel()
+            let mma = minMaxAvg(model)
+            let mm  = chart.getMinMaxValue()
+            let y_min = mma[0] - (mma[0] - mm[0])/2 , y_max = mma[1] + (mm[1] - mma[1])/2
+            chart.adjustAxis({"miny": Math.floor(y_min), "maxy": Math.ceil(y_max)})
+            adjustAxis()
+        }
+    }
+
+    function zoomOut(){
+        if(seriesCount !== 0){
+            let mm  = chart.getMinMaxValue()
+            let y_min = mm[0] - (mm[1] - mm[0])/5 , y_max = mm[1] + (mm[1] - mm[0])/5
+            chart.adjustAxis({"miny": Math.floor(y_min), "maxy": Math.ceil(y_max)})
+            adjustAxis()
+        }
+    }
+
+    function getSeriesModel(){
         let model = []
         for(let i = 0; i < seriesList.count; i++){
             let m = []
@@ -180,20 +201,16 @@ Item {
             }
             model.push(m)
         }
-        let mma = minMaxAvg(model)
-        let y_min = mma[0] - mma[2]/10 - 1, y_max = mma[1] + mma[2]/10 + 1
-        return chart.adjustAxis({"miny": Math.floor(y_min), "maxy": Math.ceil(y_max)})
+        return model
     }
 
-
-    function adjustAxisChanged(d_series, min, max){
+    function adjustDragArea(d_series, min, max){
         for(let i = 0; i < d_series.count; i++){
             let item = d_series.itemAt(i)
             adjustToPoint(item, d_series.chartSeries, i)
             item.setDragMinMax(min - item.height/2, max - item.height/2)
         }
     }
-
 
 /////////////////////////////////////////////////  Dynamic  //////////////////////////////////////////////////
 
@@ -255,7 +272,7 @@ Item {
     // create a dragSeries
     function createDragSeries(series, model, minMax, index){
         var d_series = dragC.createObject(control, {chartSeries: series, chartSeriesIndex:index, enabledColor: series.color})
-        adjustAxisChanged(d_series, minMax[1], minMax[0])
+        adjustDragArea(d_series, minMax[1], minMax[0])
         return d_series
     }
 
