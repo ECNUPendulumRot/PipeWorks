@@ -59,7 +59,7 @@ Item {
                 property bool adjustEnabled: false
 
                 enabled: !control.locked  // control whether user can drag
-                radius: enabled ? 5 : 3
+                radius: enabled ? 6 : 4
                 visible: repeaterC.chartSeries.visible
                 z: repeaterC.chartSeriesIndex
                 color: enabledColor
@@ -161,6 +161,8 @@ Item {
         let series = seriesList.get(seriesIndex).l_series
         series.replace(series.at(index).x, series.at(index).y,  // old position
                        series.at(index).x, value)               // new position
+        let item = seriesList.get(seriesIndex).d_series.itemAt(index)
+        adjustToPoint(item, series, index)
     }
 
     // adjust draggers to new drag areas
@@ -258,7 +260,7 @@ Item {
     function createSeries(model, legend, index){
         var series = chart.createLineSeries(model, legend)
         series.color = seriesColor[index]
-        series.width = 3
+        series.width = 2
         return series
     }
 
