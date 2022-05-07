@@ -54,10 +54,11 @@ Item {
             model: chartSeries.count
 
             Dragger {
+                id: draggerC
                 property real chartWidth: chart.width
                 property real chartHeight: chart.height
-                property bool adjustEnabled: false
-
+                property bool adjustEnabled: true
+                property alias animation: animation
                 enabled: !control.locked  // control whether user can drag
                 radius: enabled ? 6 : 4
                 visible: repeaterC.chartSeries.visible
@@ -68,6 +69,13 @@ Item {
                 onChartWidthChanged: adjustToPoint(this, repeaterC.chartSeries, index)
                 onChartHeightChanged: adjustToPoint(this, repeaterC.chartSeries, index)
 
+                NumberAnimation on y {
+                    id: animation
+                    easing.bezierCurve: [0.863,0.00579,0.138,0.999,1,1]
+                    duration: 100
+
+                    onFinished: draggerC.adjustEnabled = false
+                }
 
                 onYChanged:{
                     if(active || adjustEnabled){
@@ -164,10 +172,12 @@ Item {
 
     function adjustSeries(seriesIndex, index, value){
         let series = seriesList.get(seriesIndex).l_series
-        series.replace(series.at(index).x, series.at(index).y,  // old position
-                       series.at(index).x, value)               // new position
+        let point = chart.mapToPosition(Qt.point(series.at(index).x, value), series)
         let item = seriesList.get(seriesIndex).d_series.itemAt(index)
-        adjustToPoint(item, series, index)
+        item.adjustEnabled = true
+        item.animation.from = item.y
+        item.animation.to = point.y - item.height/2
+        item.animation.start()
     }
 
     // adjust draggers to new drag areas
