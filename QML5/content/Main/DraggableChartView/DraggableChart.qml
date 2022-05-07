@@ -61,12 +61,13 @@ Item {
                 enabled: !control.locked  // control whether user can drag
                 radius: enabled ? 6 : 4
                 visible: repeaterC.chartSeries.visible
-                z: repeaterC.chartSeriesIndex
+                z:  repeaterC.chartSeriesIndex
                 color: enabledColor
 
                 onHeightChanged: adjustToPoint(this, repeaterC.chartSeries, index)
                 onChartWidthChanged: adjustToPoint(this, repeaterC.chartSeries, index)
                 onChartHeightChanged: adjustToPoint(this, repeaterC.chartSeries, index)
+
 
                 onYChanged:{
                     if(active || adjustEnabled){
@@ -87,6 +88,10 @@ Item {
         id: chart
         anchors.fill: parent
         margins.top: 40
+
+        onSeriesAdded: {
+
+        }
     }
 
     ListModel {
@@ -221,8 +226,7 @@ Item {
     // this will alse create the axis for the modelList, with policy of max + avg + 1 and min - avg - 1
     function createDraggableSeries(modelList, legendList){
         seriesCount = modelList.length - 1
-        let x_series = modelList[0]
-        modelList.shift()
+        let x_series = modelList.shift()
         let x_min = x_series[0], x_max = x_series[x_series.length - 1]
         let mma = minMaxAvg(modelList)
         let y_min = mma[0] - mma[2]/10 - 1, y_max = mma[1] + mma[2]/10 + 1
@@ -260,7 +264,7 @@ Item {
     function createSeries(model, legend, index){
         var series = chart.createLineSeries(model, legend)
         series.color = seriesColor[index]
-        series.width = 2
+        series.width = 3
         return series
     }
 
@@ -275,7 +279,7 @@ Item {
 
     // create a dragSeries
     function createDragSeries(series, model, minMax, index){
-        var d_series = dragC.createObject(control, {chartSeries: series, chartSeriesIndex:index, enabledColor: series.color})
+        var d_series = dragC.createObject(chart, {chartSeries: series, chartSeriesIndex:index, enabledColor: series.color})
         adjustDragArea(d_series, minMax[1], minMax[0])
         return d_series
     }

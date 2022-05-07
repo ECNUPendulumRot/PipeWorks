@@ -1,4 +1,4 @@
-import QtQuick 2.15
+ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Rectangle {
@@ -27,8 +27,8 @@ Rectangle {
         id: dragArea
         anchors.fill: parent
 
-        preventStealing: true
-        propagateComposedEvents: false
+        //preventStealing: true
+        //propagateComposedEvents: false
 
         drag{
             target: control
