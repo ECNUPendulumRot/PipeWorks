@@ -1,5 +1,6 @@
 ﻿import QtQuick 2.15
 import QtQuick.Controls 2.12
+import QtQuick.Studio.Effects 1.0
 
 Button {
     id: control
@@ -24,6 +25,16 @@ Button {
         border.color: "#d3d3d3"
         border.width: 1
         anchors.fill: parent
+
+        layer.enabled: true
+        layer.effect: DropShadowEffect {
+            color: "#2d000000"
+            radius: 8
+            samples: 17
+            spread: 0
+            verticalOffset: 0
+            horizontalOffset: 0
+        }
     }
 
     Image {
