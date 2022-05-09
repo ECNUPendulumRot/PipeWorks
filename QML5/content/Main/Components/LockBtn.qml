@@ -10,9 +10,8 @@ Button {
     leftPadding: 4
     rightPadding: 4
 
-    hoverEnabled: true
-    checked: true
     checkable: true
+    checked: true
     display: AbstractButton.IconOnly
 
     background: buttonBackground
@@ -25,7 +24,6 @@ Button {
         border.color: "#d3d3d3"
         border.width: 1
         anchors.fill: parent
-
         layer.enabled: true
         layer.effect: DropShadowEffect {
             color: "#2d000000"
@@ -39,68 +37,13 @@ Button {
 
     Image {
         id: unlock
-        x: 12
-        y: 5
+        anchors.centerIn: control
         width: 26
         height: 18
-        opacity: 0
-        source: "../../images/unlock.png"
-        antialiasing: false
-        mipmap: false
-        fillMode: Image.Stretch
-    }
-
-    Image {
-        id: lock
-        width: 20
-        height: 20
-        visible: true
-        anchors.verticalCenter: parent.verticalCenter
-        source: "../../images/lock.png"
-        antialiasing: false
-        mipmap: false
-        anchors.horizontalCenter: parent.horizontalCenter
+        source: control.checked ? "../../images/lock.png" : "../../images/unlock.png"
         fillMode: Image.PreserveAspectFit
     }
     states: [
-        State {
-            name: "locked"
-            when: control.checked
-
-            PropertyChanges {
-                target: lock
-                opacity: 1
-            }
-
-            PropertyChanges {
-                target: unlock
-                opacity: 0
-            }
-
-            PropertyChanges {
-                target: control
-                checked: true
-            }
-        },
-        State {
-            name: "unlocked"
-            when: !control.checked
-
-            PropertyChanges {
-                target: lock
-                opacity: 0
-            }
-
-            PropertyChanges {
-                target: unlock
-                opacity: 1
-            }
-
-            PropertyChanges {
-                target: control
-                checked: false
-            }
-        },
         State {
             name: "hover"
             when: control.hovered && !control.pressed
@@ -110,6 +53,7 @@ Button {
                 color: "#f2f2f2"
             }
         },
+
         State {
             name: "press"
             when: control.pressed
