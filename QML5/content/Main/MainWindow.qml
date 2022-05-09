@@ -513,7 +513,7 @@ Rectangle {
             y: (parent.height - logoutDialog.height)/2
 
             text.text: "未提交的数据将会丢失，确定要切换用户吗？"
-            title: "你的修改未提交保存！"
+            title: "当前修改未提交保存！"
             text.color: "#202020"
             imageSource: "../images/caution.png"
 

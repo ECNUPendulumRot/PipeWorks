@@ -86,7 +86,7 @@ Popup{
             id: text3
             x: 64
             y: 58
-            text: "你可以选择:"
+            text: "可以选择:"
             font.pixelSize: 14
             font.family:"Microsoft Yahei"
         }

@@ -290,9 +290,9 @@ Item {
 
     function userLogin(){
         if(inputID.inputText.text === "")
-            errorMsg.text = "你还没有输入用户名"
+            errorMsg.text = "未输入用户名"
         else if(inputPw.inputText.text === "")
-                errorMsg.text = "你还没有输入密码"
+                errorMsg.text = "未输入密码"
             else if(!scheduler.userCreate(inputID.inputText.text, inputPw.inputText.text))
                     errorMsg.text = "账户或者密码错误"
                 else{
