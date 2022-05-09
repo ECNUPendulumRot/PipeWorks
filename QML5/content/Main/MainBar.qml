@@ -62,16 +62,6 @@ Rectangle {
         imageSource: "../images/motion.png"
     }
 
-
-//    MotionParamBtn {
-//        id: motionParamBtn
-//        x: 216
-//        anchors.verticalCenter: parent.verticalCenter
-//        anchors.verticalCenterOffset: 0
-
-
-//    }
-
     MainBarParameterBtn {
         id: ctrlParamBtn
         anchors
@@ -85,7 +75,6 @@ Rectangle {
         imageSource: "../images/control.png"
     }
 
-
     MainBarParameterBtn {
         id: commParamBtn
         anchors
@@ -98,27 +87,6 @@ Rectangle {
         textItemText: "通讯参数配置"
         imageSource: "../images/commmunication.png"
     }
-
-
-
-//    CtrlParamBtn {
-//        id: ctrlParamBtn
-//        anchors.verticalCenter: parent.verticalCenter
-//        anchors.left: motionParamBtn.right
-//        anchors.leftMargin: 25
-
-
-//    }
-
-//    CommParamBtn {
-//        id: commParamBtn
-//        anchors.verticalCenter: parent.verticalCenter
-//        anchors.left: ctrlParamBtn.right
-//        anchors.leftMargin: 25
-
-//    }
-
-
 }
 
 
