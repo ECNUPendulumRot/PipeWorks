@@ -309,8 +309,8 @@ Rectangle {
                 parent: Overlay.overlay
                 x: (parent.width - saveAsDialog.width)/2
                 y: (parent.height - saveAsDialog.height)/2
-                title: "你确定要保存吗？"
-                text.text: "如果还有未提交的修改，保存的副本将不包含未提交的修改，你确定要继续吗?"
+                title: "确定要保存吗？"
+                text.text: "如果还有未提交的修改，保存的副本将不包含未提交的修改，确定要继续吗?"
                 text.color: "#202020"
 
                 imageSource: "../images/caution.png"
@@ -669,7 +669,7 @@ Rectangle {
             progressBarValue = 0.0
             completeBtn.cvisible = false;
             confirmBtn.cvisible = true;
-            title = "你是否要将当前文件上传到中控？"
+            title = "是否要将当前文件上传到中控？"
             uploadDialog.close()
         }
     }
@@ -748,7 +748,7 @@ Rectangle {
         y: (parent.height - onePassDialog.height)/2
 
         text.text: "把当前选中焊道数据上传至中控，且该操作不可撤销，请确认是否上传数据？"
-        title: "你是否要上传当前选中的焊道数据？"
+        title: "是否要上传当前选中的焊道数据？"
         text.color: "#202020"
         imageSource: "../images/information.png"
         confirmBtn.text: "确定"

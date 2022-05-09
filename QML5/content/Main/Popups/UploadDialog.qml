@@ -62,7 +62,7 @@ Popup{
             id: title
             x: 47
             y: 25
-            text: "您是否要将当前文件上传到中控？"
+            text: "是否要将当前文件上传到中控？"
             font.pixelSize: 18
             anchors.verticalCenterOffset: -1
             font.family: "Courier"

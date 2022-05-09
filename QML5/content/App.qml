@@ -68,8 +68,8 @@ ApplicationWindow {
         x: (parent.width - exitDialog.width)/2
         y: (parent.height - exitDialog.height)/2
 
-        title: "您确定要退出吗"
-        text.text: "一个数据库已经打开并且有未提交的修改，退出将会丢弃这些修改。您确定要退出吗？"
+        title: "确定要退出吗"
+        text.text: "一个工艺文件已经打开并且有未提交的修改，退出将会放弃这些修改。确定要退出吗？"
         text.color: "#202020"
         text.wrapMode: Text.Wrap
         imageSource: "images/caution.png"
